@@ -2,6 +2,10 @@
 import React from 'react';
 import { render } from 'react-dom';
 
+// yarn add @material-ui/core
+// yarn add @material-ui/icons
+// import { Component } from "@material-ui/core";
+
 
 // == Import : local
 import App from 'src/components/App';
