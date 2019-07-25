@@ -1,0 +1,23 @@
+@import 'src/styles/vars';
+
+.who {
+  width: 60%;
+  padding : 1em;
+  margin: auto;
+  h2 {
+    text-align: center;
+  }
+  &-role{
+    text-align: center;
+  }
+  &-trombi {
+    display: flex; 
+    justify-content: space-around;
+  }
+}
+
+.member-card {
+  max-width : 10em;
+  margin-top: 1em;
+  
+}
