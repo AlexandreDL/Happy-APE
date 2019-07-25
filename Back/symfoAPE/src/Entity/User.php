@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -36,19 +34,14 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $lastname;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $firstname;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $adress_city;
+    private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -66,12 +59,12 @@ class User implements UserInterface
     private $address_other;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $address_number;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=15, nullable=true)
      */
     private $address_zipcode;
 
@@ -81,17 +74,17 @@ class User implements UserInterface
     private $newsletter_subscription;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $is_active;
+    private $isActive;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $is_parent;
+    private $isParent;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $createdAt;
 
@@ -100,32 +93,9 @@ class User implements UserInterface
      */
     private $updatedAt;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Child", mappedBy="parents")
-     */
-    private $children;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="author")
-     */
-    private $events_published;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Event", mappedBy="participants")
-     */
-    private $events_participation;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Role", inversedBy="users")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $role;
-
     public function __construct()
     {
-        $this->children = new ArrayCollection();
-        $this->events_published = new ArrayCollection();
-        $this->events_participation = new ArrayCollection();
+        $this->createdAt = new \DateTime;
     }
 
     public function getId(): ?int
@@ -211,7 +181,7 @@ class User implements UserInterface
         return $this->lastname;
     }
 
-    public function setLastname(string $lastname): self
+    public function setLastname(?string $lastname): self
     {
         $this->lastname = $lastname;
 
@@ -223,21 +193,9 @@ class User implements UserInterface
         return $this->firstname;
     }
 
-    public function setFirstname(string $firstname): self
+    public function setFirstname(?string $firstname): self
     {
         $this->firstname = $firstname;
-
-        return $this;
-    }
-
-    public function getAdressCity(): ?string
-    {
-        return $this->adress_city;
-    }
-
-    public function setAdressCity(?string $adress_city): self
-    {
-        $this->adress_city = $adress_city;
 
         return $this;
     }
@@ -278,12 +236,12 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getAddressNumber(): ?string
+    public function getAddressNumber(): ?int
     {
         return $this->address_number;
     }
 
-    public function setAddressNumber(?string $address_number): self
+    public function setAddressNumber(?int $address_number): self
     {
         $this->address_number = $address_number;
 
@@ -316,24 +274,24 @@ class User implements UserInterface
 
     public function getIsActive(): ?bool
     {
-        return $this->is_active;
+        return $this->isActive;
     }
 
-    public function setIsActive(bool $is_active): self
+    public function setIsActive(?bool $isActive): self
     {
-        $this->is_active = $is_active;
+        $this->isActive = $isActive;
 
         return $this;
     }
 
     public function getIsParent(): ?bool
     {
-        return $this->is_parent;
+        return $this->isParent;
     }
 
-    public function setIsParent(bool $is_parent): self
+    public function setIsParent(?bool $isParent): self
     {
-        $this->is_parent = $is_parent;
+        $this->isParent = $isParent;
 
         return $this;
     }
@@ -343,7 +301,7 @@ class User implements UserInterface
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -362,102 +320,8 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Child[]
-     */
-    public function getChildren(): Collection
+    public function __toString()
     {
-        return $this->children;
-    }
-
-    public function addChild(Child $child): self
-    {
-        if (!$this->children->contains($child)) {
-            $this->children[] = $child;
-            $child->addParent($this);
-        }
-
-        return $this;
-    }
-
-    public function removeChild(Child $child): self
-    {
-        if ($this->children->contains($child)) {
-            $this->children->removeElement($child);
-            $child->removeParent($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Event[]
-     */
-    public function getEventsPublished(): Collection
-    {
-        return $this->events_published;
-    }
-
-    public function addEventsPublished(Event $eventsPublished): self
-    {
-        if (!$this->events_published->contains($eventsPublished)) {
-            $this->events_published[] = $eventsPublished;
-            $eventsPublished->setAuthor($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEventsPublished(Event $eventsPublished): self
-    {
-        if ($this->events_published->contains($eventsPublished)) {
-            $this->events_published->removeElement($eventsPublished);
-            // set the owning side to null (unless already changed)
-            if ($eventsPublished->getAuthor() === $this) {
-                $eventsPublished->setAuthor(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Event[]
-     */
-    public function getEventsParticipation(): Collection
-    {
-        return $this->events_participation;
-    }
-
-    public function addEventsParticipation(Event $eventsParticipation): self
-    {
-        if (!$this->events_participation->contains($eventsParticipation)) {
-            $this->events_participation[] = $eventsParticipation;
-            $eventsParticipation->addParticipant($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEventsParticipation(Event $eventsParticipation): self
-    {
-        if ($this->events_participation->contains($eventsParticipation)) {
-            $this->events_participation->removeElement($eventsParticipation);
-            $eventsParticipation->removeParticipant($this);
-        }
-
-        return $this;
-    }
-
-    public function getRole(): ?Role
-    {
-        return $this->role;
-    }
-
-    public function setRole(?Role $role): self
-    {
-        $this->role = $role;
-
-        return $this;
+        return $this->lastname;
     }
 }

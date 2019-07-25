@@ -17,17 +17,17 @@ class PrivatePost
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $title;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $content;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $createdAt;
 
@@ -36,10 +36,10 @@ class PrivatePost
      */
     private $updatedAt;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
-     */
-    private $author;
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime;
+    }
 
     public function getId(): ?int
     {
@@ -51,7 +51,7 @@ class PrivatePost
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle(?string $title): self
     {
         $this->title = $title;
 
@@ -63,7 +63,7 @@ class PrivatePost
         return $this->content;
     }
 
-    public function setContent(string $content): self
+    public function setContent(?string $content): self
     {
         $this->content = $content;
 
@@ -75,7 +75,7 @@ class PrivatePost
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -94,15 +94,8 @@ class PrivatePost
         return $this;
     }
 
-    public function getAuthor(): ?User
+    public function __toString()
     {
-        return $this->author;
-    }
-
-    public function setAuthor(?User $author): self
-    {
-        $this->author = $author;
-
-        return $this;
+        return $this->title;
     }
 }

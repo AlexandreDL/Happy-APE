@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -19,22 +17,22 @@ class Child
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $lastname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $class;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $createdAt;
 
@@ -43,16 +41,9 @@ class Child
      */
     private $updatedAt;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="children")
-     */
-    private $parents;
-
     public function __construct()
     {
-        $this->parents = new ArrayCollection();
-        $this->createdAt = new \DateTime();
-        
+        $this->createdAt = new \DateTime;
     }
 
     public function getId(): ?int
@@ -65,7 +56,7 @@ class Child
         return $this->lastname;
     }
 
-    public function setLastname(string $lastname): self
+    public function setLastname(?string $lastname): self
     {
         $this->lastname = $lastname;
 
@@ -77,7 +68,7 @@ class Child
         return $this->firstname;
     }
 
-    public function setFirstname(string $firstname): self
+    public function setFirstname(?string $firstname): self
     {
         $this->firstname = $firstname;
 
@@ -89,7 +80,7 @@ class Child
         return $this->class;
     }
 
-    public function setClass(string $class): self
+    public function setClass(?string $class): self
     {
         $this->class = $class;
 
@@ -101,7 +92,7 @@ class Child
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -120,29 +111,8 @@ class Child
         return $this;
     }
 
-    /**
-     * @return Collection|User[]
-     */
-    public function getParents(): Collection
+    public function __toString()
     {
-        return $this->parents;
-    }
-
-    public function addParent(User $parent): self
-    {
-        if (!$this->parents->contains($parent)) {
-            $this->parents[] = $parent;
-        }
-
-        return $this;
-    }
-
-    public function removeParent(User $parent): self
-    {
-        if ($this->parents->contains($parent)) {
-            $this->parents->removeElement($parent);
-        }
-
-        return $this;
+        return $this->lastname;
     }
 }

@@ -2,12 +2,12 @@
 
 namespace App\DataFixtures;
 
-use Faker\Factory;
-use App\Entity\Child;
+//use Faker\Factory;
+//use App\Entity\Child;
 use App\Entity\Event;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Faker\ORM\Doctrine\Populator as Populator;
+//use Faker\ORM\Doctrine\Populator as Populator;
 use Nelmio\Alice\Loader\NativeLoader;
 
 class AppFixtures extends Fixture
@@ -17,8 +17,8 @@ class AppFixtures extends Fixture
         for ($i = 1; $i <= 10; $i++){
             $event = new Event();
             $event->setName("Titre de l'événement n°$i")
-                  ->setContent("<p>Contenu de l'événement n°$i</p>")
-                  ->getMedia("http://placehold.it/350x150");
+                  ->setContent("<p>Contenu de l'événement n°$i</p>");
+                  //->getMedia("http://placehold.it/350x150")
                 
             $manager->persist($event);
         }
@@ -31,8 +31,6 @@ class AppFixtures extends Fixture
             $manager->persist($entity);
         };
    
-
-
         $manager->flush();
     }
 
