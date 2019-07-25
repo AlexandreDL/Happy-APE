@@ -12,7 +12,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 
 
 // == Composant
-const who = () => (
+const WhoAreWe = () => (
   <article className="who">
     <h1>Qui sommes nous ?</h1>
     <p>
@@ -93,4 +93,4 @@ const who = () => (
 );
 
 // == Export
-export default who;
+export default WhoAreWe;
