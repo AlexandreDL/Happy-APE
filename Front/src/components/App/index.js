@@ -27,7 +27,7 @@ const App = () => (
         <Route exact path="/" component={HomePage} />
         <Route path="/conditions-generales-d-utilisation" component={CGU} />
         <Route path="/qui-sommes-nous" component={WhoAreWe} />
-        <Route path="/contact" component={Contact} />
+        <Route path="/Contact" component={Contact} />
 
       </main>
       <Footer />
