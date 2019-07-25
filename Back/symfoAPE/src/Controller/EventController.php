@@ -6,7 +6,10 @@ use App\Entity\Event;
 use App\DataFixtures\AppFixtures;
 use App\Repository\EventRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Json;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class EventController extends AbstractController
@@ -14,33 +17,44 @@ class EventController extends AbstractController
     /**
      * @Route("/events", name="events_list")
      */
-    public function list(Request $request)
-    {
-        $repository = $this->getDoctrine()->getRepository(Event::class);
+    public function list(EventRepository $eventRepository) {
 
-        $events = $repository->findById($id);
-
-        $lastEvents = $repository->lastRelease(3);
-
-        $response = new Response(json_encode($lastEvents));
-
-        $response->headers->set('Content-Type', 'application/json');
-
-        return $response;
-        
-        // return $this->json('src/Repository/EventRepository.php',[
-        //     'events' => $events,
-        // ]);
+        $events = $eventRepository->findAll();
+        return new JsonResponse($events);
     }
+
+    // public function list(Request $request)
+    // {
+    //     $repository = $this->getDoctrine()->getRepository(Event::class);
+
+    //     $events = $repository->findById($id);
+
+    //     $lastEvents = $repository->lastRelease(3);
+
+    //     $response = new Response(json_encode($lastEvents));
+
+    //     $response->headers->set('Content-Type', 'application/json');
+
+    //     return $response;
+        
+    //     // return $this->json('src/Repository/EventRepository.php',[
+    //     //     'events' => $events,
+    //     // ]);
+    // }
 
      /**
      * @Route("/events/{id}", name="event_details")
      */
-    public function show()
-    {
-        return $this->json(['title' => 'événements', 
-    'content' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti provident ipsum enim adipisci tempore sit amet pariatur, praesentium saepe doloribus quisquam quos rerum! Quaerat ratione at iste exercitiatonem id perferendis?']);
+    public function showOneEvent(Event $event) {
+        dump($event);
+        $response = new JsonResponse(array('event' => $event));
+        return $response;
     }
+    // public function show()
+    // {
+    //     return $this->json(['title' => 'événements', 
+    // 'content' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti provident ipsum enim adipisci tempore sit amet pariatur, praesentium saepe doloribus quisquam quos rerum! Quaerat ratione at iste exercitiatonem id perferendis?']);
+    // }
 
      /**
      * @Route("/private/events/create", name="event_add")
