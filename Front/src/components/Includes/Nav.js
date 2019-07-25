@@ -10,12 +10,12 @@ import './nav.scss';
 const NavBar = () => {
   return (
     <div className="navBar">
-      <ul>
-        <li><Link href="/">Accueil</Link></li>
-        <li><Link href="#">Evenement</Link></li>
-        <li><Link href="#">Qui sommes nous ?</Link></li>
-        <li><Link href="#">Contact</Link></li>
-        <li><Link href="#">Compte</Link></li>
+      <ul className="navBar-ul">
+        <li className="navBar-ul-li"><Link color="inherit" href="/">Accueil</Link></li>
+        <li className="navBar-ul-li"><Link color="inherit" href="#">Evenement</Link></li>
+        <li className="navBar-ul-li"><Link color="inherit" href="#">Qui sommes nous ?</Link></li>
+        <li className="navBar-ul-li"><Link color="inherit" href="#">Contact</Link></li>
+        <li className="navBar-ul-li"><Link color="inherit" href="#">Compte</Link></li>
       </ul>
     </div>
   )
