@@ -5,7 +5,8 @@ import React from 'react';
 
 import NavBar from 'src/components/Includes/Nav';
 import Header from 'src/components/Includes/Header';
-import Footer from 'src/components/Includes/Footer'
+import CGU from 'src/components/CGU';
+import Footer from 'src/components/Includes/Footer';
 
 import './app.scss';
 
@@ -15,10 +16,12 @@ const App = () => (
     <Header>
       <NavBar />
     </Header>
-      <div> contenu du site</div>
+      <main>
+      </main>
       <Footer />
   </React.Fragment>
 );
 
 // == Export
 export default App;
+
