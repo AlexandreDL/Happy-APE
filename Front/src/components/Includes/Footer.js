@@ -10,7 +10,7 @@ import './footer.scss';
 // == Composant
 const Footer = () => {
   return (
-    <div className="footer">
+    <footer>
       <div className="footer-top">
         <ul className="footer-top-ul-left">
           <li className="footer-top-ul-left-li"><Link color="inherit" href="/">Mentions légales </Link></li>
@@ -28,7 +28,7 @@ const Footer = () => {
       <p>copyright (c) 2019 APE - Tous drois réservés</p>
       
       
-    </div>
+    </footer>
   )
 }
 
