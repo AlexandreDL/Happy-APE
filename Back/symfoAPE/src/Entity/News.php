@@ -49,7 +49,7 @@ class News
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="news")
+     * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="news", nullable=true)
      */
     private $media;
 
@@ -68,6 +68,7 @@ class News
         $this->createdAt = new \DateTime();
         $this->media = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->published = false;
     }
 
     public function getId(): ?int
