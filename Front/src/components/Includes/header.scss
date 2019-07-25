@@ -1,0 +1,9 @@
+header {
+  width: 100vw;
+
+  & img {
+    display: block;
+    margin: 0 auto;
+    width: 250px;
+  }
+}

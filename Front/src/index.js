@@ -16,7 +16,7 @@ import App from 'src/components/App';
 const rootComponent = <App />;
 
 // 2. La cible du DOM (là où la structure doit prendre vie dans le DOM)
-const target = document.getElementById('root');
+const target = document.getElementById('app');
 
 // Le rendu de React => DOM
 render(rootComponent, target);
