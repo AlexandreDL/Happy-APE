@@ -2,25 +2,29 @@
 
 .navBar {
 display: flex;
-background-color: $color5; 
+background-color: $color2; 
 justify-content: space-between;
 color: $color4;
 
-img{
-  width: 10%;
-  height: 10%;
-  padding: 1em; 
-}
-
-}
-ul {
+&-ul {
   display : flex;
   padding : 1em;
-  margin : 0.2em;
+  margin : 0.1em;
   text-align: right;
+
+  &-li {
+    padding :0.5em;
+    align-content: flex-end;
+  }
 }
-li {
-  padding :1em;
-  align-content: flex-end;
 }
+
+img{
+  width: 12%;
+  height: 12%;
+  padding: 0.3em; 
+}
+
+
+
 
