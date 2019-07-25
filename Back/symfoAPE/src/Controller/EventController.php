@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Event;
+use App\DataFixtures\AppFixtures;
 use App\Repository\EventRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,19 +18,19 @@ class EventController extends AbstractController
     {
         $repository = $this->getDoctrine()->getRepository(Event::class);
 
-        $searchTitle = $request->request->get('title');
+        $events = $repository->findById($id);
 
-        if($searchTitle){
-            $events = $repository->findByTitle($searchTitle);
- 
-         } else {
-            $events = $repository->findById($id);
-         }
-         $lastEvents = $repository->lastRelease(3);
+        $lastEvents = $repository->lastRelease(3);
+
+        $response = new Response(json_encode($lastEvents));
+
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
         
-        return $this->json('src/Repository/EventRepository.php',[
-            'events' => $events,
-        ]);
+        // return $this->json('src/Repository/EventRepository.php',[
+        //     'events' => $events,
+        // ]);
     }
 
      /**
