@@ -16,9 +16,7 @@ const NavBar = () => {
         <li><Link href="#">Qui sommes nous ?</Link></li>
         <li><Link href="#">Contact</Link></li>
         <li><Link href="#">Compte</Link></li>
-        
       </ul>
-      
     </div>
   )
 }
