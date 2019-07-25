@@ -16,9 +16,10 @@ const App = () => (
     <Header>
       <NavBar />
     </Header>
-      <main>
-      </main>
-      <Footer />
+    <main>
+      <p>contenu</p>
+    </main>
+    <Footer />
   </React.Fragment>
 );
 
