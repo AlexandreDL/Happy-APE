@@ -3,7 +3,7 @@
 .navBar {
 display: flex;
 background-color: $color2; 
-justify-content: space-between;
+justify-content: flex-end;
 color: $color4;
 
 &-ul {
@@ -17,12 +17,6 @@ color: $color4;
     align-content: flex-end;
   }
 }
-}
-
-img{
-  width: 12%;
-  height: 12%;
-  padding: 0.3em; 
 }
 
 

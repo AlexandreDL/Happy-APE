@@ -10,8 +10,7 @@ import './nav.scss';
 const NavBar = () => {
   return (
     <div className="navBar">
-      <img src="/src/medias/HAPPY-APE2.png" alt="img-logo-asso"/>
-      <ul className="navBar-ul">
+        <ul className="navBar-ul">
         <li className="navBar-ul-li"><a href="#">Accueil</a></li>
         <li className="navBar-ul-li"><a href="#">Evenement</a></li>
         <li className="navBar-ul-li"><a href="#">Qui sommes nous ?</a></li>
