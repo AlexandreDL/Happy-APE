@@ -1,8 +1,8 @@
 // == Import : npm
 import React from 'react';
 
-
 // == Import : local
+import { Link } from '@material-ui/core';
 import './nav.scss';
 
 
@@ -10,15 +10,13 @@ import './nav.scss';
 const NavBar = () => {
   return (
     <div className="navBar">
-        <ul className="navBar-ul">
-        <li className="navBar-ul-li"><a href="#">Accueil</a></li>
-        <li className="navBar-ul-li"><a href="#">Evenement</a></li>
-        <li className="navBar-ul-li"><a href="#">Qui sommes nous ?</a></li>
-        <li className="navBar-ul-li"><a href="#">Contact</a></li>
-        <li className="navBar-ul-li"><a href="#">Compte</a></li>
-        
+      <ul>
+        <li><Link href="/">Accueil</Link></li>
+        <li><Link href="#">Evenement</Link></li>
+        <li><Link href="#">Qui sommes nous ?</Link></li>
+        <li><Link href="#">Contact</Link></li>
+        <li><Link href="#">Compte</Link></li>
       </ul>
-      
     </div>
   )
 }
