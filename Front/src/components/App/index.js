@@ -4,6 +4,7 @@ import {
   Route, Switch,
   Redirect, withRouter,
 } from 'react-router-dom';
+import { Container } from '@material-ui/core';
 
 // == Import : local
 
@@ -24,11 +25,12 @@ const App = () => (
       <NavBar />
     </Header>
       <main>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/conditions-generales-d-utilisation" component={CGU} />
-        <Route path="/qui-sommes-nous" component={WhoAreWe} />
-        <Route path="/Contact" component={Contact} />
-
+        <Container maxWidthXl height="100%">
+          <Route exact path="/" component={HomePage} />
+          <Route path="/conditions-generales-d-utilisation" component={CGU} />
+          <Route path="/qui-sommes-nous" component={WhoAreWe} />
+          <Route path="/Contact" component={Contact} />
+        </Container>
       </main>
       <Footer />
   </React.Fragment>
