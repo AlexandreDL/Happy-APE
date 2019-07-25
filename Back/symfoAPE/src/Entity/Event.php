@@ -63,11 +63,17 @@ class Event
      */
     private $media;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $content;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
         $this->participants = new ArrayCollection();
         $this->media = new ArrayCollection();   
+        $this->is_published = false;
     }
 
     public function getId(): ?int
@@ -212,6 +218,18 @@ class Event
                 $media->setEvent(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(string $content): self
+    {
+        $this->content = $content;
 
         return $this;
     }

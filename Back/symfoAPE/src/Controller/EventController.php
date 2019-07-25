@@ -2,18 +2,34 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Event;
+use App\Repository\EventRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class EventController extends AbstractController
 {
     /**
      * @Route("/events", name="events_list")
      */
-    public function list()
+    public function list(Request $request)
     {
-        return $this->json(['title' => 'événements', 
-    'content' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti provident ipsum enim adipisci tempore sit amet pariatur, praesentium saepe doloribus quisquam quos rerum! Quaerat ratione at iste exercitiatonem id perferendis?']);
+        $repository = $this->getDoctrine()->getRepository(Event::class);
+
+        $searchTitle = $request->request->get('title');
+
+        if($searchTitle){
+            $events = $repository->findByTitle($searchTitle);
+ 
+         } else {
+            $events = $repository->findById($id);
+         }
+         $lastEvents = $repository->lastRelease(3);
+        
+        return $this->json('src/Repository/EventRepository.php',[
+            'events' => $events,
+        ]);
     }
 
      /**
