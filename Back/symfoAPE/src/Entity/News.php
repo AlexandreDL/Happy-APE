@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -19,27 +17,22 @@ class News
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $title;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $content;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $slug;
+    private $isPublished;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $published;
-
-    /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $createdAt;
 
@@ -48,27 +41,9 @@ class News
      */
     private $updatedAt;
 
-    // /**
-    //  * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="news", nullable=true)
-    //  */
-    // private $media;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
-     */
-    private $author;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="news")
-     */
-    private $tags;
-
     public function __construct()
     {
-        $this->createdAt = new \DateTime();
-        $this->media = new ArrayCollection();
-        $this->tags = new ArrayCollection();
-        $this->published = false;
+        $this->createdAt = new \DateTime;
     }
 
     public function getId(): ?int
@@ -81,7 +56,7 @@ class News
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle(?string $title): self
     {
         $this->title = $title;
 
@@ -93,33 +68,21 @@ class News
         return $this->content;
     }
 
-    public function setContent(string $content): self
+    public function setContent(?string $content): self
     {
         $this->content = $content;
 
         return $this;
     }
 
-    public function getSlug(): ?string
+    public function getIsPublished(): ?bool
     {
-        return $this->slug;
+        return $this->isPublished;
     }
 
-    public function setSlug(?string $slug): self
+    public function setIsPublished(?bool $isPublished): self
     {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    public function getPublished(): ?bool
-    {
-        return $this->published;
-    }
-
-    public function setPublished(bool $published): self
-    {
-        $this->published = $published;
+        $this->isPublished = $isPublished;
 
         return $this;
     }
@@ -129,7 +92,7 @@ class News
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -141,78 +104,9 @@ class News
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Media[]
-     */
-    public function getMedia(): Collection
-    {
-        return $this->media;
-    }
-
-    public function addMedium(Media $medium): self
-    {
-        if (!$this->media->contains($medium)) {
-            $this->media[] = $medium;
-            $medium->setNews($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMedium(Media $medium): self
-    {
-        if ($this->media->contains($medium)) {
-            $this->media->removeElement($medium);
-            // set the owning side to null (unless already changed)
-            if ($medium->getNews() === $this) {
-                $medium->setNews(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getAuthor(): ?User
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(?User $author): self
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Tag[]
-     */
-    public function getTags(): Collection
-    {
-        return $this->tags;
-    }
-
-    public function addTag(Tag $tag): self
-    {
-        if (!$this->tags->contains($tag)) {
-            $this->tags[] = $tag;
-        }
-
-        return $this;
-    }
-
-    public function removeTag(Tag $tag): self
-    {
-        if ($this->tags->contains($tag)) {
-            $this->tags->removeElement($tag);
-        }
 
         return $this;
     }

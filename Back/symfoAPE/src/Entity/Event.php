@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -19,14 +17,9 @@ class Event
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $slug;
+    private $name;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -34,7 +27,7 @@ class Event
     private $date;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $createdAt;
 
@@ -44,36 +37,18 @@ class Event
     private $updatedAt;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $is_published;
+    private $isPublished;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="events_published")
-     */
-    private $author;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="events_participation")
-     */
-    private $participants;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="event")
-     */
-    private $media;
-
-    /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $content;
 
     public function __construct()
     {
-        $this->createdAt = new \DateTime();
-        $this->participants = new ArrayCollection();
-        $this->media = new ArrayCollection();   
-        $this->is_published = false;
+        $this->createdAt = new \DateTime;
     }
 
     public function getId(): ?int
@@ -86,21 +61,9 @@ class Event
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(?string $slug): self
-    {
-        $this->slug = $slug;
 
         return $this;
     }
@@ -122,7 +85,7 @@ class Event
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -143,81 +106,12 @@ class Event
 
     public function getIsPublished(): ?bool
     {
-        return $this->is_published;
+        return $this->isPublished;
     }
 
-    public function setIsPublished(bool $is_published): self
+    public function setIsPublished(?bool $isPublished): self
     {
-        $this->is_published = $is_published;
-
-        return $this;
-    }
-
-    public function getAuthor(): ?string
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(string $author): self
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|User[]
-     */
-    public function getParticipants(): Collection
-    {
-        return $this->participants;
-    }
-
-    public function addParticipant(User $participant): self
-    {
-        if (!$this->participants->contains($participant)) {
-            $this->participants[] = $participant;
-        }
-
-        return $this;
-    }
-
-    public function removeParticipant(User $participant): self
-    {
-        if ($this->participants->contains($participant)) {
-            $this->participants->removeElement($participant);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Media[]
-     */
-    public function getMedia(): Collection
-    {
-        return $this->media;
-    }
-
-    public function addMedia(Media $media): self
-    {
-        if (!$this->media->contains($media)) {
-            $this->media[] = $media;
-            $media->setEvent($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMedia(Media $media): self
-    {
-        if ($this->media->contains($media)) {
-            $this->media->removeElement($media);
-            // set the owning side to null (unless already changed)
-            if ($media->getEvent() === $this) {
-                $media->setEvent(null);
-            }
-        }
+        $this->isPublished = $isPublished;
 
         return $this;
     }
@@ -227,7 +121,7 @@ class Event
         return $this->content;
     }
 
-    public function setContent(string $content): self
+    public function setContent(?string $content): self
     {
         $this->content = $content;
 
