@@ -2,12 +2,12 @@
 
 namespace App\DataFixtures;
 
-use Faker\Factory;
-use App\Entity\Child;
+//use Faker\Factory;
+//use App\Entity\Child;
 use App\Entity\Event;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Faker\ORM\Doctrine\Populator as Populator;
+//use Faker\ORM\Doctrine\Populator as Populator;
 use Nelmio\Alice\Loader\NativeLoader;
 
 class AppFixtures extends Fixture
@@ -31,8 +31,6 @@ class AppFixtures extends Fixture
             $manager->persist($entity);
         };
    
-
-
         $manager->flush();
     }
 

@@ -25,7 +25,7 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="json", nullable=true)
      */
     private $roles = [];
 
@@ -100,10 +100,11 @@ class User implements UserInterface
      */
     private $updatedAt;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Child", mappedBy="parents")
-     */
-    private $children;
+    // /**
+    //  * @ORM\Column(nullable=true)
+    //  * @ORM\ManyToMany(targetEntity="App\Entity\Child", mappedBy="parents")
+    //  */
+    // private $children;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Event", mappedBy="author")
@@ -117,15 +118,23 @@ class User implements UserInterface
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Role", inversedBy="users")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $role;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\PrivatePost", mappedBy="user")
+     */
+    private $posts_published;
 
     public function __construct()
     {
         $this->children = new ArrayCollection();
         $this->events_published = new ArrayCollection();
         $this->events_participation = new ArrayCollection();
+        $this->is_active = false;
+        $this->createdAt = new \Datetime();
+        $this->posts_published = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -457,6 +466,41 @@ class User implements UserInterface
     public function setRole(?Role $role): self
     {
         $this->role = $role;
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return $this->lastname;
+    }
+
+    /**
+     * @return Collection|PrivatePost[]
+     */
+    public function getPostsPublished(): Collection
+    {
+        return $this->posts_published;
+    }
+
+    public function addPostsPublished(PrivatePost $postsPublished): self
+    {
+        if (!$this->posts_published->contains($postsPublished)) {
+            $this->posts_published[] = $postsPublished;
+            $postsPublished->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePostsPublished(PrivatePost $postsPublished): self
+    {
+        if ($this->posts_published->contains($postsPublished)) {
+            $this->posts_published->removeElement($postsPublished);
+            // set the owning side to null (unless already changed)
+            if ($postsPublished->getUser() === $this) {
+                $postsPublished->setUser(null);
+            }
+        }
 
         return $this;
     }

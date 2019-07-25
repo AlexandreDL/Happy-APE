@@ -42,6 +42,7 @@ class Media
     private $updatedAt;
 
     /**
+     * @ORM\Column(nullable=true)
      * @ORM\ManyToOne(targetEntity="App\Entity\Event", inversedBy="media")
      */
     private $event;
@@ -155,5 +156,10 @@ class Media
         $this->news = $news;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->title;
     }
 }

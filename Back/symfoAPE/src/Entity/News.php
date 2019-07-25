@@ -48,10 +48,10 @@ class News
      */
     private $updatedAt;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="news", nullable=true)
-     */
-    private $media;
+    // /**
+    //  * @ORM\OneToMany(targetEntity="App\Entity\Media", mappedBy="news", nullable=true)
+    //  */
+    // private $media;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
@@ -215,5 +215,10 @@ class News
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->title;
     }
 }
