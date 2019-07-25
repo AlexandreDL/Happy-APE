@@ -2,14 +2,15 @@
 import React from 'react';
 
 // == Import : local
-import NavBar from 'src/components/Includes/Nav'
+import NavBar from 'src/components/Includes/Nav';
+import Header from 'src/components/Includes/Header';
 import './app.scss';
 
 // == Composant
 const App = () => (
-  <div id="app">
+  <Header>
     <NavBar />
-  </div>
+  </Header>
 );
 
 // == Export
