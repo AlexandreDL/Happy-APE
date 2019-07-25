@@ -1,0 +1,58 @@
+App\Entity\Child:
+    child_{1..50}:
+        lastname: '<lastname()>' 
+        firstname: '<firstname()>' 
+        class: '<randomElement($array = array ('1a','2b','3c'))>' 
+        parents: '2x @user*'
+
+
+
+
+App\Entity\Media:
+     
+App\Entity\News:
+    news_{1..10}:
+        title: '<sentence($nbWords = 4()>' 
+        content: '<paragraph()>' 
+        #published: boolean
+        tags: '2x @tag*'
+        media: '<imageUrl($width = 640, $height = 480)>'
+        author: '@user*'
+
+
+App\Entity\PrivatePost:
+    privatepost_:  
+        title: '<sentence($nbWords = 4()>' 
+        content: '<paragraph()>' 
+        author: '@user*'
+
+App\Entity\Role:
+    role_: '<randomElement($array = array ('user','admin','redacteur', 'parent'))>' 
+
+App\Entity\Tag: 
+    tag_{1..5}:
+        title: '<word()>' 
+
+
+
+#App\Entity\User: 
+
+ #   // On crée une instance de Faker en français
+ #       $generator = Factory::create('fr_FR');
+ #       // On passe le Manager de Doctrine à Faker !
+ #       $populator = new Populator($generator, $manager);
+#
+ #       $populator->addEntity(Child::class, 50, [
+ #           'lastname' => function() use ($generator) { return $generator->lastname(); },
+ #           'firstname' => function() use ($generator) { return $generator->firstname(); },
+ #           'class' => function() use ($generator) { return $generator->randomElement($array = array ('1a','2b','3c')); },
+ #           // parents étant une many to many, faker ne va pas fonctionner. il faudrait utiliser alice. 
+ #           //'parents' => function() use ($generator) { return $generator->movieTitleRandom(); },        ]);
+ #       // On peut passer en 3ème paramètre le générateur de notre choix, ici un "name" cohérent pour Person
+ #       $populator->addEntity('AppBundle\Entity\Person', 20, array(
+ #         'name' => function() use ($generator) { return $generator->name(); },
+ #       ));
+ #       // On demande à Faker d'éxécuter les ajouts
+ #       $insertedEntities = $populator->execute();
+ #       // Si besoin de manipuler les entités créées
+ #       // dump($insertedEntities);
