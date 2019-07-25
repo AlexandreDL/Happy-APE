@@ -21,11 +21,18 @@ const App = () => (
     <Header>
       <NavBar />
     </Header>
+<<<<<<< HEAD
+    <main>
+      <p>contenu</p>
+    </main>
+    <Footer />
+=======
       <main>
         <Route exact path="/" component={HomePage} />
         <Route path="/conditions-generales-d-utilisation" component={CGU} />
       </main>
       <Footer />
+>>>>>>> 748bd40ce7aadfb9482e46ee54ec6e6afac2237c
   </React.Fragment>
 );
 
