@@ -20,8 +20,8 @@ export default createMuiTheme({
     secondary: { main: '#ffc43d' },
   },
   overrides: {
-    MuiButton: {
-      raisedPrimary: {
+    root: {
+      MuiButton: {
         color: '#fffff',
       },
     },
