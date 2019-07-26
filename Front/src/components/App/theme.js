@@ -21,10 +21,8 @@ export default createMuiTheme({
   },
   overrides: {
     MuiButton: {
-      root: {
-        color: 'white',
-        colorInherit: '#fff',
-
+      raisedPrimary: {
+        color: '#fffff',
       },
     },
   },
