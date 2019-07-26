@@ -3,8 +3,11 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import { Container } from '@material-ui/core';
 
-// == Import : local
+import { MuiThemeProvider } from '@material-ui/core/styles';
 
+
+// == Import : local
+import theme from 'src/components/App/theme';
 import NavBar from 'src/components/Includes/Nav';
 import Header from 'src/components/Includes/Header';
 import CGU from 'src/components/CGU';
@@ -18,6 +21,7 @@ import './app.scss';
 
 // == Composant
 const App = () => (
+  <MuiThemeProvider theme={theme}>
   <React.Fragment>
     <Header>
       <NavBar />
@@ -33,6 +37,7 @@ const App = () => (
     </Container>
     <Footer />
   </React.Fragment>
+  </MuiThemeProvider>
 );
 
 // == Export

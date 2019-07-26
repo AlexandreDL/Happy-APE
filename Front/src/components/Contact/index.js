@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 const Contact = () => {
   
 return (
+
   <form className="contact">
     <TextField
       required
@@ -41,10 +42,12 @@ return (
       className=''
       margin="normal"
       />
-    <Button className="contact-button" variant="contained" color="default">
+    <Button className="contact-button" variant="contained" color="primary">
         envoyer
     </Button>
+    
   </form>
+
     
 );
 
