@@ -19,8 +19,19 @@ class TagController extends AbstractController
     public function list(TagRepository $tagRepository)
     {
        $tags = $tagRepository->findAll(); 
-       return $this->json($tags);
-    }
+       //return $this->json($tags);
+
+       $formatted = [];
+       foreach ($tags as $tag) {
+           $formatted[] = [
+              'id' => $tag->getId(),
+              'name' => $tag->getTitle(),
+           ];
+       }
+
+       return new JsonResponse($formatted);
+   }
+    
 
     /**
      * @Route("/tag/{id}", name="tag_one", methods={"GET"}))
