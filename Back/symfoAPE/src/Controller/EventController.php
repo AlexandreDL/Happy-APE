@@ -8,39 +8,74 @@ use App\Repository\EventRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Constraints\Json;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class EventController extends AbstractController
 {
+
     /**
      * @Route("/events", name="events_list")
      */
-    public function list(EventRepository $eventRepository) {
+    public function list()
+    {
 
-        $events = $eventRepository->findAll();
-        return new JsonResponse($events);
+        // return new JsonResponse(
+        //     [
+        //         'status' => 'ok',
+        //     ]);
+
+        $serializer = JMS\Serializer\SerializerBuilder::create()->build();
+
+        $data = array();
+
+        for ($i = 1; $i <= 10; $i++){
+            $event = new Event();
+            $event->setName("Titre de l'événement n°$i")
+                  ->setContent("<p>Contenu de l'événement n°$i</p>")
+                  ->getMedia("http://placehold.it/350x150");
+                
+            $data[] = $serializer->serialize($event, 'json');
+        }
+
+        $response = new Response();
+        $response->setContent(json_encode($data));
+        $response->send();
     }
-
-    // public function list(Request $request)
+    /**
+     * @Route("/events", name="events_list")
+     */
+    // public function list(Response $response, EventRepository $eventrepository)
     // {
-    //     $repository = $this->getDoctrine()->getRepository(Event::class);
 
-    //     $events = $repository->findById($id);
-
-    //     $lastEvents = $repository->lastRelease(3);
-
-    //     $response = new Response(json_encode($lastEvents));
-
+    //     $response = new Response();
+    //     $response->setContent(json_encode([
+    //         'data' => 123,
+    //     ]));
     //     $response->headers->set('Content-Type', 'application/json');
-
-    //     return $response;
-        
-    //     // return $this->json('src/Repository/EventRepository.php',[
-    //     //     'events' => $events,
-    //     // ]);
+    
+    //     $eventrepository = $this->getDoctrine()->getRepository(Event::class);
+    
+    // $events = $eventrepository->findAll(); 
+    //     $response->headers->set('Content-Type', 'application/json');
+    
+    //     return new JsonResponse($response, 200);
     // }
+
+    // public function list() {
+    //     $em = $this->getDoctrine()->getManager();
+    //     $query = $em->createQuery(
+    //         'SELECT c
+    //         FROM AppBundle:Event'
+    //     );
+    //     $categorias = $query->getArrayResult();
+    
+    //     $response = new Response(json_encode($categorias));
+    //     $response->headers->set('Content-Type', 'application/json');
+    
+    //     return $response;
+    // }
+
 
      /**
      * @Route("/events/{id}", name="event_details")
