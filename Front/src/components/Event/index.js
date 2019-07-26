@@ -17,7 +17,13 @@ const Event = () => {
   return (
     <article className="event">
       <Card >
-
+        <CardMedia
+          component="img"
+          alt="soirée théatre avec les Ah!"
+          height="140"
+          image="https://www.theatresparisiensassocies.com/user/img/1/710x0x1207-or.jpg"
+          title="soirée théatre"
+          />
         <CardContent>
           <Typography gutterBottom variant="h4" component="h2">
             Soirée théâtre - troupe des AH !
