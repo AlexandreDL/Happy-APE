@@ -22,13 +22,15 @@ const App = () => (
     <Header>
       <NavBar />
     </Header>
-    <main>
-      <Route exact path="/" component={HomePage} />
-      <Route path="/conditions-generales-d-utilisation" component={CGU} />
-      <Route path="/qui-sommes-nous" component={WhoAreWe} />
-      <Route path="/contact" component={Contact} />
-      <Route path="/evenement" component={Events} />
-    </main>
+    <Container sm="100%">
+      <main>
+        <Route exact path="/" component={HomePage} />
+        <Route path="/conditions-generales-d-utilisation" component={CGU} />
+        <Route path="/qui-sommes-nous" component={WhoAreWe} />
+        <Route path="/contact" component={Contact} />
+        <Route path="/evenement" component={Events} />
+      </main>
+    </Container>
     <Footer />
   </React.Fragment>
 );
