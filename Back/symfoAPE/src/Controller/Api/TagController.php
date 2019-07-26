@@ -3,7 +3,9 @@
 namespace App\Controller\Api;
 
 use App\Entity\Tag;
+use App\Form\TagType;
 use App\Repository\TagRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -47,5 +49,27 @@ class TagController extends AbstractController
         'name' => $tag->getTitle(),
         ];
         return new JsonResponse($formatted);
+    }
+
+    /**
+     * Creates a new Tag entity.
+     *
+     * @Route("/tag/new", methods={"POST"}, name="tag_new")
+     */
+    public function newTag(Request $request) {
+        $requestData = \json_decode($request->getContent(), true);  
+
+        $tag = new Tag();
+        $form = $this->createForm(TagType::class, $tag);
+        $form->submit($requestData);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($tag);
+            $em->flush();
+            return new Response('I really hope it\s working fine.');
+        } else {
+            return $form;
+        }
     }
 }

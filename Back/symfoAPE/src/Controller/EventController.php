@@ -7,9 +7,11 @@ use App\Form\EventType;
 use App\Repository\EventRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Tests\Fixtures\Validation\Article;
 
 class EventController extends AbstractController {
 
@@ -83,20 +85,17 @@ class EventController extends AbstractController {
     }
 
      /**
-     * @Route
+     * @Route("/private/events/{id}/delete", name="event_delete")
      */
-    public function edit()
-    {
-        return $this->json(['title' => 'événements', 
-    'content' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti provident ipsum enim adipisci tempore sit amet pariatur, praesentium saepe doloribus quisquam quos rerum! Quaerat ratione at iste exercitiatonem id perferendis?']);
-    }
+    public function delete($id) {
 
-     /**
-     * @Route("/events/{id}/delete", name="event_delete")
-     */
-    public function delete()
-    {
-        return $this->json(['title' => 'événements', 
-    'content' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti provident ipsum enim adipisci tempore sit amet pariatur, praesentium saepe doloribus quisquam quos rerum! Quaerat ratione at iste exercitiatonem id perferendis?']);
-    }
+        $event = $this->getDoctrine()->getRepository(Event::class)->find($id);
+        
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($event);
+        $response = new Response();
+        $response->send();
+
+        return $this->json($event);
+      }
 }
