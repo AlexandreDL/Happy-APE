@@ -4,16 +4,21 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\News;
+use App\Repository\NewsRepository;
 
 class PublicController extends AbstractController
 {
     /**
      * @Route("/", name="home")
      */
-    public function home()
+    public function home(NewsRepository $newsRepository)
     {
-        return $this->json(['title' => 'homepage', 
-    'content' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti provident ipsum enim adipisci tempore sit amet pariatur, praesentium saepe doloribus quisquam quos rerum! Quaerat ratione at iste exercitiatonem id perferendis?']);
+        $lastNewses = $newsRepository->findBy(['isPublished' => true], ['createdAt' => 'DESC'], 5, 0);
+        return $this->json([
+        'title' => 'homepage', 
+        'news' => $lastNewses
+    ]);
     }
     
      /**
