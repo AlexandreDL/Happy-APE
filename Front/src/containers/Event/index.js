@@ -4,9 +4,6 @@ import { connect } from 'react-redux';
 // == Import : local
 import Event from 'src/components/Event';
 
-// Action Creators
-import { doSomething } from 'src/store/reducer';
-
 /* === State (données) ===
  * - mapStateToProps retroune un objet de props pour le composant de présentation
  * - mapStateToProps met à dispo 2 params
@@ -26,9 +23,7 @@ const mapStateToProps = (state, ownProps) => ({
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  doSomething: () => {
-    dispatch(doSomething('Coucou'));
-  },
+
 });
 
 // Container

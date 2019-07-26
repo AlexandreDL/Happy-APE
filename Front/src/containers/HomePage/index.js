@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 // == Import : local
 import Homepage from 'src/components/HomePage';
 
-// Action Creators
-import { doSomething } from 'src/store/reducer';
 
 /* === State (données) ===
  * - mapStateToProps retroune un objet de props pour le composant de présentation
@@ -15,7 +13,7 @@ import { doSomething } from 'src/store/reducer';
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
 const mapStateToProps = (state, ownProps) => ({
-  message: state.message,
+  homepageData: state.homepageData,
 });
 
 /* === Actions ===
@@ -26,9 +24,13 @@ const mapStateToProps = (state, ownProps) => ({
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  doSomething: () => {
-    dispatch(doSomething('Coucou'));
-  },
+  setHomepageData: () => {
+    const action = {
+      type: 'GET_HOMEPAGE_DATAS',
+    };
+
+    dispatch(action);
+  }
 });
 
 // Container

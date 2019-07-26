@@ -2,35 +2,46 @@ import React from 'react';
 import Event from 'src/components/Event';
 import Slider from 'src/utils/Carousel';
 import NewsDetail from 'src/components/NewsDetail';
-import { Container, Divider } from '@material-ui/core';
-// import axios from 'axios';
+import { Container, Divider, ListItemAvatar } from '@material-ui/core';
+import axios from 'axios';
 
 
-const HomePage = () => { 
+class HomePage extends React.Component {
 
-  // axios.get('http://127.0.0.1:8001/api/news')
-  //   .then((response) => {
-  //     console.log(response.data);
-  //   });
+  homepageData = 'null';
 
+  componentDidMount() {
+    if(this.props.homepageData === null) {
+      this.props.setHomepageData();
+      console.log(this.props.homepageData);
+    }
+  }
 
-  return (
-    <React.Fragment>
-      <Slider />
-      <Divider />
-      <article id="events">
-        <Container>
-          <Event />
-        </Container>
-      </article>
-      <Divider />
-      <NewsDetail />
-      <NewsDetail />
-      <NewsDetail />
-      <NewsDetail />
-      <Divider />
-    </React.Fragment>
-  );
+  componentDidUpdate() {
+    if(this.props.homepageData === null) {
+      this.props.setHomepageData();
+      console.log(this.props.homepageData);
+    }
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        <Slider />
+        <Divider />
+        <article id="events">
+          <Container>
+            <Event />
+          </Container>
+        </article>
+        <Divider />
+        {/* {this.homepageData.news.map(item => (
+          <NewsDetail item={item} />
+          ))} */}
+        <Divider />
+      </React.Fragment>
+    );
+  };
 };
 
 export default HomePage;

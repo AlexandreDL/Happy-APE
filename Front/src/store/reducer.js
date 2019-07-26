@@ -1,18 +1,18 @@
 // == Initial State
 const initialState = {
-  message: 'Hello',
+  homepageData: null,
 };
 
 // == Types
-const DO_SOMETHING = 'DO_SOMETHING';
+const GET_HOMEPAGE_DATAS = 'GET_HOMEPAGE_DATAS';
 
 // == Reducer
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case DO_SOMETHING:
+    case GET_HOMEPAGE_DATAS:
       return {
         ...state,
-        message: action.message,
+        homepageData: action.homepageData,
       };
 
     default:
@@ -21,9 +21,9 @@ const reducer = (state = initialState, action = {}) => {
 };
 
 // == Action Creators
-export const doSomething = message => ({
-  type: DO_SOMETHING,
-  message,
+export const getHomepageDatas = data => ({
+  type: GET_HOMEPAGE_DATAS,
+  homepageData: data,
 });
 
 
