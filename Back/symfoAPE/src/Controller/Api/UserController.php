@@ -26,6 +26,9 @@ class UserController extends AbstractController
      */
     public function one(User $user)
     {
+        if (empty($user)) {
+            return new JsonResponse(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
+          }
         return $this->json($user);
     }
 }

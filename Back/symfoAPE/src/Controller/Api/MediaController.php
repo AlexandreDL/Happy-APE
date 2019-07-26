@@ -2,10 +2,11 @@
 
 namespace App\Controller\Api;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Media;
 use App\Repository\MediaRepository;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
 * @Route("/api", name="api_")
@@ -26,6 +27,9 @@ class MediaController extends AbstractController
      */
     public function one(media $media)
     {
+        if (empty($media)) {
+            return new JsonResponse(['message' => 'File not found'], Response::HTTP_NOT_FOUND);
+          }
         return $this->json($media);
     }
     
