@@ -15,6 +15,7 @@ import HomePage from 'src/components/HomePage';
 import Footer from 'src/components/Includes/Footer';
 import WhoAreWe from 'src/components/WhoAreWe';
 import Contact from 'src/components/Contact';
+import Events from 'src/components/Events';
 
 import './app.scss';
 
@@ -29,7 +30,8 @@ const App = () => (
           <Route exact path="/" component={HomePage} />
           <Route path="/conditions-generales-d-utilisation" component={CGU} />
           <Route path="/qui-sommes-nous" component={WhoAreWe} />
-          <Route path="/Contact" component={Contact} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/evenement" component={Events} />
         </Container>
       </main>
       <Footer />

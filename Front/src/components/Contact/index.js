@@ -8,8 +8,10 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 // == Composant
-const Contact = () => (
-  <div className="contact">
+const Contact = () => {
+  
+return (
+  <form className="contact">
     <TextField
       required
       id="standard-name"
@@ -35,16 +37,19 @@ const Contact = () => (
       id="standard-multiline-flexible"
       label="votre message"
       multiline
-      rowsMax="4" 
+      rows="4" 
       className=''
       margin="normal"
       />
-    <Button className="contact-button" variant="contained" color="primary">
+    <Button className="contact-button" variant="contained" color="default">
         envoyer
     </Button>
-  </div>
+  </form>
     
 );
+
+}
+
 
 // == Export
 export default Contact;
