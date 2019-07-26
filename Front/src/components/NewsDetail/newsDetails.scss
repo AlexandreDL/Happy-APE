@@ -1,0 +1,20 @@
+.newsDetail {
+  max-width: 80%;
+  margin: auto;
+  padding: 25px;
+
+  
+  
+  &-content {
+  font-size: 1em;
+  line-height: 1.2em;
+  }
+
+}
+
+.newsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  
+}

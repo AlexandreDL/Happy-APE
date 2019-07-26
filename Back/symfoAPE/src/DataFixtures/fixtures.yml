@@ -1,58 +1,48 @@
+parameters :
+    classArray: ['CE', 'CP', 'CP', 'Petite section', 'Grande section']
+    roleArray: ['user', 'parent', 'admin', 'redacteur']
+
 App\Entity\Child:
     child_{1..50}:
         lastname: '<lastname()>' 
         firstname: '<firstname()>' 
-        class: '<randomElement($array = array ('1a','2b','3c'))>' 
-        parents: '2x @user*'
-
-
-
+        class: '<randomElement($classArray)>' 
+        #parents: '2x @user*'
 
 App\Entity\Media:
-     
+    media_{1..20}:
+        title: '<word()>' 
+        type: '<fileExtension()>'
+        url: '<imageUrl()>'
+   
 App\Entity\News:
     news_{1..10}:
-        title: '<sentence($nbWords = 4()>' 
+        title: '<sentence()>' 
         content: '<paragraph()>' 
-        #published: boolean
-        tags: '2x @tag*'
-        media: '<imageUrl($width = 640, $height = 480)>'
-        author: '@user*'
-
+        isPublished: '<boolean()>'
+        #tags: '2x @tag*'
+        #author: '@user*'
 
 App\Entity\PrivatePost:
-    privatepost_:  
-        title: '<sentence($nbWords = 4()>' 
-        content: '<paragraph()>' 
-        author: '@user*'
+    privatepost_{1..15}:  
+        title (unique): '<sentence()>' 
+        content (unique): '<paragraph()>' 
+        #author: '@user*'
 
 App\Entity\Role:
-    role_: '<randomElement($array = array ('user','admin','redacteur', 'parent'))>' 
+    role_{1..4}:
+        role (unique): '<randomElement($roleArray)>' 
 
 App\Entity\Tag: 
     tag_{1..5}:
         title: '<word()>' 
 
-
-
-#App\Entity\User: 
-
- #   // On crée une instance de Faker en français
- #       $generator = Factory::create('fr_FR');
- #       // On passe le Manager de Doctrine à Faker !
- #       $populator = new Populator($generator, $manager);
-#
- #       $populator->addEntity(Child::class, 50, [
- #           'lastname' => function() use ($generator) { return $generator->lastname(); },
- #           'firstname' => function() use ($generator) { return $generator->firstname(); },
- #           'class' => function() use ($generator) { return $generator->randomElement($array = array ('1a','2b','3c')); },
- #           // parents étant une many to many, faker ne va pas fonctionner. il faudrait utiliser alice. 
- #           //'parents' => function() use ($generator) { return $generator->movieTitleRandom(); },        ]);
- #       // On peut passer en 3ème paramètre le générateur de notre choix, ici un "name" cohérent pour Person
- #       $populator->addEntity('AppBundle\Entity\Person', 20, array(
- #         'name' => function() use ($generator) { return $generator->name(); },
- #       ));
- #       // On demande à Faker d'éxécuter les ajouts
- #       $insertedEntities = $populator->execute();
- #       // Si besoin de manipuler les entités créées
- #       // dump($insertedEntities);
+App\Entity\User: 
+    user_{1..50}:
+        email (unique): '<email()>' 
+        password: '<password()>'
+        lastname: '<lastname()>' 
+        firstname: '<firstname()>' 
+        is_active: '<boolean()>'
+        is_parent: '<boolean()>'
+        #children: '<numberBetween(1, 2)>x @child*'

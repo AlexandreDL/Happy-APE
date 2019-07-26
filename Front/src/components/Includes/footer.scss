@@ -3,39 +3,35 @@
 footer {
   background-color: $color2; 
   color: $color4;
+  height: 150px;
+  padding: 25px;
 
   & .footer-top {
-    display: flex;
-    justify-content: space-between;
+    height: 100%;
 
-    & .footer-ul-right {
+    &-ul-right {
       display : flex;
       padding : 0.2em;
       margin : 0em;
       flex-direction: column;
       align-items: flex-end;
-      font-size: 0.8em;
+      font-size: 0.9em;
       
       &-li {
-        padding :0.2em;
+        padding: 0.2em;
       }  
     }  
-    & .footer-ul-left {
-      display : flex;
-      padding : 0.2em;
-      margin : 0em;
-      flex-direction: column;
+    & .footer-top-ul-left {
+      font-size: 0.9em;
       align-items: flex-start;
-      font-size: 0.8em;
-      
-      & .footer-li {
-        padding :0.2em;
-      }  
-    }  
+      &-li {
+        margin-top: 0.3em;
+      }
+    }
   }
   
   p {
-  font-size: 0.8em;
+  font-size: 1em;
   padding: 0.5em;
   text-align: center;
   }

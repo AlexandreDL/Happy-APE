@@ -17,12 +17,12 @@ class Media
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $type;
 
@@ -32,7 +32,7 @@ class Media
     private $url;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $createdAt;
 
@@ -41,24 +41,9 @@ class Media
      */
     private $updatedAt;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Event", inversedBy="media")
-     */
-    private $event;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Role", cascade={"persist", "remove"})
-     */
-    private $accreditation_level;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\News", inversedBy="media")
-     */
-    private $news;
-
     public function __construct()
     {
-        $this->createdAt = new \DateTime();
+        $this->createdAt = new \DateTime;
     }
 
     public function getId(): ?int
@@ -71,7 +56,7 @@ class Media
         return $this->title;
     }
 
-    public function setTitle(string $title): self
+    public function setTitle(?string $title): self
     {
         $this->title = $title;
 
@@ -83,7 +68,7 @@ class Media
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?string $type): self
     {
         $this->type = $type;
 
@@ -102,7 +87,12 @@ class Media
         return $this;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -121,39 +111,8 @@ class Media
         return $this;
     }
 
-    public function getEvent(): ?Event
+    public function __toString()
     {
-        return $this->event;
-    }
-
-    public function setEvent(?Event $event): self
-    {
-        $this->event = $event;
-
-        return $this;
-    }
-
-    public function getAccreditationLevel(): ?Role
-    {
-        return $this->accreditation_level;
-    }
-
-    public function setAccreditationLevel(?Role $accreditation_level): self
-    {
-        $this->accreditation_level = $accreditation_level;
-
-        return $this;
-    }
-
-    public function getNews(): ?News
-    {
-        return $this->news;
-    }
-
-    public function setNews(?News $news): self
-    {
-        $this->news = $news;
-
-        return $this;
+        return $this->title;
     }
 }

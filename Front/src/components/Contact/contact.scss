@@ -1,0 +1,17 @@
+@import 'src/styles/vars';
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  width : 60%;
+  margin: auto;
+  padding : 1em;
+  
+
+  &-button {
+    width: 5em;
+    margin: auto;
+    
+  }
+  
+}

@@ -63,17 +63,19 @@ class EventController extends AbstractController {
     // }
 
 
-
-
-
      /**
      * @Route("/events/{id}", name="event_details")
      */
-    public function show()
-    {
-        return $this->json(['title' => 'événements', 
-    'content' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti provident ipsum enim adipisci tempore sit amet pariatur, praesentium saepe doloribus quisquam quos rerum! Quaerat ratione at iste exercitiatonem id perferendis?']);
+    public function showOneEvent(Event $event) {
+        dump($event);
+        $response = new JsonResponse(array('event' => $event));
+        return $response;
     }
+    // public function show()
+    // {
+    //     return $this->json(['title' => 'événements', 
+    // 'content' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti provident ipsum enim adipisci tempore sit amet pariatur, praesentium saepe doloribus quisquam quos rerum! Quaerat ratione at iste exercitiatonem id perferendis?']);
+    // }
 
      /**
      * @Route("/private/events/create", name="event_add")
