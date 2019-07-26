@@ -3,7 +3,7 @@ import React from 'react';
 
 
 // == Import : local
-import { Link, Container, Grid } from '@material-ui/core';
+import { Link, Grid } from '@material-ui/core';
 import './footer.scss';
 
 

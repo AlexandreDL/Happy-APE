@@ -1,9 +1,6 @@
 // == Import : npm
 import React from 'react';
-import {
-  Route, Switch,
-  Redirect, withRouter,
-} from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { Container } from '@material-ui/core';
 
 // == Import : local
@@ -25,16 +22,14 @@ const App = () => (
     <Header>
       <NavBar />
     </Header>
-      <main>
-        <Container maxWidthXl height="100%">
-          <Route exact path="/" component={HomePage} />
-          <Route path="/conditions-generales-d-utilisation" component={CGU} />
-          <Route path="/qui-sommes-nous" component={WhoAreWe} />
-          <Route path="/contact" component={Contact} />
-          <Route path="/evenement" component={Events} />
-        </Container>
-      </main>
-      <Footer />
+    <main>
+      <Route exact path="/" component={HomePage} />
+      <Route path="/conditions-generales-d-utilisation" component={CGU} />
+      <Route path="/qui-sommes-nous" component={WhoAreWe} />
+      <Route path="/contact" component={Contact} />
+      <Route path="/evenement" component={Events} />
+    </main>
+    <Footer />
   </React.Fragment>
 );
 

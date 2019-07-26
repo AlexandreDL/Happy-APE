@@ -1,0 +1,48 @@
+parameters :
+    classArray: ['CE', 'CP', 'CP', 'Petite section', 'Grande section']
+    roleArray: ['user', 'parent', 'admin', 'redacteur']
+
+App\Entity\Child:
+    child_{1..50}:
+        lastname: '<lastname()>' 
+        firstname: '<firstname()>' 
+        class: '<randomElement($classArray)>' 
+        #parents: '2x @user*'
+
+App\Entity\Media:
+    media_{1..20}:
+        title: '<word()>' 
+        type: '<fileExtension()>'
+        url: '<imageUrl()>'
+   
+App\Entity\News:
+    news_{1..10}:
+        title: '<sentence()>' 
+        content: '<paragraph()>' 
+        isPublished: '<boolean()>'
+        #tags: '2x @tag*'
+        #author: '@user*'
+
+App\Entity\PrivatePost:
+    privatepost_{1..15}:  
+        title (unique): '<sentence()>' 
+        content (unique): '<paragraph()>' 
+        #author: '@user*'
+
+App\Entity\Role:
+    role_:
+        role: '<randomElement($roleArray)>' 
+
+App\Entity\Tag: 
+    tag_{1..5}:
+        title: '<word()>' 
+
+App\Entity\User: 
+    user_{1..50}:
+        email (unique): '<email()>' 
+        password: '<password()>'
+        lastname: '<lastname()>' 
+        firstname: '<firstname()>' 
+        is_active: '<boolean()>'
+        is_parent: '<boolean()>'
+        #children: '<numberBetween(1, 2)>x @child*'
