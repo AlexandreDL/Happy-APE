@@ -1,14 +1,17 @@
 import React from 'react';
+import Event from 'src/components/Event';
+import Slider from 'src/utils/Carousel';
+import NewsDetail from 'src/components/NewsDetail';
+
 
 const HomePage = () => (
   <React.Fragment>
-    <p>Bienvenue sur la page d'accueil!</p>
-    <p>Bienvenue sur la page d'accueil!</p>
-    <p>Bienvenue sur la page d'accueil!</p>
-    <p>Bienvenue sur la page d'accueil!</p>
-    <p>Bienvenue sur la page d'accueil!</p>
-    <p>Bienvenue sur la page d'accueil!</p>
-    <p>Bienvenue sur la page d'accueil!</p>
+
+    <Event />
+    <NewsDetail />
+    <NewsDetail />
+    <NewsDetail />
+    <NewsDetail />
   </React.Fragment>
 );
 
