@@ -1,0 +1,13 @@
+.event {
+  margin: 2em;  
+  &-resume {
+    max-width : 60%;
+  }
+  &-button {
+    height: 3em;
+    padding : 1em;
+  }
+  &-cardAction {
+  float: right;
+  }
+}
