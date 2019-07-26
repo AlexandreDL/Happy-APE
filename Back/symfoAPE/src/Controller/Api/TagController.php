@@ -2,11 +2,12 @@
 
 namespace App\Controller\Api;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Tag;
 use App\Repository\TagRepository;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+//use Symfony\Component\HttpFoundation\Request;
 
 /**
   * @Route("/api", name="api_")
@@ -18,24 +19,33 @@ class TagController extends AbstractController
      */
     public function list(TagRepository $tagRepository)
     {
-       $tags = $tagRepository->findAll(); 
-       return $this->json($tags);
+        $tags = $tagRepository->findAll(); 
+ 
+        $formatted = [];
+        foreach ($tags as $tag) {
+            $formatted[] = [
+               'id' => $tag->getId(),
+               'name' => $tag->getTitle(),
+            ];
+        } 
+        return new JsonResponse($formatted);
     }
+    
 
-    // /**
-    //  *  Deletes a Tag entity.
-    // * @Route("/tag/{id}/delete", methods={"DELETE"}, name="admin_post_delete")
-    //  */
-    // public function delete()
-    // {
-    //    //todo
-    // }
-
-        /**
+    /**
      * @Route("/tag/{id}", name="tag_one", methods={"GET"}))
      */
     public function one(Tag $tag)
-    {
-        return $this->json($tag);
+    { 
+      if (empty($tag)) {
+        return new JsonResponse(['message' => 'Tag not found'], Response::HTTP_NOT_FOUND);
+      }
+
+
+        $formatted[] = [
+        'id' => $tag->getId(),
+        'name' => $tag->getTitle(),
+        ];
+        return new JsonResponse($formatted);
     }
 }

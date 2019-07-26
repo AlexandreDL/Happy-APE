@@ -2,65 +2,51 @@
 
 namespace App\Controller;
 
-use App\Entity\Event;
-use App\DataFixtures\AppFixtures;
 use App\Repository\EventRepository;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Event;
 
-class EventController extends AbstractController
-{
+class EventController extends AbstractController {
 
     /**
      * @Route("/events", name="events_list")
      */
     public function list()
     {
-
-        // return new JsonResponse(
-        //     [
-        //         'status' => 'ok',
-        //     ]);
-
-        $serializer = JMS\Serializer\SerializerBuilder::create()->build();
-
         $data = array();
 
         for ($i = 1; $i <= 10; $i++){
-            $event = new Event();
-            $event->setName("Titre de l'événement n°$i")
-                  ->setContent("<p>Contenu de l'événement n°$i</p>")
-                  ->getMedia("http://placehold.it/350x150");
-                
-            $data[] = $serializer->serialize($event, 'json');
+            $event[$i] = new Event();
+            $event[$i]->setName("Titre de l'événement n°$i")
+                  ->setContent("<p>Contenu de l'événement n°$i</p>");
+            $data[$i] = [
+                "id" => $event[$i]->getId(),
+                "name" => $event[$i]->getName(),
+                "date" => $event[$i]->getDate(),
+                "createdAt" => $event[$i]->getCreatedAt(),
+                "updatedAt" => $event[$i]->getUpdatedAt(),
+                "isPublished" => $event[$i]->getIsPublished(),
+                "content" => $event[$i]->getContent()
+            ];
         }
-
-        $response = new Response();
-        $response->setContent(json_encode($data));
-        $response->send();
+        
+        return new JsonResponse($data);
     }
-    /**
-     * @Route("/events", name="events_list")
-     */
-    // public function list(Response $response, EventRepository $eventrepository)
-    // {
 
-    //     $response = new Response();
-    //     $response->setContent(json_encode([
-    //         'data' => 123,
-    //     ]));
-    //     $response->headers->set('Content-Type', 'application/json');
-    
-    //     $eventrepository = $this->getDoctrine()->getRepository(Event::class);
-    
-    // $events = $eventrepository->findAll(); 
-    //     $response->headers->set('Content-Type', 'application/json');
-    
-    //     return new JsonResponse($response, 200);
-    // }
+    /**
+     * @Route("/eventsbis", name="events_listbis", methods={"GET"})
+     */
+    public function listbis(EventRepository $repository) {
+        $events = $repository->findAll();
+        dump($events);
+        $response = new JsonResponse();
+        $response->setData(['data' => $events]);
+        
+        dump($response);
+        //$response = JsonResponse::fromJsonString('{ "data": 123 }');
+    }
 
     // public function list() {
     //     $em = $this->getDoctrine()->getManager();
