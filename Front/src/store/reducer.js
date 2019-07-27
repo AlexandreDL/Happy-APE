@@ -3,28 +3,35 @@ const initialState = {
   homepageData: null,
 };
 
-// == Types
-const GET_HOMEPAGE_DATAS = 'GET_HOMEPAGE_DATAS';
-
 // == Reducer
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case GET_HOMEPAGE_DATAS:
+    case 'GET_HOMEPAGE':
+      break;
+    case 'GET_HOMEPAGE_SUCCESS':
       return {
         ...state,
-        homepageData: action.homepageData,
+        homepageData: action.payload.data,
       };
-
+    case 'GET_HOMEPAGE_FAILURE':
+      console.log('oooooooohhhh that\'s too baaaad!');
+      break;
     default:
       return state;
   }
 };
 
 // == Action Creators
-export const getHomepageDatas = data => ({
-  type: GET_HOMEPAGE_DATAS,
-  homepageData: data,
-});
+export function getHomepageData() {
+  return {
+    type: 'GET_HOMEPAGE',
+    payload: {
+      request: {
+        url: '/',
+      },
+    },
+  };
+}
 
 
 // == Selectors

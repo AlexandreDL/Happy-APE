@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 // == Import : local
 import Homepage from 'src/components/HomePage';
+import { getHomepageData } from 'src/store/reducer';
 
 
 /* === State (données) ===
@@ -24,13 +25,7 @@ const mapStateToProps = (state, ownProps) => ({
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  setHomepageData: () => {
-    const action = {
-      type: 'GET_HOMEPAGE_DATAS',
-    };
-
-    dispatch(action);
-  }
+  setHomepageData: () => (dispatch(getHomepageData())),
 });
 
 // Container

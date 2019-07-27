@@ -19,14 +19,14 @@ const Footer = () => {
   return (
     <footer>
       <Grid container justify="space-between">
-        <Grid item lg="6">
+        <Grid item xs={12} lg={6}>
           <ul className="footer-top-ul-left">
             <li className="footer-top-ul-left-li"><Link color="inherit" href="/">Mentions légales </Link></li>
             <li className="footer-top-ul-left-li"><Link color="inherit" href="/">Conditions générales de vente</Link></li>
             <li className="footer-top-ul-left-li"><Link color="inherit" href="/">Conditions générales d'utilisation</Link></li>
           </ul>
         </Grid>
-        <Grid item lg="6">
+        <Grid item xs={12} lg={6}>
           <ul className="footer-top-ul-right">
             <li className="footer-top-ul-right-li"><Link component={AccueilLink} color="inherit">Accueil</Link></li>
             <li className="footer-top-ul-right-li"><Link component={EvenementLink} color="inherit">Evenement</Link></li>
