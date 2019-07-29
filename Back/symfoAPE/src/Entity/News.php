@@ -44,7 +44,7 @@ class News
     public function __construct()
     {
         $this->createdAt = new \DateTime;
-        $this->isPublished = false;
+        $this->isPublished = true;
     }
 
     public function getId(): ?int

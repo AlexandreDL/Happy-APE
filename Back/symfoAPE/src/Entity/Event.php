@@ -49,6 +49,7 @@ class Event
     public function __construct()
     {
         $this->createdAt = new \DateTime;
+        $this->isPublished = true;
     }
 
     public function getId(): ?int

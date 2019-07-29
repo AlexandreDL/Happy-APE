@@ -19,7 +19,7 @@ App\Entity\News:
     news_{1..10}:
         title: '<sentence()>' 
         content: '<paragraph()>' 
-        isPublished: '<boolean()>'
+        createdAt: '<dateTimeBetween("-200 days", "now")>'
         #tags: '2x @tag*'
         #author: '@user*'
 
@@ -46,3 +46,10 @@ App\Entity\User:
         is_active: '<boolean()>'
         is_parent: '<boolean()>'
         #children: '<numberBetween(1, 2)>x @child*'
+
+App\Entity\Event:
+    event_{1..10}:
+        name: '<sentence()>' 
+        content: '<paragraph()>' 
+        createdAt: '<dateTimeBetween("-200 days", "now")>'
+        date: '<dateTimeBetween("now", "200 days")>'
