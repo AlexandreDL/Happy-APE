@@ -1,5 +1,7 @@
 // == Import : npm
 import React from 'react';
+import PropTypes from 'prop-types';
+import { CircularProgress } from '@material-ui/core';
 
 // == Import : local
 
@@ -8,13 +10,41 @@ import Event from 'src/components/Event';
 
 
 // == Composant
-const Events = () => (
-  <article className="event-list">
-    <Event />
-    <Event />
-    <Event />
-  </article>
-);
+class Events extends React.Component {
+
+  events = {};
+
+  loading = true;
+
+  componentDidMount() {
+    const { getEventsForPage } = this.props;
+    getEventsForPage();
+  }
+
+  render() {
+    const { loading, events } = this.props;
+    this.events = events;
+    this.loading = loading;
+    return (
+      <article className="event-list">
+        {(!this.loading && this.events.length !== undefined) ? this.events.map(item => (
+          <Event item={item} key={item.id} />
+        )) : (
+          <div className="cpcenter">
+            <CircularProgress disableShrink className="progress" />
+          </div>
+        )
+            }
+      </article>
+    );
+  }
+}
+
+Events.propTypes = {
+  getEventsForPage: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  events: PropTypes.object.isRequired,
+};
 
 // == Export
 export default Events;

@@ -15,6 +15,7 @@ import { getHomepageData } from 'src/store/reducer';
  */
 const mapStateToProps = (state, ownProps) => ({
   homepageData: state.homepageData,
+  loading: state.loading,
 });
 
 /* === Actions ===

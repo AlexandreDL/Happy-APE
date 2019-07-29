@@ -1,42 +1,78 @@
-/* eslint-disable react/destructuring-assignment */
-
 import React from 'react';
 import Event from 'src/components/Event';
 import Slider from 'src/utils/Carousel';
 import NewsDetail from 'src/components/NewsDetail';
-import { Container, Divider } from '@material-ui/core';
+import { Container, Divider, CircularProgress } from '@material-ui/core';
 import PropTypes from 'prop-types';
-
+import './homepage.scss';
 
 class HomePage extends React.Component {
-  homepageData = null;
+  event = {};
 
   componentWillMount() {
-    this.props.setHomepageData();
+    const { setHomepageData } = this.props;
+    setHomepageData();
   }
 
   render() {
-    if (this.props.homepageData !== null) {
-      document.title = this.props.homepageData.title;
+    const { homepageData, loading } = this.props;
+
+    if (!loading) {
+      document.title = homepageData.title;
+      if (homepageData.nextEvent !== undefined) {
+        this.event = (
+          <Event
+            item={homepageData.nextEvent}
+            key={homepageData.nextEvent.id}
+          />
+        );
+      }
+      else {
+        this.event = (
+          <div className="center event">
+            <p>Aucun évènement à afficher</p>
+          </div>
+        );
+      }
+      if (homepageData.news !== undefined) {
+        this.news = (
+          homepageData.news.map(item => (
+            <NewsDetail item={item} key={item.id} />
+          ))
+        );
+      }
+      else {
+        this.news = (
+          <div className="center event">
+            <p>Aucune actualité à afficher</p>
+          </div>
+        );
+      }
     }
+    else {
+      document.title = 'Chargement...';
+    }
+
     return (
       <React.Fragment>
         <Slider />
         <Divider />
         <h1>Évènements à venir</h1>
         <Container>
-          {(this.props.homepageData !== null) && (
-            <Event
-              item={this.props.homepageData.nextEvent}
-              key={this.props.homepageData.nextEvent.id}
-            />
-          )}
+          {!loading ? this.event : (
+            <div className="cpcenter">
+              <CircularProgress disableShrink className="progress" />
+            </div>
+          )
+          }
         </Container>
         <Divider />
         <h1>Nos dernières actualités</h1>
-        {(this.props.homepageData !== null) && this.props.homepageData.news.map(item => (
-          <NewsDetail item={item} key={item.id} />
-        ))}
+        {!loading ? this.news : (
+          <div className="cpcenter">
+            <CircularProgress disableShrink className="progress" />
+          </div>
+        ) }
         <Divider />
       </React.Fragment>
     );
@@ -46,7 +82,8 @@ class HomePage extends React.Component {
 export default HomePage;
 
 
-// HomePage.propTypes = {
-//   homepageData: PropTypes.array.isRequired,
-//   setHomepageData: PropTypes.func.isRequired,
-// };
+HomePage.propTypes = {
+  homepageData: PropTypes.object.isRequired,
+  setHomepageData: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+};
