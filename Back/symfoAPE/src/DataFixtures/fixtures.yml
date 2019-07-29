@@ -28,7 +28,7 @@ App\Entity\PrivatePost:
         title (unique): '<sentence()>' 
         content (unique): '<paragraph()>' 
         #author: '@user*'
-
+        
 App\Entity\Role:
     role_{1..4}:
         role (unique): '<randomElement($roleArray)>' 
