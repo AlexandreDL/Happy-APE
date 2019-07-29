@@ -1,0 +1,21 @@
+@import 'src/styles/vars';
+
+.contact-form {
+  text-align: center;
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  width : 60%;
+  margin: auto;
+  padding : 1em;
+  
+
+  &-button {
+    display: inline-block;
+    width: 6em;
+    margin: auto;
+  }
+  
+}
