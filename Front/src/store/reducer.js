@@ -1,8 +1,14 @@
 // == Initial State
 const initialState = {
   homepageData: {},
+  legalMentionsData : [],
   loading: true,
 };
+// == Types
+const GET_LEGAL_MENTIONS = 'GET_LEGAL_MENTIONS';
+const GET_LEGAL_MENTIONS_SUCCESS = 'GET_LEGAL_MENTIONS_SUCCESS';
+const GET_LEGAL_MENTIONS_FAILURE = 'GET_LEGAL_MENTIONS_FAILURE';
+
 
 // == Reducer
 const reducer = (state = initialState, action = {}) => {
@@ -21,6 +27,22 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
       };
+    case 'GET_LEGAL_MENTIONS':
+      return {
+        ...state,
+      };
+    case 'GET_LEGAL_MENTIONS_SUCCESS':
+      return {
+        ...state,
+        legalMentionsData: action.payload.data,
+        loading: false,
+      };
+    case 'GET_LEGAL_MENTIONS_FAILURE':
+      return {
+        ...state,
+      };
+
+
     default:
       return state;
   }
@@ -33,6 +55,17 @@ export function getHomepageData() {
     payload: {
       request: {
         url: '/',
+      },
+    },
+  };
+}
+
+export function getLegalMentionsData() {
+  return {
+    type: 'GET_LEGAL_MENTIONS',
+    payload: {
+      request: {
+        url: '/api/mentions-legales',
       },
     },
   };
