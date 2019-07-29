@@ -16,6 +16,7 @@ import Footer from 'src/containers/Includes/Footer';
 import WhoAreWe from 'src/containers/WhoAreWe';
 import Contact from 'src/containers/Contact';
 import Events from 'src/containers/Events';
+import legalMentions from 'src/containers/legalMentions';
 
 import './app.scss';
 
@@ -33,6 +34,7 @@ const App = () => (
           <Route path="/qui-sommes-nous" component={WhoAreWe} />
           <Route path="/contact" component={Contact} />
           <Route path="/evenement" component={Events} />
+          <Route path="/mentions-legales" component={legalMentions} />
         </main>
       </Container>
       <Footer />

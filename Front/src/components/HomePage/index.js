@@ -34,6 +34,7 @@ class HomePage extends React.Component {
           </div>
         );
       }
+
       if (homepageData.news !== undefined) {
         this.news = (
           homepageData.news.map(item => (
@@ -52,7 +53,6 @@ class HomePage extends React.Component {
     else {
       document.title = 'Chargement...';
     }
-
     return (
       <React.Fragment>
         <Slider />
