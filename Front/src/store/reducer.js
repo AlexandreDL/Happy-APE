@@ -75,6 +75,10 @@ export function getLegalMentionsData() {
     payload: {
       request: {
         url: '/api/mentions-legales',
+      },
+    },
+  };
+}
 
 export function getEvents() {
   return {
