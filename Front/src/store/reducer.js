@@ -2,10 +2,7 @@
 const initialState = {
   homepageData: {},
   loading: true,
-<<<<<<< HEAD
   events: {},
-=======
->>>>>>> 6d2d6ae2749b6e16dbca8d6b2c638e08f978ac90
 };
 
 // == Reducer
@@ -25,7 +22,6 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
       };
-<<<<<<< HEAD
     case 'GET_EVENTS':
       return {
         ...state,
@@ -37,8 +33,6 @@ const reducer = (state = initialState, action = {}) => {
         events: action.payload.data,
         loading: false,
       };
-=======
->>>>>>> 6d2d6ae2749b6e16dbca8d6b2c638e08f978ac90
     default:
       return state;
   }
