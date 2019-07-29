@@ -1,21 +1,26 @@
 // == Initial State
 const initialState = {
-  homepageData: null,
+  homepageData: {},
+  loading: true,
 };
 
 // == Reducer
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case 'GET_HOMEPAGE':
-      break;
+      return {
+        ...state,
+      };
     case 'GET_HOMEPAGE_SUCCESS':
       return {
         ...state,
         homepageData: action.payload.data,
+        loading: false,
       };
     case 'GET_HOMEPAGE_FAILURE':
-      console.log('oooooooohhhh that\'s too baaaad!');
-      break;
+      return {
+        ...state,
+      };
     default:
       return state;
   }
