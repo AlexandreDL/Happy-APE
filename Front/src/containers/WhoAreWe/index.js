@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 // == Import : local
 import WhoAreWe from 'src/components/WhoAreWe';
+import { getWhoAreWeData } from 'src/store/reducer';
 
 
 /* === State (données) ===
@@ -13,6 +14,8 @@ import WhoAreWe from 'src/components/WhoAreWe';
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
 const mapStateToProps = (state, ownProps) => ({
+  whoAreWeData: state.whoAreWeData,
+  loading: state.loadin,
 });
 
 /* === Actions ===
@@ -23,6 +26,7 @@ const mapStateToProps = (state, ownProps) => ({
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
 const mapDispatchToProps = (dispatch, ownProps) => ({
+  setWhoAreWeData: () => (dispatch(getWhoAreWeData())),
 });
 
 // Container

@@ -57,7 +57,7 @@ class HomePage extends React.Component {
       <React.Fragment>
         <Slider />
         <Divider />
-        <h1>Évènements à venir</h1>
+        <h1 className="MuiTypography-h1">Évènements à venir</h1>
         <Container>
           {!loading ? this.event : (
             <div className="cpcenter">
@@ -67,7 +67,7 @@ class HomePage extends React.Component {
           }
         </Container>
         <Divider />
-        <h1>Nos dernières actualités</h1>
+        <h1 className="MuiTypography-h1">Nos dernières actualités</h1>
         {!loading ? this.news : (
           <div className="cpcenter">
             <CircularProgress disableShrink className="progress" />
