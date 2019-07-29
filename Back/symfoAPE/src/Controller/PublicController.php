@@ -4,16 +4,25 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\News;
+use App\Repository\NewsRepository;
+use App\Entity\Event;
+use App\Repository\EventRepository;
 
 class PublicController extends AbstractController
 {
     /**
      * @Route("/", name="home")
      */
-    public function home()
+    public function home(NewsRepository $newsRepository, EventRepository $eventrepository)
     {
-        return $this->json(['title' => 'homepage', 
-    'content' => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti provident ipsum enim adipisci tempore sit amet pariatur, praesentium saepe doloribus quisquam quos rerum! Quaerat ratione at iste exercitiatonem id perferendis?']);
+        $lastNewses = $newsRepository->findBy(['isPublished' => true], ['createdAt' => 'DESC'], 5, 0);
+        $nextEvent = $eventrepository->findOneBy(['isPublished' => true], ['date' => 'ASC'], 1, 0);
+        return $this->json([
+        'title' => 'homepage', 
+        'news' => $lastNewses,
+        'nextEvent' => $nextEvent,
+    ]);
     }
     
      /**

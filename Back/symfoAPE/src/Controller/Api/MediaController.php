@@ -32,6 +32,5 @@ class MediaController extends AbstractController
           }
         return $this->json($media);
     }
-    
 }
   
