@@ -19,7 +19,7 @@ class HomePage extends React.Component {
 
     if (!loading) {
       document.title = homepageData.title;
-      if (homepageData.nextEvent !== null) {
+      if (homepageData.nextEvent !== undefined) {
         this.event = (
           <Event
             item={homepageData.nextEvent}
@@ -34,7 +34,8 @@ class HomePage extends React.Component {
           </div>
         );
       }
-      if (homepageData.news !== null && homepageData.news.length !== 0) {
+
+      if (homepageData.news !== undefined) {
         this.news = (
           homepageData.news.map(item => (
             <NewsDetail item={item} key={item.id} />
@@ -52,21 +53,26 @@ class HomePage extends React.Component {
     else {
       document.title = 'Chargement...';
     }
-
-    console.log(homepageData.news);
-
     return (
       <React.Fragment>
         <Slider />
         <Divider />
         <h1>Évènements à venir</h1>
         <Container>
-          {!loading ? this.event : <CircularProgress disableShrink className="progress" />
+          {!loading ? this.event : (
+            <div className="cpcenter">
+              <CircularProgress disableShrink className="progress" />
+            </div>
+          )
           }
         </Container>
         <Divider />
         <h1>Nos dernières actualités</h1>
-        {!loading ? this.news : <CircularProgress disableShrink className="progress" /> }
+        {!loading ? this.news : (
+          <div className="cpcenter">
+            <CircularProgress disableShrink className="progress" />
+          </div>
+        ) }
         <Divider />
       </React.Fragment>
     );

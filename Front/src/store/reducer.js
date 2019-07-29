@@ -3,6 +3,7 @@ const initialState = {
   homepageData: {},
   legalMentionsData : [],
   loading: true,
+  events: {},
 };
 // == Types
 const GET_LEGAL_MENTIONS = 'GET_LEGAL_MENTIONS';
@@ -41,8 +42,17 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
       };
-
-
+    case 'GET_EVENTS':
+      return {
+        ...state,
+        loading: true,
+      };
+    case 'GET_EVENTS_SUCCESS':
+      return {
+        ...state,
+        events: action.payload.data,
+        loading: false,
+      };
     default:
       return state;
   }
@@ -59,14 +69,20 @@ export function getHomepageData() {
     },
   };
 }
-
 export function getLegalMentionsData() {
   return {
     type: 'GET_LEGAL_MENTIONS',
     payload: {
       request: {
         url: '/api/mentions-legales',
-      },
+
+export function getEvents() {
+  return {
+    type: 'GET_EVENTS',
+    payload: {
+      request: {
+        url: '/events/',
+     },
     },
   };
 }
