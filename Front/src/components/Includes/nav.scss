@@ -6,20 +6,20 @@ background-color: $color1;
 justify-content: flex-end;
 color: $color4;
 
+
 &-ul {
   display : flex;
   padding : 1em;
   margin : 0.1em;
   text-align: right;
+  max-width: 100%;
 
   &-li {
     padding :0.5em;
     align-content: flex-end;
+    max-width: 100%;
   }
 }
-}
-.link-nav {
-  
 }
 
 

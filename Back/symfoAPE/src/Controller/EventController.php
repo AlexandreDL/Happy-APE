@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\Tests\Fixtures\Validation\Article;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class EventController extends AbstractController {
 
@@ -25,24 +26,24 @@ class EventController extends AbstractController {
         return $this->json($events);
 
 
-        // $data = array();
+        $data = array();
 
-        // for ($i = 1; $i <= 10; $i++){
-        //     $event[$i] = new Event();
-        //     $event[$i]->setName("Titre de l'événement n°$i")
-        //           ->setContent("<p>Contenu de l'événement n°$i</p>");
-        //     $data[$i] = [
-        //         "id" => $event[$i]->getId(),
-        //         "name" => $event[$i]->getName(),
-        //         "date" => $event[$i]->getDate(),
-        //         "createdAt" => $event[$i]->getCreatedAt(),
-        //         "updatedAt" => $event[$i]->getUpdatedAt(),
-        //         "isPublished" => $event[$i]->getIsPublished(),
-        //         "content" => $event[$i]->getContent()
-        //     ];
-        // }
+        for ($i = 1; $i <= 10; $i++){
+            $event[$i] = new Event();
+            $event[$i]->setName("Titre de l'événement n°$i")
+                  ->setContent("<p>Contenu de l'événement n°$i</p>");
+            $data[$i] = [
+                "id" => $event[$i]->getId(),
+                "name" => $event[$i]->getName(),
+                "date" => $event[$i]->getDate(),
+                "createdAt" => $event[$i]->getCreatedAt(),
+                "updatedAt" => $event[$i]->getUpdatedAt(),
+                "isPublished" => $event[$i]->getIsPublished(),
+                "content" => $event[$i]->getContent()
+            ];
+        }
         
-        // return new JsonResponse($data);
+        return new JsonResponse($data);
     }
 
      /**

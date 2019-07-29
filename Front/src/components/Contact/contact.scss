@@ -1,5 +1,9 @@
 @import 'src/styles/vars';
 
+.contact-form {
+  text-align: center;
+}
+
 .contact {
   display: flex;
   flex-direction: column;
@@ -9,9 +13,9 @@
   
 
   &-button {
-    width: 5em;
+    display: inline-block;
+    width: 6em;
     margin: auto;
-    
   }
   
 }
