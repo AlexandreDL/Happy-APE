@@ -10,7 +10,8 @@ import { MuiThemeProvider } from '@material-ui/core/styles';
 import theme from 'src/components/App/theme';
 import NavBar from 'src/containers/Includes/Nav';
 import Header from 'src/containers/Includes/Header';
-import CGU from 'src/components/CGU';
+import CGU from 'src/containers/CGU';
+import CGV from 'src/containers/CGV';
 import HomePage from 'src/containers/HomePage';
 import Footer from 'src/containers/Includes/Footer';
 import WhoAreWe from 'src/containers/WhoAreWe';
@@ -30,11 +31,12 @@ const App = () => (
       <Container sm="100%">
         <main>
           <Route exact path="/" component={HomePage} />
-          <Route path="/conditions-generales-d-utilisation" component={CGU} />
           <Route path="/qui-sommes-nous" component={WhoAreWe} />
           <Route path="/contact" component={Contact} />
           <Route path="/evenement" component={Events} />
           <Route path="/mentions-legales" component={legalMentions} />
+          <Route path="/conditions-generales-d-utilisation" component={CGU} />
+          <Route path="/conditions-generales-de-vente" component={CGV} />
         </main>
       </Container>
       <Footer />
