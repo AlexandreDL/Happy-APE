@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
@@ -22,6 +23,9 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
+     * @Assert\Email( message = "Veuillez saisir un email valide SVP.")
+     * @Assert\Unique
      */
     private $email;
 
@@ -31,7 +35,6 @@ class User implements UserInterface
     private $roles = [];
 
     /**
-     * @var string The hashed password
      * @ORM\Column(type="string")
      * @Assert\NotBlank(message = "Ce champ doit être renseigné.")
      * @Assert\Length(min="8", minMessage="Votre mot de passe doit faire minimum 8 caractères")
@@ -39,28 +42,26 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message = "Ce champ doit être renseigné.")
-     * @Assert\Length(min="8", minMessage="Votre Prénom doit faire minimum 8 caractères")
+     * @Assert\Length(min="2", minMessage="Votre Prénom doit faire minimum 2 caractères")
      */
     private $lastname;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message = "Ce champ doit être renseigné.")
-     * @Assert\Length(min="8", minMessage="Votre Nom doit faire minimum 8 caractères")
+     * @Assert\Length(min="2", minMessage="Votre Nom doit faire minimum 2 caractères")
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Length(min="8", minMessage="Votre Adresse doit faire minimum 8 caractères")
      */
     private $address_city;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Length(min="8", minMessage="Votre Adresse doit faire minimum 8 caractères")
      */
     private $address_street;
 
@@ -95,12 +96,14 @@ class User implements UserInterface
     private $isParent;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime")
+     * @Assert\DateTime()
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\DateTime()
      */
     private $updatedAt;
 

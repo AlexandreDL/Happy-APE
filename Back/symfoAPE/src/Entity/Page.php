@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PagesRepository")
@@ -17,12 +18,16 @@ class Page
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
+     * @Assert\Length(min=4, minMessage="Plus court que "home", comme nom de page, ça fait vraiment short, non ?", max=200, maxMessage ="Il s'agit du title de la page, pas d'un roman ;)")
      */
     private $title;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text")
+     * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
+     * @Assert\Length(min=50, minMessage = "Moins de 50 caractères sur une page, ça ne fait pas très sérieux... ")
      */
     private $content;
 

@@ -22,14 +22,14 @@ class News
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
-     * @Assert\Length(min=5, minMessage = "Au moins 5 caractères.", max=255)
+     * @Assert\Length(min=5, minMessage="Le titre de la news doit compter entre 5 et 200 caractères.", max=200, maxMessage ="Le titre de la news doit compter entre 5 et 200 caractères.")
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
-     * @Assert\Length(min=50, minMessage = "Au moins 50 caractères.")
+     * @Assert\Length(min=50, minMessage = "Au moins 50 caractères SVP.")
      */
     private $content;
 
@@ -40,11 +40,13 @@ class News
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\DateTime
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\DateTime
      */
     private $updatedAt;
 

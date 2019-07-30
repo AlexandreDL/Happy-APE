@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PrivatePostRepository")
@@ -19,22 +20,28 @@ class PrivatePost
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
+     * @Assert\Length(min=5, minMessage="Le nom du post doit compter entre 5 et 200 caractères.", max=200, maxMessage ="Le nom du post doit compter entre 5 et 200 caractères.")
      */
     private $title;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text")
+     * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
+     * @Assert\Length(min=50, minMessage = "Au moins 50 caractères SVP.")
      */
     private $content;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime")
+     * @Assert\DateTime
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\DateTime
      */
     private $updatedAt;
 
