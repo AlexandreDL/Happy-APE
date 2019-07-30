@@ -1,26 +1,33 @@
 @import 'src/styles/vars';
 
+
+@media screen and (min-width:480px) {
 .navBar {
 display: flex;
 background-color: $color1; 
 justify-content: flex-end;
 color: $color4;
-
-
-&-ul {
-  display : flex;
-  padding : 1em;
-  margin : 0.1em;
-  text-align: right;
-  max-width: 100%;
-
-  &-li {
-    padding :0.5em;
-    align-content: flex-end;
-    max-width: 100%;
+}
+}
+@media screen and (max-width:480px) {
+  .navBar {
+    display: none;
   }
 }
+
+
+@media screen and (min-width:0px ) and (max-width:480px) {
+.mobile {
+display: flex;
+background-color: $color1; 
+justify-content: flex-end;
+color: $color4;;
 }
+  }
 
-
+@media screen and (min-width:481px) {
+  .mobile {
+     display: none;
+    }
+      }
 
