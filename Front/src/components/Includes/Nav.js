@@ -2,8 +2,13 @@
 import React from 'react';
 
 // == Import : local
-import { Link } from '@material-ui/core';
+import { Link, AppBar } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+import Button from '@material-ui/core/Button';
+
+
 import './nav.scss';
 
 
@@ -15,19 +20,48 @@ const NavBar = () => {
   const WhoAreWeLink = React.forwardRef((props, ref) => <RouterLink to="/qui-sommes-nous" innerRef={ref} {...props} />);
   const ContactLink = React.forwardRef((props, ref) => <RouterLink to="/contact" innerRef={ref} {...props} />);
   const AccountLink = React.forwardRef((props, ref) => <RouterLink to="/" innerRef={ref} {...props} />);
+  
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  function handleClick(event) {
+    setAnchorEl(event.currentTarget);
+  }
+
+  function handleClose() {
+    setAnchorEl(null);
+  }
 
   return (
-    <div className="navBar">
-      <ul className="navBar-ul">
-        <li className="navBar-ul-li"><Link component={AccueilLink} color="inherit">Accueil</Link></li>
-        <li className="navBar-ul-li"><Link component={EvenementLink} color="inherit">Evenement</Link></li>
-        <li className="navBar-ul-li"><Link component={WhoAreWeLink} color="inherit">Qui sommes nous ?</Link></li>
-        <li className="navBar-ul-li"><Link component={ContactLink} color="inherit">Contact</Link></li>
-        <li className="navBar-ul-li"><Link component={AccountLink} color="inherit">Compte</Link></li>
-      </ul>
+    <div>
+      <div className="mobile">
+        <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+          Menu
+        </Button>
+        <Menu
+          id="simple-menu"
+          anchorEl={anchorEl}
+          keepMounted
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+        >
+          <MenuItem component={AccueilLink} to="/">Accueil</MenuItem>
+          <MenuItem component={EvenementLink} to="/evenement">Evenement</MenuItem>
+          <MenuItem component={WhoAreWeLink} to="/qui-sommes-nous">Qui sommes-nous ?</MenuItem>
+          <MenuItem component={ContactLink} to="/contact">Contact</MenuItem>
+          <MenuItem component={AccountLink} to="/">Compte</MenuItem>
+        </Menu>
+      </div>
+    
+      <div className="navBar">
+        <MenuItem component={AccueilLink} to="/">Accueil</MenuItem>
+        <MenuItem component={EvenementLink} to="/evenement">Evenement</MenuItem>
+        <MenuItem component={WhoAreWeLink} to="/qui-sommes-nous">Qui sommes-nous ?</MenuItem>
+        <MenuItem component={ContactLink} to="/contact">Contact</MenuItem>
+        <MenuItem component={AccountLink} to="/">Compte</MenuItem>
+      </div>
     </div>
   )
-}
+};
 
 // == Export
 export default NavBar;
