@@ -10,8 +10,9 @@ import logMiddleware from './logMiddleware';
 // == Store
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const client = axios.create({ //all axios can be used, shown in axios documentation
-  baseURL: 'http://api.happyape.local/',
+// all axios can be used, shown in axios documentation
+const client = axios.create({
+  baseURL: 'https://back.isodev.ovh',
   responseType: 'json',
 });
 

@@ -2,9 +2,8 @@
 import { connect } from 'react-redux';
 
 // == Import : local
-import Homepage from 'src/components/HomePage';
-import { getHomepageData } from 'src/store/reducer';
-
+import legalMentions from 'src/components/legalMentions';
+import { getLegalMentionsData } from 'src/store/reducer';
 
 /* === State (données) ===
  * - mapStateToProps retroune un objet de props pour le composant de présentation
@@ -14,7 +13,7 @@ import { getHomepageData } from 'src/store/reducer';
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
 const mapStateToProps = (state, ownProps) => ({
-  homepageData: state.homepageData,
+  legalMentionsData: state.legalMentionsData,
   loading: state.loading,
 });
 
@@ -26,17 +25,17 @@ const mapStateToProps = (state, ownProps) => ({
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  setHomepageData: () => (dispatch(getHomepageData())),
+  setLegalMentionsData: () => (dispatch(getLegalMentionsData())),
 });
 
 // Container
-const HomepageContainer = connect(
+const legalMentionsContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Homepage);
+)(legalMentions);
 
 // == Export
-export default HomepageContainer;
+export default legalMentionsContainer;
 
 /* = export à la volée
 export default connect(

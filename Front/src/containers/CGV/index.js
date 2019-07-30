@@ -2,9 +2,8 @@
 import { connect } from 'react-redux';
 
 // == Import : local
-import Homepage from 'src/components/HomePage';
-import { getHomepageData } from 'src/store/reducer';
-
+import CGV from 'src/components/CGV';
+import { getCGVData } from 'src/store/reducer';
 
 /* === State (données) ===
  * - mapStateToProps retroune un objet de props pour le composant de présentation
@@ -14,8 +13,9 @@ import { getHomepageData } from 'src/store/reducer';
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
 const mapStateToProps = (state, ownProps) => ({
-  homepageData: state.homepageData,
+  CGVData: state.CGVData,
   loading: state.loading,
+ 
 });
 
 /* === Actions ===
@@ -26,17 +26,17 @@ const mapStateToProps = (state, ownProps) => ({
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  setHomepageData: () => (dispatch(getHomepageData())),
+  setCGVData: () => (dispatch(getCGVData())),
 });
 
 // Container
-const HomepageContainer = connect(
+const CGVContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Homepage);
+)(CGV);
 
 // == Export
-export default HomepageContainer;
+export default CGVContainer;
 
 /* = export à la volée
 export default connect(

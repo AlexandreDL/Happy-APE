@@ -23,26 +23,6 @@ class EventController extends AbstractController {
 
         $events = $repo->findAll();
         return $this->json($events);
-
-
-        $data = array();
-
-        for ($i = 1; $i <= 10; $i++){
-            $event[$i] = new Event();
-            $event[$i]->setName("Titre de l'événement n°$i")
-                  ->setContent("<p>Contenu de l'événement n°$i</p>");
-            $data[$i] = [
-                "id" => $event[$i]->getId(),
-                "name" => $event[$i]->getName(),
-                "date" => $event[$i]->getDate(),
-                "createdAt" => $event[$i]->getCreatedAt(),
-                "updatedAt" => $event[$i]->getUpdatedAt(),
-                "isPublished" => $event[$i]->getIsPublished(),
-                "content" => $event[$i]->getContent()
-            ];
-        }
-        
-        return new JsonResponse($data);
     }
 
      /**

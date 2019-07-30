@@ -15,15 +15,18 @@ const Footer = () => {
   const WhoAreWeLink = React.forwardRef((props, ref) => <RouterLink to="/qui-sommes-nous" innerRef={ref} {...props} />);
   const ContactLink = React.forwardRef((props, ref) => <RouterLink to="/contact" innerRef={ref} {...props} />);
   const AccountLink = React.forwardRef((props, ref) => <RouterLink to="/" innerRef={ref} {...props} />);
+  const LegalsMentionsLink = React.forwardRef((props, ref) => <RouterLink to="/mentions-legales" innerRef={ref} {...props} />);
+  const cguLink = React.forwardRef((props, ref) => <RouterLink to="/conditions-generales-d-utilisation" innerRef={ref} {...props} />);
+  const cgvLink = React.forwardRef((props, ref) => <RouterLink to="/conditions-generales-de-vente" innerRef={ref} {...props} />);
   
   return (
     <footer>
       <Grid container justify="space-between">
         <Grid item xs={12} lg={6}>
           <ul className="footer-top-ul-left">
-            <li className="footer-top-ul-left-li"><Link color="inherit" href="/">Mentions légales </Link></li>
-            <li className="footer-top-ul-left-li"><Link color="inherit" href="/">Conditions générales de vente</Link></li>
-            <li className="footer-top-ul-left-li"><Link color="inherit" href="/">Conditions générales d'utilisation</Link></li>
+            <li className="footer-top-ul-left-li"><Link component={LegalsMentionsLink} color="inherit">Mentions légales</Link></li>
+            <li className="footer-top-ul-left-li"><Link component={cgvLink} color="inherit">Conditions générales de vente</Link></li>
+            <li className="footer-top-ul-left-li"><Link component={cguLink} color="inherit">Conditions générales d'utilisation</Link></li>
           </ul>
         </Grid>
         <Grid item xs={12} lg={6}>

@@ -2,19 +2,21 @@ import React from 'react';
 import { Container } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
+import './legalMentions.scss';
 
-class CGV extends React.Component {
+
+class legalMentions extends React.Component {
   componentWillMount() {
-    const { setCGVData } = this.props;
-    setCGVData();
+    const { setLegalMentionsData } = this.props;
+    setLegalMentionsData();
   }
 
   render() {
-    const { CGVData } = this.props;
+    const { legalMentionsData } = this.props;
 
     return (
       <Container className="mentions">
-        {CGVData.map(item => (
+        {legalMentionsData.map(item => (
           <div className="mentions-content" key={item.id}>
             <h1>{item.title}</h1>
             <p>{item.content}</p>
@@ -26,10 +28,9 @@ class CGV extends React.Component {
   }
 }
 
-export default CGV;
+export default legalMentions;
 
-CGV.propTypes = {
-  CGVData: PropTypes.array.isRequired,
-  setCGVData: PropTypes.func.isRequired,
+legalMentions.propTypes = {
+  legalMentionsData: PropTypes.array.isRequired,
+  setLegalMentionsData: PropTypes.func.isRequired,
 };
-
