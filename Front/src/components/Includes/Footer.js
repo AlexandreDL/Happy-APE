@@ -29,7 +29,7 @@ const Footer = () => {
             <li className="footer-top-ul-left-li"><Link component={cguLink} color="inherit">Conditions générales d'utilisation</Link></li>
           </ul>
         </Grid>
-        <Grid item xs={12} lg={6}>
+        <Grid item xs={12} lg={4}>
           <ul className="footer-top-ul-right">
             <li className="footer-top-ul-right-li"><Link component={AccueilLink} color="inherit">Accueil</Link></li>
             <li className="footer-top-ul-right-li"><Link component={EvenementLink} color="inherit">Evenement</Link></li>
