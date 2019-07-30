@@ -56,8 +56,7 @@ class Child
      *      min = 1,
      *      max = 2,
      *      minMessage = "Au moins un parent doit être associé",
-     *      maxMessage = "On peut associer au maximum deux parents par enfant."
-     * 
+     *      maxMessage = "On peut associer au maximum deux parents par enfant.")
      */
     private $parents;
 

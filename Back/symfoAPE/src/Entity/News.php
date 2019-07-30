@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\NewsRepository")
@@ -21,14 +22,14 @@ class News
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
-     * @Assert\Lenght(min=5, minMessage = "Au moins 5 caractères.", max=255)
+     * @Assert\Length(min=5, minMessage = "Au moins 5 caractères.", max=255)
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
-     * @Assert\Lenght(min=50, minMessage = "Au moins 50 caractères.")
+     * @Assert\Length(min=50, minMessage = "Au moins 50 caractères.")
      */
     private $content;
 

@@ -29,6 +29,7 @@ class Event
     /**
      * @ORM\Column(type="datetime")
      * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
+     * 
      */
     private $date;
 
