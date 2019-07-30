@@ -20,11 +20,15 @@ class News
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
+     * @Assert\Lenght(min=5, minMessage = "Au moins 5 caractères.", max=255)
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
+     * @Assert\Lenght(min=50, minMessage = "Au moins 50 caractères.")
      */
     private $content;
 

@@ -19,18 +19,21 @@ class Event
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
+     * @Assert\Length(min=5, minMessage="Le nom de l'événement doit compter entre 5 et 200 caractères.", max=200, maxMessage ="Le nom de l'événement doit compter entre 5 et 200 caractères.")
+     * 
      */
     private $name;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
-     * @Assert\NotBlank
+     * @ORM\Column(type="datetime")
+     * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
      */
     private $date;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
@@ -40,17 +43,20 @@ class Event
     private $updatedAt;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean")
      */
     private $isPublished;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text")
+     * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
+     *  @Assert\Length(min=50, minMessage = "Au moins 50 caractères SVP.")
      */
     private $content;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="events")
+     * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
      */
     private $author;
 
@@ -63,16 +69,7 @@ class Event
     {
         $this->createdAt = new \DateTime;
         $this->isPublished = true;
-        $slugger = new Slugger();
-        $slug = $slugger->slugify($this->name);
-        $this->slug = $slug;
     }
-
-    // public function applySlug() {
-    //     $slugger = new Slugger();
-    //     $slug = $slugger->slugify($this->name);
-    //     $this->slug = $slug;
-    // }
 
     public function getId(): ?int
     {

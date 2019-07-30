@@ -17,27 +17,33 @@ class Media
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
+     * @Assert\Lenght(min=5, minMessage="Le nom de ce fichier doit compter entre 5 et 50 caractères.", max=50, maxMessage ="Le nom de ce fichier  doit compter entre 5 et 50 caractères.")
      */
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $type;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank
      */
     private $url;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime")
+     * @Assert\Length(min=10)
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\Length(min=10)
      */
     private $updatedAt;
 

@@ -39,17 +39,25 @@ class Child
     private $class;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime")
+     * @Assert\DateTime()
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\DateTime()
      */
     private $updatedAt;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="children")
+     *  * @Assert\Count(
+     *      min = 1,
+     *      max = 2,
+     *      minMessage = "Au moins un parent doit être associé",
+     *      maxMessage = "On peut associer au maximum deux parents par enfant."
+     * 
      */
     private $parents;
 

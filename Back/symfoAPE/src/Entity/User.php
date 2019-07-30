@@ -32,26 +32,34 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(message = "Ce champ doit être renseigné.")
+     * @Assert\Length(min="8", minMessage="Votre mot de passe doit faire minimum 8 caractères")
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message = "Ce champ doit être renseigné.")
+     * @Assert\Length(min="8", minMessage="Votre Prénom doit faire minimum 8 caractères")
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message = "Ce champ doit être renseigné.")
+     * @Assert\Length(min="8", minMessage="Votre Nom doit faire minimum 8 caractères")
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(min="8", minMessage="Votre Adresse doit faire minimum 8 caractères")
      */
     private $address_city;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\Length(min="8", minMessage="Votre Adresse doit faire minimum 8 caractères")
      */
     private $address_street;
 
