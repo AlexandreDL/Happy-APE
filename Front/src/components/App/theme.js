@@ -34,11 +34,7 @@ const generalTheme = createMuiTheme({
       fontSize: 18,
       lineHeight: 10,
     },
-    body3: {
-      fontFamily: 'Raleway',
-      fontSize: 20,
-      lineHeight: 10,
-    },
+    
   },
   overrides: {
     root: {
