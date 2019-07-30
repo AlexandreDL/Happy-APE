@@ -41,7 +41,7 @@ class Event extends React.Component {
               <Typography gutterBottom variant="body2" component="p">
                 {item.date}
               </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
+              <Typography variant="body3" color="textSecondary" component="p">
                 {item.content}
               </Typography>
             </CardContent>
@@ -68,3 +68,6 @@ export default Event;
 // Event.propTypes = {
 //   item: PropTypes.array.isRequired,
 // };
+
+
+

@@ -2,9 +2,8 @@
 import { connect } from 'react-redux';
 
 // == Import : local
-import WhoAreWe from 'src/components/WhoAreWe';
-import { getWhoAreWeData } from 'src/store/reducer';
-
+import legalMentions from 'src/components/legalMentions';
+import { getLegalMentionsData } from 'src/store/reducer';
 
 /* === State (données) ===
  * - mapStateToProps retroune un objet de props pour le composant de présentation
@@ -14,8 +13,8 @@ import { getWhoAreWeData } from 'src/store/reducer';
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
 const mapStateToProps = (state, ownProps) => ({
-  whoAreWeData: state.whoAreWeData,
-  loading: state.loadin,
+  legalMentionsData: state.legalMentionsData,
+  loading: state.loading,
 });
 
 /* === Actions ===
@@ -26,17 +25,17 @@ const mapStateToProps = (state, ownProps) => ({
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  setWhoAreWeData: () => (dispatch(getWhoAreWeData())),
+  setLegalMentionsData: () => (dispatch(getLegalMentionsData())),
 });
 
 // Container
-const WhoAreWeContainer = connect(
+const legalMentionsContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(WhoAreWe);
+)(legalMentions);
 
 // == Export
-export default WhoAreWeContainer;
+export default legalMentionsContainer;
 
 /* = export à la volée
 export default connect(

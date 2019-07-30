@@ -2,9 +2,8 @@
 import { connect } from 'react-redux';
 
 // == Import : local
-import WhoAreWe from 'src/components/WhoAreWe';
-import { getWhoAreWeData } from 'src/store/reducer';
-
+import CGU from 'src/components/CGU';
+import { getCGUData } from 'src/store/reducer';
 
 /* === State (données) ===
  * - mapStateToProps retroune un objet de props pour le composant de présentation
@@ -14,8 +13,9 @@ import { getWhoAreWeData } from 'src/store/reducer';
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
 const mapStateToProps = (state, ownProps) => ({
-  whoAreWeData: state.whoAreWeData,
-  loading: state.loadin,
+  CGUData: state.CGUData,
+  loading: state.loading,
+ 
 });
 
 /* === Actions ===
@@ -26,17 +26,17 @@ const mapStateToProps = (state, ownProps) => ({
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  setWhoAreWeData: () => (dispatch(getWhoAreWeData())),
+  setCGUData: () => (dispatch(getCGUData())),
 });
 
 // Container
-const WhoAreWeContainer = connect(
+const CGUContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(WhoAreWe);
+)(CGU);
 
 // == Export
-export default WhoAreWeContainer;
+export default CGUContainer;
 
 /* = export à la volée
 export default connect(
