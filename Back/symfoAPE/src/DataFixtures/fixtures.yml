@@ -7,7 +7,7 @@ App\Entity\Child:
         lastname: '<lastname()>' 
         firstname: '<firstname()>' 
         class: '<randomElement($classArray)>' 
-        #parents: '2x @user*'
+        parents: '<numberBetween(1, 2)>x @user*'
 
 App\Entity\Media:
     media_{1..20}:
@@ -46,7 +46,6 @@ App\Entity\User:
         firstname: '<firstname()>' 
         is_active: '<boolean()>'
         is_parent: '<boolean()>'
-        #children: '<numberBetween(1, 2)>x @child*'
 
 App\Entity\Event:
     event_{1..10}:

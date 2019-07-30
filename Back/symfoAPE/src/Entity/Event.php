@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use App\Utils\Slugger;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
@@ -23,6 +25,7 @@ class Event
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\NotBlank
      */
     private $date;
 
@@ -51,11 +54,25 @@ class Event
      */
     private $author;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $slug;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime;
         $this->isPublished = true;
+        $slugger = new Slugger();
+        $slug = $slugger->slugify($this->name);
+        $this->slug = $slug;
     }
+
+    // public function applySlug() {
+    //     $slugger = new Slugger();
+    //     $slug = $slugger->slugify($this->name);
+    //     $this->slug = $slug;
+    // }
 
     public function getId(): ?int
     {
@@ -147,6 +164,18 @@ class Event
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

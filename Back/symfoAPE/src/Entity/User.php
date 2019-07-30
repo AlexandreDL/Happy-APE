@@ -105,11 +105,17 @@ class User implements UserInterface
      */
     private $events;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Child", mappedBy="parents")
+     */
+    private $children;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime;
         $this->news = new ArrayCollection();
         $this->events = new ArrayCollection();
+        $this->children = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -396,6 +402,34 @@ class User implements UserInterface
             if ($event->getAuthor() === $this) {
                 $event->setAuthor(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Child[]
+     */
+    public function getChildren(): Collection
+    {
+        return $this->children;
+    }
+
+    public function addChild(Child $child): self
+    {
+        if (!$this->children->contains($child)) {
+            $this->children[] = $child;
+            $child->addParent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChild(Child $child): self
+    {
+        if ($this->children->contains($child)) {
+            $this->children->removeElement($child);
+            $child->removeParent($this);
         }
 
         return $this;
