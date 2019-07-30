@@ -3,11 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\MediaRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\MediumRepository")
  */
-class Media
+class Medium
 {
     /**
      * @ORM\Id()
@@ -19,33 +20,57 @@ class Media
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
-     * @Assert\Lenght(min=5, minMessage="Le nom de ce fichier doit compter entre 5 et 50 caractères.", max=50, maxMessage ="Le nom de ce fichier  doit compter entre 5 et 50 caractères.")
+     * @Assert\Length(min=5, 
+     *      minMessage="Le nom de ce fichier doit compter entre 5 et 50 caractères.",   
+     *      max=50, 
+     *      maxMessage ="Le nom de ce fichier  doit compter entre 5 et 50 caractères.")
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/pdf", "image/png", "image/jpg", "image/jpeg", "image/gif"},
+     *     mimeTypesMessage = "Veuillez vous assurer que votre fichier soit en pdf, png, jpeg ou gif."
+     * )
      */
     private $type;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
+     * @Assert\Url
      */
     private $url;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Assert\Length(min=10)
+     * @Assert\DateTime
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @Assert\Length(min=10)
+     * @Assert\DateTime
      */
     private $updatedAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\News", inversedBy="media")
+     */
+    private $news;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Event", inversedBy="media")
+     */
+    private $event;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\PrivatePost", inversedBy="media")
+     */
+    private $privatePost;
 
 
     public function __construct()
@@ -121,5 +146,41 @@ class Media
     public function __toString()
     {
         return $this->title;
+    }
+
+    public function getNews(): ?News
+    {
+        return $this->news;
+    }
+
+    public function setNews(?News $news): self
+    {
+        $this->news = $news;
+
+        return $this;
+    }
+
+    public function getEvent(): ?Event
+    {
+        return $this->event;
+    }
+
+    public function setEvent(?Event $event): self
+    {
+        $this->event = $event;
+
+        return $this;
+    }
+
+    public function getPrivatePost(): ?PrivatePost
+    {
+        return $this->privatePost;
+    }
+
+    public function setPrivatePost(?PrivatePost $privatePost): self
+    {
+        $this->privatePost = $privatePost;
+
+        return $this;
     }
 }

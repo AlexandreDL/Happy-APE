@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Utils\Slugger;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -29,17 +31,19 @@ class Event
     /**
      * @ORM\Column(type="datetime")
      * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
-     * 
+     * @Assert\Date
      */
     private $date;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\DateTime 
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Assert\DateTime
      */
     private $updatedAt;
 
@@ -51,7 +55,7 @@ class Event
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
-     *  @Assert\Length(min=50, minMessage = "Au moins 50 caractères SVP.")
+     * @Assert\Length(min=50, minMessage = "Au moins 50 caractères SVP.")
      */
     private $content;
 
@@ -66,10 +70,16 @@ class Event
      */
     private $slug;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Medium", mappedBy="event")
+     */
+    private $media;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime;
         $this->isPublished = true;
+        $this->media = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -174,6 +184,37 @@ class Event
     public function setSlug(?string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Medium[]
+     */
+    public function getMedia(): Collection
+    {
+        return $this->media;
+    }
+
+    public function addMedium(Medium $medium): self
+    {
+        if (!$this->media->contains($medium)) {
+            $this->media[] = $medium;
+            $medium->setEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMedium(Medium $medium): self
+    {
+        if ($this->media->contains($medium)) {
+            $this->media->removeElement($medium);
+            // set the owning side to null (unless already changed)
+            if ($medium->getEvent() === $this) {
+                $medium->setEvent(null);
+            }
+        }
 
         return $this;
     }

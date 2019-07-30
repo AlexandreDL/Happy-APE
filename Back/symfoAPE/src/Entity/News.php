@@ -58,11 +58,17 @@ class News
      */
     private $tags;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Medium", mappedBy="news")
+     */
+    private $media;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime;
         $this->isPublished = true;
         $this->tags = new ArrayCollection();
+        $this->media = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -168,6 +174,37 @@ class News
     {
         if ($this->tags->contains($tag)) {
             $this->tags->removeElement($tag);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Medium[]
+     */
+    public function getMedia(): Collection
+    {
+        return $this->media;
+    }
+
+    public function addMedium(Medium $medium): self
+    {
+        if (!$this->media->contains($medium)) {
+            $this->media[] = $medium;
+            $medium->setNews($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMedium(Medium $medium): self
+    {
+        if ($this->media->contains($medium)) {
+            $this->media->removeElement($medium);
+            // set the owning side to null (unless already changed)
+            if ($medium->getNews() === $this) {
+                $medium->setNews(null);
+            }
         }
 
         return $this;
