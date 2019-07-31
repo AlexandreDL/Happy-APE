@@ -2,8 +2,8 @@
 
 namespace App\Controller\Api;
 
-use App\Entity\Media;
-use App\Repository\MediaRepository;
+use App\Entity\Medium;
+use App\Repository\MediumRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,26 +11,26 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 /**
 * @Route("/api", name="api_")
 */
-class MediaController extends AbstractController
+class MediumController extends AbstractController
 {
     /**
-     * @Route("/medias", name="media_list", methods = {"GET"})
+     * @Route("/media", name="media_list", methods = {"GET"})
      */
-    public function list(MediaRepository $mediaRepository)
+    public function list(MediumRepository $mediumRepository)
     {
-       $medias = $mediaRepository->findAll(); 
-       return $this->json($medias);
+       $media = $mediumRepository->findAll(); 
+       return $this->json($media);
     }   
 
     /**
      * @Route("/media/{id}", name="media_one", methods={"GET"}))
      */
-    public function one(media $media)
+    public function one(medium $medium)
     {
-        if (empty($media)) {
+        if (empty($medium)) {
             return new JsonResponse(['message' => 'File not found'], Response::HTTP_NOT_FOUND);
           }
-        return $this->json($media);
+        return $this->json($medium);
     }
 }
   

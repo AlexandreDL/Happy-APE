@@ -2,12 +2,12 @@
 
 namespace App\Form;
 
-use App\Entity\Media;
+use App\Entity\Medium;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class MediaType extends AbstractType
+class MediumType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -21,7 +21,7 @@ class MediaType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Media::class,
+            'data_class' => Medium::class,
             'csrf_protection' => false
         ]);
     }
