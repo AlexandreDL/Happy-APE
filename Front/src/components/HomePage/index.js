@@ -2,7 +2,7 @@ import React from 'react';
 import Event from 'src/components/Event';
 import Slider from 'src/utils/Carousel';
 import NewsDetail from 'src/components/NewsDetail';
-import { Container, Divider, CircularProgress } from '@material-ui/core';
+import { Container, Divider, CircularProgress, Grid, Box } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import './homepage.scss';
@@ -39,7 +39,11 @@ class HomePage extends React.Component {
       if (homepageData.news !== undefined) {
         this.news = (
           homepageData.news.map(item => (
-            <NewsDetail item={item} key={item.id} />
+            <React.Fragment key={item.id}>
+              <Grid item xs={12} sm={12} xl={6} lg={6}>
+                <NewsDetail item={item} key={item.id} />
+              </Grid>
+            </React.Fragment>
           ))
         );
       }
@@ -58,22 +62,33 @@ class HomePage extends React.Component {
       <React.Fragment>
         <Slider />
         <Divider />
-        <Typography variant="h1">Évènements à venir</Typography>
-        <Container>
-          {!loading ? this.event : (
-            <div className="cpcenter">
-              <CircularProgress disableShrink className="progress" />
-            </div>
-          )
-          }
-        </Container>
+
+        <Box className="next-event-box">
+          <Container>
+            <Typography variant="h1">Évènements à venir</Typography>
+
+              {!loading ? this.event : (
+                <div className="cpcenter">
+                  <CircularProgress disableShrink className="progress" />
+                </div>
+              )
+              }
+          </Container>
+        </Box>
+        
         <Divider />
-        <Typography variant="h1">Nos dernières actualités</Typography>
-        {!loading ? this.news : (
-          <div className="cpcenter">
-            <CircularProgress disableShrink className="progress" />
-          </div>
-        ) }
+          <Box className="next-event-box">
+            <Container>
+              <Typography variant="h1">Nos dernières actualités</Typography>
+              <Grid container>
+                {!loading ? this.news : (
+                  <div className="cpcenter">
+                    <CircularProgress disableShrink className="progress" />
+                  </div>
+                ) }
+              </Grid>
+            </Container>
+          </Box>
         <Divider />
       </React.Fragment>
     );

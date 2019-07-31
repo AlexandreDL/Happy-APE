@@ -19,7 +19,7 @@ import './event.scss';
 
 // == Composant
 class Event extends React.Component {
-  returnedValue = <h1>Aucun évènement à venir</h1>;
+  returnedValue = <h1 className="cpcenter">Aucun évènement à venir</h1>;
 
   componentWillMount() {
     const { item } = this.props;
@@ -39,8 +39,13 @@ class Event extends React.Component {
               <Typography variant="h2">
                 {item.name}
               </Typography>
+
               <Typography variant="body2">
                 {item.date}
+
+              <Typography gutterBottom variant="body2" component="p">
+                <strong>Le {new Date(item.date).toLocaleDateString()} à {new Date(item.date).toLocaleTimeString()}</strong>
+
               </Typography>
               <Typography variant="body1">
                 {item.content}

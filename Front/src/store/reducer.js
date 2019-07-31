@@ -5,7 +5,7 @@ const initialState = {
   CGUData: [],
   CGVData: [],
   loading: true,
-  events: {},
+  events: [],
   whoAreWeData: [],
   drawerOpen: false,
 };
