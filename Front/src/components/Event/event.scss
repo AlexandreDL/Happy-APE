@@ -1,25 +1,9 @@
 @import 'src/styles/vars';
 
 .event {
-  margin: 25px 0;
+  margin: 25px 0; 
   
-  &-resume {
-    max-width : 60%;
-  }
-  &-button {
-    height: 3em;
-    padding : 1em;
-  }
   &-cardAction {
   float: right;
   }  
-}
-
-
-#events {
-  // background-image: url("https://www.theatresparisiensassocies.com/user/img/1/710x0x1207-or.jpg");
-  // background-repeat: no-repeat;
-  // background-size: cover;
-  // background-position: center center;
-  padding: 50px;
 }
