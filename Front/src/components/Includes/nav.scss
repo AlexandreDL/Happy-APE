@@ -2,12 +2,12 @@
 
 
 @media screen and (min-width:480px) {
-.navBar {
-display: flex;
-background-color: $color1; 
-justify-content: flex-end;
-color: $color4;
-}
+  .navBar {
+  display: flex;
+  background-color: $color1; 
+  justify-content: flex-end;
+  color: $color4;
+  }
 }
 @media screen and (max-width:480px) {
   .navBar {
@@ -17,17 +17,20 @@ color: $color4;
 
 
 @media screen and (min-width:0px ) and (max-width:480px) {
-.mobile {
-display: flex;
-background-color: $color1; 
-justify-content: flex-end;
-color: $color4;;
-}
+  .mobile {
+  display: flex;
+  background-color: $color1; 
+  justify-content: flex-end;
+  color: $color4;;
   }
+}
 
 @media screen and (min-width:481px) {
   .mobile {
      display: none;
     }
-      }
+}
 
+.MuiSvgIcon-root {
+  margin-right: 25px;
+}
