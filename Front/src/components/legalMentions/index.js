@@ -1,6 +1,8 @@
 import React from 'react';
 import { Container } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
+
 
 import './legalMentions.scss';
 
@@ -18,8 +20,8 @@ class legalMentions extends React.Component {
       <Container className="mentions">
         {legalMentionsData.map(item => (
           <div className="mentions-content" key={item.id}>
-            <h1>{item.title}</h1>
-            <p>{item.content}</p>
+            <Typography variant="h1">{item.title}</Typography>
+            <Typography variant="body1">{item.content}</Typography>
           </div>
         ))
           }

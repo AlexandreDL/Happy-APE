@@ -35,14 +35,14 @@ const NavBar = ({ drawerOpen, toggleDrawerAction }) => {
       </div>
       <div className="navBar">
         <MenuItem component={AccueilLink} to="/">Accueil</MenuItem>
-        <MenuItem component={EvenementLink} to="/evenement">Evenement</MenuItem>
+        <MenuItem component={EvenementLink} to="/evenements">Evenement</MenuItem>
         <MenuItem component={WhoAreWeLink} to="/qui-sommes-nous">Qui sommes-nous ?</MenuItem>
         <MenuItem component={ContactLink} to="/contact">Contact</MenuItem>
         <MenuItem component={AccountLink} to="/">Compte</MenuItem>
       </div>
       <Drawer open={drawerOpen} onClose={toggleDrawerButton}>
         <MenuItem onClick={toggleDrawerButton} component={AccueilLink} to="/"><Home />Accueil</MenuItem>
-        <MenuItem onClick={toggleDrawerButton} component={EvenementLink} to="/evenement"><Event />Evenement</MenuItem>
+        <MenuItem onClick={toggleDrawerButton} component={EvenementLink} to="/evenements"><Event />Evenement</MenuItem>
         <MenuItem onClick={toggleDrawerButton} component={WhoAreWeLink} to="/qui-sommes-nous"><ContactSupport />Qui sommes-nous ?</MenuItem>
         <MenuItem onClick={toggleDrawerButton} component={ContactLink} to="/contact"><Contacts />Contact</MenuItem>
         <MenuItem onClick={toggleDrawerButton} component={AccountLink} to="/"><AccountCircle />Compte</MenuItem>

@@ -4,6 +4,7 @@ import Slider from 'src/utils/Carousel';
 import NewsDetail from 'src/components/NewsDetail';
 import { Container, Divider, CircularProgress } from '@material-ui/core';
 import PropTypes from 'prop-types';
+import Typography from '@material-ui/core/Typography';
 import './homepage.scss';
 
 class HomePage extends React.Component {
@@ -57,7 +58,7 @@ class HomePage extends React.Component {
       <React.Fragment>
         <Slider />
         <Divider />
-        <h1 className="MuiTypography-h1">Évènements à venir</h1>
+        <Typography variant="h1">Évènements à venir</Typography>
         <Container>
           {!loading ? this.event : (
             <div className="cpcenter">
@@ -67,7 +68,7 @@ class HomePage extends React.Component {
           }
         </Container>
         <Divider />
-        <h1 className="MuiTypography-h1">Nos dernières actualités</h1>
+        <Typography variant="h1">Nos dernières actualités</Typography>
         {!loading ? this.news : (
           <div className="cpcenter">
             <CircularProgress disableShrink className="progress" />

@@ -4,8 +4,10 @@
   width: 100%;
   padding : 1em;
   margin: auto;
-  h2, h1 {
+  h1 {
     text-align: center;
+    text-transform: uppercase;
+    margin-bottom:1em;
   }
   &-role{
     text-align: center;
@@ -19,5 +21,10 @@
 .member-card {
   max-width : 10em;
   margin-top: 1em;
+
+  h3{
+    text-align: center;
+    text-transform: uppercase;
+  }
   
 }
