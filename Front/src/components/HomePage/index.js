@@ -2,7 +2,7 @@ import React from 'react';
 import Event from 'src/components/Event';
 import Slider from 'src/utils/Carousel';
 import NewsDetail from 'src/components/NewsDetail';
-import { Container, Divider, CircularProgress } from '@material-ui/core';
+import { Container, Divider, CircularProgress, Grid } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import './homepage.scss';
 
@@ -38,7 +38,11 @@ class HomePage extends React.Component {
       if (homepageData.news !== undefined) {
         this.news = (
           homepageData.news.map(item => (
-            <NewsDetail item={item} key={item.id} />
+            <React.Fragment>
+              <Grid xs={12} sm={12} xl={6} lg={6}>
+                <NewsDetail item={item} key={item.id} />
+              </Grid>
+            </React.Fragment>
           ))
         );
       }
@@ -68,11 +72,13 @@ class HomePage extends React.Component {
         </Container>
         <Divider />
         <h1 className="MuiTypography-h1">Nos dernières actualités</h1>
-        {!loading ? this.news : (
-          <div className="cpcenter">
-            <CircularProgress disableShrink className="progress" />
-          </div>
-        ) }
+        <Grid container>
+          {!loading ? this.news : (
+            <div className="cpcenter">
+              <CircularProgress disableShrink className="progress" />
+            </div>
+          ) }
+        </Grid>
         <Divider />
       </React.Fragment>
     );
