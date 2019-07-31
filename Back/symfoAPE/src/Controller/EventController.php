@@ -22,7 +22,7 @@ class EventController extends AbstractController {
     public function list(EventRepository $eventRepository)
     {
 
-        $events = $eventRepository->findLast3();
+        $events = $eventRepository->findNext3();
         return $this->json($events);
     }
 

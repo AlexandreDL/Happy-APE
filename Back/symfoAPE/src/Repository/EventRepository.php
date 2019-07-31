@@ -19,16 +19,27 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
-    public function findLast3() {
+    public function findNext3() {
       
         $query = $this->createQueryBuilder('e')
-            ->join('e.author', 'u')
+            ->InnerJoin('e.author', 'u')
             ->addSelect('u')
             ->where("e.isPublished = 1")
             ->orderBy('e.date')
             ->setMaxResults(3)
             ;
         return $query->getQuery()->getArrayResult();
+    }
+
+    public function findNext() {
+        $query = $this->createQueryBuilder('e')
+            ->innerJoin('e.author', 'u')
+            ->addSelect('u')
+            ->where("e.isPublished = 1")
+            ->orderBy('e.date')
+            ->setMaxResults(1)
+            ;
+        return $query->getQuery()->getResult();
     }
 
     // /**

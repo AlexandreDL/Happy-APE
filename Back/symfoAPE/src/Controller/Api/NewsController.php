@@ -18,7 +18,7 @@ class NewsController extends AbstractController
      */
     public function list(NewsRepository $newsRepository)
     {
-       $news = $newsRepository->findAll(); 
+       $news = $newsRepository->findNews(); 
        return $this->json($news);
     }
 
