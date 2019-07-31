@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 // == Import : local
 import EventDetail from 'src/components/EventDetail';
+import { getEvents } from 'src/store/reducer';
 
 
 
@@ -15,7 +16,8 @@ import EventDetail from 'src/components/EventDetail';
  */
 const mapStateToProps = (state, ownProps) => ({
   events: state.events,
-  });
+  loading: state.loading,
+});
 
 /* === Actions ===
  * - mapDispatchToProps retroune un objet de props pour le composant de présentation
@@ -25,7 +27,7 @@ const mapStateToProps = (state, ownProps) => ({
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
 const mapDispatchToProps = (dispatch, ownProps) => ({
- 
+  getEventsForPage: () => (dispatch(getEvents())), 
 });
 
 // Container

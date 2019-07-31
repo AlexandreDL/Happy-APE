@@ -34,7 +34,7 @@ const App = () => (
           <Route exact path="/" component={HomePage} />
           <Route path="/qui-sommes-nous" component={WhoAreWe} />
           <Route path="/contact" component={Contact} />
-          <Route path="/evenement" component={Events} />
+          <Route path="/evenements" component={Events} />
           <Route path="/mentions-legales" component={legalMentions} />
           <Route path="/conditions-generales-d-utilisation" component={CGU} />
           <Route path="/conditions-generales-de-vente" component={CGV} />

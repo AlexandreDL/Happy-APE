@@ -16,7 +16,7 @@ import './nav.scss';
 const NavBar = () => {
 
   const AccueilLink = React.forwardRef((props, ref) => <RouterLink to="/" innerRef={ref} {...props} />);
-  const EvenementLink = React.forwardRef((props, ref) => <RouterLink to="/evenement" innerRef={ref} {...props} />);
+  const EvenementLink = React.forwardRef((props, ref) => <RouterLink to="/evenements" innerRef={ref} {...props} />);
   const WhoAreWeLink = React.forwardRef((props, ref) => <RouterLink to="/qui-sommes-nous" innerRef={ref} {...props} />);
   const ContactLink = React.forwardRef((props, ref) => <RouterLink to="/contact" innerRef={ref} {...props} />);
   const AccountLink = React.forwardRef((props, ref) => <RouterLink to="/" innerRef={ref} {...props} />);
@@ -45,7 +45,7 @@ const NavBar = () => {
           onClose={handleClose}
         >
           <MenuItem component={AccueilLink} to="/">Accueil</MenuItem>
-          <MenuItem component={EvenementLink} to="/evenement">Evenement</MenuItem>
+          <MenuItem component={EvenementLink} to="/evenements">Evenement</MenuItem>
           <MenuItem component={WhoAreWeLink} to="/qui-sommes-nous">Qui sommes-nous ?</MenuItem>
           <MenuItem component={ContactLink} to="/contact">Contact</MenuItem>
           <MenuItem component={AccountLink} to="/">Compte</MenuItem>
@@ -53,7 +53,7 @@ const NavBar = () => {
       </div>
       <div className="navBar">
         <MenuItem component={AccueilLink} to="/">Accueil</MenuItem>
-        <MenuItem component={EvenementLink} to="/evenement">Evenement</MenuItem>
+        <MenuItem component={EvenementLink} to="/evenements">Evenement</MenuItem>
         <MenuItem component={WhoAreWeLink} to="/qui-sommes-nous">Qui sommes-nous ?</MenuItem>
         <MenuItem component={ContactLink} to="/contact">Contact</MenuItem>
         <MenuItem component={AccountLink} to="/">Compte</MenuItem>
