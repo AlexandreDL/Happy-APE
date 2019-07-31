@@ -14,7 +14,7 @@ class PublicController extends AbstractController
      */
     public function home(NewsRepository $newsRepository, EventRepository $eventrepository)
     {
-        $lastNewses = $newsRepository->findBy(['isPublished' => true], ['createdAt' => 'DESC'], 5, 0);
+        $lastNewses = $newsRepository->findBy(['isPublished' => true], ['createdAt' => 'DESC'], 3, 0);
         $nextEvent = $eventrepository->findOneBy(['isPublished' => true], ['date' => 'ASC'], 1, 0);
         return $this->json([
         'title' => 'homepage', 

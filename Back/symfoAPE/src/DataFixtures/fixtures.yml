@@ -1,6 +1,7 @@
 parameters :
     classArray: ['CE', 'CP', 'CP', 'Petite section', 'Grande section']
     roleArray: ['user', 'parent', 'admin', 'redacteur']
+    slugArray: ['slug-pour-fabrice', 'une-cuillere-pour-maman', 'une-cuillere-pour-papa', 'slug-bidon']
 
 App\Entity\Child:
     child_{1..50}:
@@ -56,3 +57,4 @@ App\Entity\Event:
         createdAt: '<dateTimeBetween("-200 days", "now")>'
         date: '<dateTimeBetween("now", "200 days")>'
         author: '@user*'
+        slug: '<randomElement($slugArray)>' 

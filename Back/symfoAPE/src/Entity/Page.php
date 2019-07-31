@@ -20,7 +20,7 @@ class Page
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
-     * @Assert\Length(min=4, minMessage="Plus court que "home", comme nom de page, ça fait vraiment short, non ?", max=200, maxMessage ="Il s'agit du title de la page, pas d'un roman ;)")
+     * @Assert\Length(min=4, minMessage="Plus court que 'home', comme nom de page, ça fait vraiment short, non ?", max=200, maxMessage ="Il s'agit du title de la page, pas d'un roman ;).")
      */
     private $title;
 
