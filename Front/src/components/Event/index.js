@@ -39,13 +39,8 @@ class Event extends React.Component {
               <Typography variant="h2">
                 {item.name}
               </Typography>
-
-              <Typography variant="body2">
-                {item.date}
-
-              <Typography gutterBottom variant="body2" component="p">
+              <Typography gutterBottom variant="body2">
                 <strong>Le {new Date(item.date).toLocaleDateString()} à {new Date(item.date).toLocaleTimeString()}</strong>
-
               </Typography>
               <Typography variant="body1">
                 {item.content}

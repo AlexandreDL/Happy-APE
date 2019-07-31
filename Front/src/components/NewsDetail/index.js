@@ -22,12 +22,6 @@ const NewsDetail = ({ item }) =>{
 
   const itemYear = new Date(item.createdAt).getFullYear();
 
-
-
-  
-  console.log(day);
-
-
   return (
     <React.Fragment>
   

@@ -67,12 +67,12 @@ class HomePage extends React.Component {
           <Container>
             <Typography variant="h1">Évènements à venir</Typography>
 
-              {!loading ? this.event : (
-                <div className="cpcenter">
-                  <CircularProgress disableShrink className="progress" />
-                </div>
-              )
-              }
+            {!loading ? this.event : (
+              <div className="cpcenter">
+                <CircularProgress disableShrink className="progress" />
+              </div>
+            )
+            }
           </Container>
         </Box>
         
