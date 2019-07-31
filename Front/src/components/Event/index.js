@@ -18,7 +18,7 @@ import './event.scss';
 
 // == Composant
 class Event extends React.Component {
-  returnedValue = <h1>Aucun évènement à venir</h1>;
+  returnedValue = <h1 className="cpcenter">Aucun évènement à venir</h1>;
 
   componentWillMount() {
     const { item } = this.props;
