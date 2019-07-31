@@ -23,6 +23,7 @@ class Events extends React.Component {
 
   render() {
     const { loading, events } = this.props;
+    
     this.events = events;
     this.loading = loading;
     return (

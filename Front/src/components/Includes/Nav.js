@@ -51,7 +51,6 @@ const NavBar = () => {
           <MenuItem component={AccountLink} to="/">Compte</MenuItem>
         </Menu>
       </div>
-    
       <div className="navBar">
         <MenuItem component={AccueilLink} to="/">Accueil</MenuItem>
         <MenuItem component={EvenementLink} to="/evenement">Evenement</MenuItem>

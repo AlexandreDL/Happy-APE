@@ -18,6 +18,7 @@ import WhoAreWe from 'src/containers/WhoAreWe';
 import Contact from 'src/containers/Contact';
 import Events from 'src/containers/Events';
 import legalMentions from 'src/containers/legalMentions';
+import EventDetail from 'src/containers/EventDetail';
 
 import './app.scss';
 
@@ -37,6 +38,15 @@ const App = () => (
           <Route path="/mentions-legales" component={legalMentions} />
           <Route path="/conditions-generales-d-utilisation" component={CGU} />
           <Route path="/conditions-generales-de-vente" component={CGV} />
+          <Route
+            path="/evenement/:slug"
+            render={(routeInfo) => {
+              const { slug } = routeInfo.match.params;
+              return (
+                <EventDetail slug={slug} />
+              );
+            }}
+          />
         </main>
       </Container>
       <Footer />

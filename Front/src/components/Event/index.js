@@ -8,7 +8,7 @@ import {
   Card,
   Button,
 } from '@material-ui/core';
-
+import { Link } from 'react-router-dom';
 // == Import : local
 
 import './event.scss';
@@ -41,15 +41,17 @@ class Event extends React.Component {
               <Typography gutterBottom variant="body2" component="p">
                 {item.date}
               </Typography>
-              <Typography variant="body3" color="textSecondary" component="p">
+              <Typography variant="body2" color="textSecondary" component="p">
                 {item.content}
               </Typography>
             </CardContent>
 
             <CardActions className="event-cardAction">
-              <Button className="event-button" variant="contained" color="primary">
-              Voir l'événement
-              </Button>
+              <Link to={`/evenement/${item.slug}`}>
+                <Button className="event-button" variant="contained" color="primary">
+                Voir l'événement
+                </Button>
+              </Link>
             </CardActions>
           </Card>
         </article>
