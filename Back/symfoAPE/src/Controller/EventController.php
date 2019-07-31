@@ -19,10 +19,10 @@ class EventController extends AbstractController {
     /**
      * @Route("/events", name="events_list")
      */
-    public function list(EventRepository $repo)
+    public function list(EventRepository $eventRepository)
     {
 
-        $events = $repo->findAll();
+        $events = $eventRepository->findLast3();
         return $this->json($events);
     }
 

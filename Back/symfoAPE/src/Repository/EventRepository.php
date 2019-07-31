@@ -3,8 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Event;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Event|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,6 +17,18 @@ class EventRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Event::class);
+    }
+
+    public function findLast3() {
+      
+        $query = $this->createQueryBuilder('e')
+            ->join('e.author', 'u')
+            ->addSelect('u')
+            ->where("e.isPublished = 1")
+            ->orderBy('e.date')
+            ->setMaxResults(3)
+            ;
+        return $query->getQuery()->getArrayResult();
     }
 
     // /**
