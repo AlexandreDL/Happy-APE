@@ -1,5 +1,7 @@
-header {
+.header-top {
   width: 100%;
+  background-image: url('https://static.isodev.ovh/img/board2.png');
+  background-size: cover;
 
   & img {
     display: block;

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Event;
+use App\Utils\Slugger;
 use App\Form\EventType;
 use App\Repository\EventRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +30,8 @@ class EventController extends AbstractController {
      * @Route("/events/{id}", name="event_show")
      */
     public function show(Event $event)
-    {
+    {        
+        dump($event);
         return $this->json($event);
     }
 

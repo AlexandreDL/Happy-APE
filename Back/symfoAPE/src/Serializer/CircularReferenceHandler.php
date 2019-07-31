@@ -3,6 +3,7 @@
 namespace App\Serializer;
 use App\Entity\Event;
 use App\Entity\News;
+use App\Entity\Child;
 use Symfony\Component\Routing\RouterInterface;
 class CircularReferenceHandler
 {
@@ -22,6 +23,8 @@ class CircularReferenceHandler
                 return $object->getId();
             case $object instanceof News:
                 return $object->getId();
+            case $object instanceof Child:
+            return $object->getId();
         }
         return $object->getId();
     }
