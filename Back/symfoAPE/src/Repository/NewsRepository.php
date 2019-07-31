@@ -23,7 +23,9 @@ class NewsRepository extends ServiceEntityRepository
       
         $query = $this->createQueryBuilder('n')
             ->innerJoin('n.user', 'u')
-            ->addSelect('u')
+            ->innerJoin('n.media', 'm')
+            ->innerJoin('n.tags', 't')
+            ->addSelect('u', 'm', 't')
             ->where("n.isPublished = 1")
             ->orderBy('n.createdAt', 'DESC')
             ->setMaxResults(3)

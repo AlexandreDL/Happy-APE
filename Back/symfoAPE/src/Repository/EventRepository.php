@@ -22,8 +22,9 @@ class EventRepository extends ServiceEntityRepository
     public function findNext3() {
       
         $query = $this->createQueryBuilder('e')
-            ->InnerJoin('e.author', 'u')
-            ->addSelect('u')
+            ->innerJoin('e.author', 'u')
+            ->innerJoin('e.media', 'm')
+            ->addSelect('u', 'm')
             ->where("e.isPublished = 1")
             ->orderBy('e.date')
             ->setMaxResults(3)
@@ -34,7 +35,8 @@ class EventRepository extends ServiceEntityRepository
     public function findNext() {
         $query = $this->createQueryBuilder('e')
             ->innerJoin('e.author', 'u')
-            ->addSelect('u')
+            ->innerJoin('e.media', 'm')
+            ->addSelect('u', 'm')
             ->where("e.isPublished = 1")
             ->orderBy('e.date')
             ->setMaxResults(1)
@@ -42,16 +44,6 @@ class EventRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
     }
 
-    public function findMedia() {
-        $query = $this->createQueryBuilder('m')
-            ->innerJoin('m.author', 'u')
-            ->addSelect('u')
-            ->where("m.isPublished = 1")
-            ->orderBy('m.date')
-            ->setMaxResults(1)
-            ;
-        return $query->getQuery()->getResult();
-    }
 
     // /**
     //  * @return Event[] Returns an array of Event objects
