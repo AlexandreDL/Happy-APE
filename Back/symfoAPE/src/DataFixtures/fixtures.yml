@@ -1,7 +1,7 @@
 parameters :
     classArray: ['CE', 'CP', 'CP', 'Petite section', 'Grande section']
     roleArray: ['user', 'parent', 'admin', 'redacteur']
-    slugArray: ['slug-pour-fabrice', 'une-cuillere-pour-maman', 'une-cuillere-pour-papa', 'slug-bidon']
+    slugArray: ['slug-pour-fabrice', 'une-cuillere-pour-maman', 'une-cuillere-pour-papa', 'slug-bidon', 'slug-pour-fabrice1', 'slug-pour-fabrice2', 'slug-pour-fabrice3', 'slug-pour-fabrice4', 'slug-coucou', 'slug-fixture']
 
 App\Entity\Child:
     child_{1..50}:
@@ -57,4 +57,4 @@ App\Entity\Event:
         createdAt: '<dateTimeBetween("-200 days", "now")>'
         date: '<dateTimeBetween("now", "200 days")>'
         author: '@user*'
-        slug: '<randomElement($slugArray)>' 
+        slug (unique): '<randomElement($slugArray)>' 
