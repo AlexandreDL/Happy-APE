@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 // == Import : local
 import Nav from 'src/components/Includes/Nav';
+import { toggleDrawer, getCGVData } from 'src/store/reducer';
 
 
 /* === State (données) ===
@@ -13,7 +14,7 @@ import Nav from 'src/components/Includes/Nav';
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
 const mapStateToProps = (state, ownProps) => ({
-  message: state.message,
+  drawerOpen: state.drawerOpen,
 });
 
 /* === Actions ===
@@ -24,7 +25,7 @@ const mapStateToProps = (state, ownProps) => ({
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
 const mapDispatchToProps = (dispatch, ownProps) => ({
-
+  toggleDrawerAction: () => dispatch(toggleDrawer()),
 });
 
 // Container
