@@ -23,6 +23,7 @@ class Events extends React.Component {
 
   render() {
     const { loading, events } = this.props;
+    
     this.events = events;
     this.loading = loading;
     return (
@@ -43,7 +44,7 @@ class Events extends React.Component {
 Events.propTypes = {
   getEventsForPage: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
-  events: PropTypes.object.isRequired,
+  events: PropTypes.array.isRequired,
 };
 
 // == Export

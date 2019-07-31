@@ -6,13 +6,12 @@ import React from 'react';
 import './contact.scss';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { ThemeProvider } from '@material-ui/styles';
-import generalTheme from 'src/components/App/theme';
+import Typography from '@material-ui/core/Typography';
 
 // == Composant
 const Contact = () => (
   <div className="contact-form">
-    <h1>Formulaire de contact</h1>
+    <Typography variant="h1">Formulaire de contact</Typography>
     <form className="contact">
       <TextField
         required
@@ -43,11 +42,11 @@ const Contact = () => (
         className=''
         margin="normal"
         />
-      <ThemeProvider theme={generalTheme}>
+     
         <Button className="contact-button" variant="contained" color="primary" type="submit">
             envoyer
         </Button>
-      </ThemeProvider>
+      
     </form>
   </div>
 );

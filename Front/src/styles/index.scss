@@ -4,6 +4,10 @@
 body {
   font-family: sans-serif;
   height: 100vh;
+  background-image: url("https://isostatic.ovh/happychilds.jpg"),url("https://isostatic.ovh/happychilds.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 button {
@@ -26,3 +30,6 @@ button {
   text-align: center;
 }
 
+strong {
+  font-weight: bolder;
+}

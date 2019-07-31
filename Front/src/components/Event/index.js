@@ -8,6 +8,7 @@ import {
   Card,
   Button,
 } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 // == Import : local
 
@@ -18,7 +19,7 @@ import './event.scss';
 
 // == Composant
 class Event extends React.Component {
-  returnedValue = <h1>Aucun évènement à venir</h1>;
+  returnedValue = <h1 className="cpcenter">Aucun évènement à venir</h1>;
 
   componentWillMount() {
     const { item } = this.props;
@@ -35,21 +36,28 @@ class Event extends React.Component {
               title="soirée théatre"
             />
             <CardContent>
-              <Typography gutterBottom variant="h4" component="h1">
+              <Typography variant="h2">
                 {item.name}
               </Typography>
-              <Typography gutterBottom variant="body2" component="p">
+
+              <Typography variant="body2">
                 {item.date}
+
+              <Typography gutterBottom variant="body2" component="p">
+                <strong>Le {new Date(item.date).toLocaleDateString()} à {new Date(item.date).toLocaleTimeString()}</strong>
+
               </Typography>
-              <Typography variant="body3" color="textSecondary" component="p">
+              <Typography variant="body1">
                 {item.content}
               </Typography>
             </CardContent>
 
             <CardActions className="event-cardAction">
-              <Button className="event-button" variant="contained" color="primary">
-              Voir l'événement
-              </Button>
+              <Link to={`/evenement/${item.slug}`}>
+                <Button className="event-button" variant="contained" color="primary">
+                Voir l'événement
+                </Button>
+              </Link>
             </CardActions>
           </Card>
         </article>
