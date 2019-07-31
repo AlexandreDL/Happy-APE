@@ -21,6 +21,6 @@ class PublicController extends AbstractController
         'news' => $lastNewses,
         'nextEvent' => $nextEvent,
     ]);
-    }    
+    }
 }
 
