@@ -7,6 +7,7 @@ const initialState = {
   loading: true,
   events: [],
   whoAreWeData: [],
+  drawerOpen: false,
 };
 // == Types
 const GET_LEGAL_MENTIONS = 'GET_LEGAL_MENTIONS';
@@ -21,6 +22,7 @@ const GET_CGVDATA_FAILURE = 'GET_CGVDATA_FAILURE';
 const GET_WHOAREWEDATA = 'GET_WHOAREWEDATA';
 const GET_WHOAREWEDATA_SUCCESS = 'GET_WHOAREWEDATA_SUCCESS';
 const GET_WHOAREWEDATA_FAILURE = 'GET_WHOAREWEDATA_FAILURE';
+const TOGGLE_DRAWER = 'TOGGLE_DRAWER';
 
 
 // == Reducer
@@ -108,6 +110,11 @@ const reducer = (state = initialState, action = {}) => {
         events: action.payload.data,
         loading: false,
       };
+    case TOGGLE_DRAWER:
+      return {
+        ...state,
+        drawerOpen: !state.drawerOpen,
+      };
     default:
       return state;
   }
@@ -178,6 +185,10 @@ export function getWhoAreWeData() {
     },
   };
 }
+
+export const toggleDrawer = () => ({
+    type: TOGGLE_DRAWER,
+});
 
 
 // == Selectors
