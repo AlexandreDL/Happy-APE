@@ -19,6 +19,13 @@ class PrivatePostRepository extends ServiceEntityRepository
         parent::__construct($registry, PrivatePost::class);
     }
 
+    public function findPrivatePosts() {
+        $query = $this->createQueryBuilder('p')
+            ->innerJoin('p.media', 'm')
+            ->addSelect('m')
+            ;
+        return $query->getQuery()->getArrayResult();
+    }
     // /**
     //  * @return PrivatePost[] Returns an array of PrivatePost objects
     //  */
