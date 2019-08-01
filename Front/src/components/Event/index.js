@@ -55,7 +55,7 @@ class Event extends React.Component {
                 
                 <Grid xs={12} sm={12} xl={8} lg={8}>
                   <Typography variant="h2">{item.name}</Typography>
-                  <Link to={`/evenement/${item.slug}`}>
+                  <Link to={`/evenement/${item.slug}`} style={{ textDecoration: 'none'}}>
                     <Button variant="contained" color="primary">
                     Voir l'événement
                     </Button>

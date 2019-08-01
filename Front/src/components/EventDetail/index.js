@@ -21,7 +21,7 @@ class EventDetail extends React.Component {
   );
 
   componentWillMount() {
-    const { getEventsForPage } = this.props;
+    const { getEventsForPage} = this.props;
     getEventsForPage();
   }
 

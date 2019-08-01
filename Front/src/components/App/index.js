@@ -19,6 +19,7 @@ import Contact from 'src/containers/Contact';
 import Events from 'src/containers/Events';
 import legalMentions from 'src/containers/legalMentions';
 import EventDetail from 'src/containers/EventDetail';
+import NewsDetail from 'src/containers/NewsDetail';
 import Login from 'src/components/User/Login';
 
 import './app.scss';
@@ -46,6 +47,15 @@ const App = () => (
               const { slug } = routeInfo.match.params;
               return (
                 <EventDetail slug={slug} />
+              );
+            }}
+          />
+          <Route
+            path="/actualites/:slug"
+            render={(routeInfo) => {
+              const { slug } = routeInfo.match.params;
+              return (
+                <NewsDetail slug={slug} />
               );
             }}
           />
