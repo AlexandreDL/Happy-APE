@@ -4,6 +4,7 @@ import Slider from 'src/utils/Carousel';
 import NewsDetail from 'src/components/NewsDetail';
 import { Container, Divider, CircularProgress, Grid, Box } from '@material-ui/core';
 import PropTypes from 'prop-types';
+import Typography from '@material-ui/core/Typography';
 import './homepage.scss';
 
 class HomePage extends React.Component {
@@ -39,7 +40,7 @@ class HomePage extends React.Component {
         this.news = (
           homepageData.news.map(item => (
             <React.Fragment key={item.id}>
-              <Grid item xs={12} sm={12} xl={6} lg={6}>
+              <Grid item xs={12} sm={12} xl={6} lg={12}>
                 <NewsDetail item={item} key={item.id} />
               </Grid>
             </React.Fragment>
@@ -63,21 +64,21 @@ class HomePage extends React.Component {
         <Divider />
         <Box className="whitebox">
           <Container>
-            <h1 className="MuiTypography-h1">Évènements à venir</h1>
+            <Typography variant="h1">Évènements à venir</Typography>
 
-              {!loading ? this.event : (
-                <div className="cpcenter">
-                  <CircularProgress disableShrink className="progress" />
-                </div>
-              )
-              }
+            {!loading ? this.event : (
+              <div className="cpcenter">
+                <CircularProgress disableShrink className="progress" />
+              </div>
+            )
+            }
           </Container>
         </Box>
         
         <Divider />
           <Box className="whitebox">
             <Container>
-              <h1 className="MuiTypography-h1">Nos dernières actualités</h1>
+              <Typography variant="h1">Nos dernières actualités</Typography>
               <Grid container>
                 {!loading ? this.news : (
                   <div className="cpcenter">

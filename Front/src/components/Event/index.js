@@ -9,6 +9,7 @@ import {
   Button,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+
 // == Import : local
 
 import './event.scss';
@@ -35,13 +36,13 @@ class Event extends React.Component {
               title="soirée théatre"
             />
             <CardContent>
-              <Typography gutterBottom variant="h4" component="h1">
+              <Typography variant="h2">
                 {item.name}
               </Typography>
-              <Typography gutterBottom variant="body2" component="p">
+              <Typography gutterBottom variant="body2">
                 <strong>Le {new Date(item.date).toLocaleDateString()} à {new Date(item.date).toLocaleTimeString()}</strong>
               </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
+              <Typography variant="body1">
                 {item.content}
               </Typography>
             </CardContent>

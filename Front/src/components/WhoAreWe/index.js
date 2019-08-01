@@ -9,24 +9,24 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import ReactMarkdown from 'react-markdown';
+import Typography from '@material-ui/core/Typography';
 
 // == Composant
 class WhoAreWe extends React.Component {
-  
   componentWillMount() {
     const { setWhoAreWeData } = this.props;
     setWhoAreWeData();
   }
 
-  render () {
+  render() {
     const { whoAreWeData } = this.props;
-
+    console.log(whoAreWeData);
     return (
       <article className="who whitebox">
         {whoAreWeData.map(item => (
           <div key={item.id}>
-            <h1>{item.title}</h1>
-            <ReactMarkdown source={item.content} />
+            <Typography variant="h1">{item.title}</Typography>
+            <Typography variant="body1"><ReactMarkdown source={item.content} /></Typography>
           </div>
         ))
             }
@@ -40,7 +40,7 @@ class WhoAreWe extends React.Component {
               title="Maria"
             />
             <CardContent>
-              <h2>Maria</h2>
+            <Typography variant="h3">Maria</Typography>
               <p className="who-role">présidente de l'association</p> 
             </CardContent>
             
@@ -54,7 +54,7 @@ class WhoAreWe extends React.Component {
               title="Maria"
             />
             <CardContent>
-              <h2>Thomas</h2>
+              <Typography variant="h3">Thomas</Typography>
               <p className="who-role">animateur en chef</p> 
             </CardContent>
           </Card>
@@ -68,7 +68,7 @@ class WhoAreWe extends React.Component {
               title="Maria"
             />
             <CardContent>
-              <h2>Alex</h2>
+              <Typography variant="h3">Alex</Typography>
               <p className="who-role">responsable café</p> 
             </CardContent>
           </Card>
@@ -82,7 +82,7 @@ class WhoAreWe extends React.Component {
               title="Maria"
             />
             <CardContent>
-              <h2>fabrice</h2>
+              <Typography variant="h3">fabrice</Typography>
               <p className="who-role">responsable tirelire</p> 
             </CardContent>
           </Card>
@@ -95,7 +95,7 @@ class WhoAreWe extends React.Component {
               title="Maria"
             />
             <CardContent>
-              <h2>inconnu</h2>
+              <Typography variant="h3">inconnu</Typography>
               <p className="who-role">on sait pas trop</p> 
             </CardContent>
           </Card>

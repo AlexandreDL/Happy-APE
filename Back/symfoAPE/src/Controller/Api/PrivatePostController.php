@@ -18,7 +18,7 @@ class PrivatePostController extends AbstractController
      */
     public function list(PrivatePostRepository $privatePostRepository)
     {
-       $privatePosts = $privatePostRepository->findAll(); 
+       $privatePosts = $privatePostRepository->findPrivatePosts(); 
        return $this->json($privatePosts);
     }
 

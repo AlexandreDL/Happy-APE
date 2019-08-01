@@ -7,40 +7,49 @@ const generalTheme = createMuiTheme({
     secondary: { main: '#ffc43d' },
   },
   typography: {
-
-    h4: {
-      fontFamily: 'Indie Flower',
-      fontWeight: 'bold',
-      paddingTop: 5,
-      marginBottom: 0,
-    },
-    h3: {
-      fontFamily: 'Raleway',
-      lineHeight: 5,
-      fontSize: 12,
-    },
-    h2: {
-      fontSize: 13,
-    },
+    underline: 'none',
     h1: {
       fontFamily: 'Raleway',
-      fontSize: 40,
+      color: '#FF732D',
+      fontSize: '2rem',
       paddingTop: 20,
       fontWeight: 'bold',
       textAlign: 'left',
+      borderBottom: '1px solid #FF732D'
     },
+
+    h2: {
+      fontFamily: 'Gochi Hand',
+      fontSize: '2em',
+      //fontWeight: 'bold',
+      paddingTop: 5,
+      marginBottom: 0,
+     
+    },
+    h3: {
+      fontFamily: 'Raleway',
+      fontSize: '1rem',
+      fontWeight: 'bold',
+    },
+
+    h4: {
+      fontSize: 13,
+    },
+    body1: {
+      fontFamily: 'Raleway',
+      fontSize: 16,
+      lineHeight: 1.5,
+    },
+      
     body2: {
       fontFamily: 'Raleway',
       fontSize: 18,
-      lineHeight: 10,
     },
     
   },
   overrides: {
-    root: {
-      MuiButton: {
-        color: '#fffff',
-      },
+    MuiButton: {
+     
     },
   },
 });
