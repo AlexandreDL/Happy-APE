@@ -21,6 +21,7 @@ import legalMentions from 'src/containers/legalMentions';
 import EventDetail from 'src/containers/EventDetail';
 import NewsDetail from 'src/containers/NewsDetail';
 import Login from 'src/components/User/Login';
+import Signup from 'src/components/User/Signup';
 
 import './app.scss';
 
@@ -41,6 +42,7 @@ const App = () => (
           <Route path="/conditions-generales-d-utilisation" component={CGU} />
           <Route path="/conditions-generales-de-vente" component={CGV} />
           <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
           <Route
             path="/evenement/:slug"
             render={(routeInfo) => {
