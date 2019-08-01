@@ -26,7 +26,7 @@ class WhoAreWe extends React.Component {
         {whoAreWeData.map(item => (
           <div key={item.id}>
             <Typography variant="h1">{item.title}</Typography>
-            <Typography variant="body1"><ReactMarkdown source={item.content} /></Typography>
+            <Typography variant="body1">{item.content} /></Typography>
           </div>
         ))
             }

@@ -19,18 +19,17 @@ const NewsDetail = ({ item }) =>{
   const month = year[itemMonth];
 
   const dayNumber = new Date(item.createdAt).getUTCDate();
-
   const itemYear = new Date(item.createdAt).getFullYear();
 
   return (
     <React.Fragment>  
       <article className="newsContent">
-        <div className="calendar">
+        <Grid className="calendar">
           <div className="newContentDay">{day}</div>
           <div className="newContentNumber">{dayNumber}</div>
           <div className="newContentMonth">{month}</div>
           <div className="newContentYear">{itemYear}</div>           
-        </div>
+        </Grid>
         <header className="newsHeader">
           <Grid component="header">         
             <Typography variant="h2">{item.title}</Typography>
