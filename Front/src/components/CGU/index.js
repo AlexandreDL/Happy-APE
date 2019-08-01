@@ -2,7 +2,7 @@ import React from 'react';
 import { Container } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
-
+import './cgu.scss';
 
 class CGU extends React.Component {
   componentWillMount() {

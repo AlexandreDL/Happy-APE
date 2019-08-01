@@ -40,7 +40,7 @@ class HomePage extends React.Component {
         this.news = (
           homepageData.news.map(item => (
             <React.Fragment key={item.id}>
-              <Grid item xs={12} sm={12} xl={6} lg={6}>
+              <Grid item xs={12} sm={12} xl={6} lg={12}>
                 <NewsDetail item={item} key={item.id} />
               </Grid>
             </React.Fragment>

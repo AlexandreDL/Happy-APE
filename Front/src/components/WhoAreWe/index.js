@@ -12,15 +12,14 @@ import Typography from '@material-ui/core/Typography';
 
 // == Composant
 class WhoAreWe extends React.Component {
-  
   componentWillMount() {
     const { setWhoAreWeData } = this.props;
     setWhoAreWeData();
   }
 
-  render () {
+  render() {
     const { whoAreWeData } = this.props;
-
+    console.log(whoAreWeData);
     return (
       <article className="who">
         {whoAreWeData.map(item => (
