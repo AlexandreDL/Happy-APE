@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 
 // == Composant
 const Contact = () => (
-  <div className="contact-form">
+  <div className="contact-form whitebox">
     <Typography variant="h1">Formulaire de contact</Typography>
     <form className="contact">
       <TextField
@@ -30,7 +30,7 @@ const Contact = () => (
       <TextField
         required
         id="email"
-        label="Votre-email"
+        label="Votre E-mail"
         className=''
         margin="normal"
       />

@@ -32,4 +32,18 @@ button {
 
 strong {
   font-weight: bolder;
+
+}
+
+.whitebox {
+  background-color: rgba(255, 255, 255, 0.767);
+  border-radius: 8px;
+  margin: 15px 0;
+  padding: 15px;
+}
+
+.MuiInput-root {
+  min-width: 400px;
+  max-width: 95%;
+  margin: 50px 0;
 }

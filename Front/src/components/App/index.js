@@ -19,6 +19,7 @@ import Contact from 'src/containers/Contact';
 import Events from 'src/containers/Events';
 import legalMentions from 'src/containers/legalMentions';
 import EventDetail from 'src/containers/EventDetail';
+import Login from 'src/components/User/Login';
 
 import './app.scss';
 
@@ -38,6 +39,7 @@ const App = () => (
           <Route path="/mentions-legales" component={legalMentions} />
           <Route path="/conditions-generales-d-utilisation" component={CGU} />
           <Route path="/conditions-generales-de-vente" component={CGV} />
+          <Route path="/login" component={Login} />
           <Route
             path="/evenement/:slug"
             render={(routeInfo) => {
