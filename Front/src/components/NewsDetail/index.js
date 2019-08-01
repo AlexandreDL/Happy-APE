@@ -23,19 +23,17 @@ const NewsDetail = ({ item }) =>{
 
   return (
     <React.Fragment>  
-      <article className="newsContent">
+      <article className="newsContent ">
         <Grid className="calendar">
           <div className="newContentDay">{day}</div>
           <div className="newContentNumber">{dayNumber}</div>
           <div className="newContentMonth">{month}</div>
           <div className="newContentYear">{itemYear}</div>           
-        </Grid>
-        <header className="newsHeader">
-          <Grid component="header">         
+        </Grid>        
+        <Grid component="newsHeader">         
             <Typography variant="h2">{item.title}</Typography>
             <Typography variant="body2">{item.content}</Typography>
-          </Grid>
-        </header>
+        </Grid>
       </article>
     </React.Fragment>
   );

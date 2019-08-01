@@ -5,15 +5,13 @@
   display: flex;
   padding: 25px; 
   flex-direction: row;
-  align-items: center;
+  align-items: top;
   
 
 
 }
 .newsHeader {
-  justify-content: space-between;
-  align-items: baseline;
-  padding: 1em;
+
 }
 
 .calendar {
@@ -23,6 +21,8 @@
   border-radius: 10px;
   padding: 0.3em;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.39);
+  height: 100%;
+  margin: 1em;
   
 }
 .newContentDay{
@@ -36,7 +36,6 @@ border-top-right-radius: 5px;
 
 .newContentNumber{
   font-size: 2em;
-  font-stretch: extra-condensed;
   background-color: $color4;
   font-weight: bold; 
   }
