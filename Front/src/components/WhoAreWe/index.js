@@ -8,6 +8,7 @@ import './who.scss';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+import ReactMarkdown from 'react-markdown';
 
 // == Composant
 class WhoAreWe extends React.Component {
@@ -21,11 +22,11 @@ class WhoAreWe extends React.Component {
     const { whoAreWeData } = this.props;
 
     return (
-      <article className="who">
+      <article className="who whitebox">
         {whoAreWeData.map(item => (
           <div key={item.id}>
             <h1>{item.title}</h1>
-            <p>{item.content}</p>
+            <ReactMarkdown source={item.content} />
           </div>
         ))
             }

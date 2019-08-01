@@ -61,7 +61,7 @@ class HomePage extends React.Component {
       <React.Fragment>
         <Slider />
         <Divider />
-        <Box className="next-event-box">
+        <Box className="whitebox">
           <Container>
             <h1 className="MuiTypography-h1">Évènements à venir</h1>
 
@@ -75,7 +75,7 @@ class HomePage extends React.Component {
         </Box>
         
         <Divider />
-          <Box className="next-event-box">
+          <Box className="whitebox">
             <Container>
               <h1 className="MuiTypography-h1">Nos dernières actualités</h1>
               <Grid container>

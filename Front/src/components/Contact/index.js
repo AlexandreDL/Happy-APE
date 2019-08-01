@@ -11,7 +11,7 @@ import generalTheme from 'src/components/App/theme';
 
 // == Composant
 const Contact = () => (
-  <div className="contact-form">
+  <div className="contact-form whitebox">
     <h1>Formulaire de contact</h1>
     <form className="contact">
       <TextField
@@ -31,7 +31,7 @@ const Contact = () => (
       <TextField
         required
         id="email"
-        label="Votre-email"
+        label="Votre E-mail"
         className=''
         margin="normal"
       />
