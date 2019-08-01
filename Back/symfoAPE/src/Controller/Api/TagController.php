@@ -6,6 +6,7 @@ use App\Entity\Tag;
 use App\Form\TagType;
 use App\Repository\TagRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -73,7 +74,16 @@ class TagController extends AbstractController
         }
     }
 
+    /**
+     * @Route("/tag/{id}/delete", name="tag_delete", methods="DELETE")
+     */
+    public function delete(Request $request, Tag $tag)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($tag);
+        $em->flush();
+        return $this->json('', Response::HTTP_NO_CONTENT);
+    }
+
     
-
-
 }

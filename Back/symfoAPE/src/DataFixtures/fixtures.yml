@@ -1,19 +1,24 @@
 parameters :
     classArray: ['CE', 'CP', 'CP', 'Petite section', 'Grande section']
     roleArray: ['user', 'parent', 'admin', 'redacteur']
+    slugArray: ['slug-pour-fabrice', 'une-cuillere-pour-maman', 'une-cuillere-pour-papa', 'slug-bidon', 'slug-pour-fabrice1', 'slug-pour-fabrice2', 'slug-pour-fabrice3', 'slug-pour-fabrice4', 'slug-coucou', 'slug-fixture']
 
 App\Entity\Child:
     child_{1..50}:
         lastname: '<lastname()>' 
         firstname: '<firstname()>' 
         class: '<randomElement($classArray)>' 
-        #parents: '2x @user*'
+        parents: '<numberBetween(1, 2)>x @user*'
 
-App\Entity\Media:
-    media_{1..20}:
+App\Entity\Medium:
+    medium_{1..20}:
         title: '<word()>' 
         type: '<fileExtension()>'
         url: '<imageUrl()>'
+        news: '25%? @news*'
+        privatepost: '25%? @privatepost*'
+        event: '25%? @event*'
+        
    
 App\Entity\News:
     news_{1..10}:
@@ -22,13 +27,11 @@ App\Entity\News:
         createdAt: '<dateTimeBetween("-200 days", "now")>'
         tags: '<numberBetween(1, 3)>x @tag*'
         user: '@user*'
-        #media: '@media*'
-
+      
 App\Entity\PrivatePost:
     privatepost_{1..15}:  
         title (unique): '<sentence()>' 
         content (unique): '<paragraph()>' 
-        #author: '@user*'
         
 App\Entity\Role:
     role_{1..4}:
@@ -46,7 +49,6 @@ App\Entity\User:
         firstname: '<firstname()>' 
         is_active: '<boolean()>'
         is_parent: '<boolean()>'
-        #children: '<numberBetween(1, 2)>x @child*'
 
 App\Entity\Event:
     event_{1..10}:
@@ -55,3 +57,4 @@ App\Entity\Event:
         createdAt: '<dateTimeBetween("-200 days", "now")>'
         date: '<dateTimeBetween("now", "200 days")>'
         author: '@user*'
+        slug (unique): '<randomElement($slugArray)>' 

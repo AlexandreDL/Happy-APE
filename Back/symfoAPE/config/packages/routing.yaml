@@ -2,3 +2,6 @@ framework:
     router:
         strict_requirements: ~
         utf8: true
+
+api_login_check:
+    path: /api/login_check

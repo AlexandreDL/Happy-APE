@@ -19,6 +19,22 @@ class ChildRepository extends ServiceEntityRepository
         parent::__construct($registry, Child::class);
     }
 
+    public function findChildrenByParent($parent) {
+        $qb = $this->createQueryBuilder('c')
+        ->join('c.parent', 'u')
+        ->where('c.parent = :currentParent')
+        ->setParameter('currentParrent', $parent)
+    ;
+    
+    return $qb->getQuery()->getResult();
+ }
+
+    public function findChildren() {
+        $query = $this->createQueryBuilder('c')
+            ->leftJoin('c.parents', 'u')
+            ;
+        return $query->getQuery()->getArrayResult();
+    }
     // /**
     //  * @return Child[] Returns an array of Child objects
     //  */

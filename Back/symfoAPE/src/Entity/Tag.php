@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TagRepository")
@@ -20,6 +21,10 @@ class Tag
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
+     * @Assert\Length(min=3, 
+     *      minMessage="Le nom du tag doit compter entre 3 et 20 caractères.",       max=20, 
+     *      maxMessage ="Le nom du tag doit compter entre 3 et 20                    caractères.")
      */
     private $title;
 

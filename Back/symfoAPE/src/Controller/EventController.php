@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Event;
+use App\Utils\Slugger;
 use App\Form\EventType;
 use App\Repository\EventRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,38 +19,19 @@ class EventController extends AbstractController {
     /**
      * @Route("/events", name="events_list")
      */
-    public function list(EventRepository $repo)
+    public function list(EventRepository $eventRepository)
     {
 
-        $events = $repo->findAll();
+        $events = $eventRepository->findNext3();
         return $this->json($events);
-
-
-        $data = array();
-
-        for ($i = 1; $i <= 10; $i++){
-            $event[$i] = new Event();
-            $event[$i]->setName("Titre de l'événement n°$i")
-                  ->setContent("<p>Contenu de l'événement n°$i</p>");
-            $data[$i] = [
-                "id" => $event[$i]->getId(),
-                "name" => $event[$i]->getName(),
-                "date" => $event[$i]->getDate(),
-                "createdAt" => $event[$i]->getCreatedAt(),
-                "updatedAt" => $event[$i]->getUpdatedAt(),
-                "isPublished" => $event[$i]->getIsPublished(),
-                "content" => $event[$i]->getContent()
-            ];
-        }
-        
-        return new JsonResponse($data);
     }
 
      /**
      * @Route("/events/{id}", name="event_show")
      */
     public function show(Event $event)
-    {
+    {        
+        dump($event);
         return $this->json($event);
     }
 
