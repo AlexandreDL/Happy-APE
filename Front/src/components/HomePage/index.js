@@ -1,11 +1,12 @@
 import React from 'react';
 import Event from 'src/components/Event';
 import Slider from 'src/utils/Carousel';
-import NewsDetail from 'src/components/NewsDetail';
+import NewsDetail from 'src/containers/NewsDetail';
 import { Container, Divider, CircularProgress, Grid, Box } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import './homepage.scss';
+import { Link } from 'react-router-dom';
 
 class HomePage extends React.Component {
   event = {};
@@ -39,10 +40,18 @@ class HomePage extends React.Component {
       if (homepageData.news !== undefined) {
         this.news = (
           homepageData.news.map(item => (
-            <React.Fragment key={item.id}>
-              <Grid item xs={12} sm={12} xl={6} lg={12}>
-                <NewsDetail item={item} key={item.id} />
-              </Grid>
+            
+            <React.Fragment key={item.id}>        
+              <Link to={`/actualites/${item.slug}`} style={{ textDecoration: 'none', color: '#000000' }}>
+                <Grid container
+                  direction="row"
+                  justify="center"
+                  alignItems="flex-start">
+                  <Grid item xs={12} sm={12} xl={6} lg={6}>
+                    <NewsDetail item={item} key={item.id} />
+                  </Grid>
+                </Grid>
+              </Link>
             </React.Fragment>
           ))
         );

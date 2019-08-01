@@ -14,7 +14,7 @@ class CGV extends React.Component {
     const { CGVData } = this.props;
 
     return (
-      <Container className="mentions">
+      <Container className="mentions whitebox">
         {CGVData.map(item => (
           <div className="mentions-content" key={item.id}>    
             <Typography variant="h1">{item.title}</Typography>

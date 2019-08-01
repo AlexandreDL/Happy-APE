@@ -21,7 +21,7 @@ class EventDetail extends React.Component {
   );
 
   componentWillMount() {
-    const { getEventsForPage } = this.props;
+    const { getEventsForPage} = this.props;
     getEventsForPage();
   }
 
@@ -35,7 +35,7 @@ class EventDetail extends React.Component {
 
       if (this.actualEvent !== null) {
         this.eventLoaded = (
-          <article className="eventDetail">
+          <article className="eventDetail whitebox">
            <Typography variant="h2">{this.actualEvent.name}</Typography>
            <Typography variant="body2">{this.actualEvent.content}</Typography>
           </article>

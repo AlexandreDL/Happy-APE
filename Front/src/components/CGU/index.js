@@ -14,6 +14,7 @@ class CGU extends React.Component {
     const { CGUData } = this.props;
 
     return (
+
       <Container className="whitebox">
         {CGUData.map(item => (
           <div className="mentions-content" key={item.id}>
