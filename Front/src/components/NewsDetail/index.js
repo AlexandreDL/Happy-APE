@@ -22,19 +22,24 @@ const NewsDetail = ({ item }) =>{
   const itemYear = new Date(item.createdAt).getFullYear();
 
   return (
-    <React.Fragment>  
-      <article className="newsContent ">
-        <Grid className="calendar">
-          <div className="newContentDay">{day}</div>
-          <div className="newContentNumber">{dayNumber}</div>
-          <div className="newContentMonth">{month}</div>
-          <div className="newContentYear">{itemYear}</div>           
-        </Grid>        
-        <Grid component="newsHeader">         
+    <React.Fragment> 
+      <Grid container
+        direction="row"
+        justify="center"
+        alignItems="flex-start"
+        className="news-content">   
+        
+          <Grid xs={5} sm={5} xl={2} lg={2} className="calendar">
+            <div className="newContentDay">{day}</div>
+            <div className="newContentNumber">{dayNumber}</div>
+            <div className="newContentMonth">{month}</div>
+            <div className="newContentYear">{itemYear}</div>           
+          </Grid>        
+          <Grid xs={12} sm={12} xl={8} lg={8}>         
             <Typography variant="h2">{item.title}</Typography>
             <Typography variant="body2">{item.content}</Typography>
-        </Grid>
-      </article>
+          </Grid>
+      </Grid>
     </React.Fragment>
   );
 };
