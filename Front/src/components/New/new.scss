@@ -5,17 +5,19 @@
    padding: 25px; 
 }
 
-.calendar {
-  //border: 1px solid black;
+.newCalendar {
   background-color: $color4;
   text-align: center; 
   border-radius: 10px;
   padding: 0.3em;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.39);
   height: 100%;
-  margin-right: 1em;
-  
+  margin: 20em;
 }
+.newContent {
+  padding-left: 1em;
+}
+
 .newContentDay{
 background-color: $color1;
 //font-size: 100%;

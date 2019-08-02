@@ -6,88 +6,100 @@ import React from 'react';
 import './contact.scss';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Input from '@material-ui/core/Input';
+import TextField from '@material-ui/core/TextField';
+import PropTypes from 'prop-types';
+
 
 // == Composant
 const Contact = ({
   changeContactInputValue,
-  contact_name,
-  contact_firstname,
-  contact_email,
-  contact_message,
-  sendContactForm
- }) => {
-  
+  contactName,
+  contactFirstname,
+  contactEmail,
+  contactMessage,
+  getSendContactForm,
+}) => {
   const changeHandler = (event) => {
-    changeContactInputValue([event.target.name], event.target.value );
+    changeContactInputValue([event.target.name], event.target.value);
     // console.log({ [event.target.name]: event.target.value });
   };
-  
+
   const submitHandler = (event) => {
     event.preventDefault();
     const contactData = {
-      name: contact_name,
-      firstname: contact_firstname,
-      email: contact_email,
-      message: contact_message,
+      name: contactName,
+      firstname: contactFirstname,
+      email: contactEmail,
+      message: contactMessage,
     };
+
     getSendContactForm(contactData);
 
     // console.log(contactData);
   };
 
   return (
-    
+
     <div className="contact-form whitebox">
       <Typography variant="h1">Formulaire de contact</Typography>
       <form onSubmit={submitHandler} className="contact">
-        <Input
+        
+        <TextField
           onChange={changeHandler}
-          value={contact_name}
+          value={contactName}
           name="contact_name"
           required
           id="standard-name"
-          label="Votre nom"         
-      
+          label="Votre nom"
+         
+          margin="normal"
+
         />
-        <Input
+        <TextField
           onChange={changeHandler}
-          value={contact_firstname}
+          value={contactFirstname}
           name="contact_firstname"
           required
           id="standard-firstname"
           label="Votre prénom"
-               
+        
         />
-        <Input
+        <TextField
           onChange={changeHandler}
-          value={contact_email}
+          value={contactEmail}
           name="contact_email"
           required
           id="email"
-          label="Votre E-mail"     
-          
+          label="Votre E-mail"
+
         />
-        <Input
+        <TextField
           onChange={changeHandler}
-          value={contact_message}
-          name="contact_message" 
+          value={contactMessage}
+          name="contact_message"
           id="standard-multiline-flexible"
           label="Votre message"
           multiline
-          rows="4" 
+          rows="4"
          
-          
-          />
-      
-          <Button className="contact-button" variant="contained" color="primary" type="submit">
+        />
+
+        <Button className="contact-button" variant="contained" color="primary" type="submit">
               envoyer
-          </Button>
-        
+        </Button>
+
       </form>
     </div>
-);
-}
+  );
+};
 
+Contact.propTypes = {
+  changeContactInputValue: PropTypes.func.isRequired,
+  contactName: PropTypes.string.isRequired,
+  contactFirstname: PropTypes.string.isRequired,
+  contactEmail: PropTypes.string.isRequired,
+  contactMessage: PropTypes.string.isRequired,  
+  getSendContactForm: PropTypes.func.isRequired, 
+};
 // == Export
 export default Contact;
