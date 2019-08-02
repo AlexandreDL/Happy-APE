@@ -8,6 +8,10 @@ const initialState = {
   events: [],
   whoAreWeData: [],
   drawerOpen: false,
+  contact_firstname: '',
+  contact_name: '',
+  contact_email: '',
+  contact_message: '',
 };
 // == Types
 const GET_LEGAL_MENTIONS = 'GET_LEGAL_MENTIONS';
@@ -23,6 +27,8 @@ const GET_WHOAREWEDATA = 'GET_WHOAREWEDATA';
 const GET_WHOAREWEDATA_SUCCESS = 'GET_WHOAREWEDATA_SUCCESS';
 const GET_WHOAREWEDATA_FAILURE = 'GET_WHOAREWEDATA_FAILURE';
 const TOGGLE_DRAWER = 'TOGGLE_DRAWER';
+const CONTACT_INPUT_VALUE = 'CONTACT_INPUT_VALUE';
+const SEND_CONTACTFORM = 'SEND_CONTACTFORM';
 
 
 // == Reducer
@@ -98,7 +104,6 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
       };
-
     case 'GET_EVENTS':
       return {
         ...state,
@@ -109,6 +114,15 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         events: action.payload.data,
         loading: false,
+      };
+    case CONTACT_INPUT_VALUE:
+      return {
+        ...state,
+        contact_name: (action.contact_name === undefined) ? state.contact_name : action.contact_name,
+        contact_firstname: (action.contact_firstname === undefined) ? state.contact_firstname : action.contact_firstname,
+        contact_email: (action.contact_email === undefined) ? state.contact_email : action.contact_email,
+        contact_message: (action.contact_message === undefined) ? state.contact_message : action.contact_message,
+        
       };
     case TOGGLE_DRAWER:
       return {
@@ -185,9 +199,26 @@ export function getWhoAreWeData() {
     },
   };
 }
+export function sendContactForm(contactData) {
+  return {
+    type: SEND_CONTACTFORM,
+    payload: {
+      request: {
+        url: '/api/contact',
+        body: contactData,
+        method: 'POST',
+      },
+    },
+  };
+}
 
 export const toggleDrawer = () => ({
-    type: TOGGLE_DRAWER,
+  type: TOGGLE_DRAWER,
+});
+
+export const changeContactInput = (name, value) => ({
+  type: CONTACT_INPUT_VALUE,
+  [name]: value,
 });
 
 

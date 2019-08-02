@@ -2,8 +2,9 @@
 import { connect } from 'react-redux';
 
 // == Import : local
-import Contact from 'src/components/Contact';
-import { changeContactInput, sendContactForm } from 'src/store/reducer';
+import NewsDetail from 'src/components/NewsDetail';
+import { getHomepageData } from 'src/store/reducer';
+
 
 
 /* === State (données) ===
@@ -14,10 +15,8 @@ import { changeContactInput, sendContactForm } from 'src/store/reducer';
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
 const mapStateToProps = (state, ownProps) => ({
-  contact_name: state.contact_name,
-  contact_firstname: state.contact_firstname,
-  contact_email: state.contact_email,
-  contact_message: state.contact_message,
+  homepageData: state.homepageData,
+  loading: state.loading,
 });
 
 /* === Actions ===
@@ -28,29 +27,17 @@ const mapStateToProps = (state, ownProps) => ({
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  changeContactInputValue: (name, value) => {dispatch(changeContactInput(name, value))},
-  getSendContactForm: contactData => {dispatch(sendContactForm(contactData))},
+  setHomepageData: () => (dispatch(getHomepageData())),
 });
 
-
-// const mapDispatchToProps = dispatch => ({
-//   // en clé : le nom de la prop
-//   // en valeur : la fonction
-//   // cette fonction peut eventuellement gérer des paramètres
-//   // on donner une valeur à ces paramètres en executant la fonction
-//   // dans le composant et en lui transmettant des arguments
-//   changeInputValue: (newInputValue) => {
-//     dispatch(changeInput(newInputValue));
-//   },
-
 // Container
-const ContactContainer = connect(
+const NewsDetailContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Contact);
+)(NewsDetail);
 
 // == Export
-export default ContactContainer;
+export default NewsDetailContainer;
 
 /* = export à la volée
 export default connect(
