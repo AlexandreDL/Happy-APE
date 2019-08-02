@@ -1,47 +1,24 @@
-// == Import : npm
 import React from 'react';
-import { Grid, CircularProgress  } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import PropTypes from 'prop-types';
+import './new.scss';
 
-// == Import : local
-
-import './newsDetails.scss';
-
-// == Composant
-class NewsDetail extends React.Component {
-
-  actualNews = null;
-
-  newsLoaded = (
-    <div className="cpcenter">
-      <CircularProgress />
-    </div>
-  );
-
+class New extends React.Component {
   componentWillMount() {
-    const { setHomepageData } = this.props;
-    setHomepageData();
-  }
-
-  render() {
-    const { homepageData, slug, loading, item } = this.props;
-
+    const { item } = this.props;
     const itemDay = new Date(item.createdAt).getDay();
     const week = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi']
     const day = week[itemDay];
+
     const itemMonth = new Date(item.createdAt).getMonth();
     const year = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet']
     const month = year[itemMonth];
+
     const dayNumber = new Date(item.createdAt).getUTCDate();
     const itemYear = new Date(item.createdAt).getFullYear();
 
-    // console.log(item);
-
-    if (homepageData.news !== undefined ) {
-      this.actualNews = homepageData.news.find(item => item.slug === slug);
-    if (this.actualNews !== null) {
-      this.newsLoaded = (
+    if (item.id !== undefined) {
+      this.returnedValue = (
         <React.Fragment>
           <Grid
             container
@@ -64,18 +41,11 @@ class NewsDetail extends React.Component {
       );
     }
   }
-    return (!loading) ? this.newsLoaded : this.newsLoaded;
+
+  render() {
+    return this.returnedValue;
   }
 }
 
-
-NewsDetail.propTypes = {
-  item: PropTypes.object.isRequired,
-  homepageData: PropTypes.object.isRequired,
-  setHomepageData: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
-};
-
-
 // == Export
-export default NewsDetail;
+export default New;

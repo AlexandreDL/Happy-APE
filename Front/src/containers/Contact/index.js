@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 // == Import : local
 import Contact from 'src/components/Contact';
+import { changeContactInput, sendContactForm } from 'src/store/reducer';
 
 
 /* === State (données) ===
@@ -13,7 +14,10 @@ import Contact from 'src/components/Contact';
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
 const mapStateToProps = (state, ownProps) => ({
-  message: state.message,
+  contact_name: state.contact_name,
+  contact_firstname: state.contact_firstname,
+  contact_email: state.contact_email,
+  contact_message: state.contact_message,
 });
 
 /* === Actions ===
@@ -24,8 +28,20 @@ const mapStateToProps = (state, ownProps) => ({
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
 const mapDispatchToProps = (dispatch, ownProps) => ({
-
+  changeContactInputValue: (name, value) => {dispatch(changeContactInput(name, value))},
+  getSendContactForm: contactData => {dispatch(sendContactForm(contactData))},
 });
+
+
+// const mapDispatchToProps = dispatch => ({
+//   // en clé : le nom de la prop
+//   // en valeur : la fonction
+//   // cette fonction peut eventuellement gérer des paramètres
+//   // on donner une valeur à ces paramètres en executant la fonction
+//   // dans le composant et en lui transmettant des arguments
+//   changeInputValue: (newInputValue) => {
+//     dispatch(changeInput(newInputValue));
+//   },
 
 // Container
 const ContactContainer = connect(
