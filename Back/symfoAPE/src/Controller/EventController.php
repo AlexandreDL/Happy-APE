@@ -6,6 +6,7 @@ use App\Entity\Event;
 use App\Utils\Slugger;
 use App\Form\EventType;
 use App\Repository\EventRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
@@ -64,9 +65,13 @@ class EventController extends AbstractController {
     public function edit(Event $event, Request $request) 
     {
         // $this->denyAccessUnlessGranted
-        $data = \json_decode($request->getContent());
+        $event = json_decode($request->getContent());
+        if ($event === null) {
+            return new JsonResponse(['message' =>'Cet événement n\'existe pas.'], Response::HTTP_NOT_FOUND);
+        }
+        $request->request->replace($event);
+        
     }
-
 
      /**
      * @Route("/api/events/{id}/delete", name="event_delete")
