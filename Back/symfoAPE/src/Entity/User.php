@@ -7,10 +7,11 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @Serializer\ExclusionPolicy("ALL")
  */
 class User implements UserInterface
 {
@@ -45,6 +46,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message = "Ce champ doit être renseigné.")
      * @Assert\Length(min="2", minMessage="Votre Prénom doit faire minimum 2 caractères")
+     * @Serializer\Expose
      */
     private $lastname;
 
@@ -52,6 +54,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message = "Ce champ doit être renseigné.")
      * @Assert\Length(min="2", minMessage="Votre Nom doit faire minimum 2 caractères")
+     * @Serializer\Expose
      */
     private $firstname;
 

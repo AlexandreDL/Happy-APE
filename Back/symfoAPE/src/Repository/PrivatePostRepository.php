@@ -21,8 +21,7 @@ class PrivatePostRepository extends ServiceEntityRepository
 
     public function findPrivatePosts() {
         $query = $this->createQueryBuilder('p')
-            ->innerJoin('p.media', 'm')
-            ->addSelect('m')
+            ->leftJoin('p.media', 'm')
             ;
         return $query->getQuery()->getArrayResult();
     }

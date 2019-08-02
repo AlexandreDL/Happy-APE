@@ -22,9 +22,8 @@ class EventRepository extends ServiceEntityRepository
     public function findNext3() {
       
         $query = $this->createQueryBuilder('e')
-            ->innerJoin('e.author', 'u')
-            ->innerJoin('e.media', 'm')
-            ->addSelect('u', 'm')
+            ->leftJoin('e.author', 'u')
+            ->leftJoin('e.media', 'm')
             ->where("e.isPublished = 1")
             ->orderBy('e.date')
             ->setMaxResults(3)
@@ -34,9 +33,8 @@ class EventRepository extends ServiceEntityRepository
 
     public function findNext() {
         $query = $this->createQueryBuilder('e')
-            ->innerJoin('e.author', 'u')
+            ->leftJoin('e.author', 'u')
             ->innerJoin('e.media', 'm')
-            ->addSelect('u', 'm')
             ->where("e.isPublished = 1")
             ->orderBy('e.date')
             ->setMaxResults(1)

@@ -6,9 +6,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\NewsRepository")
+ * @Serializer\ExclusionPolicy("ALL")
  */
 class News
 {
@@ -23,6 +25,7 @@ class News
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
      * @Assert\Length(min=5, minMessage="Le titre de la news doit compter entre 5 et 200 caractères.", max=200, maxMessage ="Le titre de la news doit compter entre 5 et 200 caractères.")
+     * @Serializer\Expose
      */
     private $title;
 
@@ -30,6 +33,7 @@ class News
      * @ORM\Column(type="text")
      * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
      * @Assert\Length(min=50, minMessage = "Au moins 50 caractères SVP.")
+     * @Serializer\Expose
      */
     private $content;
 
@@ -57,6 +61,7 @@ class News
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="news")
+     * @Serializer\Expose
      */
     private $tags;
 

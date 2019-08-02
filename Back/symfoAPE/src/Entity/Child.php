@@ -6,8 +6,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation as Serializer;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ChildRepository")
+ * @Serializer\ExclusionPolicy("ALL")
  */
 class Child
 {
@@ -22,6 +24,7 @@ class Child
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
      * @Assert\Length(min=2, max=50)
+     * @Serializer\Expose
      */
     private $lastname;
 
@@ -29,12 +32,14 @@ class Child
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
      * @Assert\Length(min=2, max=50)
+     * @Serializer\Expose
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
      * * @Assert\NotBlank()
+     * @Serializer\Expose
      */
     private $class;
 
