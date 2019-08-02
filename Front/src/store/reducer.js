@@ -8,10 +8,10 @@ const initialState = {
   events: [],
   whoAreWeData: [],
   drawerOpen: false,
-  contact_firstname: '',
-  contact_name: '',
-  contact_email: '',
-  contact_message: '',
+  contactFirstname: '',
+  contactName: '',
+  contactEmail: '',
+  contactMessage: '',
 };
 // == Types
 const GET_LEGAL_MENTIONS = 'GET_LEGAL_MENTIONS';
@@ -118,10 +118,10 @@ const reducer = (state = initialState, action = {}) => {
     case CONTACT_INPUT_VALUE:
       return {
         ...state,
-        contact_name: (action.contact_name === undefined) ? state.contact_name : action.contact_name,
-        contact_firstname: (action.contact_firstname === undefined) ? state.contact_firstname : action.contact_firstname,
-        contact_email: (action.contact_email === undefined) ? state.contact_email : action.contact_email,
-        contact_message: (action.contact_message === undefined) ? state.contact_message : action.contact_message,
+        contactName: (action.contact_name === undefined) ? state.contactName : action.contact_name,
+        contactFirstname: (action.contact_firstname === undefined) ? state.contactFirstname : action.contact_firstname,
+        contactEmail: (action.contact_email === undefined) ? state.contactEmail : action.contact_email,
+        contactMessage: (action.contact_message === undefined) ? state.contactMessage : action.contact_message,
         
       };
     case TOGGLE_DRAWER:

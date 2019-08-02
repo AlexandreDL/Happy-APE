@@ -19,9 +19,9 @@ const generalTheme = createMuiTheme({
     },
 
     h2: {
-      fontFamily: 'Gochi Hand',
-      fontSize: '2em',
-      //fontWeight: 'bold',
+      fontFamily: 'Raleway',
+      fontSize: '1.7em',
+      fontWeight: 'bold',
       paddingTop: 5,
       marginBottom: 0,
      

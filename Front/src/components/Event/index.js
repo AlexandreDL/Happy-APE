@@ -53,21 +53,24 @@ class Event extends React.Component {
                 justify="center"
                 alignItems="flex-start">               
                 
-                <Grid item xs={12} sm={12} xl={8} lg={8}>
-                  <Typography variant="h2">{item.name}</Typography>
-                  <Link to={`/evenement/${item.slug}`} style={{ textDecoration: 'none'}}>
-                    <Button variant="contained" color="primary">
-                    Voir l'événement
-                    </Button>
-                  </Link>
-                </Grid> 
+                <Grid item xs={12} sm={9} xl={9} lg={9}>
+                  <Typography variant="h2">{item.name}</Typography>              
+                </Grid>                          
                 
-                <Grid item xs={3} sm={3} xl={3} lg={3} className="event-calendar">        
+                <Grid item xs={8} sm={3} xl={3} lg={3} className="event-calendar">        
                   <div className="newContentDay">{day}</div>
                   <div className="newContentNumber">{dayNumber}</div>
                   <div className="newContentMonth">{month}</div>
                   <div className="newContentYear">{itemYear}</div>                          
                 </Grid>
+
+                <Grid item xs={4} sm={4} xl={4} lg={4}>
+                  <Link to={`/evenement/${item.slug}`} style={{ textDecoration: 'none'}}>
+                    <Button variant="contained" color="primary" >
+                    Voir l'événement
+                    </Button>
+                  </Link>
+                </Grid> 
               
               </Grid>              
             </CardContent>
