@@ -30,8 +30,8 @@ class Events extends React.Component {
       <Grid container spacing={2}>
 
         {(!this.loading && this.events.length !== undefined) ? this.events.map(item => (
-          <Grid item xs={12} sm={12} xl={6} lg={6}>
-            <Event item={item} key={item.id} />
+          <Grid item xs={12} sm={12} xl={6} lg={6} key={item.id}>
+            <Event item={item}  />
           </Grid>
         )) : (
           <div className="cpcenter">
