@@ -34,35 +34,39 @@ class EventController extends AbstractController {
     }
 
      /**
-     * @Route("/api/events/create", name="event_create")
-     * @Route("/api/events/{id}/edit", name="event_edit")
+     * @Route("/api/events/create", name="event_create", methods = {"POST"}) 
      */
-    public function form(Event $event = null, Request $request, ObjectManager $manager)
+    public function create(Request $request, EntityManagerInterface $entityManager) 
     {
-        if (!$event){
-            $event = new Event();
-        }
+        // if is authenticated fully (ROLE_REDACTEUR)... // autres if
+        $newEvent = json_decode($request->getContent());
+        $event = new Event();
+        $event->setName($newEvent->name);
+        $event->setDate($newEvent->date);
+        $event->setContent($newEvent->content);
+        $event->setMedia($newEvent->media);
+        // $event->setAuthor commentaire car il faut get->current user ...
+        
+        $entityManager->persist($event);
+        $entityManager->flush();
 
-        $form = $this->createForm(EventType::class, $event);
-
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()) {
-            if(!$event->getId()) {
-                $event->setCreatedAt(new \DateTime);
-            }
-            $manager->persist($event);
-            $manager->flush();
-
-            return $this->redirectToRoute('event_show', ['id' => $event->getId()]);
-        }
-
-        return $this->json([
-            'formEvent' => $form->createView(),
-            'editMode' => $event->getId() !== null
-        ]);
+        $data = [
+            'status' => 201,
+            'message' => 'L\'événement à été créé'
+        ];
+        return new JsonResponse($data, 201);
 
     }
+
+     /**
+     * @Route("/api/events/{id}/edit", name="event_edit")
+     */
+    public function edit(Event $event, Request $request) 
+    {
+        // $this->denyAccessUnlessGranted
+        $data = \json_decode($request->getContent());
+    }
+
 
      /**
      * @Route("/api/events/{id}/delete", name="event_delete")

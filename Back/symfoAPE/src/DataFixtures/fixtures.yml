@@ -3,12 +3,6 @@ parameters :
     roleArray: ['user', 'parent', 'admin', 'redacteur']
     slugArray: ['slug-pour-fabrice', 'une-cuillere-pour-maman', 'une-cuillere-pour-papa', 'slug-bidon', 'slug-pour-fabrice1', 'slug-pour-fabrice2', 'slug-pour-fabrice3', 'slug-pour-fabrice4', 'slug-coucou', 'slug-fixture']
 
-App\Entity\Child:
-    child_{1..50}:
-        lastname: '<lastname()>' 
-        firstname: '<firstname()>' 
-        class: '<randomElement($classArray)>' 
-        parents: '<numberBetween(1, 2)>x @user*'
 
 App\Entity\Medium:
     medium_{1..20}:
