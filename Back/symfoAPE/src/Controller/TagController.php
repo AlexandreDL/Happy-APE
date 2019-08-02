@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Api;
+namespace App\Controller;
 
 use App\Entity\Tag;
 use App\Form\TagType;
@@ -11,9 +11,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 //use Symfony\Component\HttpFoundation\Request;
 
-/**
-  * @Route("/api", name="api_")
-  */
 class TagController extends AbstractController
 {
     /**
@@ -35,9 +32,9 @@ class TagController extends AbstractController
     
 
     /**
-     * @Route("/tag/{id}", name="tag_one", methods={"GET"}))
+     * @Route("/tag/{id}", name="tag_show", methods={"GET"}))
      */
-    public function one(Tag $tag)
+    public function show(Tag $tag)
     { 
       if (empty($tag)) {
         return new JsonResponse(['message' => 'Tag not found'], Response::HTTP_NOT_FOUND);
@@ -54,7 +51,7 @@ class TagController extends AbstractController
     /**
      * Creates a new Tag entity.
      *
-     * @Route("/tag/new", methods={"POST"}, name="tag_new")
+     * @Route("/api/tag/new", methods={"POST"}, name="tag_new")
      */
     public function newTag(Request $request) {
         $requestData = \json_decode($request->getContent(), true);  
@@ -72,7 +69,15 @@ class TagController extends AbstractController
             return $form;
         }
     }
+    
+    /**
+     * @Route("/api/tag/create", name="tag_create")
+     * @Route("/api/tag/{id}/edit", name="tag_edit")
+     */
 
+    /**
+     * @Route("/api/tag/{id}/delete", name="tag_delete")
+     */
     
 
 

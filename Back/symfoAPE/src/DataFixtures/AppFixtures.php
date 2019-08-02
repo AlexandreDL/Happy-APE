@@ -181,7 +181,7 @@ class AppFixtures extends Fixture
         $manager->persist($pageCGU);
         
         $pageAbout = new Page(); 
-        $pageAbout->setTitle('qui-sommes-nous'); 
+        $pageAbout->setTitle('Qui sommes-nous ?'); 
         $pageAbout->setContent('Une association de parents d\'élèves a pour objet la défense des intérêts moraux et matériels communs aux parents d\'élèves. Elle ne regroupe que des parents d\'élèves, auxquels sont assimilées les personnes ayant la responsabilité légale d\'un ou plusieurs élèves. Elle représente les parents d\'élèves en participant aux conseils d\'écoles, aux conseils d\'administration des établissements scolaires et aux conseils de classe.
 
         Les associations ne peuvent fixer le siège social dans l\'enceinte scolaire. 

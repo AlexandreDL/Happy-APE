@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Api;
+namespace App\Controller;
 
 use App\Entity\Role;
 use App\Repository\RoleRepository;
@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @Route("/api", name="api_")
+ * @Route("/admin", name="admin_roles")
  */
 class RoleController extends AbstractController
 {

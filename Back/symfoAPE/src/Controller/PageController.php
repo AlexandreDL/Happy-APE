@@ -1,16 +1,13 @@
 <?php
 
-namespace App\Controller\Api;
+namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Repository\PageRepository;
 use Symfony\Component\Routing\Annotation\Route;
-// use App\Entity\Page;
 
-/**
-* @Route("/api", name="api_")
-*/
 class PageController extends AbstractController
+
 {
 
     /**
@@ -46,7 +43,7 @@ class PageController extends AbstractController
      */
     public function AboutUs(PageRepository $pageRepository)
     {
-        $aboutPage = $pageRepository->findBy(['title' => 'qui-sommes-nous'] );
+        $aboutPage = $pageRepository->findBy(['title' => 'Qui sommes-nous ?'] );
         return $this->json($aboutPage);
     }
 

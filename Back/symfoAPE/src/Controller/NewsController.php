@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Api;
+namespace App\Controller;
 
 use App\Entity\News;
 use App\Repository\NewsRepository;
@@ -8,9 +8,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-/**
- * @Route("/api", name="api_")
- */
 class NewsController extends AbstractController
 {
     /**
@@ -23,7 +20,7 @@ class NewsController extends AbstractController
     }
 
     /**
-     * @Route("/news/{id}", name="news_one", methods={"GET"}))
+     * @Route("/news/{id}", name="news_show", methods={"GET"}))
      */
     public function one(News $news)
     {   
@@ -33,4 +30,26 @@ class NewsController extends AbstractController
     
         return $this->json($news);
     }
+
+    /**
+     * @Route("/api/news/create", name="news_create")
+     * @Route("/api/news/{id}/edit", name="news_edit")
+     */
+    //TODO
+
+    /**
+     * @Route("/api/news/{id}/delete", name="news_delete")
+     */
+    public function delete($id) {
+
+        $news = $this->getDoctrine()->getRepository(News::class)->find($id);
+        
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($news);
+        $response = new Response();
+        $response->send();
+
+        return $this->json($news);
+      }
+
 }

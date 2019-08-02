@@ -21,7 +21,6 @@ class EventController extends AbstractController {
      */
     public function list(EventRepository $eventRepository)
     {
-
         $events = $eventRepository->findNext3();
         return $this->json($events);
     }
@@ -31,13 +30,12 @@ class EventController extends AbstractController {
      */
     public function show(Event $event)
     {        
-        dump($event);
         return $this->json($event);
     }
 
      /**
-     * @Route("/private/events/create", name="event_create")
-     * @Route("/private/events/{id}/edit", name="event_edit")
+     * @Route("/api/events/create", name="event_create")
+     * @Route("/api/events/{id}/edit", name="event_edit")
      */
     public function form(Event $event = null, Request $request, ObjectManager $manager)
     {
@@ -67,7 +65,7 @@ class EventController extends AbstractController {
     }
 
      /**
-     * @Route("/private/events/{id}/delete", name="event_delete")
+     * @Route("/api/events/{id}/delete", name="event_delete")
      */
     public function delete($id) {
 
