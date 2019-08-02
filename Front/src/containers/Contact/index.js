@@ -14,10 +14,10 @@ import { changeContactInput, sendContactForm } from 'src/store/reducer';
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
 const mapStateToProps = (state, ownProps) => ({
-  contact_name: state.contact_name,
-  contact_firstname: state.contact_firstname,
-  contact_email: state.contact_email,
-  contact_message: state.contact_message,
+  contactName: state.contactName,
+  contactFirstname: state.contactFirstname,
+  contactEmail: state.contactEmail,
+  contactMessage: state.contactMessage,
 });
 
 /* === Actions ===

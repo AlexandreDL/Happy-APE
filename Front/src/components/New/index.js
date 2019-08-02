@@ -26,15 +26,15 @@ class New extends React.Component {
             justify="center"
             alignItems="flex-start"
             className="news-content">
-            <Grid item xs={5} sm={5} xl={2} lg={2} className="calendar">
+            <Grid item xs={6} sm={2} xl={2} lg={2} className="newCalendar">
               <div className="newContentDay">{day}</div>
               <div className="newContentNumber">{dayNumber}</div>
               <div className="newContentMonth">{month}</div>
               <div className="newContentYear">{itemYear}</div>
             </Grid>
-            <Grid item xs={12} sm={12} xl={8} lg={8}>
+            <Grid item xs={12} sm={12} xl={10} lg={10} className="newContent">
               <Typography variant="h2">{item.title}</Typography>
-              <Typography variant="body2">{item.content}</Typography>
+              {/* <Typography variant="body2">{item.content}</Typography> */}
             </Grid>
           </Grid>
         </React.Fragment>
