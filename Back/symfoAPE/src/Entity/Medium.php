@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MediumRepository")
+ * @Serializer\ExclusionPolicy("ALL")
  */
 class Medium
 {
@@ -24,6 +26,7 @@ class Medium
      *      minMessage="Le nom de ce fichier doit compter entre 5 et 50 caractères.",   
      *      max=50, 
      *      maxMessage ="Le nom de ce fichier  doit compter entre 5 et 50 caractères.")
+     * @Serializer\Expose
      */
     private $title;
 
@@ -35,6 +38,7 @@ class Medium
      *     mimeTypes = {"application/pdf", "image/png", "image/jpg", "image/jpeg", "image/gif"},
      *     mimeTypesMessage = "Veuillez vous assurer que votre fichier soit en pdf, png, jpeg ou gif."
      * )
+     * @Serializer\Expose
      */
     private $type;
 
@@ -42,6 +46,7 @@ class Medium
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank
      * @Assert\Url
+     * @Serializer\Expose
      */
     private $url;
 

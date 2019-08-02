@@ -22,10 +22,9 @@ class NewsRepository extends ServiceEntityRepository
     public function findNext3() {
       
         $query = $this->createQueryBuilder('n')
-            ->innerJoin('n.user', 'u')
-            ->innerJoin('n.media', 'm')
-            ->innerJoin('n.tags', 't')
-            ->addSelect('u', 'm', 't')
+            ->leftJoin('n.user', 'u')
+            ->leftJoin('n.media', 'm')
+            ->leftJoin('n.tags', 't')
             ->where("n.isPublished = 1")
             ->orderBy('n.createdAt', 'DESC')
             ->setMaxResults(3)

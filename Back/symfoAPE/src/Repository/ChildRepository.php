@@ -21,8 +21,7 @@ class ChildRepository extends ServiceEntityRepository
 
     public function findChildrenByParent($parent) {
         $qb = $this->createQueryBuilder('c')
-        ->join('c.parent', 'u')
-        ->addSelect('u')
+        ->leftJoin('c.parent', 'u')
         ->where('c.parent = :currentParent')
         ->setParameter('currentParrent', $parent)
     ;
@@ -32,8 +31,7 @@ class ChildRepository extends ServiceEntityRepository
 
     public function findChildren() {
         $query = $this->createQueryBuilder('c')
-            ->innerJoin('c.parents', 'u')
-            ->addSelect('u')
+            ->leftJoin('c.parents', 'u')
             ;
         return $query->getQuery()->getArrayResult();
     }
