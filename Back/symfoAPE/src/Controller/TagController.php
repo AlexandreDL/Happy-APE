@@ -3,12 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Tag;
-use App\Form\TagType;
 use App\Repository\TagRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
+
 //use Symfony\Component\HttpFoundation\Request;
 
 class TagController extends AbstractController
@@ -51,34 +52,54 @@ class TagController extends AbstractController
     /**
      * Creates a new Tag entity.
      *
-     * @Route("/api/tag/new", methods={"POST"}, name="tag_new")
+     * @Route("/api/tag/create", methods={"POST"}, name="tag_create")
      */
-    public function newTag(Request $request) {
-        $requestData = \json_decode($request->getContent(), true);  
+    public function create(Request $request, EntityManagerInterface $entityManager) {
+       $newTag = json_decode($request->getContent(), true);  
 
         $tag = new Tag();
-        $form = $this->createForm(TagType::class, $tag);
-        $form->submit($requestData);
+        $tag->setTitle($newTag->title);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($tag);
-            $em->flush();
-            return new Response('I really hope it\s working fine.');
-        } else {
-            return $form;
-        }
+        $entityManager->persist($tag);
+        $entityManager->flush();
+        
+        $data = [
+            'status' => 201,
+            'message' => 'Le tag à été créé'
+        ];
+        return new JsonResponse($data, 201);  
     }
     
     /**
-     * @Route("/api/tag/create", name="tag_create")
-     * @Route("/api/tag/{id}/edit", name="tag_edit")
+     * @Route("/api/tag/{id}/edit", name="tag_edit", methods = {"PUT"})
      */
+    public function edit(Tag $tag, Request $request) 
+    {
+        // $this->denyAccessUnlessGranted
+        $tag = json_decode($request->getContent());
+        if ($tag === null) {
+            return new JsonResponse(['message' =>'Ce tag n\'existe pas.'], Response::HTTP_NOT_FOUND);
+        }
+
+        $response = new JsonResponse($tag, 200);
+        return $response;
+    }
+
 
     /**
      * @Route("/api/tag/{id}/delete", name="tag_delete")
      */
-    
+    public function delete($id) {
 
-
+        $tag = $this->getDoctrine()->getRepository(Tag::class)->find($id);
+        
+        if ($tag) {
+          $entityManager = $this->getDoctrine()->getManager();
+          $entityManager->remove($tag);
+          $entityManager->flush();
+        }
+         return new Response(null, 204);  
+      }
 }
+
+

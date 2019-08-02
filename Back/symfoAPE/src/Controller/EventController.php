@@ -60,7 +60,7 @@ class EventController extends AbstractController {
     }
 
      /**
-     * @Route("/api/events/{id}/edit", name="event_edit")
+     * @Route("/api/events/{id}/edit", name="event_edit", methods = {"PUT"})
      */
     public function edit(Event $event, Request $request) 
     {
@@ -69,8 +69,10 @@ class EventController extends AbstractController {
         if ($event === null) {
             return new JsonResponse(['message' =>'Cet événement n\'existe pas.'], Response::HTTP_NOT_FOUND);
         }
-        $request->request->replace($event);
-        
+
+        $response = new JsonResponse($event, 200);
+        return $response;
+        //$request->request->replace($event);    
     }
 
      /**
@@ -80,11 +82,11 @@ class EventController extends AbstractController {
 
         $event = $this->getDoctrine()->getRepository(Event::class)->find($id);
         
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($event);
-        $response = new Response();
-        $response->send();
-
-        return $this->json($event);
+        if ($event) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($event);
+            $entityManager->flush();
+        }
+        return new Response(null, 204);
       }
 }
