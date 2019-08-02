@@ -4,11 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Event;
 use App\Utils\Slugger;
-use App\Form\EventType;
 use App\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -37,7 +35,7 @@ class EventController extends AbstractController {
      /**
      * @Route("/api/events/create", name="event_create", methods = {"POST"}) 
      */
-    public function create(Request $request, EntityManagerInterface $entityManager) 
+    public function create(Request $request, EntityManagerInterface $entityManager, Slugger $slugger) 
     {
         // if is authenticated fully (ROLE_REDACTEUR)... // autres if
         $newEvent = json_decode($request->getContent());
@@ -47,7 +45,9 @@ class EventController extends AbstractController {
         $event->setContent($newEvent->content);
         $event->setMedia($newEvent->media);
         // $event->setAuthor commentaire car il faut get->current user ...
-        
+        $slug = $slugger->slugify($event->getName());
+        $event->setSlug($slug);
+
         $entityManager->persist($event);
         $entityManager->flush();
 
@@ -62,17 +62,22 @@ class EventController extends AbstractController {
      /**
      * @Route("/api/events/{id}/edit", name="event_edit", methods = {"PUT"})
      */
-    public function edit(Event $event, Request $request) 
+    public function edit(Event $event, Request $request, Slugger $slugger, EntityManagerInterface $entityManager) 
     {
         // $this->denyAccessUnlessGranted
         $event = json_decode($request->getContent());
+
         if ($event === null) {
             return new JsonResponse(['message' =>'Cet événement n\'existe pas.'], Response::HTTP_NOT_FOUND);
         }
 
+        $slug = $slugger->slugify($event->getName());
+        $event->setSlug($slug);
+
+        $entityManager->flush();
+
         $response = new JsonResponse($event, 200);
         return $response;
-        //$request->request->replace($event);    
     }
 
      /**

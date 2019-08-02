@@ -7,6 +7,7 @@ use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
 
 class UserController extends AbstractController
 {
@@ -39,13 +40,15 @@ class UserController extends AbstractController
     /** 
      * @Route("/profil/user/{id}/edit", name="user_edit")
      */
-    public function edit(User $user, Request $request) 
+    public function edit(User $user, Request $request, EntityManagerInterface $entityManager) 
     {
         // $this->denyAccessUnlessGranted
         $user = json_decode($request->getContent());
         if ($user === null) {
             return new JsonResponse(['message' =>'Cet utilisateur n\'existe pas.'], Response::HTTP_NOT_FOUND);
         }
+
+        $entityManager->flush();
 
         $response = new JsonResponse($user, 200);
         return $response;

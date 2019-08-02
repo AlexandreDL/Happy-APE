@@ -73,13 +73,15 @@ class TagController extends AbstractController
     /**
      * @Route("/api/tag/{id}/edit", name="tag_edit", methods = {"PUT"})
      */
-    public function edit(Tag $tag, Request $request) 
+    public function edit(Tag $tag, Request $request, EntityManagerInterface $entityManager) 
     {
         // $this->denyAccessUnlessGranted
         $tag = json_decode($request->getContent());
         if ($tag === null) {
             return new JsonResponse(['message' =>'Ce tag n\'existe pas.'], Response::HTTP_NOT_FOUND);
         }
+        
+        $entityManager->flush();
 
         $response = new JsonResponse($tag, 200);
         return $response;

@@ -58,7 +58,7 @@ class MediumController extends AbstractController
     /** 
      * @Route("/api/Media/{id}/edit", name="media_edit")
      */
-    public function edit(Medium $media, Request $request) 
+    public function edit(Medium $media, Request $request, EntityManagerInterface $entityManager) 
     {
         // $this->denyAccessUnlessGranted
         $media = json_decode($request->getContent());
@@ -66,6 +66,8 @@ class MediumController extends AbstractController
             return new JsonResponse(['message' =>'Ce media n\'existe pas.'], Response::HTTP_NOT_FOUND);
         }
 
+        $entityManager->flush();
+        
         $response = new JsonResponse($media, 200);
         return $response;
     }

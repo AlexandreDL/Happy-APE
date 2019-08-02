@@ -59,14 +59,16 @@ class RoleController extends AbstractController
      /**
       * @Route("/api/role/{id}/edit", name="role_edit", methods = {"PUT"})
       */
-     public function edit(Role $role, Request $request) 
+     public function edit(Role $role, Request $request, EntityManagerInterface $entityManager) 
      {
          // $this->denyAccessUnlessGranted
          $role = json_decode($request->getContent());
          if ($role === null) {
              return new JsonResponse(['message' =>'Ce role n\'existe pas.'], Response::HTTP_NOT_FOUND);
          }
- 
+         
+         $entityManager->flush();
+
          $response = new JsonResponse($role, 200);
          return $response;
      }

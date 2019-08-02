@@ -57,13 +57,14 @@ class PrivatePostController extends AbstractController
     /**
      * @Route("/api/privatePost/{id}/edit", name="privatePost_edit")
      */
-    public function edit(PrivatePost $privatePost, Request $request) 
+    public function edit(PrivatePost $privatePost, Request $request, EntityManagerInterface $entityManager) 
     {
         // $this->denyAccessUnlessGranted
         $privatePost = json_decode($request->getContent());
         if ($privatePost === null) {
             return new JsonResponse(['message' =>'Ce post n\'existe pas.'], Response::HTTP_NOT_FOUND);
         }
+        $entityManager->flush();
 
         $response = new JsonResponse($privatePost, 200);
         return $response;
