@@ -20,12 +20,10 @@ class HomePage extends React.Component {
   componentWillMount() {
     const { setHomepageData } = this.props;
     setHomepageData();
-    console.log(this.props.homepageData);
   }
   
   render() {
     const { homepageData, loading } = this.props;
-    console.log(homepageData);
     if (!loading) {
       document.title = homepageData.title;
       if (homepageData.nextEvent !== undefined) {
