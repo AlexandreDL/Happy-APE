@@ -15,7 +15,7 @@ import { getEvents } from 'src/store/reducer';
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
 const mapStateToProps = (state, ownProps) => ({
-  events: state.events,
+  events: (state.events !== null) ? state.events : null,
   loading: state.loading,
 });
 
@@ -27,7 +27,7 @@ const mapStateToProps = (state, ownProps) => ({
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  getEventsForPage: () => (dispatch(getEvents())), 
+  getEventsForPage: () => (dispatch(getEvents())),
 });
 
 // Container
