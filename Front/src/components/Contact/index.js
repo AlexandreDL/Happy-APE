@@ -8,6 +8,8 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types';
+import Grid from '@material-ui/core/Grid';
+import FormControl from '@material-ui/core';
 
 
 // == Composant
@@ -43,53 +45,61 @@ const Contact = ({
     <div className="contact-form whitebox">
       <Typography variant="h1">Formulaire de contact</Typography>
       <form onSubmit={submitHandler} className="contact">
-        
-        <TextField
-          onChange={changeHandler}
-          value={contactName}
-          name="contact_name"
-          required
-          id="standard-name"
-          label="Votre nom"
-         
-          margin="normal"
+        <Grid container direction="row" justify="center" alignContent="center" alignItems="center" className="login-form" spacing={2}>
+          <Grid item xs={4} sm={6} xl={6} lg={6}>
+          <Grid item>
+            <TextField
+              onChange={changeHandler}
+              value={contactName}
+              name="contact_name"
+              required
+              id="standard-name"
+              label="Votre nom"         
+              margin="normal"
+            />         
+          </Grid>
 
-        />
-        <TextField
-          onChange={changeHandler}
-          value={contactFirstname}
-          name="contact_firstname"
-          required
-          id="standard-firstname"
-          label="Votre prénom"
-        
-        />
-        <TextField
-          onChange={changeHandler}
-          value={contactEmail}
-          name="contact_email"
-          required
-          id="email"
-          label="Votre E-mail"
+          <Grid item>
+            <TextField
+              onChange={changeHandler}
+              value={contactFirstname}
+              name="contact_firstname"
+              required
+              id="standard-firstname"
+              label="Votre prénom"
+            />
+          </Grid>
 
-        />
-        <TextField
-          onChange={changeHandler}
-          value={contactMessage}
-          name="contact_message"
-          id="standard-multiline-flexible"
-          label="Votre message"
-          multiline
-          rows="4"
-         
-        />
+          <Grid item>
+            <TextField
+              onChange={changeHandler}
+              value={contactEmail}
+              name="contact_email"
+              required
+              id="email"
+              label="Votre E-mail"
+            />
+          </Grid>
 
-        <Button className="contact-button" variant="contained" color="primary" type="submit">
+          <Grid item>
+            <TextField
+              onChange={changeHandler}
+              value={contactMessage}
+              name="contact_message"
+              id="standard-multiline-flexible"
+              label="Votre message"
+              multiline
+              rows="4"  
+            />
+          </Grid>
+          <Button className="contact-button" variant="contained" color="primary" type="submit">
               envoyer
-        </Button>
-
+          </Button>
+          </Grid>
+        </Grid>
       </form>
     </div>
+    
   );
 };
 
