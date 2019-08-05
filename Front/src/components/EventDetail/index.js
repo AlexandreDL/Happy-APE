@@ -1,6 +1,6 @@
 // == Import : npm
 import React from 'react';
-import { CircularProgress } from '@material-ui/core';
+import { LinearProgress } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 
@@ -16,7 +16,7 @@ class EventDetail extends React.Component {
   
   eventLoaded = (
     <div className="cpcenter">
-      <CircularProgress />
+      <LinearProgress color="secondary" />
     </div>
   );
 
@@ -36,8 +36,8 @@ class EventDetail extends React.Component {
       if (this.actualEvent !== null) {
         this.eventLoaded = (
           <article className="eventDetail whitebox">
-           <Typography variant="h2">{this.actualEvent.name}</Typography>
-           <Typography variant="body2">{this.actualEvent.content}</Typography>
+            <Typography variant="h2">{this.actualEvent.name}</Typography>
+            <Typography variant="body2">{this.actualEvent.content}</Typography>
           </article>
         );
       }

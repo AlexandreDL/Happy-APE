@@ -1,12 +1,6 @@
 // == Initial State
 const initialState = {
-  homepageData: {},
-  legalMentionsData: [],
-  CGUData: [],
-  CGVData: [],
   loading: true,
-  events: [],
-  whoAreWeData: [],
   drawerOpen: false,
   contactFirstname: '',
   contactName: '',
