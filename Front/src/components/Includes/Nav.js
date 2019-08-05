@@ -16,6 +16,7 @@ const NavBar = ({ drawerOpen, toggleDrawerAction }) => {
   const WhoAreWeLink = React.forwardRef((props, ref) =>  <Link href="/qui-sommes-nous" innerRef={ref} {...props} />);
   const ContactLink = React.forwardRef((props, ref) =>   <Link href="/contact" innerRef={ref} {...props} />);
   const AccountLink = React.forwardRef((props, ref) =>   <Link href="/" innerRef={ref} {...props} />);
+  const AdminAppLink = React.forwardRef((props, ref) =>   <Link href="/admin/Dashboard" innerRef={ref} {...props} />);
 
   const toggleDrawerButton = event => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -38,7 +39,6 @@ const NavBar = ({ drawerOpen, toggleDrawerAction }) => {
         <MenuItem component={ContactLink} to="/contact">Contact</MenuItem>
         <MenuItem component={AccountLink} to="/">Compte</MenuItem>
         <MenuItem component={AdminAppLink} to="/admin/Dashboard">Dashboard</MenuItem>
-      </div>
       </Typography>
       <Drawer open={drawerOpen} onClose={toggleDrawerButton}>
         <MenuItem onClick={toggleDrawerButton} component={AccueilLink} to="/"><Home />Accueil</MenuItem>
