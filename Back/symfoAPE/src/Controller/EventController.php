@@ -15,14 +15,14 @@ use Symfony\Bundle\FrameworkBundle\Tests\Fixtures\Validation\Article;
 
 class EventController extends AbstractController {
 
-    // /**
-    //  * @Route("/events", name="events_list")
-    //  */
-    // public function list(EventRepository $eventRepository)
-    // {
-    //     $events = $eventRepository->findNext3();
-    //     return $this->json($events);
-    // }
+    /**
+     * @Route("/events", name="events_list")
+     */
+    public function list(EventRepository $eventRepository)
+    {
+        $events = $eventRepository->findNext3();
+        return $this->json($events);
+    }
 
     //  /**
     //  * @Route("/events/{id}", name="event_show")

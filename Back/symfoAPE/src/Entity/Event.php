@@ -46,7 +46,7 @@ class Event
     private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      * @Assert\DateTime
      */
     private $updatedAt;
@@ -70,19 +70,22 @@ class Event
      */
     private $slug;
 
-     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="events")
-     */
-    private $author;
-
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Medium", mappedBy="event")
      */
     private $media;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     */
+    private $author;
+
     public function __construct()
     {
         $this->media = new ArrayCollection();
+        $this->createdAt = new \DateTime;
+        $this->updatedAt = new \DateTime;
+        $this->isPublished = true;
     }
 
     public function getId(): ?int
@@ -174,18 +177,6 @@ class Event
         return $this;
     }
 
-    public function getAuthor(): ?User
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(?User $author): self
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Medium[]
      */
@@ -213,6 +204,18 @@ class Event
                 $medium->setEvent(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

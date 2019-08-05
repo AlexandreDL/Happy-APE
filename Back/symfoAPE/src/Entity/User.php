@@ -128,22 +128,27 @@ class User implements UserInterface
     public function __construct()
     {
         $this->createdAt = new \DateTime;
+        $this->updatedAt = new \DateTime;
         $this->news = new ArrayCollection();
         $this->events = new ArrayCollection();
     }
+
     public function getId(): ?int
     {
         return $this->id;
     }
+
     public function getEmail(): ?string
     {
         return $this->email;
     }
+
     public function setEmail(string $email): self
     {
         $this->email = $email;
         return $this;
     }
+
     
     /**
      * @see UserInterface
@@ -155,11 +160,13 @@ class User implements UserInterface
         $roles[] = 'ROLE_USER';
         return array_unique($roles);
     }
+
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
         return $this;
     }
+
     /**
      * @see UserInterface
      */
@@ -167,11 +174,13 @@ class User implements UserInterface
     {
         return (string) $this->password;
     }
+
     public function setPassword(string $password): self
     {
         $this->password = $password;
         return $this;
     }
+
     /**
      * @see UserInterface
      */
@@ -179,6 +188,7 @@ class User implements UserInterface
     {
         // not needed when using the "bcrypt" algorithm in security.yaml
     }
+    
     /**
      * @see UserInterface
      */
@@ -187,170 +197,199 @@ class User implements UserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+    
     public function getLastname(): ?string
     {
         return $this->lastname;
     }
+    
     public function setLastname(?string $lastname): self
     {
         $this->lastname = $lastname;
         return $this;
     }
+    
     public function getFirstname(): ?string
     {
         return $this->firstname;
     }
+    
     public function setFirstname(?string $firstname): self
     {
         $this->firstname = $firstname;
         return $this;
     }
+    
     public function getAddressCity(): ?string
     {
         return $this->address_city;
     }
+    
     public function setAddressCity(?string $address_city): self
     {
         $this->address_city = $address_city;
         return $this;
     }
+    
     public function getAddressStreet(): ?string
     {
         return $this->address_street;
     }
+    
     public function setAddressStreet(?string $address_street): self
     {
         $this->address_street = $address_street;
         return $this;
     }
+    
     public function getAddressOther(): ?string
     {
         return $this->address_other;
     }
+    
     public function setAddressOther(?string $address_other): self
     {
         $this->address_other = $address_other;
         return $this;
     }
+    
     public function getAddressNumber(): ?int
     {
         return $this->address_number;
     }
+    
     public function setAddressNumber(?int $address_number): self
     {
         $this->address_number = $address_number;
         return $this;
     }
+    
     public function getAddressZipcode(): ?string
     {
         return $this->address_zipcode;
     }
+    
     public function setAddressZipcode(?string $address_zipcode): self
     {
         $this->address_zipcode = $address_zipcode;
         return $this;
     }
+    
     public function getNewsletterSubscription(): ?bool
     {
         return $this->newsletter_subscription;
     }
+    
     public function setNewsletterSubscription(?bool $newsletter_subscription): self
     {
         $this->newsletter_subscription = $newsletter_subscription;
         return $this;
     }
+    
     public function getIsActive(): ?bool
     {
         return $this->isActive;
     }
+    
     public function setIsActive(?bool $isActive): self
     {
         $this->isActive = $isActive;
         return $this;
     }
+    
     public function getIsParent(): ?bool
     {
         return $this->isParent;
     }
+    
     public function setIsParent(?bool $isParent): self
     {
         $this->isParent = $isParent;
         return $this;
     }
+    
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
+    
     public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
         return $this;
     }
+    
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }
+    
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
         return $this;
     }
+    
     public function __toString()
     {
         return $this->lastname;
     }
-    /**
-     * @return Collection|News[]
-     */
-    public function getNews(): Collection
-    {
-        return $this->news;
-    }
-    public function addNews(News $news): self
-    {
-        if (!$this->news->contains($news)) {
-            $this->news[] = $news;
-            $news->setUser($this);
-        }
-        return $this;
-    }
-    public function removeNews(News $news): self
-    {
-        if ($this->news->contains($news)) {
-            $this->news->removeElement($news);
-            // set the owning side to null (unless already changed)
-            if ($news->getUser() === $this) {
-                $news->setUser(null);
-            }
-        }
-        return $this;
-    }
-    /**
-     * @return Collection|Event[]
-     */
-    public function getEvents(): Collection
-    {
-        return $this->events;
-    }
-    public function addEvent(Event $event): self
-    {
-        if (!$this->events->contains($event)) {
-            $this->events[] = $event;
-            $event->setAuthor($this);
-        }
-        return $this;
-    }
-    public function removeEvent(Event $event): self
-    {
-        if ($this->events->contains($event)) {
-            $this->events->removeElement($event);
-            // set the owning side to null (unless already changed)
-            if ($event->getAuthor() === $this) {
-                $event->setAuthor(null);
-            }
-        }
-        return $this;
-    }
+    
+
+    // /**
+    //  * @return Collection|News[]
+    //  */
+    // public function getNews(): Collection
+    // {
+    //     return $this->news;
+    // }
+    
+    // public function addNews(News $news): self
+    // {
+    //     if (!$this->news->contains($news)) {
+    //         $this->news[] = $news;
+    //         $news->setUser($this);
+    //     }
+    //     return $this;
+    // }
+    // public function removeNews(News $news): self
+    // {
+    //     if ($this->news->contains($news)) {
+    //         $this->news->removeElement($news);
+    //         // set the owning side to null (unless already changed)
+    //         if ($news->getUser() === $this) {
+    //             $news->setUser(null);
+    //         }
+    //     }
+    //     return $this;
+    // }
+
+    // /**
+    //  * @return Collection|Event[]
+    //  */
+    // public function getEvents(): Collection
+    // {
+    //     return $this->events;
+    // }
+    // public function addEvent(Event $event): self
+    // {
+    //     if (!$this->events->contains($event)) {
+    //         $this->events[] = $event;
+    //         $event->setAuthor($this);
+    //     }
+    //     return $this;
+    // }
+    // public function removeEvent(Event $event): self
+    // {
+    //     if ($this->events->contains($event)) {
+    //         $this->events->removeElement($event);
+    //         // set the owning side to null (unless already changed)
+    //         if ($event->getAuthor() === $this) {
+    //             $event->setAuthor(null);
+    //         }
+    //     }
+    //     return $this;
+    // }
 
     /**
      * Get the value of username

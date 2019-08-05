@@ -61,6 +61,12 @@ class News
     private $media;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Serializer\Expose
+     */
+    private $slug;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     private $author;
@@ -73,8 +79,11 @@ class News
 
     public function __construct()
     {
-        $this->media = new ArrayCollection();
+        $this->createdAt = new \DateTime;
+        $this->updatedAt = new \DateTime;
+        $this->isPublished = true;
         $this->tags = new ArrayCollection();
+        $this->media = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -207,6 +216,26 @@ class News
         if ($this->tags->contains($tag)) {
             $this->tags->removeElement($tag);
         }
+
+        return $this;
+    }
+
+    /**
+     * Get the value of slug
+     */ 
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set the value of slug
+     *
+     * @return  self
+     */ 
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
 
         return $this;
     }

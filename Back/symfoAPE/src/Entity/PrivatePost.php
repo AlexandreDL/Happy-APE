@@ -55,6 +55,8 @@ class PrivatePost
 
     public function __construct()
     {
+        $this->createdAt = new \DateTime;
+        $this->updatedAt = new \DateTime;
         $this->media = new ArrayCollection();
     }
 
