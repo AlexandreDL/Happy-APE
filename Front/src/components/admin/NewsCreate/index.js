@@ -5,7 +5,9 @@ import {
   ReferenceInput,
   TextInput,
   SelectInput,
-  LongTextInput,
+  ImageInput,
+  ImageField,
+
 } from 'react-admin';
 
 import RichTextInput from 'ra-input-rich-text';
@@ -19,6 +21,9 @@ const NewsCreate = props => (
       </ReferenceInput>
       <TextInput source="title" />
       <RichTextInput source="body" />
+      <ImageInput source="pictures" label="Related pictures" accept="image/*">
+        <ImageField source="src" title="title" />
+      </ImageInput>
     </SimpleForm>
   </Create>
 );

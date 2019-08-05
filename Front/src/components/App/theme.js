@@ -8,9 +8,7 @@ const generalTheme = createMuiTheme({
   },
   typography: {
     underline: 'none',
-    caption: {
-      color: '#f4f4f8',
-    },
+  
     h1: {
       fontFamily: 'Raleway',
       color: '#FF732D',
