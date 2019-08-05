@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ApiResource()
+ * @ApiResource(routePrefix="/admin")
  * @ORM\Entity(repositoryClass="App\Repository\RoleRepository")
  */
 class Role
