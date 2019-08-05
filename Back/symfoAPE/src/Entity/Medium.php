@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
-* @ApiResource(itemOperations={
+ * @ApiResource(itemOperations={
  *     "DELETE"={"method"="DELETE", "path"="/redact/{id}"},
  *     "put"={"method"="PUT", "path"="/redact/{id}/update"},
  * })

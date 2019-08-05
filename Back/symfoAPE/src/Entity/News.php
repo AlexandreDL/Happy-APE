@@ -70,16 +70,16 @@ class News
     private $slug;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @Serializer\Expose
-     */
-    private $author;
-
-    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Tag")
      * @Serializer\Expose
      */
     private $tags;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
 
     public function __construct()
     {
@@ -186,18 +186,6 @@ class News
         return $this;
     }
 
-    public function getAuthor(): ?User
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(?User $author): self
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Tag[]
      */
@@ -240,6 +228,18 @@ class News
     public function setSlug($slug)
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

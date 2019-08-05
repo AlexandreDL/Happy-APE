@@ -2,14 +2,16 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
-use JMS\Serializer\Annotation as Serializer;
+use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
+use JMS\Serializer\Annotation as Serializer;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 
 /**
  * @ApiResource(routePrefix="/profil")
@@ -29,7 +31,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
-     * @Assert\Email( message = "Veuillez saisir un email valide SVP.")
+     * @Assert\Email(message = "Veuillez saisir un email valide SVP.")
      * @Assert\Unique
      */
     private $email;
@@ -124,14 +126,14 @@ class User implements UserInterface
      */
     private $updatedAt;
 
-
-    public function __construct()
+    public function __construct(PasswordEncoderInterface $encoder)
     {
         $this->createdAt = new \DateTime;
         $this->updatedAt = new \DateTime;
-        $this->news = new ArrayCollection();
-        $this->events = new ArrayCollection();
+        $this->password = $encoder->encodePassword($this, $this->getPassword());
     }
+
+
 
     public function getId(): ?int
     {
@@ -335,62 +337,6 @@ class User implements UserInterface
         return $this->lastname;
     }
     
-
-    // /**
-    //  * @return Collection|News[]
-    //  */
-    // public function getNews(): Collection
-    // {
-    //     return $this->news;
-    // }
-    
-    // public function addNews(News $news): self
-    // {
-    //     if (!$this->news->contains($news)) {
-    //         $this->news[] = $news;
-    //         $news->setUser($this);
-    //     }
-    //     return $this;
-    // }
-    // public function removeNews(News $news): self
-    // {
-    //     if ($this->news->contains($news)) {
-    //         $this->news->removeElement($news);
-    //         // set the owning side to null (unless already changed)
-    //         if ($news->getUser() === $this) {
-    //             $news->setUser(null);
-    //         }
-    //     }
-    //     return $this;
-    // }
-
-    // /**
-    //  * @return Collection|Event[]
-    //  */
-    // public function getEvents(): Collection
-    // {
-    //     return $this->events;
-    // }
-    // public function addEvent(Event $event): self
-    // {
-    //     if (!$this->events->contains($event)) {
-    //         $this->events[] = $event;
-    //         $event->setAuthor($this);
-    //     }
-    //     return $this;
-    // }
-    // public function removeEvent(Event $event): self
-    // {
-    //     if ($this->events->contains($event)) {
-    //         $this->events->removeElement($event);
-    //         // set the owning side to null (unless already changed)
-    //         if ($event->getAuthor() === $this) {
-    //             $event->setAuthor(null);
-    //         }
-    //     }
-    //     return $this;
-    // }
-
     /**
      * Get the value of username
      */ 
