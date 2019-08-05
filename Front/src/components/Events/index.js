@@ -1,7 +1,7 @@
 // == Import : npm
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CircularProgress, Grid } from '@material-ui/core';
+import { LinearProgress, Grid } from '@material-ui/core';
 
 // == Import : local
 
@@ -27,15 +27,15 @@ class Events extends React.Component {
     this.events = events;
     this.loading = loading;
     return (
-      <Grid container spacing={2}>
+      <Grid container spacing={2} class="whitebox">
 
-        {(!this.loading && this.events.length !== undefined) ? this.events.map(item => (
+        {(!this.loading && this.events.length !== undefined && this.events.length !== 0) ? this.events.map(item => (
           <Grid item xs={12} sm={12} xl={6} lg={6} key={item.id}>
-            <Event item={item}  />
+            <Event item={item} />
           </Grid>
         )) : (
           <div className="cpcenter">
-            <CircularProgress disableShrink className="progress" />
+            <LinearProgress color="secondary" />
           </div>
         )
             }

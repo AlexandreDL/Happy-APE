@@ -14,7 +14,7 @@ import { getWhoAreWeData } from 'src/store/reducer';
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
 const mapStateToProps = (state, ownProps) => ({
-  whoAreWeData: state.whoAreWeData,
+  whoAreWeData: (state.whoAreWeData !== undefined) ? state.whoAreWeData : null,
   loading: state.loadin,
 });
 

@@ -5,12 +5,12 @@ import New from 'src/components/New';
 import {
   Container,
   Divider,
-  CircularProgress,
+  LinearProgress,
   Grid,
-  Box, 
+  Box,
+  Typography,
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import Typography from '@material-ui/core/Typography';
 import './homepage.scss';
 import { Link } from 'react-router-dom';
 
@@ -20,11 +20,12 @@ class HomePage extends React.Component {
   componentWillMount() {
     const { setHomepageData } = this.props;
     setHomepageData();
+    console.log(this.props.homepageData);
   }
-
+  
   render() {
     const { homepageData, loading } = this.props;
-
+    console.log(homepageData);
     if (!loading) {
       document.title = homepageData.title;
       if (homepageData.nextEvent !== undefined) {
@@ -83,7 +84,7 @@ class HomePage extends React.Component {
 
             {!loading ? this.event : (
               <div className="cpcenter">
-                <CircularProgress disableShrink className="progress" />
+                <LinearProgress color="secondary"/>
               </div>
             )
             }
@@ -94,11 +95,11 @@ class HomePage extends React.Component {
           <Box className="whitebox">
             <Container>
               <Typography variant="h1">Nos dernières actualités</Typography>
-                {!loading ? this.news : (
-                  <div className="cpcenter">
-                    <CircularProgress disableShrink className="progress" />
-                  </div>
-                ) }
+              {!loading ? this.news : (
+                <div className="cpcenter">
+                  <LinearProgress color="secondary"/>
+                </div>
+              ) }
             </Container>
           </Box>
         <Divider />
@@ -111,7 +112,6 @@ export default HomePage;
 
 
 HomePage.propTypes = {
-  homepageData: PropTypes.object.isRequired,
   setHomepageData: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
 };
