@@ -13,7 +13,7 @@ import { getEvents } from 'src/store/reducer';
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
 const mapStateToProps = (state, ownProps) => ({
-  events: (state.events !== null) ? state.events : null,
+  events: state.events,
   loading: state.loading,
 });
 

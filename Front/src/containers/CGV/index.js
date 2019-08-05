@@ -15,7 +15,6 @@ import { getCGVData } from 'src/store/reducer';
 const mapStateToProps = (state, ownProps) => ({
   CGVData: state.CGVData,
   loading: state.loading,
- 
 });
 
 /* === Actions ===

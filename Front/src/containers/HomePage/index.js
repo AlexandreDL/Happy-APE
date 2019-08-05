@@ -14,7 +14,7 @@ import { getHomepageData } from 'src/store/reducer';
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
 const mapStateToProps = (state, ownProps) => ({
-  homepageData: (state.homepageData !== undefined) ? state.homePageData : null,
+  homepageData: state.homepageData,
   loading: state.loading,
 });
 
