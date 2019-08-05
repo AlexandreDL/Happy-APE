@@ -68,6 +68,7 @@ class News
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @Serializer\Expose
      */
     private $author;
 
