@@ -47,7 +47,7 @@ class HomePage extends React.Component {
           <React.Fragment>        
             <Grid container
               direction="row"
-              justify="center"
+              justify="flex-start"
               alignItems="flex-start"
               >
               {homepageData.news.map(item => (
