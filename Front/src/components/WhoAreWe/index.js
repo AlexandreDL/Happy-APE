@@ -20,16 +20,14 @@ class WhoAreWe extends React.Component {
 
   render() {
     const { whoAreWeData } = this.props;
-    console.log(whoAreWeData);
     return (
       <article className="who whitebox">
-        {whoAreWeData.map(item => (
+        {(whoAreWeData !== null) && whoAreWeData.map(item => (
           <div key={item.id}>
             <Typography variant="h1">{item.title}</Typography>
             <Typography variant="body1"><ReactMarkdown source={item.content} /></Typography>
           </div>
-        ))
-            }
+        ))}
         <section className="who-trombi">
           <Card className="member-card">
             <CardMedia
@@ -40,10 +38,9 @@ class WhoAreWe extends React.Component {
               title="Maria"
             />
             <CardContent>
-            <Typography variant="h3">Maria</Typography>
+              <Typography variant="h3">Maria</Typography>
               <p className="who-role">présidente de l'association</p> 
             </CardContent>
-            
           </Card>
           <Card className="member-card">
             <CardMedia
@@ -111,6 +108,5 @@ class WhoAreWe extends React.Component {
 export default WhoAreWe;
 
 WhoAreWe.propTypes = {
-  whoAreWeData: PropTypes.array.isRequired,
   setWhoAreWeData: PropTypes.func.isRequired,
 };

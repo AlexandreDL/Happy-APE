@@ -12,9 +12,7 @@ import Header from 'src/components/Includes/Header';
  *  - ownProps : les props passées au container
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
-const mapStateToProps = (state, ownProps) => ({
-  message: state.message,
-});
+const mapStateToProps = null;
 
 /* === Actions ===
  * - mapDispatchToProps retroune un objet de props pour le composant de présentation
@@ -23,9 +21,7 @@ const mapStateToProps = (state, ownProps) => ({
  *  - ownProps : les props passées au container
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
-const mapDispatchToProps = (dispatch, ownProps) => ({
-
-});
+const mapDispatchToProps = {};
 
 // Container
 const HeaderContainer = connect(

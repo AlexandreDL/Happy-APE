@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 // == Import : local
 import Nav from 'src/components/Includes/Nav';
-import { toggleDrawer, getCGVData } from 'src/store/reducer';
+import { toggleDrawer } from 'src/store/reducer';
 
 
 /* === State (données) ===
