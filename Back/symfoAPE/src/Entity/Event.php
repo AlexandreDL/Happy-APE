@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Utils\Slugger;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -10,8 +11,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
+ * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
- * @Serializer\ExclusionPolicy("ALL")
  */
 class Event
 {
@@ -45,7 +46,7 @@ class Event
     private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime")
      * @Assert\DateTime
      */
     private $updatedAt;
@@ -64,16 +65,15 @@ class Event
     private $content;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="events")
-     * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
-     */
-    private $author;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Serializer\Expose
      */
     private $slug;
+
+     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="events")
+     */
+    private $author;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Medium", mappedBy="event")
@@ -82,8 +82,6 @@ class Event
 
     public function __construct()
     {
-        $this->createdAt = new \DateTime;
-        $this->isPublished = true;
         $this->media = new ArrayCollection();
     }
 
@@ -164,9 +162,16 @@ class Event
         return $this;
     }
 
-    public function __toString()
+    public function getSlug(): ?string
     {
-        return $this->name;
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 
     public function getAuthor(): ?User
@@ -177,18 +182,6 @@ class Event
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
-
-        return $this;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(?string $slug): self
-    {
-        $this->slug = $slug;
 
         return $this;
     }

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,8 +10,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
+ * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\NewsRepository")
- * @Serializer\ExclusionPolicy("ALL")
  */
 class News
 {
@@ -38,44 +39,42 @@ class News
     private $content;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isPublished;
-
-    /**
      * @ORM\Column(type="datetime")
      * @Assert\DateTime
      */
     private $createdAt;
 
-    /**
+     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Assert\DateTime
      */
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="news")
+     * @ORM\Column(type="boolean")
      */
-    private $user;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="news")
-     * @Serializer\Expose
-     */
-    private $tags;
+    private $isPublished;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Medium", mappedBy="news")
      */
     private $media;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     */
+    private $author;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tag")
+     * @Serializer\Expose
+     */
+    private $tags;
+
     public function __construct()
     {
-        $this->createdAt = new \DateTime;
-        $this->isPublished = true;
-        $this->tags = new ArrayCollection();
         $this->media = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -107,18 +106,6 @@ class News
         return $this;
     }
 
-    public function getIsPublished(): ?bool
-    {
-        return $this->isPublished;
-    }
-
-    public function setIsPublished(?bool $isPublished): self
-    {
-        $this->isPublished = $isPublished;
-
-        return $this;
-    }
-
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
@@ -143,45 +130,14 @@ class News
         return $this;
     }
 
-    public function __toString()
+    public function getIsPublished(): ?bool
     {
-        return $this->title;
+        return $this->isPublished;
     }
 
-    public function getUser(): ?User
+    public function setIsPublished(?bool $isPublished): self
     {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Tag[]
-     */
-    public function getTags(): Collection
-    {
-        return $this->tags;
-    }
-
-    public function addTag(Tag $tag): self
-    {
-        if (!$this->tags->contains($tag)) {
-            $this->tags[] = $tag;
-        }
-
-        return $this;
-    }
-
-    public function removeTag(Tag $tag): self
-    {
-        if ($this->tags->contains($tag)) {
-            $this->tags->removeElement($tag);
-        }
+        $this->isPublished = $isPublished;
 
         return $this;
     }
@@ -216,5 +172,42 @@ class News
 
         return $this;
     }
-   
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tag[]
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tag $tag): self
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags[] = $tag;
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tag $tag): self
+    {
+        if ($this->tags->contains($tag)) {
+            $this->tags->removeElement($tag);
+        }
+
+        return $this;
+    }
 }

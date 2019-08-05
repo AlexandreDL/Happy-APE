@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\ContactRepository")
  */
 class Contact
@@ -18,21 +20,21 @@ class Contact
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\NotBlank()
      * @Assert\Length(min=2, max=100)
      */
     private $lastname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\NotBlank()
      * @Assert\Length(min=2, max=100)
      */
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\NotBlank()
      * @Assert\Email()
      */
@@ -43,7 +45,7 @@ class Contact
      * @Assert\NotBlank()
      * @Assert\Length(min=50)
      */
-    private $messsage;
+    private $message;
 
     public function getId(): ?int
     {
@@ -55,7 +57,7 @@ class Contact
         return $this->lastname;
     }
 
-    public function setLastname(string $lastname): self
+    public function setLastname(?string $lastname): self
     {
         $this->lastname = $lastname;
 
@@ -67,7 +69,7 @@ class Contact
         return $this->firstname;
     }
 
-    public function setFirstname(string $firstname): self
+    public function setFirstname(?string $firstname): self
     {
         $this->firstname = $firstname;
 
@@ -79,21 +81,21 @@ class Contact
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
         return $this;
     }
 
-    public function getMesssage(): ?string
+    public function getMessage(): ?string
     {
-        return $this->messsage;
+        return $this->message;
     }
 
-    public function setMesssage(string $messsage): self
+    public function setMessage(string $message): self
     {
-        $this->messsage = $messsage;
+        $this->message = $message;
 
         return $this;
     }

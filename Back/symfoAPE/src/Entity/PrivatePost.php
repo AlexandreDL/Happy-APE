@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
+ * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\PrivatePostRepository")
  */
 class PrivatePost
@@ -53,7 +55,6 @@ class PrivatePost
 
     public function __construct()
     {
-        $this->createdAt = new \DateTime;
         $this->media = new ArrayCollection();
     }
 
@@ -108,11 +109,6 @@ class PrivatePost
         $this->updatedAt = $updatedAt;
 
         return $this;
-    }
-
-    public function __toString()
-    {
-        return $this->title;
     }
 
     /**
