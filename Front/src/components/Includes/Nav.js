@@ -18,6 +18,7 @@ const NavBar = ({ drawerOpen, toggleDrawerAction }) => {
   const WhoAreWeLink = React.forwardRef((props, ref) => <RouterLink to="/qui-sommes-nous" innerRef={ref} {...props} />);
   const ContactLink = React.forwardRef((props, ref) => <RouterLink to="/contact" innerRef={ref} {...props} />);
   const AccountLink = React.forwardRef((props, ref) => <RouterLink to="/" innerRef={ref} {...props} />);
+  const AdminAppLink = React.forwardRef((props, ref) => <RouterLink to="/admin/Dashboard" innerRef={ref} {...props} />);
 
   const toggleDrawerButton = event => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -39,6 +40,7 @@ const NavBar = ({ drawerOpen, toggleDrawerAction }) => {
         <MenuItem component={WhoAreWeLink} to="/qui-sommes-nous">Qui sommes-nous ?</MenuItem>
         <MenuItem component={ContactLink} to="/contact">Contact</MenuItem>
         <MenuItem component={AccountLink} to="/">Compte</MenuItem>
+        <MenuItem component={AdminAppLink} to="/admin/Dashboard">Dashboard</MenuItem>
       </div>
       <Drawer open={drawerOpen} onClose={toggleDrawerButton}>
         <MenuItem onClick={toggleDrawerButton} component={AccueilLink} to="/"><Home />Accueil</MenuItem>
@@ -46,6 +48,7 @@ const NavBar = ({ drawerOpen, toggleDrawerAction }) => {
         <MenuItem onClick={toggleDrawerButton} component={WhoAreWeLink} to="/qui-sommes-nous"><ContactSupport />Qui sommes-nous ?</MenuItem>
         <MenuItem onClick={toggleDrawerButton} component={ContactLink} to="/contact"><Contacts />Contact</MenuItem>
         <MenuItem onClick={toggleDrawerButton} component={AccountLink} to="/"><AccountCircle />Compte</MenuItem>
+        <MenuItem onClick={toggleDrawerButton} component={AdminAppLink} to="/admin/Dashboard">Dashboard</MenuItem>
       </Drawer>
     </div>
   )
