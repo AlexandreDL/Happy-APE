@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Medium;
 use App\Repository\MediumRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,7 +24,7 @@ class MediumController extends AbstractController
     /**
      * @Route("/media/{id}", name="media_show", methods={"GET"}))
      */
-    public function show(medium $medium)
+    public function show(Medium $medium)
     {
         if (empty($medium)) {
             return new JsonResponse(['message' => 'File not found'], Response::HTTP_NOT_FOUND);
@@ -30,11 +32,45 @@ class MediumController extends AbstractController
         return $this->json($medium);
     }
 
-     /**
+    /**
      * @Route("/api/Media/create", name="media_create")
+     */
+    public function create(Request $request, EntityManagerInterface $entityManager) {
+      $newMedia = json_decode($request->getContent(), true);  
+
+      $media = new media();
+      $media->setTitle($newMedia->title);
+      $media->setType($newMedia->type);
+      $media->setUrl($newMedia->url);
+      $media->setTitle($newMedia->title);
+
+      $entityManager->persist($media);
+      $entityManager->flush();
+      
+      $data = [
+          'status' => 201,
+          'message' => 'Le media à été ajouté'
+      ];
+      return new JsonResponse($data, 201);  
+    } 
+
+
+    /** 
      * @Route("/api/Media/{id}/edit", name="media_edit")
      */
-    //TODO
+    public function edit(Medium $media, Request $request, EntityManagerInterface $entityManager) 
+    {
+        // $this->denyAccessUnlessGranted
+        $media = json_decode($request->getContent());
+        if ($media === null) {
+            return new JsonResponse(['message' =>'Ce media n\'existe pas.'], Response::HTTP_NOT_FOUND);
+        }
+
+        $entityManager->flush();
+        
+        $response = new JsonResponse($media, 200);
+        return $response;
+    }
 
     /**
      * @Route("/api/Media/{id}/delete", name="media_delete")
@@ -43,12 +79,11 @@ class MediumController extends AbstractController
 
         $medium = $this->getDoctrine()->getRepository(Medium::class)->find($id);
         
+      if ($medium) {
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($medium);
-        $response = new Response();
-        $response->send();
-
-        return $this->json($medium);
+        $entityManager->flush();
       }
+      return new Response(null, 204);
+    }
 }
-  
