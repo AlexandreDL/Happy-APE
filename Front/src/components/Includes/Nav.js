@@ -11,12 +11,12 @@ import './nav.scss';
 // == Composant
 const NavBar = ({ drawerOpen, toggleDrawerAction }) => {
 
-  const AccueilLink = React.forwardRef((props, ref) =>   <Link href="/" innerRef={ref} {...props} />);
+  const AccueilLink = React.forwardRef((props, ref) => <Link href="/" innerRef={ref} {...props} />);
   const EvenementLink = React.forwardRef((props, ref) => <Link href="/evenements" innerRef={ref} {...props} />);
-  const WhoAreWeLink = React.forwardRef((props, ref) =>  <Link href="/qui-sommes-nous" innerRef={ref} {...props} />);
-  const ContactLink = React.forwardRef((props, ref) =>   <Link href="/contact" innerRef={ref} {...props} />);
-  const AccountLink = React.forwardRef((props, ref) =>   <Link href="/" innerRef={ref} {...props} />);
-  const AdminAppLink = React.forwardRef((props, ref) =>   <Link href="/admin/Dashboard" innerRef={ref} {...props} />);
+  const WhoAreWeLink = React.forwardRef((props, ref) => <Link href="/qui-sommes-nous" innerRef={ref} {...props} />);
+  const ContactLink = React.forwardRef((props, ref) => <Link href="/contact" innerRef={ref} {...props} />);
+  const AccountLink = React.forwardRef((props, ref) => <Link href="/" innerRef={ref} {...props} />);
+  const AdminAppLink = React.forwardRef((props, ref) => <Link chref="/admin/Dashboard" innerRef={ref} {...props} />);
 
   const toggleDrawerButton = event => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
