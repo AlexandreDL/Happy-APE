@@ -18,20 +18,48 @@ import NewsCreate from 'src/components/admin/NewsCreate';
 import Dashboard from 'src/components/admin/Dashboard';
 import PostIcon from '@material-ui/icons/Book';
 import UserIcon from '@material-ui/icons/Group';
+import { Provider } from 'react-redux';
+import { createHashHistory } from 'history';
+import restProvider from 'ra-data-simple-rest';
+// import defaultMessages from 'ra-language-english';
 
-import authProvider from 'src/components/admin/Utils/authProvider';
+import AdminStore from 'src/components/admin/store/index';
+// import messages from 'i18n';
 
-const dataProvider = jsonServerProvider('http://jsonplaceholder.typicode.com');
+// import authProvider from 'src/components/admin/Utils/authProvider';
+
+// const dataProvider = jsonServerProvider('http://jsonplaceholder.typicode.com');
+
+// side effects
+const authProvider = () => Promise.resolve();
+const dataProvider = restProvider('https://back.isodev.ovh/');
+// const i18nProvider = locale => {
+// if (locale !== 'en') {
+//  return messages[locale];
+// }
+// return defaultMessages;
+// };
+
+const history = createHashHistory();
+
 
 const App = () => (
-  <MuiThemeProvider theme={theme}>
-    <Admin theme={theme} dashboard={Dashboard} authProvider={authProvider} dataProvider={dataProvider}>
-      
-      <Resource name="posts" options={{ label: 'événements' }} list={EventList} edit={EventEdit} create={EventCreate} show={EventShow} icon={PostIcon} />
-      <Resource name="news" options={{ label: 'actualités' }} list={NewsList} edit={NewsEdit} create={NewsCreate} show={NewsShow} icon={PostIcon} />
-      <Resource name="users" options={{ label: 'utilisateurs' }} list={UserList} icon={UserIcon} />
-    </Admin>
-  </MuiThemeProvider>
+  <Provider
+    store={AdminStore({
+      authProvider,
+      dataProvider,
+      // i18nProvider,
+      history,
+    })}
+  >
+    <MuiThemeProvider theme={theme}>
+      <Admin theme={theme} dashboard={Dashboard} authProvider={authProvider} dataProvider={dataProvider}>
+        <Resource name="posts" options={{ label: 'événements' }} list={EventList} edit={EventEdit} create={EventCreate} show={EventShow} icon={PostIcon} />
+        <Resource name="news" options={{ label: 'actualités' }} list={NewsList} edit={NewsEdit} create={NewsCreate} show={NewsShow} icon={PostIcon} />
+        <Resource name="users" options={{ label: 'utilisateurs' }} list={UserList} icon={UserIcon} />
+      </Admin>
+    </MuiThemeProvider>
+  </Provider>
 );
 
 export default App;

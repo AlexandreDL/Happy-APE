@@ -132,6 +132,7 @@ module.exports = {
     host: host,
     port: port,
   },
+  
   plugins: [
     // Permet de prendre le index.html de src comme base pour le fichier de dist/
     new HtmlWebPackPlugin({
