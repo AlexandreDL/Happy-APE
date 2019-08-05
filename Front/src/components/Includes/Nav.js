@@ -11,7 +11,7 @@ import './nav.scss';
 // == Composant
 const NavBar = ({ drawerOpen, toggleDrawerAction }) => {
 
-  const AccueilLink = React.forwardRef((props, ref) =>   <Link href="/" innerRef={ref} {...props} />);
+  const AccueilLink = React.forwardRef((props, ref) => <Link href="/" innerRef={ref} {...props} />);
   const EvenementLink = React.forwardRef((props, ref) => <Link href="/evenements" innerRef={ref} {...props} />);
   const WhoAreWeLink = React.forwardRef((props, ref) =>  <Link href="/qui-sommes-nous" innerRef={ref} {...props} />);
   const ContactLink = React.forwardRef((props, ref) =>   <Link href="/contact" innerRef={ref} {...props} />);
