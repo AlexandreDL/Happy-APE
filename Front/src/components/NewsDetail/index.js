@@ -26,24 +26,21 @@ class NewsDetail extends React.Component {
 
   render() {
     const { homepageData, slug, loading } = this.props;
-    //console.log(homepageData.news, slug);
-    
-    // console.log(item);
 
-    if (homepageData.news !== undefined) {
-      this.actualNews = homepageData.news.find(item => item.slug === slug);
-      // console.log(this.actualNews);
-    
-      const itemDay = new Date(this.actualNews.createdAt).getDay();
-      const week = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi']
-      const day = week[itemDay];
-      const itemMonth = new Date(this.actualNews.createdAt).getMonth();
-      const year = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet']
-      const month = year[itemMonth];
-      const dayNumber = new Date(this.actualNews.createdAt).getUTCDate();
-      const itemYear = new Date(this.actualNews.createdAt).getFullYear();
-    
+
+    if (homepageData !== undefined) {
+      this.actualNews = homepageData.news.find(actu => actu.slug === slug);
       if (this.actualNews !== null) {
+        const itemDay = new Date(this.actualNews.createdAt).getDay();
+        const week = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi']
+        const day = week[itemDay];
+        const itemMonth = new Date(this.actualNews.createdAt).getMonth();
+        const year = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet']
+        const month = year[itemMonth];
+        const dayNumber = new Date(this.actualNews.createdAt).getUTCDate();
+        const itemYear = new Date(this.actualNews.createdAt).getFullYear();
+
+
         this.newsLoaded = (
           <React.Fragment>
             <Grid
@@ -51,14 +48,17 @@ class NewsDetail extends React.Component {
               direction="row"
               justify="center"
               alignItems="flex-start"
-              className="news-content">
-              <Grid item xs={5} sm={3} xl={3} lg={3} className="calendar">
+              className="news-content"
+            >
+              <Grid item xs={5} sm={5} xl={2} lg={2} className="calendar">
+
                 <div className="newContentDay">{day}</div>
                 <div className="newContentNumber">{dayNumber}</div>
                 <div className="newContentMonth">{month}</div>
                 <div className="newContentYear">{itemYear}</div>
               </Grid>
-              <Grid item xs={12} sm={8} xl={8} lg={8}>
+
+              <Grid item xs={12} sm={12} xl={8} lg={8}>
                 <Typography variant="h2">{this.actualNews.title}</Typography>
                 <Typography variant="body2">{this.actualNews.content}</Typography>
               </Grid>
@@ -73,8 +73,8 @@ class NewsDetail extends React.Component {
 
 
 NewsDetail.propTypes = {
-  // item: PropTypes.object.isRequired,
-  homepageData: PropTypes.object.isRequired,
+
+  slug: PropTypes.string.isRequired,
   setHomepageData: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
 };
