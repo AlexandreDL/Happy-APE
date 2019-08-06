@@ -1,6 +1,6 @@
 // in src/App.js
 
-import React from 'react';
+import React, { Component } from 'react';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import theme from 'src/components/App/theme';
 
@@ -18,48 +18,63 @@ import NewsCreate from 'src/components/admin/NewsCreate';
 import Dashboard from 'src/components/admin/Dashboard';
 import PostIcon from '@material-ui/icons/Book';
 import UserIcon from '@material-ui/icons/Group';
-import { Provider } from 'react-redux';
-import { createHashHistory } from 'history';
-import restProvider from 'ra-data-simple-rest';
-// import defaultMessages from 'ra-language-english';
+import parseHydraDocumentation from '@api-platform/api-doc-parser/lib/hydra/parseHydraDocumentation';
+import { hydraClient, fetchHydra as baseFetchHydra  } from '@api-platform/admin';
+import authProvider from 'src/components/admin/Utils/authProvider';
+import { Redirect } from 'react-router-dom';
+// import Layout from './Component/Layout';
+// import dataProvider from 'src/components/admin/DataProvider';
 
-import AdminStore from 'src/components/admin/store/index';
-// import messages from 'i18n';
+const entrypoint = 'https://back.isodev.ovh/api';
+const fetchHeaders = {Authorization: `Bearer ${window.localStorage.getItem('token')}`};
+const fetchHydra = (url, options = {}) => baseFetchHydra(url, {
+  ...options,
+  headers: new Headers(fetchHeaders),
+});
+const dataProvider = api => hydraClient(api, fetchHydra);
+const apiDocumentationParser = entrypoint => parseHydraDocumentation(entrypoint, { headers: new Headers(fetchHeaders) })
+  .then(
+    ({ api }) => ({ api }),
+    (result) => {
+      switch (result.status) {
+        case 401:
+          return Promise.resolve({
+            api: result.api,
+            customRoutes: [{
+              props: {
+                path: '/',
+                render: () => <Redirect to="/login"/>,
+              },
+            }],
+          });
 
-// import authProvider from 'src/components/admin/Utils/authProvider';
+        default:
+          return Promise.reject(result);
+      }
+    },
+  );
 
-// const dataProvider = jsonServerProvider('http://jsonplaceholder.typicode.com');
+export default class extends Component {
+    state = { api: null };
 
-// side effects
-const authProvider = () => Promise.resolve();
-const dataProvider = restProvider('https://back.isodev.ovh/');
-// const i18nProvider = locale => {
-// if (locale !== 'en') {
-//  return messages[locale];
-// }
-// return defaultMessages;
-// };
+    componentDidMount() {
+      apiDocumentationParser(entrypoint).then(({ api }) => {
+        this.setState({ api });
+      }).catch((e) => {
+        console.log(e);
+      });
+    }
 
-const history = createHashHistory();
-
-
-const App = () => (
-  <Provider
-    store={AdminStore({
-      authProvider,
-      dataProvider,
-      // i18nProvider,
-      history,
-    })}
-  >
-    <MuiThemeProvider theme={theme}>
-      <Admin theme={theme} dashboard={Dashboard} authProvider={authProvider} dataProvider={dataProvider}>
-        <Resource name="posts" options={{ label: 'événements' }} list={EventList} edit={EventEdit} create={EventCreate} show={EventShow} icon={PostIcon} />
-        <Resource name="news" options={{ label: 'actualités' }} list={NewsList} edit={NewsEdit} create={NewsCreate} show={NewsShow} icon={PostIcon} />
-        <Resource name="users" options={{ label: 'utilisateurs' }} list={UserList} icon={UserIcon} />
-      </Admin>
-    </MuiThemeProvider>
-  </Provider>
-);
-
-export default App;
+    render() {
+      if (this.state.api === null) return <div>Loading...</div>;
+      return (
+        <MuiThemeProvider theme={theme}>
+          <Admin theme={theme} dashboard={Dashboard} authProvider={authProvider} dataProvider={dataProvider}>
+            <Resource name="events" options={{ label: 'événements' }} list={EventList} edit={EventEdit} create={EventCreate} show={EventShow} icon={PostIcon} />
+            <Resource name="news" options={{ label: 'actualités' }} list={NewsList} edit={NewsEdit} create={NewsCreate} show={NewsShow} icon={PostIcon} />
+            <Resource name="users" options={{ label: 'utilisateurs' }} list={UserList} icon={UserIcon} />
+          </Admin>
+        </MuiThemeProvider>
+      );
+    }
+}
