@@ -3,21 +3,33 @@
 namespace App\DataFixtures;
 
 use App\Entity\Page;
+use App\Entity\User;
 use App\Entity\Event;
 use Nelmio\Alice\Loader\NativeLoader;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
+    public function __construct(UserPasswordEncoderInterface $encoder)
+        {
+            $this->encoder = $encoder;
+        }
 
     public function load(ObjectManager $manager)
     {
         $loader = new NativeLoader();
+        
             
         $entities = $loader->loadFile(__DIR__.'/fixtures.yml')->getObjects();
         
         foreach ($entities as $entity) {
+            if($entity instanceof User) {
+                $entity->setPassword($this->encoder->encodePassword(
+                    $entity, 
+                    $entity->getPassword()));
+            }
             $manager->persist($entity);
         };
 
