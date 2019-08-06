@@ -6,6 +6,13 @@ const generalTheme = createMuiTheme({
     primary: { main: '#2ab7ca' },
     secondary: { main: '#ffc43d' },
   },
+  overrides: {
+    MuiMenuItem: {
+      root: {
+        color: 'white',
+      },
+    },
+  },  
   typography: {
     underline: 'none',
     h1: {
@@ -44,6 +51,11 @@ const generalTheme = createMuiTheme({
       fontSize: 18,
     },
   },
+
+
+
+
+
 });
 
 export default generalTheme;
