@@ -12,10 +12,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 /**
- * @ApiResource(routePrefix="/profil")
- * @ApiResource(
- *     normalizationContext={"groups"={"read"}},
- *     denormalizationContext={"groups"={"write"}}
+ * @ApiResource(routePrefix="/profil", 
+ *  normalizationContext={"groups"={"read"}},
  * )
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity("email")
@@ -33,7 +31,6 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="json")
-     * @Groups({"admin:read", "admin:write"})
      */
     private $roles = [];
     
@@ -41,7 +38,6 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      * @Assert\NotBlank(message = "Ce champ doit être renseigné.")
      * @Assert\Length(min="8", minMessage="Votre mot de passe doit faire minimum 8 caractères")
-     * @Groups({"write"})
      */
     private $password;
 
@@ -49,7 +45,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message = "Ce champ doit être renseigné.")
      * @Assert\Length(min="2", minMessage="Votre Prénom doit faire minimum 2 caractères")
-     * @Groups({"read", "write"})
+     * @Groups({"read"})
      */
     private $lastname;
 
@@ -57,56 +53,48 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message = "Ce champ doit être renseigné.")
      * @Assert\Length(min="2", minMessage="Votre Nom doit faire minimum 2 caractères")
-     * @Groups({"read", "write"})
+     * @Groups({"read"})
      */
     private $firstname;
         
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"admin:read", "write"})
      */
     private $address_city;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"admin:read", "write"})
      */
     
     private $address_street;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"admin:read", "write"})
      */
     private $address_other;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"admin:read", "write"})
      */
     private $address_number;
 
     /**
      * @ORM\Column(type="string", length=15, nullable=true)
-     * @Groups({"admin:read", "write"})
      */
     private $address_zipcode;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Groups({"admin:read", "write"})
      */
     private $newsletter_subscription;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
-     * @Groups({"read", "admin:write"})
      */
     private $isActive;
 
     /**
      * @ORM\Column(type="boolean")
-     * @Groups({"admin:read", "write", "admin:write"})
      */
     private $isParent;
 
@@ -124,13 +112,12 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"admin:read", "write"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"read", "write"})
+     * @Groups({"read"})
      */
     private $username;
 
