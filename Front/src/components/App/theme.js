@@ -8,7 +8,6 @@ const generalTheme = createMuiTheme({
   },
   typography: {
     underline: 'none',
-  
     h1: {
       fontFamily: 'Raleway',
       color: '#FF732D',
@@ -25,7 +24,6 @@ const generalTheme = createMuiTheme({
       fontWeight: 'bold',
       paddingTop: 5,
       marginBottom: 0,
-     
     },
     h3: {
       fontFamily: 'Raleway',
@@ -41,17 +39,9 @@ const generalTheme = createMuiTheme({
       fontSize: 16,
       lineHeight: 1.5,
     },
-      
     body2: {
       fontFamily: 'Raleway',
       fontSize: 18,
-    },
-    
-  },
-  overrides: {
-
-    MuiButton: {
-     
     },
   },
 });
