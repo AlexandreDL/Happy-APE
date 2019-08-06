@@ -13,10 +13,11 @@ const NavBar = ({ drawerOpen, toggleDrawerAction }) => {
 
   const AccueilLink = React.forwardRef((props, ref) => <Link href="/" innerRef={ref} {...props} />);
   const EvenementLink = React.forwardRef((props, ref) => <Link href="/evenements" innerRef={ref} {...props} />);
-  const WhoAreWeLink = React.forwardRef((props, ref) =>  <Link href="/qui-sommes-nous" innerRef={ref} {...props} />);
-  const ContactLink = React.forwardRef((props, ref) =>   <Link href="/contact" innerRef={ref} {...props} />);
-  const AccountLink = React.forwardRef((props, ref) =>   <Link href="/" innerRef={ref} {...props} />);
-  const AdminAppLink = React.forwardRef((props, ref) =>  <Link href="/admin/Dashboard" innerRef={ref} {...props} />);
+  const WhoAreWeLink = React.forwardRef((props, ref) => <Link href="/qui-sommes-nous" innerRef={ref} {...props} />);
+  const ContactLink = React.forwardRef((props, ref) => <Link href="/contact" innerRef={ref} {...props} />);
+  const AccountLink = React.forwardRef((props, ref) => <Link href="/" innerRef={ref} {...props} />);
+  const AdminAppLink = React.forwardRef((props, ref) => <Link href="/admin/Dashboard" innerRef={ref} {...props} />);
+  const UserProfileLink = React.forwardRef((props, ref) => <Link href="/profil" innerRef={ref} {...props} />);
 
   const toggleDrawerButton = event => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -32,13 +33,14 @@ const NavBar = ({ drawerOpen, toggleDrawerAction }) => {
           Menu
         </Button>
       </div>
-      <Typography variant="caption" className="navBar">
+      <Typography className="navBar">
         <MenuItem component={AccueilLink} to="/">Accueil</MenuItem>
         <MenuItem component={EvenementLink} to="/evenements">Evenement</MenuItem>
         <MenuItem component={WhoAreWeLink} to="/qui-sommes-nous">Qui sommes-nous ?</MenuItem>
         <MenuItem component={ContactLink} to="/contact">Contact</MenuItem>
         <MenuItem component={AccountLink} to="/">Compte</MenuItem>
         <MenuItem component={AdminAppLink} to="/admin/Dashboard">Dashboard</MenuItem>
+        <MenuItem component={UserProfileLink} to="/profil">Mon profil</MenuItem>
       </Typography>
       <Drawer open={drawerOpen} onClose={toggleDrawerButton}>
         <MenuItem onClick={toggleDrawerButton} component={AccueilLink} to="/"><Home />Accueil</MenuItem>

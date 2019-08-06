@@ -25,7 +25,7 @@ import { Redirect } from 'react-router-dom';
 // import Layout from './Component/Layout';
 // import dataProvider from 'src/components/admin/DataProvider';
 
-const entrypoint = 'https://back.isodev.ovh/api';
+const entrypoint = 'https://back.isodev.ovh/api/';
 const fetchHeaders = {Authorization: `Bearer ${window.localStorage.getItem('token')}`};
 const fetchHydra = (url, options = {}) => baseFetchHydra(url, {
   ...options,
