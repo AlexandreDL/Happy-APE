@@ -8,8 +8,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(itemOperations={
- *     "DELETE"={"method"="DELETE", "path"="/redact/{id}"},
- *     "put"={"method"="PUT", "path"="/redact/{id}/update"},
+ *     "DELETE"={"method"="DELETE", "path"="/redact/tags/{id}/delete"},
+ *     "put"={"method"="PUT", "path"="/redact/tags/{id}/update"},
  * })
  * @ORM\Entity(repositoryClass="App\Repository\TagRepository")
  */

@@ -9,8 +9,8 @@ use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ApiResource(itemOperations={
- *     "DELETE"={"method"="DELETE", "path"="/redact/{id}"},
- *     "put"={"method"="PUT", "path"="/redact/{id}/update"},
+ *     "DELETE"={"method"="DELETE", "path"="/redact/media/{id}/delete"},
+ *     "put"={"method"="PUT", "path"="/redact/media/{id}/update"},
  * })
  * @ORM\Entity(repositoryClass="App\Repository\MediumRepository")
  * @Serializer\ExclusionPolicy("ALL")

@@ -12,8 +12,8 @@ use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ApiResource(itemOperations={
- *     "DELETE"={"method"="DELETE", "path"="/redact/{id}"},
- *     "put"={"method"="PUT", "path"="/redact/{id}/update"},
+ *     "DELETE"={"method"="DELETE", "path"="/redact/events/{id}/delete"},
+ *     "put"={"method"="PUT", "path"="/redact/events/{id}/update"},
  * })
  * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
  */
