@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation as Serializer;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 
 /**
  * @ApiResource(itemOperations={
@@ -78,6 +79,7 @@ class News
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
+     * @ApiSubresource
      */
     private $author;
 
