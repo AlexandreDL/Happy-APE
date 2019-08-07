@@ -19,11 +19,11 @@ const EventEdit = props => (
   <Edit title={<EventTitle />} {...props}>
     <SimpleForm>
       <DisabledInput source="id" />
-      <ReferenceInput source="userId" reference="users">
-        <SelectInput optionText="name" />
+      <ReferenceInput source="author" reference="profile/users">
+        <SelectInput optionText="lastname" />
       </ReferenceInput>
-      <TextInput source="title" />
-      <RichTextInput source="body" />
+      <TextInput source="name" />
+      <RichTextInput source="content" />
     </SimpleForm>
   </Edit>
 );

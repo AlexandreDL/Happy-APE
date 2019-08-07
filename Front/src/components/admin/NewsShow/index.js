@@ -16,7 +16,7 @@ const NewsShow = props => (
   <Show {...props}>
     <SimpleShowLayout>      
       <TextField source="title" />
-      <RichTextField source="body" />
+      <RichTextField source="content" />
       <DateField label="Publication date" source="created_at" />
     </SimpleShowLayout>
   </Show>
