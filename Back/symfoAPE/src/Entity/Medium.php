@@ -8,10 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * @ApiResource(itemOperations={
- *     "DELETE"={"method"="DELETE", "path"="/redact/media/{id}/delete"},
- *     "put"={"method"="PUT", "path"="/redact/media/{id}/update"},
- * })
+ * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\MediumRepository")
  * @Serializer\ExclusionPolicy("ALL")
  */

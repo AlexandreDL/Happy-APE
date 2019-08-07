@@ -10,10 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * @ApiResource(itemOperations={
- *     "DELETE"={"method"="DELETE", "path"="/redact/privatepost/{id}/delete"},
- *     "put"={"method"="PUT", "path"="/redact/privatepost/{id}/update"},
- * })
+ * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\PrivatePostRepository")
  */
 class PrivatePost

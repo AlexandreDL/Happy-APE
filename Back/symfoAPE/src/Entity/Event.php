@@ -11,10 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
- * @ApiResource(itemOperations={
- *     "DELETE"={"method"="DELETE", "path"="/redact/events/{id}/delete"},
- *     "put"={"method"="PUT", "path"="/redact/events/{id}/update"},
- * })
+ * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
  */
 class Event

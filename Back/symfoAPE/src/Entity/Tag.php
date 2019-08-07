@@ -7,10 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ApiResource(itemOperations={
- *     "DELETE"={"method"="DELETE", "path"="/redact/tags/{id}/delete"},
- *     "put"={"method"="PUT", "path"="/redact/tags/{id}/update"},
- * })
+ * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\TagRepository")
  */
 class Tag

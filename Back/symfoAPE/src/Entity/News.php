@@ -11,10 +11,7 @@ use JMS\Serializer\Annotation as Serializer;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 
 /**
- * @ApiResource(itemOperations={
- *     "DELETE"={"method"="DELETE", "path"="/redact/news/{id}/delete"},
- *     "put"={"method"="PUT", "path"="/redact/news/{id}/update"},
- * })
+ * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\NewsRepository")
  */
 class News
@@ -61,6 +58,7 @@ class News
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Medium", mappedBy="news")
+     * @Serializer\Expose
      */
     private $media;
 
@@ -72,7 +70,6 @@ class News
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Tag")
-     * @Serializer\Expose
      */
     private $tags;
 
