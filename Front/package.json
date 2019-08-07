@@ -28,7 +28,6 @@
     "style-loader": "*",
     "stylelint": "*",
     "stylelint-config-recommended": "*",
-    "uglifyjs-webpack-plugin": "*",
     "webpack": "*",
     "webpack-cli": "*",
     "webpack-dev-server": "*"
@@ -74,6 +73,7 @@
     "redux": "^4.0.4",
     "redux-axios-middleware": "^4.0.1",
     "redux-form": "^8.2.5",
-    "redux-saga": "^1.0.5"
+    "redux-saga": "^1.0.5",
+    "terser-webpack-plugin": "^1.4.1"
   }
 }
