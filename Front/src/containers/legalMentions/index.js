@@ -13,7 +13,7 @@ import { getLegalMentionsData } from 'src/store/reducer';
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
 const mapStateToProps = (state, ownProps) => ({
-  legalMentionsData: (state.legalMentionsData !== null) ? state.legalMentionsData : null,
+  legalMentionsData: state.legalMentionsData,
   loading: state.loading,
 });
 

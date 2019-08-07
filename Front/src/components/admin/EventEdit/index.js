@@ -6,8 +6,9 @@ import {
   TextInput,
   DisabledInput,
   SelectInput,
-  LongTextInput,
+  
 } from 'react-admin';
+import RichTextInput from 'ra-input-rich-text';
 
 const EventTitle = ({ record }) => {
   return <span>Post {record ? `"${record.title}"` : ''}</span>;
@@ -22,7 +23,7 @@ const EventEdit = props => (
         <SelectInput optionText="name" />
       </ReferenceInput>
       <TextInput source="title" />
-      <LongTextInput source="body" />
+      <RichTextInput source="body" />
     </SimpleForm>
   </Edit>
 );

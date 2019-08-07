@@ -6,11 +6,15 @@ const generalTheme = createMuiTheme({
     primary: { main: '#2ab7ca' },
     secondary: { main: '#ffc43d' },
   },
+  overrides: {
+    MuiMenuItem: {
+      root: {
+        color: 'white',
+      },
+    },
+  },  
   typography: {
     underline: 'none',
-    caption: {
-      color: '#f4f4f8',
-    },
     h1: {
       fontFamily: 'Raleway',
       color: '#FF732D',
@@ -27,7 +31,6 @@ const generalTheme = createMuiTheme({
       fontWeight: 'bold',
       paddingTop: 5,
       marginBottom: 0,
-     
     },
     h3: {
       fontFamily: 'Raleway',
@@ -43,19 +46,16 @@ const generalTheme = createMuiTheme({
       fontSize: 16,
       lineHeight: 1.5,
     },
-      
     body2: {
       fontFamily: 'Raleway',
       fontSize: 18,
     },
-    
   },
-  overrides: {
 
-    MuiButton: {
-     
-    },
-  },
+
+
+
+
 });
 
 export default generalTheme;

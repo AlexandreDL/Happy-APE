@@ -188,7 +188,7 @@ export function getWhoAreWeData() {
     type: GET_WHOAREWEDATA,
     payload: {
       request: {
-        url: '/api/qui-sommes-nous',
+        url: '/api/pages/19',
       },
     },
   };

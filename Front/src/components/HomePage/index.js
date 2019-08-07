@@ -20,12 +20,10 @@ class HomePage extends React.Component {
   componentWillMount() {
     const { setHomepageData } = this.props;
     setHomepageData();
-    console.log(this.props.homepageData);
   }
   
   render() {
     const { homepageData, loading } = this.props;
-    console.log(homepageData);
     if (!loading) {
       document.title = homepageData.title;
       if (homepageData.nextEvent !== undefined) {
@@ -49,7 +47,7 @@ class HomePage extends React.Component {
           <React.Fragment>        
             <Grid container
               direction="row"
-              justify="center"
+              justify="flex-start"
               alignItems="flex-start"
               >
               {homepageData.news.map(item => (

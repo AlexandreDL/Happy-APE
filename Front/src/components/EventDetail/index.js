@@ -21,14 +21,14 @@ class EventDetail extends React.Component {
   );
 
   componentWillMount() {
-    const { getEventsForPage} = this.props;
+    const { getEventsForPage } = this.props;
     getEventsForPage();
   }
 
   render() {
-
-    const { events, slug, loading } = this.props;
     
+    const { events, slug, loading } = this.props;
+  
 
     if (events[0] !== undefined) {
       this.actualEvent = events.find(item => item.slug === slug);
