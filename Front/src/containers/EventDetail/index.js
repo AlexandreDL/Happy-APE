@@ -27,7 +27,7 @@ const mapStateToProps = (state, ownProps) => ({
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  getEventsForPage: () => (dispatch(getEvents())), 
+  getEventsForPage: () => (dispatch(getEvents())),
 });
 
 // Container

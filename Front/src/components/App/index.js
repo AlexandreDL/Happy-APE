@@ -19,6 +19,12 @@ import Contact from 'src/containers/Contact';
 import Events from 'src/containers/Events';
 import legalMentions from 'src/containers/legalMentions';
 import EventDetail from 'src/containers/EventDetail';
+import NewsDetail from 'src/containers/NewsDetail';
+import Login from 'src/components/User/Login';
+import Signup from 'src/components/User/Signup';
+import UserProfile from 'src/components/User/profile';
+import AdminApp from 'src/components/admin/App';
+
 
 import './app.scss';
 
@@ -29,7 +35,7 @@ const App = () => (
       <Header>
         <NavBar />
       </Header>
-      <Container sm="100%">
+      <Container sm="100%" className="mainContainer">
         <main>
           <Route exact path="/" component={HomePage} />
           <Route path="/qui-sommes-nous" component={WhoAreWe} />
@@ -38,12 +44,25 @@ const App = () => (
           <Route path="/mentions-legales" component={legalMentions} />
           <Route path="/conditions-generales-d-utilisation" component={CGU} />
           <Route path="/conditions-generales-de-vente" component={CGV} />
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
+          <Route path="/admin/dashboard" component={AdminApp} />
+          <Route path="/profil" component={UserProfile} />
           <Route
             path="/evenement/:slug"
             render={(routeInfo) => {
               const { slug } = routeInfo.match.params;
               return (
                 <EventDetail slug={slug} />
+              );
+            }}
+          />
+          <Route
+            path="/actualites/:slug"
+            render={(routeInfo) => {
+              const { slug } = routeInfo.match.params;
+              return (
+                <NewsDetail slug={slug} />
               );
             }}
           />

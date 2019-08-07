@@ -15,7 +15,6 @@ import { getCGUData } from 'src/store/reducer';
 const mapStateToProps = (state, ownProps) => ({
   CGUData: state.CGUData,
   loading: state.loading,
- 
 });
 
 /* === Actions ===

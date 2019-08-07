@@ -1,13 +1,11 @@
 // == Initial State
 const initialState = {
-  homepageData: {},
-  legalMentionsData: [],
-  CGUData: [],
-  CGVData: [],
   loading: true,
-  events: [],
-  whoAreWeData: [],
   drawerOpen: false,
+  contactFirstname: '',
+  contactName: '',
+  contactEmail: '',
+  contactMessage: '',
 };
 // == Types
 const GET_LEGAL_MENTIONS = 'GET_LEGAL_MENTIONS';
@@ -23,6 +21,8 @@ const GET_WHOAREWEDATA = 'GET_WHOAREWEDATA';
 const GET_WHOAREWEDATA_SUCCESS = 'GET_WHOAREWEDATA_SUCCESS';
 const GET_WHOAREWEDATA_FAILURE = 'GET_WHOAREWEDATA_FAILURE';
 const TOGGLE_DRAWER = 'TOGGLE_DRAWER';
+const CONTACT_INPUT_VALUE = 'CONTACT_INPUT_VALUE';
+const SEND_CONTACTFORM = 'SEND_CONTACTFORM';
 
 
 // == Reducer
@@ -98,7 +98,6 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
       };
-
     case 'GET_EVENTS':
       return {
         ...state,
@@ -109,6 +108,15 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         events: action.payload.data,
         loading: false,
+      };
+    case CONTACT_INPUT_VALUE:
+      return {
+        ...state,
+        contactName: (action.contact_name === undefined) ? state.contactName : action.contact_name,
+        contactFirstname: (action.contact_firstname === undefined) ? state.contactFirstname : action.contact_firstname,
+        contactEmail: (action.contact_email === undefined) ? state.contactEmail : action.contact_email,
+        contactMessage: (action.contact_message === undefined) ? state.contactMessage : action.contact_message,
+        
       };
     case TOGGLE_DRAWER:
       return {
@@ -180,14 +188,31 @@ export function getWhoAreWeData() {
     type: GET_WHOAREWEDATA,
     payload: {
       request: {
-        url: '/api/qui-sommes-nous',
+        url: '/api/pages/19',
+      },
+    },
+  };
+}
+export function sendContactForm(contactData) {
+  return {
+    type: SEND_CONTACTFORM,
+    payload: {
+      request: {
+        url: '/api/contact',
+        body: contactData,
+        method: 'POST',
       },
     },
   };
 }
 
 export const toggleDrawer = () => ({
-    type: TOGGLE_DRAWER,
+  type: TOGGLE_DRAWER,
+});
+
+export const changeContactInput = (name, value) => ({
+  type: CONTACT_INPUT_VALUE,
+  [name]: value,
 });
 
 
