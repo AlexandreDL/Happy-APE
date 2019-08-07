@@ -8,11 +8,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation as Serializer;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 
 /**
  * @ApiResource(itemOperations={
- *     "DELETE"={"method"="DELETE", "path"="/redact/{id}"},
- *     "put"={"method"="PUT", "path"="/redact/{id}/update"},
+ *     "DELETE"={"method"="DELETE", "path"="/redact/news/{id}/delete"},
+ *     "put"={"method"="PUT", "path"="/redact/news/{id}/update"},
  * })
  * @ORM\Entity(repositoryClass="App\Repository\NewsRepository")
  */
@@ -78,6 +79,7 @@ class News
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
+     * @ApiSubresource
      */
     private $author;
 

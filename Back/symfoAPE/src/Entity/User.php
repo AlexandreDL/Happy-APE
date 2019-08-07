@@ -5,19 +5,20 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
-use JMS\Serializer\Annotation as Serializer;
-use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
+
 
 /**
- * @ApiResource(routePrefix="/profil")
+ * @ApiResource(routePrefix="/profil", 
+ *  normalizationContext={"groups"={"read"}},
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity("email")
  * @UniqueEntity("username")
+ * 
  */
 class User implements UserInterface
 {
@@ -27,14 +28,6 @@ class User implements UserInterface
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
-     * @Assert\Email(message = "Veuillez saisir un email valide SVP.")
-     * @Assert\Unique
-     */
-    private $email;
 
     /**
      * @ORM\Column(type="json")
@@ -52,7 +45,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message = "Ce champ doit être renseigné.")
      * @Assert\Length(min="2", minMessage="Votre Prénom doit faire minimum 2 caractères")
-     * @Serializer\Expose
+     * @Groups({"read"})
      */
     private $lastname;
 
@@ -60,18 +53,9 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message = "Ce champ doit être renseigné.")
      * @Assert\Length(min="2", minMessage="Votre Nom doit faire minimum 2 caractères")
-     * @Serializer\Expose
+     * @Groups({"read"})
      */
     private $firstname;
-
-     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message = "Ce champ doit être renseigné.")
-     * @Assert\Length(min="8", minMessage="Votre nom d'utilisateur doit faire minimum 8 caractères")
-     * @Serializer\Expose
-     * @Assert\Unique
-     */
-    private $username;
         
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -126,11 +110,21 @@ class User implements UserInterface
      */
     private $updatedAt;
 
-    public function __construct(PasswordEncoderInterface $encoder)
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups({"read"})
+     */
+    private $username;
+
+    public function __construct()
     {
         $this->createdAt = new \DateTime;
         $this->updatedAt = new \DateTime;
-        $this->password = $encoder->encodePassword($this, $this->getPassword());
     }
 
 

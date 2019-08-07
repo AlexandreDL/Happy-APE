@@ -22,7 +22,9 @@ class SecurityController extends AbstractController
        $values = json_decode($request->getContent());
        if(isset($values->username,$values->password)) {
            $user = new User();
-           $user->setEmail($values->username);
+           $user->setEmail($values->email);
+           $user->setUsername($values->username);
+           $user->setIsParent(true);
            $user->setPassword($passwordEncoder->encodePassword($user, $values->password));
            $user->setFirstname($values->firstname);
            $user->setLastname($values->lastname);
@@ -49,7 +51,7 @@ class SecurityController extends AbstractController
        return new JsonResponse($data, 500);
    }
    /**
-    * @Route("/login", name="login", methods={"POST"})
+    * @Route("/login", name="login", methods={"GET|POST"})
     */
    public function login(Request $request)
    {
