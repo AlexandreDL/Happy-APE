@@ -13,6 +13,7 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Event
 {
@@ -73,7 +74,7 @@ class Event
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $author;
 
@@ -83,6 +84,16 @@ class Event
         $this->createdAt = new \DateTime;
         $this->updatedAt = new \DateTime;
         $this->isPublished = true;
+    }
+    
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function applySlug(){
+        $slugger = new Slugger(true);
+        $slug = $slugger->slugify($this->name);
+        $this->slug = $slug;
     }
 
     public function getId(): ?int
