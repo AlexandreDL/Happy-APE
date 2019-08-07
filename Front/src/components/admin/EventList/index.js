@@ -36,6 +36,7 @@ const EventList = props => (
       medium={(
         <Datagrid>
           <TextField source="id" />
+
           <ReferenceField label="User" source="author" reference="profile/users">
             <TextField source="lastname" />
           </ReferenceField>
