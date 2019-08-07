@@ -19,11 +19,11 @@ const NewsEdit = props => (
   <Edit title={<NewsTitle />} {...props}>
     <SimpleForm>
       <DisabledInput source="id" />
-      <ReferenceInput source="userId" reference="users">
-        <SelectInput optionText="name" />
+      <ReferenceInput source="author" reference="users">
+        <SelectInput optionText="lastname" />
       </ReferenceInput>
       <TextInput source="title" />
-      <RichTextInput source="body" />
+      <RichTextInput source="content" />
     </SimpleForm>
   </Edit>
 );

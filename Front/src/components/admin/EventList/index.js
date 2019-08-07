@@ -37,7 +37,7 @@ const EventList = props => (
         <Datagrid>
           <TextField source="id" />
           <ReferenceField label="User" source="author" reference="users">
-            <TextField source="name" />
+            <TextField source="lastname" />
           </ReferenceField>
           <TextField source="name" />
           <TextField source="content" />
