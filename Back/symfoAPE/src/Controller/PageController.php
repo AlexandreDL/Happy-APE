@@ -1,16 +1,13 @@
 <?php
 
-namespace App\Controller\Api;
+namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Repository\PageRepository;
 use Symfony\Component\Routing\Annotation\Route;
-// use App\Entity\Page;
 
-/**
-* @Route("/api", name="api_")
-*/
 class PageController extends AbstractController
+
 {
 
     /**
@@ -21,7 +18,7 @@ class PageController extends AbstractController
         $pageML= $pageRepository->findBy(['title'=>'Mentions Légales']);
         return $this->json($pageML);
     }
-
+    
     /**
     * @Route("/conditions-vente", name="sales_conditions")
     */
@@ -29,7 +26,6 @@ class PageController extends AbstractController
     {
         $CGVPage = $pageRepository->findby(['title'=>'Conditions générales de vente']); 
         return $this->json($CGVPage);
- 
     }
     
      /**
@@ -40,16 +36,16 @@ class PageController extends AbstractController
         $termsOfUsePage = $pageRepository->findBy(['title'=> 'Conditions générales d\'utilisation']);
         return $this->json($termsOfUsePage);
     }
-
+    
      /**
      * @Route("/qui-sommes-nous", name="about_us")
      */
     public function AboutUs(PageRepository $pageRepository)
     {
-        $aboutPage = $pageRepository->findBy(['title' => 'qui-sommes-nous'] );
+        $aboutPage = $pageRepository->findBy(['title' => 'Qui sommes-nous ?'] );
         return $this->json($aboutPage);
     }
-
+    
      /**
      * @Route("/contact", name="contact")
      */
@@ -58,4 +54,5 @@ class PageController extends AbstractController
         $pageContact = $pageRepository->findBy(['title' => 'Contact'] );
         return $this->json($pageContact);
     }
+    
 }

@@ -2,7 +2,6 @@
 namespace App\Serializer\Normalizer;
 use App\Entity\Event;
 use App\Entity\News;
-use App\Entity\Child;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 class PublicDataNormalizer implements NormalizerInterface {
@@ -25,6 +24,6 @@ class PublicDataNormalizer implements NormalizerInterface {
     }
     public function supportsNormalization($data, $format = null)
     {
-        return $data instanceof Event || $data instanceof News || $data instanceof Child;
+        return $data instanceof Event || $data instanceof News;
     }
 }

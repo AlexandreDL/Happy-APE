@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation as Serializer;
 
 /**
+ * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\MediumRepository")
  * @Serializer\ExclusionPolicy("ALL")
  */
@@ -43,7 +45,7 @@ class Medium
     private $type;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\NotBlank
      * @Assert\Url
      * @Serializer\Expose
@@ -63,24 +65,24 @@ class Medium
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\News", inversedBy="media")
-     */
-    private $news;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Event", inversedBy="media")
      */
     private $event;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\News", inversedBy="media")
+     */
+    private $news;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\PrivatePost", inversedBy="media")
      */
     private $privatePost;
 
-
     public function __construct()
     {
         $this->createdAt = new \DateTime;
+        $this->updatedAt = new \DateTime;
     }
 
     public function getId(): ?int
@@ -148,9 +150,16 @@ class Medium
         return $this;
     }
 
-    public function __toString()
+    public function getEvent(): ?Event
     {
-        return $this->title;
+        return $this->event;
+    }
+
+    public function setEvent(?Event $event): self
+    {
+        $this->event = $event;
+
+        return $this;
     }
 
     public function getNews(): ?News
@@ -161,18 +170,6 @@ class Medium
     public function setNews(?News $news): self
     {
         $this->news = $news;
-
-        return $this;
-    }
-
-    public function getEvent(): ?Event
-    {
-        return $this->event;
-    }
-
-    public function setEvent(?Event $event): self
-    {
-        $this->event = $event;
 
         return $this;
     }

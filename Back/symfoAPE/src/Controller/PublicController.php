@@ -14,7 +14,7 @@ class PublicController extends AbstractController
      */
     public function home(NewsRepository $newsRepository, EventRepository $eventrepository)
     {
-        $lastNewses = $newsRepository->findNext3();
+        $lastNewses = $newsRepository->findNextNews();
         $nextEvent = $eventrepository->findNext();
         return $this->json([
         'title' => 'homepage', 

@@ -3,21 +3,33 @@
 namespace App\DataFixtures;
 
 use App\Entity\Page;
+use App\Entity\User;
 use App\Entity\Event;
 use Nelmio\Alice\Loader\NativeLoader;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
+    public function __construct(UserPasswordEncoderInterface $encoder)
+        {
+            $this->encoder = $encoder;
+        }
 
     public function load(ObjectManager $manager)
     {
         $loader = new NativeLoader();
+        
             
         $entities = $loader->loadFile(__DIR__.'/fixtures.yml')->getObjects();
         
         foreach ($entities as $entity) {
+            if($entity instanceof User) {
+                $entity->setPassword($this->encoder->encodePassword(
+                    $entity, 
+                    $entity->getPassword()));
+            }
             $manager->persist($entity);
         };
 
@@ -181,7 +193,7 @@ class AppFixtures extends Fixture
         $manager->persist($pageCGU);
         
         $pageAbout = new Page(); 
-        $pageAbout->setTitle('qui-sommes-nous'); 
+        $pageAbout->setTitle('Qui sommes-nous ?'); 
         $pageAbout->setContent('Une association de parents d\'élèves a pour objet la défense des intérêts moraux et matériels communs aux parents d\'élèves. Elle ne regroupe que des parents d\'élèves, auxquels sont assimilées les personnes ayant la responsabilité légale d\'un ou plusieurs élèves. Elle représente les parents d\'élèves en participant aux conseils d\'écoles, aux conseils d\'administration des établissements scolaires et aux conseils de classe.
 
         Les associations ne peuvent fixer le siège social dans l\'enceinte scolaire. 
