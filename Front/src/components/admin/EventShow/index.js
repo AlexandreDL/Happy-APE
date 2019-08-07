@@ -10,8 +10,8 @@ import {
 const EventShow = props => (
   <Show {...props}>
     <SimpleShowLayout>      
-      <TextField source="title" />
-      <RichTextField source="body" />
+      <TextField source="name" />
+      <RichTextField source="content" />
       <DateField label="Publication date" source="created_at" />
     </SimpleShowLayout>
   </Show>

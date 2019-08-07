@@ -16,11 +16,11 @@ import RichTextInput from 'ra-input-rich-text';
 const NewsCreate = props => (
   <Create {...props}>
     <SimpleForm>
-      <ReferenceInput source="userId" reference="users">
-        <SelectInput optionText="name" />
+      <ReferenceInput source="author" reference="profile/users">
+        <SelectInput optionText="lastname" />
       </ReferenceInput>
       <TextInput source="title" />
-      <RichTextInput source="body" />
+      <RichTextInput source="content" />
       <ImageInput source="pictures" label="Related pictures" accept="image/*">
         <ImageField source="src" title="title" />
       </ImageInput>

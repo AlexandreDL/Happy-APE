@@ -19,7 +19,7 @@ const NewsEdit = props => (
   <Edit title={<NewsTitle />} {...props}>
     <SimpleForm>
       <DisabledInput source="id" />
-      <ReferenceInput source="author" reference="users">
+      <ReferenceInput source="author" reference="profile/users">
         <SelectInput optionText="lastname" />
       </ReferenceInput>
       <TextInput source="title" />
