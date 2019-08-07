@@ -36,11 +36,11 @@ const NewsList = props => (
       medium={(
         <Datagrid>
           <TextField source="id" />
-          <ReferenceField label="User" source="userId" reference="users">
+          <ReferenceField label="User" source="author" reference="users">
             <TextField source="name" />
           </ReferenceField>
           <TextField source="title" />
-          <TextField source="body" />
+          <TextField source="content" />
           <EditButton />
         </Datagrid>
 )}

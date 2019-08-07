@@ -69,7 +69,13 @@ export default class extends Component {
       if (this.state.api === null) return <div>Loading...</div>;
       return (
         <MuiThemeProvider theme={theme}>
-          <Admin theme={theme} dashboard={Dashboard} authProvider={authProvider} dataProvider={dataProvider}>
+          <Admin api={ this.state.api }
+            apiDocumentationParser={apiDocumentationParser}
+            dataProvider= {dataProvider(this.state.api)}
+            theme={theme} 
+            dashboard={Dashboard}
+            authProvider={authProvider}
+          >
             <Resource name="events" options={{ label: 'événements' }} list={EventList} edit={EventEdit} create={EventCreate} show={EventShow} icon={PostIcon} />
             <Resource name="news" options={{ label: 'actualités' }} list={NewsList} edit={NewsEdit} create={NewsCreate} show={NewsShow} icon={PostIcon} />
             <Resource name="users" options={{ label: 'utilisateurs' }} list={UserList} icon={UserIcon} />
