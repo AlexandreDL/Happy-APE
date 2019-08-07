@@ -2,13 +2,16 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Utils\Slugger;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
+ * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
  */
 class Event
@@ -24,7 +27,6 @@ class Event
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
      * @Assert\Length(min=5, minMessage="Le nom de l'événement doit compter entre 5 et 200 caractères.", max=200, maxMessage ="Le nom de l'événement doit compter entre 5 et 200 caractères.")
-     * 
      */
     private $name;
 
@@ -60,12 +62,6 @@ class Event
     private $content;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="events")
-     * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
-     */
-    private $author;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $slug;
@@ -75,11 +71,18 @@ class Event
      */
     private $media;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
+
     public function __construct()
     {
-        $this->createdAt = new \DateTime;
-        $this->isPublished = true;
         $this->media = new ArrayCollection();
+        $this->createdAt = new \DateTime;
+        $this->updatedAt = new \DateTime;
+        $this->isPublished = true;
     }
 
     public function getId(): ?int
@@ -159,23 +162,6 @@ class Event
         return $this;
     }
 
-    public function __toString()
-    {
-        return $this->name;
-    }
-
-    public function getAuthor(): ?User
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(?User $author): self
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
     public function getSlug(): ?string
     {
         return $this->slug;
@@ -215,6 +201,18 @@ class Event
                 $medium->setEvent(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

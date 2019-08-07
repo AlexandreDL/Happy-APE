@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * @ApiResource(routePrefix="/admin")
  * @ORM\Entity(repositoryClass="App\Repository\RoleRepository")
  */
 class Role
@@ -37,10 +39,5 @@ class Role
         $this->role = $role;
 
         return $this;
-    }
-
-    public function __toString()
-    {
-        return $this->role;
     }
 }

@@ -3,8 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Event;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * @method Event|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,32 +19,29 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
+
     public function findNext3() {
       
         $query = $this->createQueryBuilder('e')
-            ->innerJoin('e.author', 'u')
-            ->innerJoin('e.media', 'm')
-            ->addSelect('u', 'm')
+            ->leftJoin('e.author', 'u')
+            ->leftJoin('e.media', 'm')
             ->where("e.isPublished = 1")
             ->orderBy('e.date')
             ->setMaxResults(3)
             ;
         return $query->getQuery()->getArrayResult();
     }
-
     public function findNext() {
         $query = $this->createQueryBuilder('e')
-            ->innerJoin('e.author', 'u')
-            ->innerJoin('e.media', 'm')
-            ->addSelect('u', 'm')
+            ->leftJoin('e.author', 'u')
+            ->leftJoin('e.media', 'm')
             ->where("e.isPublished = 1")
             ->orderBy('e.date')
             ->setMaxResults(1)
             ;
         return $query->getQuery()->getResult();
     }
-
-
+    
     // /**
     //  * @return Event[] Returns an array of Event objects
     //  */
