@@ -25,7 +25,7 @@ class Events extends React.Component {
 
     if (!loading || events.length !== 0) {
       this.events = (
-        <Grid container spacing={2} className="whitebox">
+        <Grid container spacing={2} >
           {events.map(item => (
             <Grid item xs={12} sm={12} xl={6} lg={6} key={item.slug}>
               <Event item={item} />
@@ -48,7 +48,7 @@ class Events extends React.Component {
 
 Events.propTypes = {
   getEventsForPage: PropTypes.func.isRequired,
-  events: PropTypes.array.isRequired,
+  // events: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
   // events: PropTypes.array.isRequired,
 };

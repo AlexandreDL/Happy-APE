@@ -5,6 +5,7 @@ import {
   TextField,
   ReferenceField,
   EditButton,
+  ShowButton,
   Filter,
   ReferenceInput,
   SelectInput,
@@ -16,7 +17,7 @@ import {
 const NewsFilter = props => (
   <Filter {...props}>
     <TextInput label="Search" source="q" alwaysOn />
-    <ReferenceInput label="User" source="author" reference="users" allowEmpty>
+    <ReferenceInput label="User" source="author" reference="news" allowEmpty>
       <SelectInput optionText="lastname" />
     </ReferenceInput>
   </Filter>
@@ -35,13 +36,13 @@ const NewsList = props => (
 )}
       medium={(
         <Datagrid>
-          <TextField source="id" />
-          <ReferenceField label="User" source="author" reference="profile/users">
+          <ReferenceField label="User" source="author" reference="news">
             <TextField source="lastname" />
           </ReferenceField>
           <TextField source="title" />
           <TextField source="content" />
           <EditButton />
+          <ShowButton />
         </Datagrid>
 )}
         />

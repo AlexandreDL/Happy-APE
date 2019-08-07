@@ -6,6 +6,9 @@ const initialState = {
   contactName: '',
   contactEmail: '',
   contactMessage: '',
+  CGVData: [],
+  CGUData: [],
+  legalMentionsData: [],
 };
 // == Types
 const GET_LEGAL_MENTIONS = 'GET_LEGAL_MENTIONS';
@@ -144,7 +147,7 @@ export function getLegalMentionsData() {
     type: GET_LEGAL_MENTIONS,
     payload: {
       request: {
-        url: '/api/mentions-legales',
+        url: '/mentions-legales',
       },
     },
   };
@@ -155,7 +158,7 @@ export function getEvents() {
     type: 'GET_EVENTS',
     payload: {
       request: {
-        url: '/events/',
+        url: '/api/events/',
       },
     },
   };
@@ -166,7 +169,7 @@ export function getCGUData() {
     type: GET_CGUDATA,
     payload: {
       request: {
-        url: '/api/conditions-utilisation',
+        url: '/conditions-utilisation',
       },
     },
   };
@@ -177,7 +180,7 @@ export function getCGVData() {
     type: GET_CGVDATA,
     payload: {
       request: {
-        url: '/api/conditions-vente',
+        url: '/conditions-vente',
       },
     },
   };
@@ -188,7 +191,7 @@ export function getWhoAreWeData() {
     type: GET_WHOAREWEDATA,
     payload: {
       request: {
-        url: '/api/pages/19',
+        url: '/qui-sommes-nous',
       },
     },
   };
@@ -198,7 +201,7 @@ export function sendContactForm(contactData) {
     type: SEND_CONTACTFORM,
     payload: {
       request: {
-        url: '/api/contact',
+        url: '/api/contacts',
         body: contactData,
         method: 'POST',
       },

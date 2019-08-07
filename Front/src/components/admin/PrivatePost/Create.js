@@ -7,19 +7,19 @@ import {
   SelectInput,
   ImageInput,
   ImageField,
-  
+  DateInput,
+
 } from 'react-admin';
+
 import RichTextInput from 'ra-input-rich-text';
 
 
-const EventCreate = props => (
+const PrivatePostCreate = props => (
   <Create {...props}>
     <SimpleForm>
-      <ReferenceInput source="author" reference="profile/users">
-        <SelectInput optionText="lastname" />
-      </ReferenceInput>
-      <TextInput source="name" />
+      <TextInput source="title" />
       <RichTextInput source="content" />
+      <DateInput label="Creation date" source="createdAt" />
       <ImageInput source="pictures" label="Related pictures" accept="image/*">
         <ImageField source="src" title="title" />
       </ImageInput>
@@ -27,4 +27,4 @@ const EventCreate = props => (
   </Create>
 );
 
-export default EventCreate;
+export default PrivatePostCreate;

@@ -51,7 +51,7 @@ class EventDetail extends React.Component {
 EventDetail.propTypes = {
   getEventsForPage: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
-  events: PropTypes.object.isRequired,
+ // events: PropTypes.object.isRequired,
   slug: PropTypes.string.isRequired,
 };
 // == Export

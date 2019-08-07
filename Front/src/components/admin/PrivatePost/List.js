@@ -5,6 +5,7 @@ import {
   TextField,
   ReferenceField,
   EditButton,
+  ShowButton,
   Filter,
   ReferenceInput,
   SelectInput,
@@ -13,18 +14,18 @@ import {
   Responsive,
 } from 'react-admin';
 
-const EventFilter = props => (
+const PrivatePostFilter = props => (
   <Filter {...props}>
     <TextInput label="Search" source="q" alwaysOn />
-    <ReferenceInput label="User" source="userId" reference="users" allowEmpty>
-      <SelectInput optionText="name" />
+    <ReferenceInput label="User" source="author" reference="users" allowEmpty>
+      <SelectInput optionText="lastname" />
     </ReferenceInput>
   </Filter>
 );
 
 
-const EventList = props => (
-  <List filters={<EventFilter />} {...props}>
+const PrivatePostList = props => (
+  <List filters={<PrivatePostFilter />} {...props}>
     <Responsive
       small={(
         <SimpleList
@@ -35,18 +36,14 @@ const EventList = props => (
 )}
       medium={(
         <Datagrid>
-          <TextField source="id" />
-
-          <ReferenceField label="User" source="author" reference="profile/users">
-            <TextField source="lastname" />
-          </ReferenceField>
-          <TextField source="name" />
+          <TextField source="title" />
           <TextField source="content" />
           <EditButton />
+          <ShowButton />
         </Datagrid>
 )}
         />
   </List>
 );
 
-export default EventList;
+export default PrivatePostList;

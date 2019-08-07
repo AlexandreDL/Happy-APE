@@ -10,22 +10,19 @@ import {
 } from 'react-admin';
 import RichTextInput from 'ra-input-rich-text';
 
-const NewsTitle = ({ record }) => {
+const PageTitle = ({ record }) => {
   return <span>Post {record ? `"${record.title}"` : ''}</span>;
 };
 
 
-const NewsEdit = props => (
-  <Edit title={<NewsTitle />} {...props}>
+const PageEdit = props => (
+  <Edit title={<PageTitle />} {...props}>
     <SimpleForm>
       <DisabledInput source="id" />
-      <ReferenceInput source="author" reference="profile/users">
-        <SelectInput optionText="lastname" />
-      </ReferenceInput>
       <TextInput source="title" />
       <RichTextInput source="content" />
     </SimpleForm>
   </Edit>
 );
 
-export default NewsEdit;
+export default PageEdit;

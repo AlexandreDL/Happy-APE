@@ -7,7 +7,7 @@ import {
   DateField,
 } from 'react-admin';
 
-const EventTitle = ({ record }) => {
+const NewsTitle = ({ record }) => {
   return <span>Post {record ? `"${record.title}"` : ''}</span>;
 };
 
