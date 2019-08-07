@@ -16,7 +16,7 @@ import {
 const PostFilter = props => (
   <Filter {...props}>
     <TextInput label="Search" source="q" alwaysOn />
-    <ReferenceInput label="User" source="userId" reference="users" allowEmpty>
+    <ReferenceInput label="User" source="userId" reference="profile/users" allowEmpty>
       <SelectInput optionText="name" />
     </ReferenceInput>
   </Filter>
@@ -35,7 +35,9 @@ const UserList = props => (
       medium={(
         <Datagrid rowClick="edit">
           <TextField source="id" />
-          <TextField source="name" />
+          <TextField source="lastname" />
+          <TextField source="firstname" />
+          <TextField source="type" />
           <TextField source="username" />
           <EmailField source="email" />
           <TextField source="address.street" />

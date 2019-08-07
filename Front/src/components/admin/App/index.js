@@ -78,7 +78,7 @@ export default class extends Component {
           >
             <Resource name="events" options={{ label: 'événements' }} list={EventList} edit={EventEdit} create={EventCreate} show={EventShow} icon={PostIcon} />
             <Resource name="news" options={{ label: 'actualités' }} list={NewsList} edit={NewsEdit} create={NewsCreate} show={NewsShow} icon={PostIcon} />
-            <Resource name="users" options={{ label: 'utilisateurs' }} list={UserList} icon={UserIcon} />
+            <Resource name="profile/users" options={{ label: 'utilisateurs' }} list={UserList} icon={UserIcon} />
           </Admin>
         </MuiThemeProvider>
       );
