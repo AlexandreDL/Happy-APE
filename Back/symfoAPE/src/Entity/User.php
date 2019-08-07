@@ -12,13 +12,12 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 /**
- * @ApiResource(routePrefix="/profil", 
- *  normalizationContext={"groups"={"read"}},
+ * @ApiResource(routePrefix="/profile", 
+ *      normalizationContext={"groups"={"read"}},
  * )
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity("email")
  * @UniqueEntity("username")
- * 
  */
 class User implements UserInterface
 {
@@ -40,6 +39,16 @@ class User implements UserInterface
      * @Assert\Length(min="8", minMessage="Votre mot de passe doit faire minimum 8 caractères")
      */
     private $password;
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Expression(
+     *      "this.getPassword() === this.getRetypedPassword()",
+     *      message="Les mots de passe ne sont pas identiques"
+     *)
+     */
+    private $retypedPassword;
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -112,11 +121,13 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email()
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min="2", minMessage="Votre nom d'utilisateur doit faire minimum 2 caractères")
      * @Groups({"read"})
      */
     private $username;
@@ -347,6 +358,19 @@ class User implements UserInterface
     public function setUsername($username)
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    
+    public function getRetypedPassword()
+    {
+        return $this->retypedPassword;
+    }
+
+    public function setRetypedPassword($retypedPassword)
+    {
+        $this->retypedPassword = $retypedPassword;
 
         return $this;
     }
