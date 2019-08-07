@@ -24,7 +24,7 @@ class HomePage extends React.Component {
   
   render() {
     const { homepageData, loading } = this.props;
-    if (!loading) {
+    if (!loading && homepageData.length !== 0) {
       document.title = homepageData.title;
       if (homepageData.nextEvent !== undefined) {
         this.event = (
@@ -111,5 +111,6 @@ export default HomePage;
 
 HomePage.propTypes = {
   setHomepageData: PropTypes.func.isRequired,
+  homepageData: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
 };

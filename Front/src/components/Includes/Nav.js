@@ -1,29 +1,45 @@
 // == Import : npm
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // == Import : local
-import { Drawer, MenuItem, Button, Link, Typography } from '@material-ui/core';
+import {
+  Drawer,
+  MenuItem,
+  Button,
+  Link,
+  Typography,
+} from '@material-ui/core';
 // import { Link as RouterLink } from 'react-router-dom';
-import { Home, Event, ContactSupport, Contacts, AccountCircle } from '@material-ui/icons';
+import {
+  Home,
+  Event,
+  ContactSupport,
+  Contacts,
+  AccountCircle,
+} from '@material-ui/icons';
+
+import { Link as NavLink } from 'react-router-dom';
+
 import './nav.scss';
 
 
 // == Composant
 const NavBar = ({ drawerOpen, toggleDrawerAction }) => {
 
-  const AccueilLink = React.forwardRef((props, ref) => <Link href="/" innerRef={ref} {...props} />);
-  const EvenementLink = React.forwardRef((props, ref) => <Link href="/evenements" innerRef={ref} {...props} />);
-  const WhoAreWeLink = React.forwardRef((props, ref) => <Link href="/qui-sommes-nous" innerRef={ref} {...props} />);
-  const ContactLink = React.forwardRef((props, ref) => <Link href="/contact" innerRef={ref} {...props} />);
-  const AccountLink = React.forwardRef((props, ref) => <Link href="/" innerRef={ref} {...props} />);
-  const AdminAppLink = React.forwardRef((props, ref) => <Link href="/admin/Dashboard" innerRef={ref} {...props} />);
-  const UserProfileLink = React.forwardRef((props, ref) => <Link href="/profil" innerRef={ref} {...props} />);
+  const AccueilLink = React.forwardRef((props, ref) => <NavLink to="/" innerRef={ref} {...props} />);
+  const EvenementLink = React.forwardRef((props, ref) => <NavLink to="/evenements" innerRef={ref} {...props} />);
+  const WhoAreWeLink = React.forwardRef((props, ref) => <NavLink to="/qui-sommes-nous" innerRef={ref} {...props} />);
+  const ContactLink = React.forwardRef((props, ref) => <NavLink to="/contact" innerRef={ref} {...props} />);
+  const AccountLink = React.forwardRef((props, ref) => <NavLink to="/" innerRef={ref} {...props} />);
+  const AdminAppLink = React.forwardRef((props, ref) => <NavLink to="/admin/Dashboard" innerRef={ref} {...props} />);
+  const UserProfileLink = React.forwardRef((props, ref) => <NavLink to="/profil" innerRef={ref} {...props} />);
 
   const toggleDrawerButton = event => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
-      toggleDrawerAction();
+    toggleDrawerAction();
   };
 
   return (
@@ -56,3 +72,9 @@ const NavBar = ({ drawerOpen, toggleDrawerAction }) => {
 
 // == Export
 export default NavBar;
+
+
+NavBar.propTypes = {
+  drawerOpen: PropTypes.bool.isRequired,
+  toggleDrawerAction: PropTypes.func.isRequired,
+};
