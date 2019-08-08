@@ -37,6 +37,7 @@ const NewsList = props => (
 )}
       medium={(
         <Datagrid>
+          <TextField source="id" />
           <ReferenceField label="User" source="author" reference="news">
             <TextField source="lastname" />
           </ReferenceField>

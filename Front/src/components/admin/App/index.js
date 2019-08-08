@@ -26,6 +26,10 @@ import PrivatePostList from 'src/components/admin/PrivatePost/List';
 import PrivatePostShow from 'src/components/admin/PrivatePost/Show';
 import PrivatePostEdit from 'src/components/admin/PrivatePost/Edit';
 import PrivatePostCreate from 'src/components/admin/PrivatePost/Create';
+import MediaList from 'src/components/admin/Media/List';
+import MediaCreate from 'src/components/admin/Media/Create';
+import MediaEdit from 'src/components/admin/Media/Edit';
+import MediaShow from 'src/components/admin/Media/Show';
 
 // Icons
 import LocalPostOffice from '@material-ui/icons/LocalPostOffice';
@@ -100,6 +104,7 @@ export default class extends Component {
             <Resource name="pages" options={{ label: 'pages' }} list={PageList} edit={PageEdit} icon={FormatIndentIncrease} />
             <Resource name="contacts" options={{ label: 'contact' }} list={ContactList} show={ContactShow} icon={LocalPostOffice} />
             <Resource name="private_posts" options={{ label: 'Actu interne' }} list={PrivatePostList} edit={PrivatePostEdit} show={PrivatePostShow} create={PrivatePostCreate} icon={AddToHomeScreen} />
+            <Resource name="media" options={{ label: 'media' }} list={MediaList} edit={MediaEdit} show={MediaShow} create={MediaCreate} icon={AddToHomeScreen} />
           </Admin>
         </MuiThemeProvider>
       );

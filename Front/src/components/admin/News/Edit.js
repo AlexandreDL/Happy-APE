@@ -18,7 +18,7 @@ const NewsTitle = ({ record }) => {
 const NewsEdit = props => (
   <Edit title={<NewsTitle />} {...props}>
     <SimpleForm>
-      <DisabledInput source="id" />
+      <TextInput source="id" />
       <ReferenceInput source="author" reference="news">
         <SelectInput optionText="lastname" />
       </ReferenceInput>

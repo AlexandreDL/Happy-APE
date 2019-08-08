@@ -12,11 +12,9 @@ import {
   SimpleList,
   Responsive,
   RichTextField,
-  ReferenceField,
-  DateInput,
 } from 'react-admin';
 
-const EventsFilter = props => (
+const MediaFilter = props => (
   <Filter {...props}>
     <TextInput label="Search" source="q" alwaysOn />
     <ReferenceInput label="User" source="author" reference="users" allowEmpty>
@@ -26,8 +24,8 @@ const EventsFilter = props => (
 );
 
 
-const EventsList = props => (
-  <List filters={<EventsFilter />} {...props}>
+const MediaList = props => (
+  <List filters={<MediaFilter />} {...props}>
     <Responsive
       small={(
         <SimpleList
@@ -38,12 +36,9 @@ const EventsList = props => (
 )}
       medium={(
         <Datagrid>
-          <ReferenceField label="User" source="author" reference="events">
-            <TextField source="lastname" />
-          </ReferenceField>
           <TextField source="title" />
           <RichTextField source="content" />
-          <DateInput label="date" source="date" />
+          <TextField source="type" />
           <EditButton />
           <ShowButton />
         </Datagrid>
@@ -52,4 +47,4 @@ const EventsList = props => (
   </List>
 );
 
-export default EventsList;
+export default MediaList;

@@ -3,7 +3,6 @@ import {
   Edit,
   SimpleForm,
   TextInput,
-  EmailInput,
 } from 'react-admin';
 
 
@@ -19,7 +18,7 @@ const UserEdit = props => (
       <TextInput source="firstname" />
       <TextInput source="type" />
       <TextInput source="username" />
-      <EmailInput source="email" />
+      <TextInput source="email" />
       <TextInput source="address.street" />
       <TextInput source="phone" />
       <TextInput source="company.name" />

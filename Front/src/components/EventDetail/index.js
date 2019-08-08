@@ -3,6 +3,8 @@ import React from 'react';
 import { LinearProgress } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
+import CardMedia from '@material-ui/core/CardMedia';
+import Card from '@material-ui/core/Card';
 
 // == Import : local
 
@@ -29,12 +31,19 @@ class EventDetail extends React.Component {
 
     if (events !== undefined && events['hydra:member'].length !== 0) {
       this.actualEvent = events['hydra:member'].find(item => item.slug === slug);
+      const EventImage = this.actualEvent.media[0].url;
 
       if (this.actualEvent !== null) {
         this.eventLoaded = (
           <article className="eventDetail whitebox">
             <Typography variant="h2">{this.actualEvent.name}</Typography>
             <Typography variant="body2">{this.actualEvent.content}</Typography>
+            <Card >
+              <CardMedia
+                src={this.actualEvent.media[0].url}
+                title="Paella dish"
+              />
+            </Card>
           </article>
         );
       }

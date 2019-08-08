@@ -3,25 +3,24 @@ import {
   Edit,
   SimpleForm,
   TextInput,
-  DateInput,
 
  
 } from 'react-admin';
 import RichTextInput from 'ra-input-rich-text';
 
-const EventsTitle = ({ record }) => {
+const MediaTitle = ({ record }) => {
   return <span>Post {record ? `"${record.title}"` : ''}</span>;
 };
 
 
-const EventsEdit = props => (
-  <Edit title={<EventsTitle />} {...props}>
+const MediaEdit = props => (
+  <Edit title={<MediaTitle />} {...props}>
     <SimpleForm>
       <TextInput source="title" />
-      <RichTextInput source="content" />
-      <DateInput label="date" source="date" />
+      <TextInput source="url" />
+      <TextInput source="type" />
     </SimpleForm>
   </Edit>
 );
 
-export default EventsEdit;
+export default MediaEdit;
