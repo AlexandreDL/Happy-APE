@@ -14,7 +14,7 @@ const NewsTitle = ({ record }) => {
 
 const NewsShow = props => (
   <Show {...props}>
-    <SimpleShowLayout>      
+    <SimpleShowLayout>
       <TextField source="title" />
       <RichTextField source="content" />
       <DateField label="Publication date" source="created_at" />

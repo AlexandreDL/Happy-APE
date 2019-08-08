@@ -2,30 +2,29 @@ import React from 'react';
 import {
   Edit,
   SimpleForm,
-  ReferenceInput,
   TextInput,
   DisabledInput,
+  ReferenceInput,
   SelectInput,
-
 } from 'react-admin';
-
 import RichTextInput from 'ra-input-rich-text';
 
-const EventTitle = ({ record }) => { 
+const EventsTitle = ({ record }) => {
   return <span>Post {record ? `"${record.title}"` : ''}</span>;
 };
 
-const EventEdit = props => (
-  <Edit title={<EventTitle />} {...props}>
+
+const EventsEdit = props => (
+  <Edit title={<EventsTitle />} {...props}>
     <SimpleForm>
       <DisabledInput source="id" />
       <ReferenceInput source="author" reference="events">
         <SelectInput optionText="lastname" />
       </ReferenceInput>
-      <TextInput source="name" />
+      <TextInput source="title" />
       <RichTextInput source="content" />
     </SimpleForm>
   </Edit>
 );
 
-export default EventEdit;
+export default EventsEdit;
