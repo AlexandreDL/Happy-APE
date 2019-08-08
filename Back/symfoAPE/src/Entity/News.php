@@ -1,16 +1,13 @@
 <?php
-
 namespace App\Entity;
-
-use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation as Serializer;
 use ApiPlatform\Core\Annotation\ApiSubresource;
-use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Constraints as Assert;
-
 /**
- * 
  * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\NewsRepository")
  */
@@ -79,7 +76,6 @@ class News
      * @ApiSubresource
      */
     private $author;
-
     public function __construct()
     {
         $this->createdAt = new \DateTime;
@@ -95,7 +91,7 @@ class News
      */
     public function applySlug(){
         $slugger = new Slugger(true);
-        $slug = $slugger->slugify($this->title);
+        $slug = $slugger->slugify($this->name);
         $this->slug = $slug;
     }
 
@@ -127,7 +123,7 @@ class News
 
         return $this;
     }
-
+    
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
@@ -148,7 +144,7 @@ class News
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
-
+        
         return $this;
     }
 
@@ -240,7 +236,7 @@ class News
 
         return $this;
     }
-
+    
     public function getAuthor(): ?User
     {
         return $this->author;
@@ -252,4 +248,5 @@ class News
 
         return $this;
     }
+    
 }
