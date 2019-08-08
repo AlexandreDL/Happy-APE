@@ -21,19 +21,19 @@ class HomePage extends React.Component {
     const { setHomepageData } = this.props;
     setHomepageData();
   }
-  
+
   render() {
     const { homepageData, loading } = this.props;
- 
-    if (!loading && homepageData.length !== 0) {
+
+    if (!loading && homepageData !== undefined) {
       document.title = homepageData.title;
       if (homepageData.nextEvent !== undefined) {
-        this.event = (
+        this.event = homepageData.nextEvent.map(item => (
           <Event
-            item={homepageData.nextEvent}
+            item={item}
             key={homepageData.nextEvent.id}
           />
-        );
+        ));
       }
       else {
         this.event = (
@@ -45,12 +45,13 @@ class HomePage extends React.Component {
 
       if (homepageData.news !== undefined) {
         this.news = (
-          <React.Fragment>        
-            <Grid container
+          <React.Fragment>
+            <Grid
+              container
               direction="row"
               justify="flex-start"
               alignItems="flex-start"
-              >
+            >
               {homepageData.news.map(item => (
                 <Grid item xs={12} sm={12} xl={6} lg={6} key={item.id}>
                   <Link to={`/actualites/${item.id}`} style={{ textDecoration: 'none', color: '#000000' }}>
@@ -58,7 +59,7 @@ class HomePage extends React.Component {
                   </Link>
                 </Grid>
               ))}
-            </Grid>              
+            </Grid>
           </React.Fragment>
         );
       }
@@ -80,27 +81,25 @@ class HomePage extends React.Component {
         <Box className="whitebox">
           <Container>
             <Typography variant="h1">Évènements à venir</Typography>
-
             {!loading ? this.event : (
               <div className="cpcenter">
-                <LinearProgress color="secondary"/>
+                <LinearProgress color="secondary" />
               </div>
             )
             }
           </Container>
         </Box>
-        
         <Divider />
-          <Box className="whitebox">
-            <Container>
-              <Typography variant="h1">Nos dernières actualités</Typography>
-              {!loading ? this.news : (
-                <div className="cpcenter">
-                  <LinearProgress color="secondary"/>
-                </div>
-              ) }
-            </Container>
-          </Box>
+        <Box className="whitebox">
+          <Container>
+            <Typography variant="h1">Nos dernières actualités</Typography>
+            {!loading ? this.news : (
+              <div className="cpcenter">
+                <LinearProgress color="secondary" />
+              </div>
+            ) }
+          </Container>
+        </Box>
         <Divider />
       </React.Fragment>
     );
