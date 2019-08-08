@@ -11,7 +11,7 @@ class New extends React.Component {
     const day = week[itemDay];
 
     const itemMonth = new Date(item.createdAt).getMonth();
-    const year = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre'];
+    const year = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Decembre'];
     const month = year[itemMonth];
 
     const dayNumber = new Date(item.createdAt).getUTCDate();

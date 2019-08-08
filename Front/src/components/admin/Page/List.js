@@ -12,6 +12,7 @@ import {
   SimpleList,
   Responsive,
   ShowButton,
+  RichTextField,
 } from 'react-admin';
 
 const ListFilter = props => (
@@ -36,8 +37,8 @@ const PageList = props => (
 )}
       medium={(
         <Datagrid>
-          <TextField source="title" />
-          <TextField source="content" />
+          <RichTextField source="title" />
+          <RichTextField source="content" />
           <EditButton />
           <ShowButton />
         </Datagrid>

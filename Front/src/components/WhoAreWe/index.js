@@ -8,7 +8,6 @@ import './who.scss';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import ReactMarkdown from 'react-markdown';
 import Typography from '@material-ui/core/Typography';
 import { LinearProgress } from '@material-ui/core';
 
@@ -32,7 +31,7 @@ class WhoAreWe extends React.Component {
         <article className="who whitebox">
             <div key={whoAreWeData[0].id}>
               <Typography variant="h1">{whoAreWeData[0].title}</Typography>
-              <Typography variant="body1"><ReactMarkdown source={whoAreWeData[0].content} /></Typography>
+              <Typography variant="body1">{whoAreWeData[0].content}</Typography>
             </div>
           <section className="who-trombi">
             <Card className="member-card">

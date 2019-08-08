@@ -7,6 +7,8 @@ import theme from 'src/components/App/theme';
 import { Admin, Resource } from 'react-admin';
 // lien vers nos composants
 import UserList from 'src/components/admin/Users/List';
+import UserEdit from 'src/components/admin/Users/Edit';
+import UserShow from 'src/components/admin/Users/Show';
 import EventList from 'src/components/admin/Event/List';
 import EventShow from 'src/components/admin/Event/Show';
 import EventEdit from 'src/components/admin/Event/Edit';
@@ -94,7 +96,7 @@ export default class extends Component {
           >
             <Resource name="events" options={{ label: 'événements' }} list={EventList} edit={EventEdit} create={EventCreate} show={EventShow} icon={EventAvailable} />
             <Resource name="news" options={{ label: 'actualités' }} list={NewsList} edit={NewsEdit} create={NewsCreate} show={NewsShow} icon={Announcement} />
-            <Resource name="profile/users" options={{ label: 'utilisateurs' }} list={UserList} icon={UserIcon} />
+            <Resource name="profile/users" options={{ label: 'utilisateurs' }} list={UserList} edit={UserEdit} show={UserShow} icon={UserIcon} />
             <Resource name="pages" options={{ label: 'pages' }} list={PageList} edit={PageEdit} icon={FormatIndentIncrease} />
             <Resource name="contacts" options={{ label: 'contact' }} list={ContactList} show={ContactShow} icon={LocalPostOffice} />
             <Resource name="private_posts" options={{ label: 'Actu interne' }} list={PrivatePostList} edit={PrivatePostEdit} show={PrivatePostShow} create={PrivatePostCreate} icon={AddToHomeScreen} />
