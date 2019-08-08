@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation as Serializer;
 use ApiPlatform\Core\Annotation\ApiSubresource;
+use App\Utils\Slugger;
 /**
  * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\NewsRepository")
