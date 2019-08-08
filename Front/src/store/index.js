@@ -5,7 +5,6 @@ import axios from 'axios';
 
 // == Import : local
 import reducer from 'src/store/reducer';
-import logMiddleware from './logMiddleware';
 
 // == Store
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -18,7 +17,6 @@ const client = axios.create({
 
 const enhancers = composeEnhancers(
   applyMiddleware(
-    logMiddleware,
     axiosMiddleware(client),
   ),
 );
