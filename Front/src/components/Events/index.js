@@ -23,16 +23,23 @@ class Events extends React.Component {
   render() {
     const { loading, events } = this.props;
 
-    if (!loading || events.length !== 0) {
-      this.events = (
-        <Grid container spacing={2} >
-          {events.map(item => (
-            <Grid item xs={12} sm={12} xl={6} lg={6} key={item.slug}>
-              <Event item={item} />
-            </Grid>
-          ))}
-        </Grid>
-      );
+    const eventsLoaded = events['hydra:member'];
+
+    if (!loading && eventsLoaded !== undefined) {
+      if (eventsLoaded.length !== 0) {
+        this.events = (
+          <Grid container spacing={2} className="whitebox">
+            {eventsLoaded.map(item => (
+              <Grid item xs={12} sm={12} xl={6} lg={6} key={item.slug}>
+                <Event item={item} />
+              </Grid>
+            ))}
+          </Grid>
+        );
+      }
+      else {
+        this.events = <p>Aucun évènement à afficher</p>;
+      }
     }
     else {
       this.wait = (

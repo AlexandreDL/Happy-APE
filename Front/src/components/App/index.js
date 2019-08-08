@@ -20,8 +20,8 @@ import Events from 'src/containers/Events';
 import legalMentions from 'src/containers/legalMentions';
 import EventDetail from 'src/containers/EventDetail';
 import NewsDetail from 'src/containers/NewsDetail';
-import Login from 'src/components/User/Login';
-import Signup from 'src/components/User/Signup';
+import Login from 'src/containers/User/Login';
+import Signup from 'src/containers/User/Signup';
 import UserProfile from 'src/components/User/profile';
 import AdminApp from 'src/components/admin/App';
 
