@@ -12,6 +12,7 @@ import {
   TextInput,
   SimpleList,
   Responsive,
+  RichTextField,
 } from 'react-admin';
 
 const NewsFilter = props => (
@@ -40,7 +41,7 @@ const NewsList = props => (
             <TextField source="lastname" />
           </ReferenceField>
           <TextField source="title" />
-          <TextField source="content" />
+          <RichTextField source="content" />
           <EditButton />
           <ShowButton />
         </Datagrid>

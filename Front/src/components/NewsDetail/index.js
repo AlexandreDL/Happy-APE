@@ -54,7 +54,7 @@ class NewsDetail extends React.Component {
             <Grid item xs={12} sm={12} xl={12} lg={12} className="newContent">
               <Typography variant="h2">{this.actualNews.title}</Typography>              
               <Typography variant="body2">{this.actualNews.content}</Typography>
-              <Typography variant="h4">publié le {dayNumber} {day}{month} {itemYear}</Typography>
+              <Typography variant="h4">publié le {day} {dayNumber} {month} {itemYear}</Typography>
             </Grid>
             </Grid>
           </React.Fragment>

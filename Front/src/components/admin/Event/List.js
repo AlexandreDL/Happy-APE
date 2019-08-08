@@ -4,7 +4,6 @@ import {
   Datagrid,
   TextField,
   ReferenceField,
-  
   Filter,
   ReferenceInput,
   SelectInput,
@@ -13,13 +12,14 @@ import {
   Responsive,
   EditButton,
   ShowButton,
+  RichTextField,
 } from 'react-admin';
 
 const EventFilter = props => (
   <Filter {...props}>
     <TextInput label="Search" source="q" alwaysOn />
-    <ReferenceInput label="User" source="userId" reference="events" allowEmpty>
-      <SelectInput optionText="name" />
+    <ReferenceInput label="User" source="author" reference="events" allowEmpty>
+      <SelectInput optionText="lastname" />
     </ReferenceInput>
   </Filter>
 );
@@ -41,7 +41,7 @@ const EventList = props => (
             <TextField source="lastname" />
           </ReferenceField>
           <TextField source="name" />
-          <TextField source="content" />
+          <RichTextField source="content" />
           <EditButton />
           <ShowButton />
         </Datagrid>

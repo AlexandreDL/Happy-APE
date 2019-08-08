@@ -14,6 +14,9 @@ import { LinearProgress } from '@material-ui/core';
 
 // == Composant
 class WhoAreWe extends React.Component {
+
+  whoAreWe = null;
+
   componentWillMount() {
     const { setWhoAreWeData } = this.props;
     setWhoAreWeData();
@@ -22,14 +25,14 @@ class WhoAreWe extends React.Component {
   render() {
     const { whoAreWeData } = this.props;
     if (whoAreWeData === undefined) {
-      return <LinearProgress />;
+      this.whoAreWe = <LinearProgress />;
     }
     else {
-      return (
+      this.whoAreWe = (
         <article className="who whitebox">
-            <div key={whoAreWeData.id}>
-              <Typography variant="h1">{whoAreWeData.title}</Typography>
-              <Typography variant="body1"><ReactMarkdown source={whoAreWeData.content} /></Typography>
+            <div key={whoAreWeData[0].id}>
+              <Typography variant="h1">{whoAreWeData[0].title}</Typography>
+              <Typography variant="body1"><ReactMarkdown source={whoAreWeData[0].content} /></Typography>
             </div>
           <section className="who-trombi">
             <Card className="member-card">
@@ -42,7 +45,7 @@ class WhoAreWe extends React.Component {
               />
               <CardContent>
                 <Typography variant="h3">Maria</Typography>
-                <p className="who-role">présidente de l'association</p> 
+                <p className="who-role">présidente de l'association</p>
               </CardContent>
             </Card>
             <Card className="member-card">
@@ -55,10 +58,9 @@ class WhoAreWe extends React.Component {
               />
               <CardContent>
                 <Typography variant="h3">Thomas</Typography>
-                <p className="who-role">animateur en chef</p> 
+                <p className="who-role">animateur en chef</p>
               </CardContent>
             </Card>
-          
             <Card className="member-card">
               <CardMedia
                 component="img"
@@ -69,10 +71,9 @@ class WhoAreWe extends React.Component {
               />
               <CardContent>
                 <Typography variant="h3">Alex</Typography>
-                <p className="who-role">responsable café</p> 
+                <p className="who-role">responsable café</p>
               </CardContent>
             </Card>
-          
             <Card className="member-card">
               <CardMedia
                 component="img"
@@ -96,15 +97,15 @@ class WhoAreWe extends React.Component {
               />
               <CardContent>
                 <Typography variant="h3">inconnu</Typography>
-                <p className="who-role">on sait pas trop</p> 
+                <p className="who-role">on sait pas trop</p>
               </CardContent>
             </Card>
-          
           </section>
         </article>
-
       )
     }
+
+    return this.whoAreWe;
   }
 }
 
@@ -113,4 +114,5 @@ export default WhoAreWe;
 
 WhoAreWe.propTypes = {
   setWhoAreWeData: PropTypes.func.isRequired,
+  whoAreWeData: PropTypes.array.isRequired,
 };

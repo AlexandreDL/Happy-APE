@@ -3,7 +3,6 @@ import {
   List,
   Datagrid,
   TextField,
-  ReferenceField,
   EditButton,
   ShowButton,
   Filter,
