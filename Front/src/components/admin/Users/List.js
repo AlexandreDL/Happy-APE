@@ -12,9 +12,10 @@ import {
   SimpleList,
   Responsive,
   ShowButton,
+  EditButton,
 } from 'react-admin';
 
-const PostFilter = props => (
+const UserFilter = props => (
   <Filter {...props}>
     <TextInput label="Search" source="q" alwaysOn />
     <ReferenceInput label="User" source="userId" reference="profile/users" allowEmpty>
@@ -24,7 +25,7 @@ const PostFilter = props => (
 );
 
 const UserList = props => (
-  <List filters={<PostFilter />} {...props}>
+  <List filters={<UserFilter />} {...props}>
     <Responsive
       small={(
         <SimpleList
@@ -41,10 +42,7 @@ const UserList = props => (
           <TextField source="type" />
           <TextField source="username" />
           <EmailField source="email" />
-          <TextField source="address.street" />
-          <TextField source="phone" />
-          <UrlField source="website" />
-          <TextField source="company.name" />
+          <EditButton />
           <ShowButton />
         </Datagrid>
         )}
