@@ -89,7 +89,7 @@ class News
      */
     public function applySlug(){
         $slugger = new Slugger(true);
-        $slug = $slugger->slugify($this->name);
+        $slug = $slugger->slugify($this->title);
         $this->slug = $slug;
     }
 
