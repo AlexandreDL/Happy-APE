@@ -10,6 +10,7 @@ use ApiPlatform\Core\Annotation\ApiSubresource;
 /**
  * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\NewsRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class News
 {
@@ -24,7 +25,6 @@ class News
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
      * @Assert\Length(min=5, minMessage="Le titre de la news doit compter entre 5 et 200 caractères.", max=200, maxMessage ="Le titre de la news doit compter entre 5 et 200 caractères.")
-     * @Serializer\Expose
      */
     private $title;
 
@@ -32,7 +32,6 @@ class News
      * @ORM\Column(type="text")
      * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
      * @Assert\Length(min=50, minMessage = "Au moins 50 caractères SVP.")
-     * @Serializer\Expose
      */
     private $content;
 
@@ -55,13 +54,11 @@ class News
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Medium", mappedBy="news")
-     * @Serializer\Expose
      */
     private $media;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Serializer\Expose
      */
     private $slug;
 
@@ -217,19 +214,13 @@ class News
         return $this;
     }
 
-    /**
-     * Get the value of slug
-     */ 
+
     public function getSlug()
     {
         return $this->slug;
     }
 
-    /**
-     * Set the value of slug
-     *
-     * @return  self
-     */ 
+
     public function setSlug($slug)
     {
         $this->slug = $slug;
@@ -248,5 +239,5 @@ class News
 
         return $this;
     }
-    
+
 }
