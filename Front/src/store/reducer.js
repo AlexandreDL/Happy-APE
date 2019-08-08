@@ -116,12 +116,40 @@ const reducer = (state = initialState, action = {}) => {
         contactFirstname: (action.contact_firstname === undefined) ? state.contactFirstname : action.contact_firstname,
         contactEmail: (action.contact_email === undefined) ? state.contactEmail : action.contact_email,
         contactMessage: (action.contact_message === undefined) ? state.contactMessage : action.contact_message,
-        
       };
     case TOGGLE_DRAWER:
       return {
         ...state,
         drawerOpen: !state.drawerOpen,
+      };
+    case 'LOGIN':
+      return {
+        ...state,
+        credentials: action.payload,
+      };
+    case 'LOGIN_FAIL':
+      return {
+        ...state,
+        user: null,
+      };
+    case 'LOGIN_SUCCESS':
+      return {
+        ...state,
+        user: action.payload.data.token,
+      };
+    case 'REGISTER':
+      return {
+        ...state,
+      };
+    case 'REGISTER_SUCCESS':
+      return {
+        ...state,
+        userConfirmed: action.payload,
+      };
+    case 'REGISTER_FAIL':
+      return {
+        ...state,
+        registerError: action,
       };
     default:
       return state;
@@ -155,7 +183,7 @@ export function getEvents() {
     type: 'GET_EVENTS',
     payload: {
       request: {
-        url: '/events/',
+        url: '/api/events',
       },
     },
   };
@@ -166,7 +194,7 @@ export function getCGUData() {
     type: GET_CGUDATA,
     payload: {
       request: {
-        url: '/api/conditions-utilisation',
+        url: '/conditions-utilisation',
       },
     },
   };
@@ -177,7 +205,7 @@ export function getCGVData() {
     type: GET_CGVDATA,
     payload: {
       request: {
-        url: '/api/conditions-vente',
+        url: '/conditions-vente',
       },
     },
   };
@@ -188,7 +216,7 @@ export function getWhoAreWeData() {
     type: GET_WHOAREWEDATA,
     payload: {
       request: {
-        url: '/api/pages/19',
+        url: '/qui-sommes-nous',
       },
     },
   };
@@ -200,6 +228,48 @@ export function sendContactForm(contactData) {
       request: {
         url: '/api/contact',
         body: contactData,
+        method: 'POST',
+      },
+    },
+  };
+}
+
+export function login(username, password) {
+  return {
+    type: 'LOGIN',
+    payload: {
+      request: {
+        url: '/api/login_check',
+        data: {
+          username,
+          password,
+        },
+        method: 'POST',
+      },
+    },
+  };
+}
+
+export function register(registerData) {
+  return {
+    type: 'REGISTER',
+    payload: {
+      request: {
+        url: '/api/profile/users',
+        data: {
+          username: registerData.username,
+          password: registerData.password,
+          retypedPassword: registerData.retypedPassword,
+          email: registerData.email,
+          lastname: registerData.lastname,
+          firstname: registerData.firstname,
+          // addressNumber: registerData.addressNumber,
+          addressStreet: registerData.addressStreet,
+          addressOther: registerData.addressOther,
+          addressZipcode: registerData.addressZipcode,
+          addressCity: registerData.addressCity,
+          isParent: registerData.isParent,
+        },
         method: 'POST',
       },
     },
