@@ -18,4 +18,4 @@ framework:
     serializer:
         circular_reference_handler: App\Serializer\CircularReferenceHandler
         enabled: true
-    
+    validation: { enable_annotations: true }
