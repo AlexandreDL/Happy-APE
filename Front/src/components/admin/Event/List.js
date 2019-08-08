@@ -3,30 +3,29 @@ import {
   List,
   Datagrid,
   TextField,
-  ReferenceField,
+  EditButton,
+  ShowButton,
   Filter,
   ReferenceInput,
   SelectInput,
   TextInput,
   SimpleList,
   Responsive,
-  EditButton,
-  ShowButton,
   RichTextField,
 } from 'react-admin';
 
-const EventFilter = props => (
+const EventsFilter = props => (
   <Filter {...props}>
     <TextInput label="Search" source="q" alwaysOn />
-    <ReferenceInput label="User" source="author" reference="events" allowEmpty>
+    <ReferenceInput label="User" source="author" reference="users" allowEmpty>
       <SelectInput optionText="lastname" />
     </ReferenceInput>
   </Filter>
 );
 
 
-const EventList = props => (
-  <List filters={<EventFilter />} {...props}>
+const EventsList = props => (
+  <List filters={<EventsFilter />} {...props}>
     <Responsive
       small={(
         <SimpleList
@@ -37,9 +36,6 @@ const EventList = props => (
 )}
       medium={(
         <Datagrid>
-          <ReferenceField label="User" source="author" reference="events">
-            <TextField source="lastname" />
-          </ReferenceField>
           <TextField source="name" />
           <RichTextField source="content" />
           <EditButton />
@@ -50,4 +46,4 @@ const EventList = props => (
   </List>
 );
 
-export default EventList;
+export default EventsList;

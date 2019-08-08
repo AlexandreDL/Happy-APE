@@ -11,6 +11,7 @@ import {
   TextInput,
   SimpleList,
   Responsive,
+  RichTextField,
 } from 'react-admin';
 
 const PrivatePostFilter = props => (
@@ -36,7 +37,7 @@ const PrivatePostList = props => (
       medium={(
         <Datagrid>
           <TextField source="title" />
-          <TextField source="content" />
+          <RichTextField source="content" />
           <EditButton />
           <ShowButton />
         </Datagrid>
