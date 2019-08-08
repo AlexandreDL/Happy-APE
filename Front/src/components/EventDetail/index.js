@@ -11,9 +11,8 @@ import './eventDetail.scss';
 
 // == Composant
 class EventDetail extends React.Component {
-
   actualEvent = null;
-  
+
   eventLoaded = (
     <div className="cpcenter">
       <LinearProgress color="secondary" />
@@ -26,12 +25,10 @@ class EventDetail extends React.Component {
   }
 
   render() {
-    
     const { events, slug, loading } = this.props;
-  
 
-    if (events[0] !== undefined) {
-      this.actualEvent = events.find(item => item.slug === slug);
+    if (events !== undefined && events['hydra:member'].length !== 0) {
+      this.actualEvent = events['hydra:member'].find(item => item.slug === slug);
 
       if (this.actualEvent !== null) {
         this.eventLoaded = (
@@ -40,6 +37,9 @@ class EventDetail extends React.Component {
             <Typography variant="body2">{this.actualEvent.content}</Typography>
           </article>
         );
+      }
+      else {
+        this.eventLoaded = <LinearProgress />;
       }
     }
 
@@ -51,7 +51,7 @@ class EventDetail extends React.Component {
 EventDetail.propTypes = {
   getEventsForPage: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
- // events: PropTypes.object.isRequired,
+  events: PropTypes.object,
   slug: PropTypes.string.isRequired,
 };
 // == Export
