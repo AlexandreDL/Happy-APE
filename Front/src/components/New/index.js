@@ -9,7 +9,6 @@ class New extends React.Component {
     const itemDay = new Date(item.createdAt).getDay();
     const week = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi']
     const day = week[itemDay];
-    
 
     const itemMonth = new Date(item.createdAt).getMonth();
     const year = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre'];
@@ -26,10 +25,11 @@ class New extends React.Component {
             direction="row"
             justify="center"
             alignItems="flex-start"
-            className="news-content">
+            className="news-content"
+          >
             <Grid item xs={12} sm={12} xl={12} lg={12} className="newContent">
-              <Typography variant="h2">{item.title}</Typography>              
-              <Typography variant="body2">{item.content}</Typography>
+              <Typography variant="h2">{item.title}</Typography>
+              <Typography variant="body2" dangerouslySetInnerHTML={{ __html: item.content }} />
               <Typography variant="h4">publié le {dayNumber} {day}{month} {itemYear}</Typography>
             </Grid>
           </Grid>
