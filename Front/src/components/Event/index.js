@@ -27,7 +27,7 @@ class Event extends React.Component {
     const day = week[itemDay];
 
     const itemMonth = new Date(item.date).getMonth();
-    const year = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre'];
+    const year = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
     const month = year[itemMonth];
 
     const dayNumber = new Date(item.date).getUTCDate();
