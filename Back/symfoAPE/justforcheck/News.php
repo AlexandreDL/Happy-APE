@@ -1,21 +1,19 @@
 <?php
-
 namespace App\Entity;
-
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Utils\Slugger;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation as Serializer;
-
+use ApiPlatform\Core\Annotation\ApiSubresource;
+use App\Utils\Slugger;
 /**
  * @ApiResource()
- * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\NewsRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Event
+class News
 {
     /**
      * @ORM\Id()
@@ -27,24 +25,24 @@ class Event
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
-     * @Assert\Length(min=5, minMessage="Le nom de l'événement doit compter entre 5 et 200 caractères.", max=200, maxMessage ="Le nom de l'événement doit compter entre 5 et 200 caractères.")
+     * @Assert\Length(min=5, minMessage="Le titre de la news doit compter entre 5 et 200 caractères.", max=200, maxMessage ="Le titre de la news doit compter entre 5 et 200 caractères.")
      */
     private $title;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="text")
      * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
-     * @Assert\Date
+     * @Assert\Length(min=50, minMessage = "Au moins 50 caractères SVP.")
      */
-    private $date;
+    private $content;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Assert\DateTime 
+     * @Assert\DateTime
      */
     private $createdAt;
 
-    /**
+     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Assert\DateTime
      */
@@ -56,11 +54,9 @@ class Event
     private $isPublished;
 
     /**
-     * @ORM\Column(type="text")
-     * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
-     * @Assert\Length(min=50, minMessage = "Au moins 50 caractères SVP.")
+     * @ORM\OneToMany(targetEntity="App\Entity\Medium", mappedBy="news")
      */
-    private $content;
+    private $media;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -68,24 +64,25 @@ class Event
     private $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Medium", mappedBy="event")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tag")
      */
-    private $media;
+    private $tags;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=false)
+     * @ApiSubresource
      */
     private $author;
-
     public function __construct()
     {
-        $this->media = new ArrayCollection();
         $this->createdAt = new \DateTime;
         $this->updatedAt = new \DateTime;
         $this->isPublished = true;
+        $this->tags = new ArrayCollection();
+        $this->media = new ArrayCollection();
     }
-    
+
     /**
      * @ORM\PrePersist
      * @ORM\PreUpdate
@@ -113,18 +110,18 @@ class Event
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getContent(): ?string
     {
-        return $this->date;
+        return $this->content;
     }
 
-    public function setDate(?\DateTimeInterface $date): self
+    public function setContent(?string $content): self
     {
-        $this->date = $date;
+        $this->content = $content;
 
         return $this;
     }
-
+    
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
@@ -145,7 +142,7 @@ class Event
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
-
+        
         return $this;
     }
 
@@ -157,30 +154,6 @@ class Event
     public function setIsPublished(?bool $isPublished): self
     {
         $this->isPublished = $isPublished;
-
-        return $this;
-    }
-
-    public function getContent(): ?string
-    {
-        return $this->content;
-    }
-
-    public function setContent(?string $content): self
-    {
-        $this->content = $content;
-
-        return $this;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(?string $slug): self
-    {
-        $this->slug = $slug;
 
         return $this;
     }
@@ -197,7 +170,7 @@ class Event
     {
         if (!$this->media->contains($medium)) {
             $this->media[] = $medium;
-            $medium->setEvent($this);
+            $medium->setNews($this);
         }
 
         return $this;
@@ -208,14 +181,54 @@ class Event
         if ($this->media->contains($medium)) {
             $this->media->removeElement($medium);
             // set the owning side to null (unless already changed)
-            if ($medium->getEvent() === $this) {
-                $medium->setEvent(null);
+            if ($medium->getNews() === $this) {
+                $medium->setNews(null);
             }
         }
 
         return $this;
     }
 
+    /**
+     * @return Collection|Tag[]
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tag $tag): self
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags[] = $tag;
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tag $tag): self
+    {
+        if ($this->tags->contains($tag)) {
+            $this->tags->removeElement($tag);
+        }
+
+        return $this;
+    }
+
+
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+    
     public function getAuthor(): ?User
     {
         return $this->author;
@@ -227,4 +240,5 @@ class Event
 
         return $this;
     }
+
 }
