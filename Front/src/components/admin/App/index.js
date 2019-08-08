@@ -25,7 +25,7 @@ import PrivatePostShow from 'src/components/admin/PrivatePost/Show';
 import PrivatePostEdit from 'src/components/admin/PrivatePost/Edit';
 import PrivatePostCreate from 'src/components/admin/PrivatePost/Create';
 
-//Icons
+// Icons
 import LocalPostOffice from '@material-ui/icons/LocalPostOffice';
 import FormatIndentIncrease from '@material-ui/icons/FormatIndentIncrease';
 import Announcement from '@material-ui/icons/Announcement';

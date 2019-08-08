@@ -24,19 +24,21 @@ class Event extends React.Component {
 
   componentWillMount() {
     const { item } = this.props;
-    const itemDay = new Date(item.createdAt).getDay();
+    console.log(item);
+    const itemDay = new Date(item[0].date).getDay();
     const week = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi']
     const day = week[itemDay];
 
-    const itemMonth = new Date(item.createdAt).getMonth();
+    const itemMonth = new Date(item[0].date).getMonth();
     const year = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre']
     const month = year[itemMonth];
 
-    const dayNumber = new Date(item.createdAt).getUTCDate();
-    const itemYear = new Date(item.createdAt).getFullYear();
+    const dayNumber = new Date(item[0].date).getUTCDate();
+    const itemYear = new Date(item[0].date).getFullYear();
+    const eventSlug = item[0].slug;
 
 
-    if (item.id !== undefined) {
+    if (item !== undefined) {
       this.returnedValue = (
         <article className="event whitebox">
           <Card >
@@ -53,11 +55,11 @@ class Event extends React.Component {
                 justify="center"
                 alignItems="flex-start">               
                 
-                <Grid item xs={12} sm={9} xl={9} lg={9}>
-                  <Typography variant="h2">{item.name}</Typography>              
+                <Grid item xs={12} sm={9} xl={10} lg={10}>
+                  <Typography variant="h2">{item[0].name}</Typography>              
                 </Grid>                          
                 
-                <Grid item xs={8} sm={3} xl={3} lg={3} className="event-calendar">        
+                <Grid item xs={8} sm={3} xl={2} lg={2} className="event-calendar">        
                   <div className="newContentDay">{day}</div>
                   <div className="newContentNumber">{dayNumber}</div>
                   <div className="newContentMonth">{month}</div>
@@ -65,7 +67,7 @@ class Event extends React.Component {
                 </Grid>
 
                 <Grid item xs={4} sm={4} xl={4} lg={4}>
-                  <Link to={`/evenement/${item.slug}`} style={{ textDecoration: 'none'}}>
+                  <Link to={`/evenement/${eventSlug}`} style={{ textDecoration: 'none'}}>
                     <Button variant="contained" color="primary" >
                     Voir l'événement
                     </Button>
