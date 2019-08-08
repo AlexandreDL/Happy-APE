@@ -21,6 +21,13 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class User implements UserInterface
 {
+    const ROLE_USER = 'ROLE_USER';
+    const ROLE_REDACT = 'ROLE_REDACT';
+    const ROLE_PARENT = 'ROLE_PARENT';
+    const ROLE_ADMIN = 'ROLE_ADMIN';
+
+    const DEFAULT_ROLES = [self::ROLE_USER];
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -136,6 +143,7 @@ class User implements UserInterface
     {
         $this->createdAt = new \DateTime;
         $this->updatedAt = new \DateTime;
+        $this->roles = self::DEFAULT_ROLES;
     }
 
 
