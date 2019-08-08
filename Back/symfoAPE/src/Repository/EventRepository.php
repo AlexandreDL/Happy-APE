@@ -33,8 +33,8 @@ class EventRepository extends ServiceEntityRepository
     }
     public function findNext() {
         $query = $this->createQueryBuilder('e')
-            ->leftJoin('e.author', 'u')
-            ->leftJoin('e.media', 'm')
+            ->join('e.author', 'u')
+            ->join('e.media', 'm')
             ->where("e.isPublished = 1")
             ->orderBy('e.date')
             ->setMaxResults(1)
