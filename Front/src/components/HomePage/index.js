@@ -24,6 +24,7 @@ class HomePage extends React.Component {
   
   render() {
     const { homepageData, loading } = this.props;
+ 
     if (!loading && homepageData.length !== 0) {
       document.title = homepageData.title;
       if (homepageData.nextEvent !== undefined) {
@@ -52,7 +53,7 @@ class HomePage extends React.Component {
               >
               {homepageData.news.map(item => (
                 <Grid item xs={12} sm={12} xl={6} lg={6} key={item.id}>
-                  <Link to={`/actualites/${item.slug}`} style={{ textDecoration: 'none', color: '#000000' }}>
+                  <Link to={`/actualites/${item.id}`} style={{ textDecoration: 'none', color: '#000000' }}>
                     <New item={item} key={item.id} />
                   </Link>
                 </Grid>

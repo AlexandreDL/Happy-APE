@@ -6,6 +6,9 @@ const initialState = {
   contactName: '',
   contactEmail: '',
   contactMessage: '',
+  CGVData: [],
+  CGUData: [],
+  legalMentionsData: [],
 };
 // == Types
 const GET_LEGAL_MENTIONS = 'GET_LEGAL_MENTIONS';
@@ -172,7 +175,7 @@ export function getLegalMentionsData() {
     type: GET_LEGAL_MENTIONS,
     payload: {
       request: {
-        url: '/api/mentions-legales',
+        url: '/mentions-legales',
       },
     },
   };
@@ -226,7 +229,7 @@ export function sendContactForm(contactData) {
     type: SEND_CONTACTFORM,
     payload: {
       request: {
-        url: '/api/contact',
+        url: '/api/contacts',
         body: contactData,
         method: 'POST',
       },

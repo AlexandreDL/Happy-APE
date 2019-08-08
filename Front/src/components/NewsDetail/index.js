@@ -35,6 +35,7 @@ class NewsDetail extends React.Component {
         const week = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi']
         const day = week[itemDay];
         const itemMonth = new Date(this.actualNews.createdAt).getMonth();
+       
         const year = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet']
         const month = year[itemMonth];
         const dayNumber = new Date(this.actualNews.createdAt).getUTCDate();
@@ -50,18 +51,11 @@ class NewsDetail extends React.Component {
               alignItems="flex-start"
               className="news-content"
             >
-              <Grid item xs={5} sm={5} xl={2} lg={2} className="calendar">
-
-                <div className="newContentDay">{day}</div>
-                <div className="newContentNumber">{dayNumber}</div>
-                <div className="newContentMonth">{month}</div>
-                <div className="newContentYear">{itemYear}</div>
-              </Grid>
-
-              <Grid item xs={12} sm={12} xl={8} lg={8}>
-                <Typography variant="h2">{this.actualNews.title}</Typography>
-                <Typography variant="body2">{this.actualNews.content}</Typography>
-              </Grid>
+            <Grid item xs={12} sm={12} xl={12} lg={12} className="newContent">
+              <Typography variant="h2">{this.actualNews.title}</Typography>              
+              <Typography variant="body2">{this.actualNews.content}</Typography>
+              <Typography variant="h4">publié le {day} {dayNumber} {month} {itemYear}</Typography>
+            </Grid>
             </Grid>
           </React.Fragment>
         );

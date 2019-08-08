@@ -9,7 +9,13 @@ const generalTheme = createMuiTheme({
   overrides: {
     MuiMenuItem: {
       root: {
-        color: 'white',
+        // color: 'white',
+        // backgroundColor: '#000000',
+      },
+    },
+    MuiInputBase: {
+      focus: {
+        backgroundColor: 'none',
       },
     },
   },  
@@ -51,11 +57,6 @@ const generalTheme = createMuiTheme({
       fontSize: 18,
     },
   },
-
-
-
-
-
 });
 
 export default generalTheme;

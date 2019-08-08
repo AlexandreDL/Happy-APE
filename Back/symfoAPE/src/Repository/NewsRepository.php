@@ -19,13 +19,13 @@ class NewsRepository extends ServiceEntityRepository
         parent::__construct($registry, News::class);
     }
 
-    public function findNext3() {
+    public function findNextNews() {
       
         $query = $this->createQueryBuilder('n')
-            ->innerJoin('n.user', 'u')
-            ->innerJoin('n.media', 'm')
-            ->innerJoin('n.tags', 't')
-            ->addSelect('u', 'm', 't')
+            ->leftJoin('n.author', 'u')
+            ->leftJoin('n.media', 'm')
+            //->leftJoin('n.tags', 't') !!!!!!!!!!!!!!!!!!!!!!!!! BUG TO FIXE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            ->addSelect('u', 'm')
             ->where("n.isPublished = 1")
             ->orderBy('n.createdAt', 'DESC')
             ->setMaxResults(3)

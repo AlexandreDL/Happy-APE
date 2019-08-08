@@ -2,12 +2,16 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation as Serializer;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 
 /**
+ * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\NewsRepository")
  */
 class News
@@ -23,6 +27,7 @@ class News
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
      * @Assert\Length(min=5, minMessage="Le titre de la news doit compter entre 5 et 200 caractères.", max=200, maxMessage ="Le titre de la news doit compter entre 5 et 200 caractères.")
+     * @Serializer\Expose
      */
     private $title;
 
@@ -30,13 +35,9 @@ class News
      * @ORM\Column(type="text")
      * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
      * @Assert\Length(min=50, minMessage = "Au moins 50 caractères SVP.")
+     * @Serializer\Expose
      */
     private $content;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isPublished;
 
     /**
      * @ORM\Column(type="datetime")
@@ -44,30 +45,45 @@ class News
      */
     private $createdAt;
 
-    /**
+     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Assert\DateTime
      */
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="news")
+     * @ORM\Column(type="boolean")
      */
-    private $user;
+    private $isPublished;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="news")
+     * @ORM\OneToMany(targetEntity="App\Entity\Medium", mappedBy="news")
+     * @Serializer\Expose
+     */
+    private $media;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Serializer\Expose
+     */
+    private $slug;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tag")
      */
     private $tags;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Medium", mappedBy="news")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     * @ApiSubresource
      */
-    private $media;
+    private $author;
 
     public function __construct()
     {
         $this->createdAt = new \DateTime;
+        $this->updatedAt = new \DateTime;
         $this->isPublished = true;
         $this->tags = new ArrayCollection();
         $this->media = new ArrayCollection();
@@ -102,18 +118,6 @@ class News
         return $this;
     }
 
-    public function getIsPublished(): ?bool
-    {
-        return $this->isPublished;
-    }
-
-    public function setIsPublished(?bool $isPublished): self
-    {
-        $this->isPublished = $isPublished;
-
-        return $this;
-    }
-
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
@@ -138,45 +142,14 @@ class News
         return $this;
     }
 
-    public function __toString()
+    public function getIsPublished(): ?bool
     {
-        return $this->title;
+        return $this->isPublished;
     }
 
-    public function getUser(): ?User
+    public function setIsPublished(?bool $isPublished): self
     {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Tag[]
-     */
-    public function getTags(): Collection
-    {
-        return $this->tags;
-    }
-
-    public function addTag(Tag $tag): self
-    {
-        if (!$this->tags->contains($tag)) {
-            $this->tags[] = $tag;
-        }
-
-        return $this;
-    }
-
-    public function removeTag(Tag $tag): self
-    {
-        if ($this->tags->contains($tag)) {
-            $this->tags->removeElement($tag);
-        }
+        $this->isPublished = $isPublished;
 
         return $this;
     }
@@ -211,5 +184,62 @@ class News
 
         return $this;
     }
-   
+
+    /**
+     * @return Collection|Tag[]
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tag $tag): self
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags[] = $tag;
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tag $tag): self
+    {
+        if ($this->tags->contains($tag)) {
+            $this->tags->removeElement($tag);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get the value of slug
+     */ 
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set the value of slug
+     *
+     * @return  self
+     */ 
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
 }

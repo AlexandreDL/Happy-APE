@@ -1,14 +1,8 @@
 parameters :
     classArray: ['CE', 'CP', 'CP', 'Petite section', 'Grande section']
-    roleArray: ['user', 'parent', 'admin', 'redacteur']
+    roleArray: ['ROLE_USER', 'ROLE_PARENT', 'ROLE_ADMIN', 'ROLE_REDACT']
     slugArray: ['slug-pour-fabrice', 'une-cuillere-pour-maman', 'une-cuillere-pour-papa', 'slug-bidon', 'slug-pour-fabrice1', 'slug-pour-fabrice2', 'slug-pour-fabrice3', 'slug-pour-fabrice4', 'slug-coucou', 'slug-fixture']
 
-App\Entity\Child:
-    child_{1..50}:
-        lastname: '<lastname()>' 
-        firstname: '<firstname()>' 
-        class: '<randomElement($classArray)>' 
-        parents: '<numberBetween(1, 2)>x @user*'
 
 App\Entity\Medium:
     medium_{1..20}:
@@ -26,7 +20,8 @@ App\Entity\News:
         content: '<paragraph()>' 
         createdAt: '<dateTimeBetween("-200 days", "now")>'
         tags: '<numberBetween(1, 3)>x @tag*'
-        user: '@user*'
+        author: '@user*'
+        slug (unique): '<randomElement($slugArray)>' 
       
 App\Entity\PrivatePost:
     privatepost_{1..15}:  
@@ -44,9 +39,10 @@ App\Entity\Tag:
 App\Entity\User: 
     user_{1..50}:
         email (unique): '<email()>' 
+        username (unique): '<userName()>'
         password: '<password()>'
-        lastname: '<lastname()>' 
-        firstname: '<firstname()>' 
+        lastname: '<lastName()>' 
+        firstname: '<firstName()>' 
         is_active: '<boolean()>'
         is_parent: '<boolean()>'
 
