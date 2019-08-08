@@ -57,7 +57,7 @@ Events.propTypes = {
   getEventsForPage: PropTypes.func.isRequired,
   // events: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
-  // events: PropTypes.array.isRequired,
+  eventsLoaded: PropTypes.object.isRequired,
 };
 
 // == Export

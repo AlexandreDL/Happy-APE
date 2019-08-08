@@ -89,6 +89,16 @@ class News
         $this->media = new ArrayCollection();
     }
 
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function applySlug(){
+        $slugger = new Slugger(true);
+        $slug = $slugger->slugify($this->name);
+        $this->slug = $slug;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

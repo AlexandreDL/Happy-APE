@@ -11,7 +11,7 @@ import './footer.scss';
 // == Composant
 const Footer = () => {
   const AccueilLink = React.forwardRef((props, ref) => <RouterLink to="/" innerRef={ref} {...props} />);
-  const EvenementLink = React.forwardRef((props, ref) => <RouterLink to="/evenement" innerRef={ref} {...props} />);
+  const EvenementLink = React.forwardRef((props, ref) => <RouterLink to="/evenements" innerRef={ref} {...props} />);
   const WhoAreWeLink = React.forwardRef((props, ref) => <RouterLink to="/qui-sommes-nous" innerRef={ref} {...props} />);
   const ContactLink = React.forwardRef((props, ref) => <RouterLink to="/contact" innerRef={ref} {...props} />);
   const AccountLink = React.forwardRef((props, ref) => <RouterLink to="/" innerRef={ref} {...props} />);
