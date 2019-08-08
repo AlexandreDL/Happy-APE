@@ -53,7 +53,7 @@ class HomePage extends React.Component {
               alignItems="flex-start"
             >
               {homepageData.news.map(item => (
-                <Grid item xs={12} sm={12} xl={6} lg={6} key={item.slug}>
+                <Grid item xs={12} sm={12} xl={12} lg={12} key={item.slug}>
                   <Link to={`/actualites/${item.slug}`} style={{ textDecoration: 'none', color: '#000000' }}>
                     <New item={item} key={item.id} />
                   </Link>
