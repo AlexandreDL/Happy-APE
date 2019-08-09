@@ -27,6 +27,7 @@ import Signup from 'src/containers/User/Signup';
 import UserProfile from 'src/components/User/profile';
 import AdminApp from 'src/components/admin/App';
 import Error from 'src/components/Error/error404';
+import Logout from 'src/components/User/Logout';
 
 
 import './app.scss';
@@ -56,9 +57,10 @@ class App extends React.Component {
                 <Route path="/conditions-generales-d-utilisation" render={props => (<CGU {...props} />)} />
                 <Route path="/conditions-generales-de-vente" render={props => (<CGV {...props} />)} />
                 <Route path="/login" render={props => ((this.isLoggedIn === null) ? <Login {...props} /> : <Redirect to="/" />)} />
-                <Route path="/signup" render={props => (<Signup {...props} />)} />
+                <Route path="/signup" render={props => ((this.isLoggedIn === null) ? <Signup {...props} /> : <Redirect to="/" />)} />
                 <Route path="/admin/dashboard" render={props => (<AdminApp {...props} />)} />
-                <Route path="/profil" render={props => (<UserProfile {...props} />)} />
+                <Route path="/profile" render={props => ((this.isLoggedIn === null) ? <UserProfile {...props} /> : <Redirect to="/" />)} />
+                <Route path="/logout" render={props => ((this.isLoggedIn === true) ? <Logout {...props} /> : <Redirect to="/" />)} />
                 <Route
                   path="/evenement/:slug"
                   render={(routeInfo) => {
@@ -67,7 +69,7 @@ class App extends React.Component {
                       <EventDetail slug={slug} />
                     );
                   }}
-                  />
+                />
                 <Route
                   path="/actualites/:slug"
                   render={(routeInfo) => {
@@ -76,7 +78,7 @@ class App extends React.Component {
                       <NewsDetail slug={slug} />
                     );
                   }}
-                  />
+                />
                 <Route path="*" component={Error} />
               </Switch>
             </main>
