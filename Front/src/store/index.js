@@ -13,6 +13,9 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const client = axios.create({
   baseURL: 'https://back.isodev.ovh',
   responseType: 'json',
+  headers: {
+    'Content-Type': 'application/ld+json; charset=utf-8',
+  },
 });
 
 const enhancers = composeEnhancers(
