@@ -43,68 +43,68 @@ class Signup extends React.Component {
           <Grid container direction="row" justify="center" alignContent="center" alignItems="center" className="login-form" spacing={2}>
             <Grid item xs={12} sm={12} xl={6} lg={6}>
               <FormControl>
-                <InputLabel htmlFor="my-input">Adresse e-mail</InputLabel>
-                <Input id="my-input" aria-describedby="e-mail-helper" name="user_email" type="email" required />
+                <InputLabel required htmlFor="my-input">Adresse e-mail</InputLabel>
+                <Input id="user_email" aria-describedby="user_email" name="user_email" type="email"  />
               </FormControl>
             </Grid>
             <Grid item xs={12} sm={12} xl={6} lg={6}>
               <FormControl>
-                <InputLabel htmlFor="my-input">Confirmez l'adresse e-mail</InputLabel>
-                <Input id="my-input" aria-describedby="e-mail-helper" name="user_email" type="email" required />
+                <InputLabel required htmlFor="my-input">Confirmez l'adresse e-mail</InputLabel>
+                <Input id="user_email_confirmation" aria-describedby="user_email_confirmation" name="user_email_confirmation" type="email"  />
               </FormControl>
             </Grid>
             <Grid item xs={12} sm={12} xl={6} lg={6}>
               <FormControl>
-                <InputLabel htmlFor="my-input">Mot de passe</InputLabel>
-                <Input id="my-input" aria-describedby="password-helper" name="user_password" type="password" required />
+                <InputLabel required htmlFor="my-input">Mot de passe</InputLabel>
+                <Input id="user_password" aria-describedby="user_password" name="user_password" type="password" />
               </FormControl>
             </Grid>
             <Grid item xs={12} sm={12} xl={6} lg={6}>
               <FormControl>
-                <InputLabel htmlFor="my-input">Confirmez le mot de passe</InputLabel>
-                <Input id="my-input" aria-describedby="e-mail-helper" name="user_email" type="password" required />
+                <InputLabel required htmlFor="my-input">Confirmez le mot de passe</InputLabel>
+                <Input id="user_password_confirmation" aria-describedby="user_password_confirmation" name="user_password_confirmation" type="password"  />
               </FormControl>
             </Grid>
             <Grid item xs={12} sm={12} xl={6} lg={6}>
               <FormControl>
-                <InputLabel htmlFor="my-input">Nom de famille</InputLabel>
-                <Input id="my-input" aria-describedby="password-helper" name="user_password" type="text" required />
+                <InputLabel required  htmlFor="my-input">Nom de famille</InputLabel>
+                <Input id="user_Firstname" aria-describedby="user_Firstname" name="user_Firstname" type="text" />
               </FormControl>
             </Grid>
             <Grid item xs={12} sm={12} xl={6} lg={6}>
               <FormControl>
-                <InputLabel htmlFor="my-input">Votre Prénom</InputLabel>
-                <Input id="my-input" aria-describedby="password-helper" name="user_password" type="text" required />
+                <InputLabel required htmlFor="my-input">Votre Prénom</InputLabel>
+                <Input id="user_Lastname" aria-describedby="user_Lastname" name="user_Lastname" type="text"  />
               </FormControl>
             </Grid>
             <Grid item xs={12} sm={12} xl={6} lg={6}>
               <FormControl>
                 <InputLabel htmlFor="my-input">Numéro de rue</InputLabel>
-                <Input id="my-input" aria-describedby="password-helper" name="user_password" type="text" required />
+                <Input id="adressNumber" aria-describedby="adressNumber" name="adressNumber" type="text" />
               </FormControl>
             </Grid>
             <Grid item xs={12} sm={12} xl={6} lg={6}>
               <FormControl>
-                <InputLabel htmlFor="my-input">Nom de la rue</InputLabel>
-                <Input id="my-input" aria-describedby="password-helper" name="user_password" type="text" required />
+                <InputLabel required htmlFor="my-input">Nom de la rue</InputLabel>
+                <Input id="adressName" aria-describedby="adressName" name="adressName" type="text"  />
               </FormControl>
             </Grid>
             <Grid item xs={12} sm={12} xl={6} lg={6}>
               <FormControl>
                 <InputLabel htmlFor="my-input">Complément d'adresse (BAT, APPT...)</InputLabel>
-                <Input id="my-input" aria-describedby="password-helper" name="user_password" type="text" required />
+                <Input id="adressName_complement" aria-describedby="adressName_complement" name="adressName_complement" type="text"/>
               </FormControl>
             </Grid>
             <Grid item xs={12} sm={12} xl={6} lg={6}>
               <FormControl>
-                <InputLabel htmlFor="my-input">Code postal</InputLabel>
-                <Input id="my-input" aria-describedby="password-helper" name="user_password" type="text" required />
+                <InputLabel required htmlFor="my-input">Code postal</InputLabel>
+                <Input id="postalCode" aria-describedby="postalCode" name="postalCode" type="text"  />
               </FormControl>
             </Grid>
             <Grid item xs={12} sm={12} xl={6} lg={6}>
               <FormControl>
-                <InputLabel htmlFor="my-input">Ville</InputLabel>
-                <Input id="my-input" aria-describedby="password-helper" name="user_password" type="text" required />
+                <InputLabel required htmlFor="my-input">Ville</InputLabel>
+                <Input id="adress_city" aria-describedby="adress_city" name="adress_city" type="text"  />
               </FormControl>
             </Grid>
             <Grid item xs={12} sm={12} xl={6} lg={6}>

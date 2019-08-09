@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Utils\Slugger;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -12,10 +11,9 @@ use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ApiResource()
- * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
- * @ORM\HasLifecycleCallbacks()
+ * @ORM\Entity(repositoryClass="App\Repository\PrivatePostRepository")
  */
-class Event
+class PrivatePost
 {
     /**
      * @ORM\Id()
@@ -27,20 +25,20 @@ class Event
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
-     * @Assert\Length(min=5, minMessage="Le nom de l'événement doit compter entre 5 et 200 caractères.", max=200, maxMessage ="Le nom de l'événement doit compter entre 5 et 200 caractères.")
+     * @Assert\Length(min=5, minMessage="Le nom du post doit compter entre 5 et 200 caractères.", max=200, maxMessage ="Le nom du post doit compter entre 5 et 200 caractères.")
      */
     private $title;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="text")
      * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
-     * @Assert\Date
+     * @Assert\Length(min=50, minMessage = "Au moins 50 caractères SVP.")
      */
-    private $date;
+    private $content;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Assert\DateTime 
+     * @Assert\DateTime
      */
     private $createdAt;
 
@@ -51,49 +49,15 @@ class Event
     private $updatedAt;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isPublished;
-
-    /**
-     * @ORM\Column(type="text")
-     * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
-     * @Assert\Length(min=50, minMessage = "Au moins 50 caractères SVP.")
-     */
-    private $content;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $slug;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Medium", mappedBy="event")
+     * @ORM\OneToMany(targetEntity="App\Entity\Medium", mappedBy="privatePost")
      */
     private $media;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $author;
-
     public function __construct()
     {
-        $this->media = new ArrayCollection();
         $this->createdAt = new \DateTime;
         $this->updatedAt = new \DateTime;
-        $this->isPublished = true;
-    }
-    
-    /**
-     * @ORM\PrePersist
-     * @ORM\PreUpdate
-     */
-    public function applySlug(){
-        $slugger = new Slugger(true);
-        $slug = $slugger->slugify($this->title);
-        $this->slug = $slug;
+        $this->media = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -113,14 +77,14 @@ class Event
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getContent(): ?string
     {
-        return $this->date;
+        return $this->content;
     }
 
-    public function setDate(?\DateTimeInterface $date): self
+    public function setContent(?string $content): self
     {
-        $this->date = $date;
+        $this->content = $content;
 
         return $this;
     }
@@ -149,42 +113,6 @@ class Event
         return $this;
     }
 
-    public function getIsPublished(): ?bool
-    {
-        return $this->isPublished;
-    }
-
-    public function setIsPublished(?bool $isPublished): self
-    {
-        $this->isPublished = $isPublished;
-
-        return $this;
-    }
-
-    public function getContent(): ?string
-    {
-        return $this->content;
-    }
-
-    public function setContent(?string $content): self
-    {
-        $this->content = $content;
-
-        return $this;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(?string $slug): self
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Medium[]
      */
@@ -197,7 +125,7 @@ class Event
     {
         if (!$this->media->contains($medium)) {
             $this->media[] = $medium;
-            $medium->setEvent($this);
+            $medium->setPrivatePost($this);
         }
 
         return $this;
@@ -208,22 +136,10 @@ class Event
         if ($this->media->contains($medium)) {
             $this->media->removeElement($medium);
             // set the owning side to null (unless already changed)
-            if ($medium->getEvent() === $this) {
-                $medium->setEvent(null);
+            if ($medium->getPrivatePost() === $this) {
+                $medium->setPrivatePost(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getAuthor(): ?User
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(?User $author): self
-    {
-        $this->author = $author;
 
         return $this;
     }

@@ -29,7 +29,7 @@ class Event
      * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
      * @Assert\Length(min=5, minMessage="Le nom de l'événement doit compter entre 5 et 200 caractères.", max=200, maxMessage ="Le nom de l'événement doit compter entre 5 et 200 caractères.")
      */
-    private $title;
+    private $name;
 
     /**
      * @ORM\Column(type="datetime")
@@ -92,7 +92,7 @@ class Event
      */
     public function applySlug(){
         $slugger = new Slugger(true);
-        $slug = $slugger->slugify($this->title);
+        $slug = $slugger->slugify($this->name);
         $this->slug = $slug;
     }
 
@@ -101,14 +101,14 @@ class Event
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getName(): ?string
     {
-        return $this->title;
+        return $this->name;
     }
 
-    public function setTitle(?string $title): self
+    public function setName(?string $name): self
     {
-        $this->title = $title;
+        $this->name = $name;
 
         return $this;
     }

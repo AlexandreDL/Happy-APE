@@ -2,15 +2,14 @@
 
 namespace App\Entity;
 
-use App\Entity\Role;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 /**
  * @ApiResource(routePrefix="/profile", 
@@ -28,6 +27,11 @@ class User implements UserInterface
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
     
     /**
      * @ORM\Column(type="string")
@@ -128,17 +132,10 @@ class User implements UserInterface
      */
     private $username;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Role", inversedBy="users")
-     *
-     */
-    private $roles;
-
     public function __construct()
     {
         $this->createdAt = new \DateTime;
         $this->updatedAt = new \DateTime;
-        $this->roles = new ArrayCollection();
     }
 
 
@@ -160,6 +157,24 @@ class User implements UserInterface
     }
 
     
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        if (empty($roles)) {
+            $roles[] = 'ROLE_USER';
+        }
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+        return $this;
+    }
+
     /**
      * @see UserInterface
      */
@@ -358,26 +373,6 @@ class User implements UserInterface
     {
         $this->retypedPassword = $retypedPassword;
 
-        return $this;
-    }
-    
-    public function getRoles()
-    {
-        dd($this->roles);
-    }
-
-    /**
-     * Set the value of roles
-     *
-     * @return  self
-     */ 
-    public function setRoles(array $roles)
-    {
-        if (!in_array('ROLE_USER', $roles))
-        {
-            $roles[] = 'ROLE_USER';
-        }
-        $this->roles = $roles;
         return $this;
     }
 }
