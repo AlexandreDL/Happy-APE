@@ -8,6 +8,7 @@ import './slider.scss';
 const Slider = () => (
   <Carousel
     autoplay
+    autoplayReverse
   >
     <img src="https://static.isodev.ovh/img/kids1.jpeg" alt="kids1" />
     <img src="https://static.isodev.ovh/img/kids2.jpeg" alt="kids2" />
