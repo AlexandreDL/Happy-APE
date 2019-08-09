@@ -13,6 +13,14 @@ const generalTheme = createMuiTheme({
         // backgroundColor: '#000000',
       },
     },
+    MuiButton: {
+      root: {
+        margin: '1em',
+        fontSize: '1em',
+        fontFamily: 'Raleway',
+        fontWeight: 'bold',
+      },
+    },
     MuiInputBase: {
       focus: {
         backgroundColor: 'none',
@@ -34,9 +42,10 @@ const generalTheme = createMuiTheme({
     h2: {
       fontFamily: 'Raleway',
       fontSize: '1.5em',
-      fontWeight: 'bold',
+      fontWeight: 'bolder',
       paddingTop: 5,
       marginBottom: 0,
+      textTransform: 'upperCase',
     },
     h3: {
       fontFamily: 'Raleway',

@@ -21,6 +21,7 @@ class Event extends React.Component {
 
   componentWillMount() {
     const { item } = this.props;
+    const itemImage = item.media[0].url;
 
     const itemDay = new Date(item.date).getDay();
     const week = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
@@ -33,6 +34,7 @@ class Event extends React.Component {
     const dayNumber = new Date(item.date).getUTCDate();
     const itemYear = new Date(item.date).getFullYear();
     const eventSlug = item.slug;
+   
 
 
     if (item !== undefined) {
@@ -43,18 +45,19 @@ class Event extends React.Component {
               component="img"
               height="250"
               alt="soirée théatre avec les Ah!"
-              image="https://www.theatresparisiensassocies.com/user/img/1/710x0x1207-or.jpg"
+              image={itemImage}
               title="soirée théatre"
             />
             <CardContent>
               <Grid
                 container
-                direction="row"
+                direction="column"
                 justify="center"
-                alignItems="flex-start"
+                alignItems="center"
+                spacing={1}
               >
                 <Grid item xs={12} sm={9} xl={10} lg={10}>
-                  <Typography variant="h2">{item.name}</Typography>
+                  <Typography variant="h2">{item.title}</Typography>
                 </Grid>
                 <Grid item xs={8} sm={3} xl={2} lg={2} className="event-calendar">
                   <div className="newContentDay">{day}</div>
@@ -62,7 +65,7 @@ class Event extends React.Component {
                   <div className="newContentMonth">{month}</div>
                   <div className="newContentYear">{itemYear}</div>
                 </Grid>
-                <Grid item xs={4} sm={4} xl={4} lg={4}>
+                <Grid item xs={12} sm={6} xl={6} lg={6}>
                   <Link to={`/evenement/${eventSlug}`} style={{ textDecoration: 'none' }}>
                     <Button variant="contained" color="primary">
                     Voir l'événement
@@ -88,3 +91,5 @@ export default Event;
 Event.propTypes = {
   item: PropTypes.object.isRequired,
 };
+
+

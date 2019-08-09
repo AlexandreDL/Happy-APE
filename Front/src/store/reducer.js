@@ -146,7 +146,7 @@ const reducer = (state = initialState, action = {}) => {
     case 'LOGIN_SUCCESS':
       return {
         ...state,
-        user: action.payload.data.token,
+        user: action.payload.data,
       };
     case 'REGISTER':
       return {

@@ -19,9 +19,9 @@ const EventCreate = props => (
       <ReferenceInput source="author" reference="events">
         <SelectInput optionText="lastname" />
       </ReferenceInput>
-      <TextInput source="name" />
+      <TextInput source="title" />
       <RichTextInput source="content" />
-      <DateInput label="Creation date" source="createdAt" />
+      <DateInput label="date" source="date" />
       <ImageInput source="pictures" label="Related pictures" accept="image/*">
         <ImageField source="src" title="title" />
       </ImageInput>

@@ -7,19 +7,18 @@ import {
   DateField,
 } from 'react-admin';
 
-const NewsTitle = ({ record }) => {
+const MediaTitle = ({ record }) => {
   return <span>Post {record ? `"${record.title}"` : ''}</span>;
 };
 
 
-const NewsShow = props => (
+const MediaShow = props => (
   <Show {...props}>
-    <SimpleShowLayout>
+    <SimpleShowLayout>      
       <TextField source="title" />
-      <RichTextField source="content" />
-      <DateField label="Publication date" source="created_at" />
+      <TextField source="url" />
     </SimpleShowLayout>
   </Show>
 );
 
-export default NewsShow;
+export default MediaShow;

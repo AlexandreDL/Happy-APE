@@ -26,6 +26,10 @@ import PrivatePostList from 'src/components/admin/PrivatePost/List';
 import PrivatePostShow from 'src/components/admin/PrivatePost/Show';
 import PrivatePostEdit from 'src/components/admin/PrivatePost/Edit';
 import PrivatePostCreate from 'src/components/admin/PrivatePost/Create';
+import MediaList from 'src/components/admin/Media/List';
+import MediaCreate from 'src/components/admin/Media/Create';
+import MediaEdit from 'src/components/admin/Media/Edit';
+import MediaShow from 'src/components/admin/Media/Show';
 
 // Icons
 import LocalPostOffice from '@material-ui/icons/LocalPostOffice';
@@ -34,12 +38,14 @@ import Announcement from '@material-ui/icons/Announcement';
 import AddToHomeScreen from '@material-ui/icons/AddToHomeScreen';
 import EventAvailable from '@material-ui/icons/EventAvailable';
 import UserIcon from '@material-ui/icons/Group';
+import Folder from '@material-ui/icons/Folder';
 
 // reactadmin
 import parseHydraDocumentation from '@api-platform/api-doc-parser/lib/hydra/parseHydraDocumentation';
 import { hydraClient, fetchHydra as baseFetchHydra  } from '@api-platform/admin';
 import authProvider from 'src/components/admin/Utils/authProvider';
 import { Redirect } from 'react-router-dom';
+import { LinearProgress } from '@material-ui/core';
 // import Layout from './Component/Layout';
 // import dataProvider from 'src/components/admin/DataProvider';
 
@@ -84,7 +90,7 @@ export default class extends Component {
     }
 
     render() {
-      if (this.state.api === null) return <div>Loading...</div>;
+      if (this.state.api === null) return <LinearProgress />;
       return (
         <MuiThemeProvider theme={theme}>
           <Admin api={ this.state.api }
@@ -94,12 +100,13 @@ export default class extends Component {
             dashboard={Dashboard}
             authProvider={authProvider}
           >
-            <Resource name="events" options={{ label: 'événements' }} list={EventList} edit={EventEdit} create={EventCreate} show={EventShow} icon={EventAvailable} />
-            <Resource name="news" options={{ label: 'actualités' }} list={NewsList} edit={NewsEdit} create={NewsCreate} show={NewsShow} icon={Announcement} />
-            <Resource name="profile/users" options={{ label: 'utilisateurs' }} list={UserList} edit={UserEdit} show={UserShow} icon={UserIcon} />
-            <Resource name="pages" options={{ label: 'pages' }} list={PageList} edit={PageEdit} icon={FormatIndentIncrease} />
-            <Resource name="contacts" options={{ label: 'contact' }} list={ContactList} show={ContactShow} icon={LocalPostOffice} />
+            <Resource name="events" options={{ label: 'Événements' }} list={EventList} edit={EventEdit} create={EventCreate} show={EventShow} icon={EventAvailable} />
+            <Resource name="news" options={{ label: 'Actualités' }} list={NewsList} edit={NewsEdit} create={NewsCreate} show={NewsShow} icon={Announcement} />
+            <Resource name="profile/users" options={{ label: 'Utilisateurs' }} list={UserList} edit={UserEdit} show={UserShow} icon={UserIcon} />
+            <Resource name="pages" options={{ label: 'Pages' }} list={PageList} edit={PageEdit} icon={FormatIndentIncrease} />
+            <Resource name="contacts" options={{ label: 'Contact' }} list={ContactList} show={ContactShow} icon={LocalPostOffice} />
             <Resource name="private_posts" options={{ label: 'Actu interne' }} list={PrivatePostList} edit={PrivatePostEdit} show={PrivatePostShow} create={PrivatePostCreate} icon={AddToHomeScreen} />
+            <Resource name="media" options={{ label: 'media' }} list={MediaList} edit={MediaEdit} show={MediaShow} create={MediaCreate} icon={Folder} />
           </Admin>
         </MuiThemeProvider>
       );

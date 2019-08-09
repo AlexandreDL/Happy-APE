@@ -9,6 +9,7 @@ import {
   Button,
   Link,
   Typography,
+  Menu,
 } from '@material-ui/core';
 // import { Link as RouterLink } from 'react-router-dom';
 import {
@@ -27,6 +28,9 @@ import './nav.scss';
 // == Composant
 const NavBar = ({ drawerOpen, toggleDrawerAction }) => {
 
+
+  const isLoggedIn = localStorage.getItem('isLoggedIn');
+
   const AccueilLink = React.forwardRef((props, ref) => <NavLink to="/" innerRef={ref} {...props} />);
   const EvenementLink = React.forwardRef((props, ref) => <NavLink to="/evenements" innerRef={ref} {...props} />);
   const WhoAreWeLink = React.forwardRef((props, ref) => <NavLink to="/qui-sommes-nous" innerRef={ref} {...props} />);
@@ -34,6 +38,8 @@ const NavBar = ({ drawerOpen, toggleDrawerAction }) => {
   const AccountLink = React.forwardRef((props, ref) => <NavLink to="/" innerRef={ref} {...props} />);
   const AdminAppLink = React.forwardRef((props, ref) => <NavLink to="/admin/Dashboard" innerRef={ref} {...props} />);
   const UserProfileLink = React.forwardRef((props, ref) => <NavLink to="/profil" innerRef={ref} {...props} />);
+  const LoginLink = React.forwardRef((props, ref) => <NavLink to="/login" innerRef={ref} {...props} />);
+  const RegisterLink = React.forwardRef((props, ref) => <NavLink to="/signup" innerRef={ref} {...props} />);
 
   const toggleDrawerButton = event => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -54,9 +60,15 @@ const NavBar = ({ drawerOpen, toggleDrawerAction }) => {
         <MenuItem component={EvenementLink} to="/evenements">Evenement</MenuItem>
         <MenuItem component={WhoAreWeLink} to="/qui-sommes-nous">Qui sommes-nous ?</MenuItem>
         <MenuItem component={ContactLink} to="/contact">Contact</MenuItem>
-        <MenuItem component={AccountLink} to="/">Compte</MenuItem>
+        {(isLoggedIn === null) ? (
+          <React.Fragment>
+            <MenuItem component={LoginLink} to="/login">Se connecter</MenuItem>
+            <MenuItem component={RegisterLink} to="/signup">Créer un compte</MenuItem>
+          </React.Fragment>
+        ) : (
+          <MenuItem component={UserProfileLink} to="/profil">Mon profil</MenuItem>
+        )}
         <MenuItem component={AdminAppLink} to="/admin/Dashboard">Dashboard</MenuItem>
-        <MenuItem component={UserProfileLink} to="/profil">Mon profil</MenuItem>
       </Typography>
       <Drawer open={drawerOpen} onClose={toggleDrawerButton}>
         <MenuItem onClick={toggleDrawerButton} component={AccueilLink} to="/"><Home />Accueil</MenuItem>

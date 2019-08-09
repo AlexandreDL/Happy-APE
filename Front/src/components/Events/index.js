@@ -5,7 +5,7 @@ import { LinearProgress, Grid } from '@material-ui/core';
 
 // == Import : local
 
-import './events.scss';
+
 import Event from 'src/components/Event';
 
 
@@ -24,13 +24,16 @@ class Events extends React.Component {
     const { loading, events } = this.props;
 
     const eventsLoaded = events['hydra:member'];
+    // console.log(eventsLoaded);
+
 
     if (!loading && eventsLoaded !== undefined) {
       if (eventsLoaded.length !== 0) {
+        
         this.events = (
           <Grid container spacing={2} className="whitebox">
             {eventsLoaded.map(item => (
-              <Grid item xs={12} sm={12} xl={6} lg={6} key={item.slug}>
+              <Grid item xs={12} sm={12} xl={6} lg={6} key={item.id}>
                 <Event item={item} />
               </Grid>
             ))}
