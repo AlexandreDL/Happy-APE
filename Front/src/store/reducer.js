@@ -9,9 +9,11 @@ const initialState = {
   CGVData: [],
   CGUData: [],
   legalMentionsData: [],
+  privatePost: [],
 };
 // == Types
 const GET_LEGAL_MENTIONS = 'GET_LEGAL_MENTIONS';
+const GET_PRIVATE_POSTS = 'GET_PRIVATE_POSTS';
 const GET_LEGAL_MENTIONS_SUCCESS = 'GET_LEGAL_MENTIONS_SUCCESS';
 const GET_LEGAL_MENTIONS_FAILURE = 'GET_LEGAL_MENTIONS_FAILURE';
 const GET_CGUDATA = 'GET_CGUDATA';
@@ -91,6 +93,12 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
       };
+    case GET_PRIVATE_POSTS:
+      return {
+        ...state,
+        privatePost: action.payload.data,
+        loading: false,
+      };
     case GET_CGVDATA_SUCCESS:
       return {
         ...state,
@@ -138,7 +146,7 @@ const reducer = (state = initialState, action = {}) => {
     case 'LOGIN_SUCCESS':
       return {
         ...state,
-        user: action.payload.data.token,
+        user: action.payload.data,
       };
     case 'REGISTER':
       return {
@@ -160,6 +168,16 @@ const reducer = (state = initialState, action = {}) => {
 };
 
 // == Action Creators
+export function getLegalMentionsData() {
+  return {
+    type: GET_LEGAL_MENTIONS,
+    payload: {
+      request: {
+        url: '/mentions-legales',
+      },
+    },
+  };
+}
 export function getHomepageData() {
   return {
     type: 'GET_HOMEPAGE',
@@ -170,12 +188,12 @@ export function getHomepageData() {
     },
   };
 }
-export function getLegalMentionsData() {
+export function getPrivatePosts() {
   return {
-    type: GET_LEGAL_MENTIONS,
+    type: GET_PRIVATE_POSTS,
     payload: {
       request: {
-        url: '/mentions-legales',
+        url: '/api/private_posts',
       },
     },
   };

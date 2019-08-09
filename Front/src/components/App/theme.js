@@ -24,7 +24,7 @@ const generalTheme = createMuiTheme({
     h1: {
       fontFamily: 'Raleway',
       color: '#FF732D',
-      fontSize: '2rem',
+      fontSize: '1.8rem',
       paddingTop: 20,
       fontWeight: 'bold',
       textAlign: 'left',
@@ -33,14 +33,14 @@ const generalTheme = createMuiTheme({
 
     h2: {
       fontFamily: 'Raleway',
-      fontSize: '1.7em',
+      fontSize: '1.5em',
       fontWeight: 'bold',
       paddingTop: 5,
       marginBottom: 0,
     },
     h3: {
       fontFamily: 'Raleway',
-      fontSize: '1rem',
+      fontSize: '0.9rem',
       fontWeight: 'bold',
     },
 
@@ -49,7 +49,7 @@ const generalTheme = createMuiTheme({
     },
     body1: {
       fontFamily: 'Raleway',
-      fontSize: 16,
+      fontSize: '1em',
       lineHeight: 1.5,
     },
     body2: {
