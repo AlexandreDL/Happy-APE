@@ -1,6 +1,8 @@
 // == Import : npm
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+
+import { Route, Redirect, Switch } from 'react-router-dom';
+
 import { Container } from '@material-ui/core';
 
 import { MuiThemeProvider } from '@material-ui/core/styles';
@@ -29,54 +31,64 @@ import Error from 'src/components/Error/error404';
 
 import './app.scss';
 
-// == Composant
-const App = () => (
-  <MuiThemeProvider theme={theme}>
-    <React.Fragment>
-      <Header>
-        <NavBar />
-      </Header>
-      <Container sm="100%" className="mainContainer">
-        <main>
-          <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/qui-sommes-nous" component={WhoAreWe} />
-            <Route exact path="/contact" component={Contact} />
-            <Route exact path="/evenements" component={Events} />
-            <Route exact path="/mentions-legales" component={legalMentions} />
-            <Route exact path="/conditions-generales-d-utilisation" component={CGU} />
-            <Route exact path="/conditions-generales-de-vente" component={CGV} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/signup" component={Signup} />
-            <Route exact path="/admin/dashboard" component={AdminApp} />
-            <Route exact path="/profil" component={UserProfile} />
-            
-            <Route
-              path="/evenement/:slug"
-              render={(routeInfo) => {
-                const { slug } = routeInfo.match.params;
-                return (
-                  <EventDetail slug={slug} />
-                );
-              }}
-            />
-            <Route
-              path="/actualites/:slug"
-              render={(routeInfo) => {
-                const { slug } = routeInfo.match.params;
-                return (
-                  <NewsDetail slug={slug} />
-                );
-              }}
-            />
-            <Route path="*" component={Error} />
+class App extends React.Component {
+  isLoggedIn = localStorage.getItem('isLoggedIn');
+
+  componentDidMount() {
+    this.forceUpdate();
+  }
+
+  render() {
+    return (
+      <MuiThemeProvider theme={theme}>
+        <React.Fragment>
+          <Header>
+            <NavBar />
+          </Header>
+          <Container sm="100%" className="mainContainer">
+            <main>
+             <Switch>
+              <Route exact path="/" render={(props) => { return <HomePage {...props} />}} />
+              <Route path="/qui-sommes-nous" render={props => (<WhoAreWe {...props} />)} />
+              <Route path="/contact" render={props => (<Contact {...props} />)} />
+              <Route path="/evenements" render={props => (<Events {...props} />)} />
+              <Route path="/mentions-legales" render={props => (<legalMentions {...props} />)} />
+              <Route path="/conditions-generales-d-utilisation" render={props => (<CGU {...props} />)} />
+              <Route path="/conditions-generales-de-vente" render={props => (<CGV {...props} />)} />
+              <Route path="/login" render={props => ((this.isLoggedIn === null) ? <Login {...props} /> : <Redirect to="/" />)} />
+              <Route path="/signup" render={props => (<Signup {...props} />)} />
+              <Route path="/admin/dashboard" render={props => (<AdminApp {...props} />)} />
+              <Route path="/profil" render={props => (<UserProfile {...props} />)} />
+              <Route
+                path="/evenement/:slug"
+                render={(routeInfo) => {
+                  const { slug } = routeInfo.match.params;
+                  return (
+                    <EventDetail slug={slug} />
+                  );
+                }}
+              />
+              <Route
+                path="/actualites/:slug"
+                render={(routeInfo) => {
+                  const { slug } = routeInfo.match.params;
+                  return (
+                    <NewsDetail slug={slug} />
+                  );
+                }}
+              />
+             <Route path="*" component={Error} />
           </Switch>
-        </main>
-      </Container>
-      <Footer />
-    </React.Fragment>
-  </MuiThemeProvider>
-);
+            </main>
+          </Container>
+          <Footer />
+        </React.Fragment>
+      </MuiThemeProvider>
+    );
+  }
+
+};
+
 
 // == Export
 export default App;
