@@ -7,7 +7,23 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *      itemOperations={
+ *          "get",
+ *          "put"={
+ *             "access_control"="is_granted('ROLE_REDACT'),"
+ *         },
+ *           "delete"={
+ *             "access_control"="is_granted('ROLE_REDACT'),"
+ *         }
+ *      },
+ *      collectionOperations={
+ *           "get",
+ *          "post"={
+ *             "access_control"="is_granted('ROLE_REDACT'),"
+ *         }
+ *      }   
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\TagRepository")
  */
 class Tag
