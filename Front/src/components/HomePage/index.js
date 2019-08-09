@@ -76,10 +76,7 @@ class HomePage extends React.Component {
       document.title = 'Chargement...';
     }
     return (
-      <React.Fragment>
-        <Slider />
-        
-        <Divider />
+      <React.Fragment>     
         <Grid
           container
           className="whitebox"
@@ -87,9 +84,12 @@ class HomePage extends React.Component {
           justify="center"
           alignItems="center"
           spacing={2}
-          >        
-          <Grid item xs={12} sm={12} xl={12} lg={12}>   
-            <Typography variant="h1">Évènements à venir</Typography>
+          > 
+          <Grid item xs={12} sm={12} xl={12} lg={12}>
+            <Slider />         
+          </Grid>
+          <Divider />
+          <Grid item xs={12} sm={12} xl={12} lg={6}>   
             {!loading ? this.event : (
               <div className="cpcenter">
                 <LinearProgress color="secondary" />

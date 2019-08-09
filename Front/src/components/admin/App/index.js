@@ -38,6 +38,7 @@ import Announcement from '@material-ui/icons/Announcement';
 import AddToHomeScreen from '@material-ui/icons/AddToHomeScreen';
 import EventAvailable from '@material-ui/icons/EventAvailable';
 import UserIcon from '@material-ui/icons/Group';
+import Folder from '@material-ui/icons/Folder';
 
 // reactadmin
 import parseHydraDocumentation from '@api-platform/api-doc-parser/lib/hydra/parseHydraDocumentation';
@@ -104,7 +105,7 @@ export default class extends Component {
             <Resource name="pages" options={{ label: 'pages' }} list={PageList} edit={PageEdit} icon={FormatIndentIncrease} />
             <Resource name="contacts" options={{ label: 'contact' }} list={ContactList} show={ContactShow} icon={LocalPostOffice} />
             <Resource name="private_posts" options={{ label: 'Actu interne' }} list={PrivatePostList} edit={PrivatePostEdit} show={PrivatePostShow} create={PrivatePostCreate} icon={AddToHomeScreen} />
-            <Resource name="media" options={{ label: 'media' }} list={MediaList} edit={MediaEdit} show={MediaShow} create={MediaCreate} icon={AddToHomeScreen} />
+            <Resource name="media" options={{ label: 'media' }} list={MediaList} edit={MediaEdit} show={MediaShow} create={MediaCreate} icon={Folder} />
           </Admin>
         </MuiThemeProvider>
       );
