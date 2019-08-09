@@ -17,13 +17,13 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *      normalizationContext={"groups"={"read"}},
  *      itemOperations={
  *          "get"={
- *             "access_control"="is_granted('ROLE_ADMIN') or (is_granted('ROLE_USER') and object.getAuthor() == user)",
+ *             "access_control"="is_granted('ROLE_ADMIN') or (is_granted('ROLE_USER') and object == user)",
  *         },
  *          "put"={
- *              "access_control"="is_granted('ROLE_ADMIN') or (is_granted('ROLE_USER') and object.getAuthor() == user)",
+ *              "access_control"="is_granted('ROLE_ADMIN') or (is_granted('ROLE_USER') and object == user)",
  *         },
  *           "delete"={
- *             "access_control"="is_granted('ROLE_ADMIN') or (is_granted('ROLE_USER') and object.getAuthor() == user)",
+ *             "access_control"="is_granted('ROLE_ADMIN') or (is_granted('ROLE_USER') and object == user)",
  *         }
  *      },
  *      collectionOperations={
