@@ -161,7 +161,13 @@ class User implements UserInterface
      */
     private $roles = ["ROLE_USER"];
 
-
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime;
+        $this->updatedAt = new \DateTime;
+        $this->isActive = true;
+    }
+    
     public function getId(): ?int
     {
         return $this->id;
