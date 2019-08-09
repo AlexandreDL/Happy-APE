@@ -57,6 +57,7 @@ class HomePage extends React.Component {
                   <Link to={`/actualites/${item.slug}`} style={{ textDecoration: 'none', color: '#000000' }}>
                     <New item={item} key={item.id} />
                   </Link>
+                  <Divider />
                 </Grid>
               ))}
             </Grid>
@@ -77,9 +78,17 @@ class HomePage extends React.Component {
     return (
       <React.Fragment>
         <Slider />
+        
         <Divider />
-        <Box className="whitebox">
-          <Container>
+        <Grid
+          container
+          className="whitebox"
+          direction="row"
+          justify="center"
+          alignItems="center"
+          spacing={2}
+          >        
+          <Grid item xs={12} sm={12} xl={12} lg={12}>   
             <Typography variant="h1">Évènements à venir</Typography>
             {!loading ? this.event : (
               <div className="cpcenter">
@@ -87,20 +96,18 @@ class HomePage extends React.Component {
               </div>
             )
             }
-          </Container>
-        </Box>
-        <Divider />
-        <Box className="whitebox">
-          <Container>
+          </Grid>
+          <Divider />    
+          <Grid item xs={12} sm={12} xl={12} lg={12}>      
             <Typography variant="h1">Nos dernières actualités</Typography>
             {!loading ? this.news : (
               <div className="cpcenter">
                 <LinearProgress color="secondary" />
               </div>
             ) }
-          </Container>
-        </Box>
-        <Divider />
+          </Grid>
+          <Divider />
+        </Grid>
       </React.Fragment>
     );
   }

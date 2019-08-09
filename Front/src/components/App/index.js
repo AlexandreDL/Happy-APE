@@ -1,6 +1,6 @@
 // == Import : npm
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { Container } from '@material-ui/core';
 
 import { MuiThemeProvider } from '@material-ui/core/styles';
@@ -24,6 +24,7 @@ import Login from 'src/containers/User/Login';
 import Signup from 'src/containers/User/Signup';
 import UserProfile from 'src/components/User/profile';
 import AdminApp from 'src/components/admin/App';
+import Error from 'src/components/Error/error404';
 
 
 import './app.scss';
@@ -37,35 +38,39 @@ const App = () => (
       </Header>
       <Container sm="100%" className="mainContainer">
         <main>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/qui-sommes-nous" component={WhoAreWe} />
-          <Route path="/contact" component={Contact} />
-          <Route path="/evenements" component={Events} />
-          <Route path="/mentions-legales" component={legalMentions} />
-          <Route path="/conditions-generales-d-utilisation" component={CGU} />
-          <Route path="/conditions-generales-de-vente" component={CGV} />
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/admin/dashboard" component={AdminApp} />
-          <Route path="/profil" component={UserProfile} />
-          <Route
-            path="/evenement/:slug"
-            render={(routeInfo) => {
-              const { slug } = routeInfo.match.params;
-              return (
-                <EventDetail slug={slug} />
-              );
-            }}
-          />
-          <Route
-            path="/actualites/:slug"
-            render={(routeInfo) => {
-              const { slug } = routeInfo.match.params;
-              return (
-                <NewsDetail slug={slug} />
-              );
-            }}
-          />
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route exact path="/qui-sommes-nous" component={WhoAreWe} />
+            <Route exact path="/contact" component={Contact} />
+            <Route exact path="/evenements" component={Events} />
+            <Route exact path="/mentions-legales" component={legalMentions} />
+            <Route exact path="/conditions-generales-d-utilisation" component={CGU} />
+            <Route exact path="/conditions-generales-de-vente" component={CGV} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/admin/dashboard" component={AdminApp} />
+            <Route exact path="/profil" component={UserProfile} />
+            
+            <Route
+              path="/evenement/:slug"
+              render={(routeInfo) => {
+                const { slug } = routeInfo.match.params;
+                return (
+                  <EventDetail slug={slug} />
+                );
+              }}
+            />
+            <Route
+              path="/actualites/:slug"
+              render={(routeInfo) => {
+                const { slug } = routeInfo.match.params;
+                return (
+                  <NewsDetail slug={slug} />
+                );
+              }}
+            />
+            <Route path="*" component={Error} />
+          </Switch>
         </main>
       </Container>
       <Footer />

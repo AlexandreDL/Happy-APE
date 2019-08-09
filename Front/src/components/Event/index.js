@@ -51,9 +51,10 @@ class Event extends React.Component {
             <CardContent>
               <Grid
                 container
-                direction="row"
+                direction="column"
                 justify="center"
-                alignItems="flex-start"
+                alignItems="center"
+                spacing={1}
               >
                 <Grid item xs={12} sm={9} xl={10} lg={10}>
                   <Typography variant="h2">{item.title}</Typography>
@@ -64,7 +65,7 @@ class Event extends React.Component {
                   <div className="newContentMonth">{month}</div>
                   <div className="newContentYear">{itemYear}</div>
                 </Grid>
-                <Grid item xs={4} sm={4} xl={4} lg={4}>
+                <Grid item xs={12} sm={6} xl={6} lg={6}>
                   <Link to={`/evenement/${eventSlug}`} style={{ textDecoration: 'none' }}>
                     <Button variant="contained" color="primary">
                     Voir l'événement
@@ -90,3 +91,5 @@ export default Event;
 Event.propTypes = {
   item: PropTypes.object.isRequired,
 };
+
+

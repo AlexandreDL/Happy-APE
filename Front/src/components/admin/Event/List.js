@@ -12,8 +12,6 @@ import {
   SimpleList,
   Responsive,
   RichTextField,
-  ReferenceField,
-  DateInput,
 } from 'react-admin';
 
 const EventsFilter = props => (
@@ -38,12 +36,8 @@ const EventsList = props => (
 )}
       medium={(
         <Datagrid>
-          <ReferenceField label="User" source="author" reference="events">
-            <TextField source="lastname" />
-          </ReferenceField>
-          <TextField source="title" />
+          <TextField source="name" />
           <RichTextField source="content" />
-          <DateInput label="date" source="date" />
           <EditButton />
           <ShowButton />
         </Datagrid>
