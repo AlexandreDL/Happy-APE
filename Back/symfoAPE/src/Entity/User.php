@@ -30,6 +30,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *           "get"={
  *             "access_control"="is_granted('ROLE_ADMIN'),"
  *         },
+ *             "post"
 
  *      }   
  * )
@@ -81,42 +82,50 @@ class User implements UserInterface
         
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read"})
      */
     private $address_city;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read"})
      */
     
     private $address_street;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read"})
      */
     private $address_other;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"read"})
      */
     private $address_number;
 
     /**
      * @ORM\Column(type="string", length=15, nullable=true)
+     * @Groups({"read"})
      */
     private $address_zipcode;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"read"})
      */
     private $newsletter_subscription;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"read"})
      */
     private $isActive;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"read"})
      */
     private $isParent;
 
@@ -135,6 +144,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Email()
+     * @Groups({"read"})
      */
     private $email;
 
@@ -146,19 +156,10 @@ class User implements UserInterface
     private $username;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Role", inversedBy="users")
-     *
+     * @ORM\Column(type="json")
+     * @Groups({"read"})
      */
-    private $roles;
-
-    public function __construct()
-    {
-        $this->createdAt = new \DateTime;
-        $this->updatedAt = new \DateTime;
-        $this->roles = new ArrayCollection();
-    }
-
-
+    private $roles = ["ROLE_USER"];
 
     public function getId(): ?int
     {
@@ -380,20 +381,11 @@ class User implements UserInterface
     
     public function getRoles()
     {
-        dd($this->roles);
+        return $this->roles;
     }
 
-    /**
-     * Set the value of roles
-     *
-     * @return  self
-     */ 
     public function setRoles(array $roles)
     {
-        if (!in_array('ROLE_USER', $roles))
-        {
-            $roles[] = 'ROLE_USER';
-        }
         $this->roles = $roles;
         return $this;
     }
