@@ -40,6 +40,7 @@ import parseHydraDocumentation from '@api-platform/api-doc-parser/lib/hydra/pars
 import { hydraClient, fetchHydra as baseFetchHydra  } from '@api-platform/admin';
 import authProvider from 'src/components/admin/Utils/authProvider';
 import { Redirect } from 'react-router-dom';
+import { LinearProgress } from '@material-ui/core';
 // import Layout from './Component/Layout';
 // import dataProvider from 'src/components/admin/DataProvider';
 
@@ -84,7 +85,7 @@ export default class extends Component {
     }
 
     render() {
-      if (this.state.api === null) return <div>Loading...</div>;
+      if (this.state.api === null) return <LinearProgress />;
       return (
         <MuiThemeProvider theme={theme}>
           <Admin api={ this.state.api }
@@ -94,11 +95,11 @@ export default class extends Component {
             dashboard={Dashboard}
             authProvider={authProvider}
           >
-            <Resource name="events" options={{ label: 'événements' }} list={EventList} edit={EventEdit} create={EventCreate} show={EventShow} icon={EventAvailable} />
-            <Resource name="news" options={{ label: 'actualités' }} list={NewsList} edit={NewsEdit} create={NewsCreate} show={NewsShow} icon={Announcement} />
-            <Resource name="profile/users" options={{ label: 'utilisateurs' }} list={UserList} edit={UserEdit} show={UserShow} icon={UserIcon} />
-            <Resource name="pages" options={{ label: 'pages' }} list={PageList} edit={PageEdit} icon={FormatIndentIncrease} />
-            <Resource name="contacts" options={{ label: 'contact' }} list={ContactList} show={ContactShow} icon={LocalPostOffice} />
+            <Resource name="events" options={{ label: 'Événements' }} list={EventList} edit={EventEdit} create={EventCreate} show={EventShow} icon={EventAvailable} />
+            <Resource name="news" options={{ label: 'Actualités' }} list={NewsList} edit={NewsEdit} create={NewsCreate} show={NewsShow} icon={Announcement} />
+            <Resource name="profile/users" options={{ label: 'Utilisateurs' }} list={UserList} edit={UserEdit} show={UserShow} icon={UserIcon} />
+            <Resource name="pages" options={{ label: 'Pages' }} list={PageList} edit={PageEdit} icon={FormatIndentIncrease} />
+            <Resource name="contacts" options={{ label: 'Contact' }} list={ContactList} show={ContactShow} icon={LocalPostOffice} />
             <Resource name="private_posts" options={{ label: 'Actu interne' }} list={PrivatePostList} edit={PrivatePostEdit} show={PrivatePostShow} create={PrivatePostCreate} icon={AddToHomeScreen} />
           </Admin>
         </MuiThemeProvider>
