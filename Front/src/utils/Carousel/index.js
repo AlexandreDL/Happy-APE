@@ -9,9 +9,9 @@ const Slider = () => (
   <Carousel
     autoplay
   >
-    <img src="https://gratisography.com/thumbnails/gratisography-animal-crackers-thumbnail.jpg" alt="" />
-    <img src="https://cdn.stocksnap.io/img-thumbs/960w/R7IOD2W1ZU.jpg" alt="" />
-    <img src="https://picography.co/wp-content/uploads/2019/04/picography-fireworks-at-night-768x576.jpg" alt="" />
+    <img src="https://static.isodev.ovh/img/kids1.jpeg" alt="kids1" />
+    <img src="https://static.isodev.ovh/img/kids2.jpeg" alt="kids2" />
+    <img src="https://static.isodev.ovh/img/kids3.jpeg" alt="kids3" />
   </Carousel>
 );
 

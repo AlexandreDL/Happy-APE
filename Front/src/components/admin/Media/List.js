@@ -3,7 +3,6 @@ import {
   List,
   Datagrid,
   TextField,
-  ReferenceField,
   EditButton,
   ShowButton,
   Filter,
@@ -15,18 +14,18 @@ import {
   RichTextField,
 } from 'react-admin';
 
-const NewsFilter = props => (
+const MediaFilter = props => (
   <Filter {...props}>
     <TextInput label="Search" source="q" alwaysOn />
-    <ReferenceInput label="User" source="author" reference="news" allowEmpty>
+    <ReferenceInput label="User" source="author" reference="users" allowEmpty>
       <SelectInput optionText="lastname" />
     </ReferenceInput>
   </Filter>
 );
 
 
-const NewsList = props => (
-  <List filters={<NewsFilter />} {...props}>
+const MediaList = props => (
+  <List filters={<MediaFilter />} {...props}>
     <Responsive
       small={(
         <SimpleList
@@ -37,12 +36,9 @@ const NewsList = props => (
 )}
       medium={(
         <Datagrid>
-          <TextField source="id" />
-          <ReferenceField label="User" source="author" reference="news">
-            <TextField source="lastname" />
-          </ReferenceField>
           <TextField source="title" />
           <RichTextField source="content" />
+          <TextField source="type" />
           <EditButton />
           <ShowButton />
         </Datagrid>
@@ -51,4 +47,4 @@ const NewsList = props => (
   </List>
 );
 
-export default NewsList;
+export default MediaList;

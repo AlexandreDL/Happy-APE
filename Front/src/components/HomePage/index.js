@@ -53,10 +53,11 @@ class HomePage extends React.Component {
               alignItems="flex-start"
             >
               {homepageData.news.map(item => (
-                <Grid item xs={12} sm={12} xl={6} lg={6} key={item.slug}>
+                <Grid item xs={12} sm={12} xl={12} lg={12} key={item.slug}>
                   <Link to={`/actualites/${item.slug}`} style={{ textDecoration: 'none', color: '#000000' }}>
                     <New item={item} key={item.id} />
                   </Link>
+                  <Divider />
                 </Grid>
               ))}
             </Grid>
@@ -75,32 +76,38 @@ class HomePage extends React.Component {
       document.title = 'Chargement...';
     }
     return (
-      <React.Fragment>
-        <Slider />
-        <Divider />
-        <Box className="whitebox">
-          <Container>
-            <Typography variant="h1">Évènements à venir</Typography>
+      <React.Fragment>     
+        <Grid
+          container
+          className="whitebox"
+          direction="row"
+          justify="center"
+          alignItems="center"
+          spacing={2}
+          > 
+          <Grid item xs={12} sm={12} xl={12} lg={12}>
+            <Slider />         
+          </Grid>
+          <Divider />
+          <Grid item xs={12} sm={12} xl={12} lg={6}>   
             {!loading ? this.event : (
               <div className="cpcenter">
                 <LinearProgress color="secondary" />
               </div>
             )
             }
-          </Container>
-        </Box>
-        <Divider />
-        <Box className="whitebox">
-          <Container>
+          </Grid>
+          <Divider />    
+          <Grid item xs={12} sm={12} xl={12} lg={12}>      
             <Typography variant="h1">Nos dernières actualités</Typography>
             {!loading ? this.news : (
               <div className="cpcenter">
                 <LinearProgress color="secondary" />
               </div>
             ) }
-          </Container>
-        </Box>
-        <Divider />
+          </Grid>
+          <Divider />
+        </Grid>
       </React.Fragment>
     );
   }

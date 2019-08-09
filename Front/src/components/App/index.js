@@ -1,6 +1,8 @@
 // == Import : npm
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+
+import { Route, Redirect, Switch } from 'react-router-dom';
+
 import { Container } from '@material-ui/core';
 
 import { MuiThemeProvider } from '@material-ui/core/styles';
@@ -24,11 +26,11 @@ import Login from 'src/containers/User/Login';
 import Signup from 'src/containers/User/Signup';
 import UserProfile from 'src/components/User/profile';
 import AdminApp from 'src/components/admin/App';
+import Error from 'src/components/Error/error404';
 
 
 import './app.scss';
 
-// == Composant
 class App extends React.Component {
   isLoggedIn = localStorage.getItem('isLoggedIn');
 
@@ -45,6 +47,7 @@ class App extends React.Component {
           </Header>
           <Container sm="100%" className="mainContainer">
             <main>
+             <Switch>
               <Route exact path="/" render={(props) => { return <HomePage {...props} />}} />
               <Route path="/qui-sommes-nous" render={props => (<WhoAreWe {...props} />)} />
               <Route path="/contact" render={props => (<Contact {...props} />)} />
@@ -74,6 +77,8 @@ class App extends React.Component {
                   );
                 }}
               />
+             <Route path="*" component={Error} />
+          </Switch>
             </main>
           </Container>
           <Footer />
@@ -83,6 +88,7 @@ class App extends React.Component {
   }
 
 };
+
 
 // == Export
 export default App;

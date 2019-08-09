@@ -1,0 +1,13 @@
+@import 'src/styles/vars';
+
+.display {
+  text-align: center;
+
+}
+.error {
+  font-weight: bolder;
+  padding: 20px;
+  font-size: 6em;
+  color: $color1;
+  font-family: 'Indie Flower', cursive;
+}

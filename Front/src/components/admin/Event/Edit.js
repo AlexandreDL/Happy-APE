@@ -3,9 +3,11 @@ import {
   Edit,
   SimpleForm,
   TextInput,
+  DateInput,
   DisabledInput,
   ReferenceInput,
   SelectInput,
+
 } from 'react-admin';
 import RichTextInput from 'ra-input-rich-text';
 
@@ -23,6 +25,7 @@ const EventsEdit = props => (
       </ReferenceInput>
       <TextInput source="title" />
       <RichTextInput source="content" />
+      <DateInput label="date" source="date" />
     </SimpleForm>
   </Edit>
 );

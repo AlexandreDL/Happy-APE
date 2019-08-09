@@ -40,7 +40,7 @@ const UserList = props => (
           <TextField source="lastname" />
           <TextField source="firstname" />
           <TextField source="type" />
-          <TextField source="username" />
+          <TextField source="role" />
           <EmailField source="email" />
           <EditButton />
           <ShowButton />
