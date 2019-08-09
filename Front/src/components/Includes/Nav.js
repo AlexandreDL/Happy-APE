@@ -10,6 +10,7 @@ import {
   Link,
   Typography,
   Menu,
+  Select,
 } from '@material-ui/core';
 // import { Link as RouterLink } from 'react-router-dom';
 import {
@@ -19,6 +20,8 @@ import {
   Contacts,
   AccountCircle,
 } from '@material-ui/icons';
+
+import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 
 import { Link as NavLink } from 'react-router-dom';
 
@@ -40,6 +43,7 @@ const NavBar = ({ drawerOpen, toggleDrawerAction }) => {
   const UserProfileLink = React.forwardRef((props, ref) => <NavLink to="/profil" innerRef={ref} {...props} />);
   const LoginLink = React.forwardRef((props, ref) => <NavLink to="/login" innerRef={ref} {...props} />);
   const RegisterLink = React.forwardRef((props, ref) => <NavLink to="/signup" innerRef={ref} {...props} />);
+  const LogoutLink = React.forwardRef((props, ref) => <NavLink to="/logout" innerRef={ref} {...props} />);
 
   const toggleDrawerButton = event => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -61,12 +65,33 @@ const NavBar = ({ drawerOpen, toggleDrawerAction }) => {
         <MenuItem component={WhoAreWeLink} to="/qui-sommes-nous">Qui sommes-nous ?</MenuItem>
         <MenuItem component={ContactLink} to="/contact">Contact</MenuItem>
         {(isLoggedIn === null) ? (
-          <React.Fragment>
-            <MenuItem component={LoginLink} to="/login">Se connecter</MenuItem>
-            <MenuItem component={RegisterLink} to="/signup">Créer un compte</MenuItem>
-          </React.Fragment>
+          <PopupState variant="popover" popupId="demo-popup-menu">
+            {popupState => (
+              <React.Fragment>
+                <Button color="primary" {...bindTrigger(popupState)}>
+                  Compte
+                </Button>
+                <Menu {...bindMenu(popupState)}>
+                  <MenuItem component={LoginLink} to="/login">Se connecter</MenuItem>
+                  <MenuItem component={RegisterLink} to="/signup">Créer un compte</MenuItem>
+                </Menu>
+              </React.Fragment>
+            )}
+          </PopupState>
         ) : (
-          <MenuItem component={UserProfileLink} to="/profil">Mon profil</MenuItem>
+          <PopupState variant="popover" popupId="demo-popup-menu">
+            {popupState => (
+              <React.Fragment>
+                <Button color="primary" {...bindTrigger(popupState)}>
+                  Compte
+                </Button>
+                <Menu {...bindMenu(popupState)}>
+                  <MenuItem component={UserProfileLink} to="/profile">Accéder à mon compte</MenuItem>
+                  <MenuItem component={LogoutLink} to="/logout">Se déconnecter</MenuItem>
+                </Menu>
+              </React.Fragment>
+            )}
+          </PopupState>
         )}
         <MenuItem component={AdminAppLink} to="/admin/Dashboard">Dashboard</MenuItem>
       </Typography>
