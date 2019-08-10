@@ -19,7 +19,7 @@ import Footer from 'src/containers/Includes/Footer';
 import WhoAreWe from 'src/containers/WhoAreWe';
 import Contact from 'src/containers/Contact';
 import Events from 'src/containers/Events';
-import legalMentions from 'src/containers/legalMentions';
+import LegalMentions from 'src/containers/LegalMentions';
 import EventDetail from 'src/containers/EventDetail';
 import NewsDetail from 'src/containers/NewsDetail';
 import Login from 'src/containers/User/Login';
@@ -49,18 +49,18 @@ class App extends React.Component {
           <Container sm="100%" className="mainContainer">
             <main>
               <Switch>
-                <Route exact path="/" render={(props) => { return <HomePage {...props} />}} />
+                <Route exact path="/" render={props => (<HomePage {...props} />)} />
                 <Route path="/qui-sommes-nous" render={props => (<WhoAreWe {...props} />)} />
                 <Route path="/contact" render={props => (<Contact {...props} />)} />
                 <Route path="/evenements" render={props => (<Events {...props} />)} />
-                <Route path="/mentions-legales" render={props => (<legalMentions {...props} />)} />
+                <Route path="/mentions-legales" render={props => (<LegalMentions {...props} />)} />
                 <Route path="/conditions-generales-d-utilisation" render={props => (<CGU {...props} />)} />
                 <Route path="/conditions-generales-de-vente" render={props => (<CGV {...props} />)} />
                 <Route path="/login" render={props => ((this.isLoggedIn === null) ? <Login {...props} /> : <Redirect to="/" />)} />
                 <Route path="/signup" render={props => ((this.isLoggedIn === null) ? <Signup {...props} /> : <Redirect to="/" />)} />
                 <Route path="/admin/dashboard" render={props => (<AdminApp {...props} />)} />
-                <Route path="/profile" render={props => ((this.isLoggedIn === null) ? <UserProfile {...props} /> : <Redirect to="/" />)} />
-                <Route path="/logout" render={props => ((this.isLoggedIn === true) ? <Logout {...props} /> : <Redirect to="/" />)} />
+                <Route path="/profile" render={props => ((this.isLoggedIn !== null) ? <UserProfile {...props} /> : <Redirect to="/" />)} />
+                <Route path="/logout" render={props => ((this.isLoggedIn !== null) ? <Logout {...props} /> : <Redirect to="/" />)} />
                 <Route
                   path="/evenement/:slug"
                   render={(routeInfo) => {
@@ -88,10 +88,8 @@ class App extends React.Component {
       </MuiThemeProvider>
     );
   }
-
-};
+}
 
 
 // == Export
 export default App;
-

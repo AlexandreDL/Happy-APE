@@ -10,10 +10,10 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { LinearProgress } from '@material-ui/core';
+import ReactMarkdown from 'react-markdown';
 
 // == Composant
 class WhoAreWe extends React.Component {
-
   whoAreWe = null;
 
   componentWillMount() {
@@ -29,10 +29,10 @@ class WhoAreWe extends React.Component {
     else {
       this.whoAreWe = (
         <article className="who whitebox">
-            <div key={whoAreWeData[0].id}>
-              <Typography variant="h1">{whoAreWeData[0].title}</Typography>
-              <Typography variant="body1">{whoAreWeData[0].content}</Typography>
-            </div>
+          <div key={whoAreWeData[0].id}>
+            <Typography variant="h1">{whoAreWeData[0].title}</Typography>
+            <Typography variant="body1"><ReactMarkdown source={whoAreWeData[0].content} /></Typography>
+          </div>
           <section className="who-trombi">
             <Card className="member-card">
               <CardMedia
@@ -83,7 +83,7 @@ class WhoAreWe extends React.Component {
               />
               <CardContent>
                 <Typography variant="h3">fabrice</Typography>
-                <p className="who-role">responsable tirelire</p> 
+                <p className="who-role">responsable tirelire</p>
               </CardContent>
             </Card>
             <Card className="member-card">
@@ -101,7 +101,7 @@ class WhoAreWe extends React.Component {
             </Card>
           </section>
         </article>
-      )
+      );
     }
 
     return this.whoAreWe;

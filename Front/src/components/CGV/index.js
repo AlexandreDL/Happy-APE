@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, LinearProgress } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
-
+import ReactMarkdown from 'react-markdown';
 
 class CGV extends React.Component {
   CGVData = null;
@@ -19,9 +19,9 @@ class CGV extends React.Component {
       this.CGVData = (
         <Container className="mentions whitebox">
           {CGVData.map(item => (
-            <div className="mentions-content" key={item.id}>    
+            <div className="mentions-content" key={item.id}>
               <Typography variant="h1">{item.title}</Typography>
-              <Typography variant="body1">{item.content}</Typography>
+              <Typography variant="body1"><ReactMarkdown source={item.content} /></Typography>
             </div>
           ))
             }
