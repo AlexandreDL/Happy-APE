@@ -2,7 +2,7 @@
 import { connect } from 'react-redux';
 
 // == Import : local
-import legalMentions from 'src/components/legalMentions';
+import LegalMentions from 'src/components/LegalMentions';
 import { getLegalMentionsData } from 'src/store/reducer';
 
 /* === State (données) ===
@@ -12,7 +12,7 @@ import { getLegalMentionsData } from 'src/store/reducer';
  *  - ownProps : les props passées au container
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   legalMentionsData: state.legalMentionsData,
   loading: state.loading,
 });
@@ -24,18 +24,18 @@ const mapStateToProps = (state, ownProps) => ({
  *  - ownProps : les props passées au container
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   setLegalMentionsData: () => (dispatch(getLegalMentionsData())),
 });
 
 // Container
-const legalMentionsContainer = connect(
+const LegalMentionsContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(legalMentions);
+)(LegalMentions);
 
 // == Export
-export default legalMentionsContainer;
+export default LegalMentionsContainer;
 
 /* = export à la volée
 export default connect(

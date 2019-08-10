@@ -10,6 +10,7 @@ import {
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import dateParser from 'src/utils/dateParser';
 
 // == Import : local
 
@@ -19,68 +20,61 @@ import './event.scss';
 class Event extends React.Component {
   returnedValue = <h1 className="cpcenter">Aucun évènement à venir</h1>;
 
-  componentWillMount() {
-    const { item } = this.props;
-    const itemImage = item.media[0].url;
-
-    const itemDay = new Date(item.date).getDay();
-    const week = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
-    const day = week[itemDay];
-
-    const itemMonth = new Date(item.date).getMonth();
-    const year = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
-    const month = year[itemMonth];
-
-    const dayNumber = new Date(item.date).getUTCDate();
-    const itemYear = new Date(item.date).getFullYear();
-    const eventSlug = item.slug;
-   
-
-
-    if (item !== undefined) {
-      this.returnedValue = (
-        <article className="event whitebox">
-          <Card>
-            <CardMedia
-              component="img"
-              height="250"
-              alt="soirée théatre avec les Ah!"
-              image={itemImage}
-              title="soirée théatre"
-            />
-            <CardContent>
-              <Grid
-                container
-                direction="column"
-                justify="center"
-                alignItems="center"
-                spacing={1}
-              >
-                <Grid item xs={12} sm={9} xl={10} lg={10}>
-                  <Typography variant="h2">{item.title}</Typography>
-                </Grid>
-                <Grid item xs={8} sm={3} xl={2} lg={2} className="event-calendar">
-                  <div className="newContentDay">{day}</div>
-                  <div className="newContentNumber">{dayNumber}</div>
-                  <div className="newContentMonth">{month}</div>
-                  <div className="newContentYear">{itemYear}</div>
-                </Grid>
-                <Grid item xs={12} sm={6} xl={6} lg={6}>
-                  <Link to={`/evenement/${eventSlug}`} style={{ textDecoration: 'none' }}>
-                    <Button variant="contained" color="primary">
-                    Voir l'événement
-                    </Button>
-                  </Link>
-                </Grid>
-              </Grid>
-            </CardContent>
-          </Card>
-        </article>
-      );
-    }
-  }
-
   render() {
+    const {
+      title,
+      content,
+      date,
+      media,
+      slug,
+      button,
+    } = this.props;
+
+    const image = (media !== undefined) ? media[0].url : 'https://static.isodev.ovh/img/lecture.jpg';
+
+    const dateParsed = dateParser(date);
+
+    this.returnedValue = (
+      <Grid
+        container
+        className="whitebox"
+        direction="row"
+        justify="center"
+        spacing={2}
+      >
+        <Grid item xs={12} sm={6} xl={4} lg={4}>
+          <CardMedia
+            component="img"
+            alt="event-image"
+            justify="center"
+            image={image}
+            title={title}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6} xl={6} lg={6}>
+          <Typography variant="h2">{title}</Typography>
+          {button !== true && (
+            <Typography variant="body2">{content}</Typography>
+          )}
+          <div className="event-calendar">
+            <div className="newContentDay">{dateParsed.day}</div>
+            <div className="newContentNumber">{dateParsed.dayNumber}</div>
+            <div className="newContentMonth">{dateParsed.month}</div>
+            <div className="newContentYear">{dateParsed.itemYear}</div>
+          </div>
+        </Grid>
+        {button === true && (
+          <Grid item xs={12} sm={6} xl={6} lg={6} className="cpcenter">
+            <Link to={`/evenement/${slug}`} style={{ textDecoration: 'none' }}>
+              <Button variant="contained" color="primary">
+              Voir l'événement
+              </Button>
+            </Link>
+          </Grid>
+        )}
+      </Grid>
+    );
+
     return this.returnedValue;
   }
 }
@@ -89,7 +83,9 @@ class Event extends React.Component {
 export default Event;
 
 Event.propTypes = {
-  item: PropTypes.object.isRequired,
+  title: PropTypes.string.isRequired,
+  content: PropTypes.string,
+  date: PropTypes.string.isRequired,
+  slug: PropTypes.string.isRequired,
+  button: PropTypes.bool.isRequired,
 };
-
-

@@ -29,12 +29,18 @@ class Events extends React.Component {
 
     if (!loading && eventsLoaded !== undefined) {
       if (eventsLoaded.length !== 0) {
-        
         this.events = (
           <Grid container spacing={2} className="whitebox">
             {eventsLoaded.map(item => (
               <Grid item xs={12} sm={12} xl={6} lg={6} key={item.id}>
-                <Event item={item} />
+                <Event
+                  title={item.title}
+                  content={item.content_short}
+                  date={item.date}
+                  media={item.media}
+                  slug={item.slug}
+                  button
+                />
               </Grid>
             ))}
           </Grid>
@@ -60,7 +66,6 @@ Events.propTypes = {
   getEventsForPage: PropTypes.func.isRequired,
   // events: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
-  eventsLoaded: PropTypes.object.isRequired,
 };
 
 // == Export
