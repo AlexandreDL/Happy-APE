@@ -2,12 +2,13 @@ import React from 'react';
 import { Container } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
+import ReactMarkdown from 'react-markdown';
 
 
-import './legalMentions.scss';
+import './LegalMentions.scss';
 
 
-class legalMentions extends React.Component {
+class LegalMentions extends React.Component {
   componentWillMount() {
     const { setLegalMentionsData } = this.props;
     setLegalMentionsData();
@@ -21,7 +22,7 @@ class legalMentions extends React.Component {
         {legalMentionsData.map(item => (
           <div className="mentions-content" key={item.id}>
             <Typography variant="h1">{item.title}</Typography>
-            <Typography variant="body1">{item.content}</Typography>
+            <Typography variant="body1"><ReactMarkdown source={item.content} /></Typography>
           </div>
         ))
           }
@@ -30,9 +31,9 @@ class legalMentions extends React.Component {
   }
 }
 
-export default legalMentions;
+export default LegalMentions;
 
-legalMentions.propTypes = {
+LegalMentions.propTypes = {
   legalMentionsData: PropTypes.array.isRequired,
   setLegalMentionsData: PropTypes.func.isRequired,
 };

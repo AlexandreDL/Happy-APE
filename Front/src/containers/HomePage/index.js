@@ -13,7 +13,7 @@ import { getHomepageData } from 'src/store/reducer';
  *  - ownProps : les props passées au container
  * Pas de data à transmettre ? const mapStateToProps = null;
  */
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = state => ({
   homepageData: (state.homepageData) ? state.homepageData : {},
   loading: state.loading,
 });
@@ -25,7 +25,7 @@ const mapStateToProps = (state, ownProps) => ({
  *  - ownProps : les props passées au container
  * Pas de disptach à transmettre ? const mapDispatchToProps = {};
  */
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   setHomepageData: () => (dispatch(getHomepageData())),
 });
 

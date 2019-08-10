@@ -3,6 +3,7 @@ import { Container, LinearProgress } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import './cgu.scss';
+import ReactMarkdown from 'react-markdown';
 
 class CGU extends React.Component {
   CGUData = null;
@@ -21,7 +22,7 @@ class CGU extends React.Component {
           {CGUData.map(item => (
             <div className="mentions-content" key={item.id}>
               <Typography variant="h1">{item.title}</Typography>
-              <Typography variant="body1">{item.content}</Typography>
+              <Typography variant="body1"><ReactMarkdown source={item.content} /></Typography>
             </div>
           ))
             }
