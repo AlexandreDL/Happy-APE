@@ -19,45 +19,16 @@ class NewsRepository extends ServiceEntityRepository
         parent::__construct($registry, News::class);
     }
 
-    public function findNextNews() {
-      
+    public function findNextNews()
+    {
         $query = $this->createQueryBuilder('n')
             ->leftJoin('n.author', 'u')
             ->leftJoin('n.media', 'm')
-            //->leftJoin('n.tags', 't') !!!!!!!!!!!!!!!!!!!!!!!!! BUG TO FIXE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             ->addSelect('u', 'm')
             ->where("n.isPublished = 1")
-            ->orderBy('n.createdAt', 'DESC')
+            ->orderBy('n.updatedAt', 'DESC')
             ->setMaxResults(3)
             ;
         return $query->getQuery()->getArrayResult();
     }
-    // /**
-    //  * @return News[] Returns an array of News objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('n')
-            ->andWhere('n.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('n.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?News
-    {
-        return $this->createQueryBuilder('n')
-            ->andWhere('n.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

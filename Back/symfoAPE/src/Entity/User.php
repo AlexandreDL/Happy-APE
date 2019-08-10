@@ -142,14 +142,14 @@ class User implements UserInterface
     private $updatedAt;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\Email()
      * @Groups({"read"})
      */
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\Length(min="2", minMessage="Votre nom d'utilisateur doit faire minimum 2 caractères")
      * @Groups({"read"})
      */

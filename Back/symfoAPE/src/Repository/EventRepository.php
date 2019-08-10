@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use DateTime;
 use App\Entity\Event;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Event|null find($id, $lockMode = null, $lockVersion = null)
@@ -26,7 +27,9 @@ class EventRepository extends ServiceEntityRepository
             ->leftJoin('e.author', 'u')
             ->leftJoin('e.media', 'm')
             ->where("e.isPublished = 1")
+            ->andWhere('e.date > :now')
             ->orderBy('e.date')
+            ->setParameter('now', new \DateTime())
             ->setMaxResults(3)
             ;
         return $query->getQuery()->getArrayResult();
@@ -36,38 +39,12 @@ class EventRepository extends ServiceEntityRepository
             ->join('e.author', 'u')
             ->join('e.media', 'm')
             ->where("e.isPublished = 1")
+            ->andWhere('e.date > :now')
             ->orderBy('e.date')
+            ->setParameter('now', new \DateTime())
             ->setMaxResults(1)
             ;
         return $query->getQuery()->getResult();
     }
     
-    // /**
-    //  * @return Event[] Returns an array of Event objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('e.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Event
-    {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
