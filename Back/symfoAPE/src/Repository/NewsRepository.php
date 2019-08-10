@@ -19,8 +19,8 @@ class NewsRepository extends ServiceEntityRepository
         parent::__construct($registry, News::class);
     }
 
-    public function findNextNews() {
-      
+    public function findNext($max_results = 1, $as_array = false)
+    {
         $query = $this->createQueryBuilder('n')
             ->leftJoin('n.author', 'u')
             ->leftJoin('n.media', 'm')
@@ -28,10 +28,15 @@ class NewsRepository extends ServiceEntityRepository
             ->addSelect('u', 'm')
             ->where("n.isPublished = 1")
             ->orderBy('n.createdAt', 'DESC')
-            ->setMaxResults(3)
+            ->setMaxResults($max_results)
             ;
-        return $query->getQuery()->getArrayResult();
+        if(empty($as_array)){
+            return $query->getQuery()->getResult();
+        }else{
+            return $query->getQuery()->getArrayResult();
+        }
     }
+
     // /**
     //  * @return News[] Returns an array of News objects
     //  */

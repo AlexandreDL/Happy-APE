@@ -19,27 +19,20 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
-
-    public function findNext3() {
-      
+    public function findNext($max_results = 1, $as_array = false)
+    {  
         $query = $this->createQueryBuilder('e')
             ->leftJoin('e.author', 'u')
             ->leftJoin('e.media', 'm')
             ->where("e.isPublished = 1")
             ->orderBy('e.date')
-            ->setMaxResults(3)
+            ->setMaxResults($max_results)
             ;
-        return $query->getQuery()->getArrayResult();
-    }
-    public function findNext() {
-        $query = $this->createQueryBuilder('e')
-            ->join('e.author', 'u')
-            ->join('e.media', 'm')
-            ->where("e.isPublished = 1")
-            ->orderBy('e.date')
-            ->setMaxResults(1)
-            ;
-        return $query->getQuery()->getResult();
+        if(empty($as_array)){
+            return $query->getQuery()->getResult();
+        }else{
+            return $query->getQuery()->getArrayResult();
+        }
     }
     
     // /**
