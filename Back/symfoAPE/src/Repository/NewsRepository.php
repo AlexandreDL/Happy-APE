@@ -15,6 +15,7 @@ class NewsRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, News::class);
     }
+
     public function findNext($max_results = 1, $as_array = false)
     {
         $query = $this->createQueryBuilder('n')
@@ -26,9 +27,10 @@ class NewsRepository extends ServiceEntityRepository
             ->orderBy('n.createdAt', 'DESC')
             ->setMaxResults($max_results)
             ;
-        if (empty($as_array)) {
+
+        if(empty($as_array)){
             return $query->getQuery()->getResult();
-        } else {
+        }else{
             return $query->getQuery()->getArrayResult();
         }
     }

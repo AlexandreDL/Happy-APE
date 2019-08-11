@@ -15,8 +15,9 @@ class EventRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Event::class);
     }
+
     public function findNext($max_results = 1, $as_array = false)
-    {
+    {  
         $query = $this->createQueryBuilder('e')
             //->leftJoin('e.author', 'u')
             ->leftJoin('e.media', 'm')
@@ -24,9 +25,10 @@ class EventRepository extends ServiceEntityRepository
             ->orderBy('e.date')
             ->setMaxResults($max_results)
             ;
-        if (empty($as_array)) {
+      
+        if(empty($as_array)){
             return $query->getQuery()->getResult();
-        } else {
+        }else{
             return $query->getQuery()->getArrayResult();
         }
     }
