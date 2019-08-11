@@ -19,7 +19,7 @@ import Footer from 'src/containers/Includes/Footer';
 import WhoAreWe from 'src/containers/WhoAreWe';
 import Contact from 'src/containers/Contact';
 import Events from 'src/containers/Events';
-import LegalMentions from 'src/containers/LegalMentions';
+import LegalMentions from 'src/containers/legalMentions';
 import EventDetail from 'src/containers/EventDetail';
 import NewsDetail from 'src/containers/NewsDetail';
 import Login from 'src/containers/User/Login';

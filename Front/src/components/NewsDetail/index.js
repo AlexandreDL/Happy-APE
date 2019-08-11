@@ -3,10 +3,11 @@ import React from 'react';
 import { Grid, CircularProgress  } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
+import dateParser from 'src/utils/dateParser';
 
 // == Import : local
 
-import './newsDetails.scss';
+
 
 // == Composant
 class NewsDetail extends React.Component {
@@ -26,7 +27,7 @@ class NewsDetail extends React.Component {
 
   render() {
     const { homepageData, slug, loading } = this.props;
-
+    
 
     if (homepageData !== undefined) {
       this.actualNews = homepageData.news.find(actu => actu.slug === slug);
@@ -46,16 +47,17 @@ class NewsDetail extends React.Component {
           <React.Fragment>
             <Grid
               container
+              className="whitebox"
               direction="row"
               justify="center"
               alignItems="flex-start"
-              className="news-content"
             >
-            <Grid item xs={12} sm={12} xl={12} lg={12} className="newContent">
-              <Typography variant="h2">{this.actualNews.title}</Typography>              
-              <Typography variant="body2">{this.actualNews.content}</Typography>
-              <Typography variant="h4">publié le {day} {dayNumber} {month} {itemYear}</Typography>
-            </Grid>
+              <Grid item xs={12} sm={12} xl={12} lg={12} >
+                <Typography variant="h2">{this.actualNews.title}</Typography>  
+                <Typography variant="h4">publié le {day} {dayNumber} {month} {itemYear}</Typography>            
+                <Typography variant="body2">{this.actualNews.content}</Typography>
+                
+              </Grid>
             </Grid>
           </React.Fragment>
         );
