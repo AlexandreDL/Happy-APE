@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ApiResource(routePrefix="/profile", 
+ * @ApiResource(
  *      normalizationContext={"groups"={"read"}},
  *      itemOperations={
  *          "get"={
