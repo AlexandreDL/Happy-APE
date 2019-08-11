@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ApiResource(routePrefix="/profile", 
+ * @ApiResource(
  *      normalizationContext={"groups"={"read"}},
  *      itemOperations={
  *          "get"={
@@ -142,14 +142,14 @@ class User implements UserInterface
     private $updatedAt;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\Email()
      * @Groups({"read"})
      */
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\Length(min="2", minMessage="Votre nom d'utilisateur doit faire minimum 2 caractères")
      * @Groups({"read"})
      */
@@ -161,7 +161,13 @@ class User implements UserInterface
      */
     private $roles = ["ROLE_USER"];
 
-
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime;
+        $this->updatedAt = new \DateTime;
+        $this->isActive = true;
+    }
+    
     public function getId(): ?int
     {
         return $this->id;
