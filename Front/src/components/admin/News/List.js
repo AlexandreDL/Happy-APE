@@ -13,14 +13,12 @@ import {
   SimpleList,
   Responsive,
   RichTextField,
+  DeleteButton,
 } from 'react-admin';
 
 const NewsFilter = props => (
   <Filter {...props}>
     <TextInput label="Search" source="q" alwaysOn />
-    <ReferenceInput label="User" source="author" reference="news" allowEmpty>
-      <SelectInput optionText="lastname" />
-    </ReferenceInput>
   </Filter>
 );
 
@@ -37,14 +35,11 @@ const NewsList = props => (
 )}
       medium={(
         <Datagrid>
-          <TextField source="id" />
-          <ReferenceField label="User" source="author" reference="news">
-            <TextField source="lastname" />
-          </ReferenceField>
           <TextField source="title" />
-          <RichTextField source="content" />
+          <TextField source="createdAt" />
           <EditButton />
           <ShowButton />
+          <DeleteButton />
         </Datagrid>
 )}
         />
