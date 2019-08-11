@@ -255,14 +255,14 @@ export function sendContactForm(contactData) {
   };
 }
 
-export function login(username, password) {
+export function login(email, password) {
   return {
     type: 'LOGIN',
     payload: {
       request: {
         url: '/api/login_check',
         data: {
-          username,
+          email,
           password,
         },
         method: 'POST',

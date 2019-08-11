@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import theme from 'src/components/App/theme';
+import { baseUrl, apiUrl } from 'src/utils/variables';
 
 import { Admin, Resource } from 'react-admin';
 // lien vers nos composants
@@ -42,21 +43,26 @@ import Folder from '@material-ui/icons/Folder';
 
 // reactadmin
 import parseHydraDocumentation from '@api-platform/api-doc-parser/lib/hydra/parseHydraDocumentation';
-import { hydraClient, fetchHydra as baseFetchHydra  } from '@api-platform/admin';
+import { hydraClient, fetchHydra as baseFetchHydra } from '@api-platform/admin';
 import authProvider from 'src/components/admin/Utils/authProvider';
 import { Redirect } from 'react-router-dom';
 import { LinearProgress } from '@material-ui/core';
 // import Layout from './Component/Layout';
 // import dataProvider from 'src/components/admin/DataProvider';
 
-const entrypoint = 'https://back.isodev.ovh/api/';
-const fetchHeaders = {Authorization: `Bearer ${window.localStorage.getItem('token')}`};
+const entrypoint = apiUrl;
+console.log(apiUrl);
+const bearer = localStorage.getItem('userToken');
+const fetchHeaders = { Authorization: `Bearer ${bearer}` };
 const fetchHydra = (url, options = {}) => baseFetchHydra(url, {
   ...options,
   headers: new Headers(fetchHeaders),
 });
 const dataProvider = api => hydraClient(api, fetchHydra);
-const apiDocumentationParser = entrypoint => parseHydraDocumentation(entrypoint, { headers: new Headers(fetchHeaders) })
+const apiDocumentationParser = entrypoint => parseHydraDocumentation(
+  entrypoint,
+  { headers: new Headers(fetchHeaders) },
+)
   .then(
     ({ api }) => ({ api }),
     (result) => {
@@ -66,8 +72,10 @@ const apiDocumentationParser = entrypoint => parseHydraDocumentation(entrypoint,
             api: result.api,
             customRoutes: [{
               props: {
-                path: '/',
-                render: () => <Redirect to="/login"/>,
+                path: baseUrl,
+                render: () => {
+                  window.location.replace('/login');
+                },
               },
             }],
           });
@@ -91,6 +99,7 @@ export default class extends Component {
 
     render() {
       if (this.state.api === null) return <LinearProgress />;
+      console.log(this.state.api);
       return (
         <MuiThemeProvider theme={theme}>
           <Admin api={ this.state.api }
@@ -102,7 +111,7 @@ export default class extends Component {
           >
             <Resource name="events" options={{ label: 'Événements' }} list={EventList} edit={EventEdit} create={EventCreate} show={EventShow} icon={EventAvailable} />
             <Resource name="news" options={{ label: 'Actualités' }} list={NewsList} edit={NewsEdit} create={NewsCreate} show={NewsShow} icon={Announcement} />
-            <Resource name="profile/users" options={{ label: 'Utilisateurs' }} list={UserList} edit={UserEdit} show={UserShow} icon={UserIcon} />
+            <Resource name="users" options={{ label: 'Utilisateurs' }} list={UserList} edit={UserEdit} show={UserShow} icon={UserIcon} />
             <Resource name="pages" options={{ label: 'Pages' }} list={PageList} edit={PageEdit} icon={FormatIndentIncrease} />
             <Resource name="contacts" options={{ label: 'Contact' }} list={ContactList} show={ContactShow} icon={LocalPostOffice} />
             <Resource name="private_posts" options={{ label: 'Actu interne' }} list={PrivatePostList} edit={PrivatePostEdit} show={PrivatePostShow} create={PrivatePostCreate} icon={AddToHomeScreen} />

@@ -38,7 +38,6 @@ const PageList = props => (
       medium={(
         <Datagrid>
           <RichTextField source="title" />
-          <RichTextField source="content" />
           <EditButton />
           <ShowButton />
         </Datagrid>

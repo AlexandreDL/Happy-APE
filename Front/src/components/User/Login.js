@@ -30,7 +30,7 @@ class Login extends React.Component {
     const { user } = this.props;
 
     if (user !== null) {
-      localStorage.setItem('userToken', user.token);
+      localStorage.setItem('userToken', String(user.token));
       localStorage.setItem('userId', user.id);
       localStorage.setItem('isLoggedIn', true);
       window.location.replace('/');

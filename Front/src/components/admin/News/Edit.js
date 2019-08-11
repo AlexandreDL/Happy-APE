@@ -2,11 +2,7 @@ import React from 'react';
 import {
   Edit,
   SimpleForm,
-  ReferenceInput,
   TextInput,
-  DisabledInput,
-  SelectInput,
- 
 } from 'react-admin';
 import RichTextInput from 'ra-input-rich-text';
 
@@ -19,9 +15,6 @@ const NewsEdit = props => (
   <Edit title={<NewsTitle />} {...props}>
     <SimpleForm>
       <TextInput source="id" />
-      <ReferenceInput source="author" reference="news">
-        <SelectInput optionText="lastname" />
-      </ReferenceInput>
       <TextInput source="title" />
       <RichTextInput source="content" />
     </SimpleForm>
