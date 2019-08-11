@@ -4,8 +4,11 @@ import { Grid, CircularProgress  } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import dateParser from 'src/utils/dateParser';
+import CardMedia from '@material-ui/core/CardMedia';
+import Card from '@material-ui/core/Card';
 
 // == Import : local
+import './newsDetails.scss';
 
 
 
@@ -31,6 +34,7 @@ class NewsDetail extends React.Component {
 
     if (homepageData !== undefined) {
       this.actualNews = homepageData.news.find(actu => actu.slug === slug);
+      console.log(this.actualNews.media[0].url);
       if (this.actualNews !== null) {
         const itemDay = new Date(this.actualNews.createdAt).getDay();
         const week = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi']
@@ -41,6 +45,7 @@ class NewsDetail extends React.Component {
         const month = year[itemMonth];
         const dayNumber = new Date(this.actualNews.createdAt).getUTCDate();
         const itemYear = new Date(this.actualNews.createdAt).getFullYear();
+        const NewsImage = this.actualNews.media[0].url;
 
 
         this.newsLoaded = (
@@ -52,11 +57,11 @@ class NewsDetail extends React.Component {
               justify="center"
               alignItems="flex-start"
             >
-              <Grid item xs={12} sm={12} xl={12} lg={12} >
-                <Typography variant="h2">{this.actualNews.title}</Typography>  
-                <Typography variant="h4">publié le {day} {dayNumber} {month} {itemYear}</Typography>            
-                <Typography variant="body2">{this.actualNews.content}</Typography>
-                
+              <Grid item xs={12} sm={12} xl={12} lg={12} >            
+                <Typography variant="h2">{this.actualNews.title}</Typography>
+                <Typography variant="h4">publié le {day} {dayNumber} {month} {itemYear}</Typography>        
+                <img src={NewsImage} alt="" className="newsImage"/>                        
+                <Typography variant="body2" dangerouslySetInnerHTML={{ __html: this.actualNews.content }} />                           
               </Grid>
             </Grid>
           </React.Fragment>
