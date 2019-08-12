@@ -98,8 +98,12 @@ class HomePage extends React.Component {
           <Grid item xs={12} sm={12} xl={12} lg={12}>
             <Slider />
           </Grid>
+          <Grid item xs={12} sm={12} xl={12} lg={12}>
+            <Typography variant="h2" align="center">Bienvenue !</Typography>
+            <Typography variant="body1">Bienvenue sur le site de l'association de parents d'élèves Happy APE. Nous sommes des parents d'élèves bénévoles qui oeuvront à financer les activités de nos enfants. Vous trouverez l'ensemble de nos action sur ce site ! !</Typography>
+          </Grid>
           <Divider />
-          <Grid item xs={12} sm={12} xl={12} lg={6} className="event">
+          <Grid item xs={12} sm={6} xl={6} lg={6} className="event">
             {!loading ? this.event : (
               <div className="cpcenter">
                 <LinearProgress color="secondary" />
