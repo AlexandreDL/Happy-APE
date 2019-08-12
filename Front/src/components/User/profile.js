@@ -72,7 +72,7 @@ class Profile extends React.Component {
     // console.log(privatePost['hydra:member']);
     const privatePostLoaded = privatePost['hydra:member'];
     console.log(privatePostLoaded);
-    // const date = dateParser(createdAt);
+   
 
 
     if (!loading && privatePostLoaded !== undefined) {
