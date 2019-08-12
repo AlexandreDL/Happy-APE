@@ -7,6 +7,8 @@ import dateParser from 'src/utils/dateParser';
 import CardMedia from '@material-ui/core/CardMedia';
 import Card from '@material-ui/core/Card';
 
+
+
 // == Import : local
 import './newsDetails.scss';
 
@@ -36,15 +38,7 @@ class NewsDetail extends React.Component {
       this.actualNews = homepageData.news.find(actu => actu.slug === slug);
       console.log(this.actualNews.media[0].url);
       if (this.actualNews !== null) {
-        const itemDay = new Date(this.actualNews.createdAt).getDay();
-        const week = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi']
-        const day = week[itemDay];
-        const itemMonth = new Date(this.actualNews.createdAt).getMonth();
-       
-        const year = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet']
-        const month = year[itemMonth];
-        const dayNumber = new Date(this.actualNews.createdAt).getUTCDate();
-        const itemYear = new Date(this.actualNews.createdAt).getFullYear();
+        
         const NewsImage = this.actualNews.media[0].url;
 
 
@@ -59,7 +53,7 @@ class NewsDetail extends React.Component {
             >
               <Grid item xs={12} sm={12} xl={12} lg={12} >            
                 <Typography variant="h2">{this.actualNews.title}</Typography>
-                <Typography variant="h4">publié le {day} {dayNumber} {month} {itemYear}</Typography>        
+                <Typography variant="h4">publié le {dateParser(this.actualNews.createdAt).day} {dateParser(this.actualNews.createdAt).dayNumber} {dateParser(this.actualNews.createdAt).month} {dateParser(this.actualNews.createdAt).itemYear}</Typography>        
                 <img src={NewsImage} alt="" className="newsImage"/>                        
                 <Typography variant="body2" dangerouslySetInnerHTML={{ __html: this.actualNews.content }} />                           
               </Grid>
