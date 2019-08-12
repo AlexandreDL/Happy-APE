@@ -80,19 +80,19 @@ class Medium
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Event", inversedBy="media", onDelete="SET NULL")
-     */
-    private $event;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\News", inversedBy="media", onDelete="SET NULL")
+     * @ORM\OneToOne(targetEntity="App\Entity\News", inversedBy="medium", cascade={"persist", "remove"})
      */
     private $news;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\PrivatePost", inversedBy="media", onDelete="SET NULL")
+     * @ORM\OneToOne(targetEntity="App\Entity\PrivatePost", inversedBy="medium", cascade={"persist", "remove"})
      */
-    private $privatePost;
+    private $private_post;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Event", inversedBy="medium", cascade={"persist", "remove"})
+     */
+    private $event;
 
     public function __construct()
     {
@@ -165,14 +165,14 @@ class Medium
         return $this;
     }
 
-    public function getEvent(): ?Event
+    public function getPrivatePost(): ?PrivatePost
     {
-        return $this->event;
+        return $this->privatePost;
     }
 
-    public function setEvent(?Event $event): self
+    public function setPrivatePost(?PrivatePost $privatePost): self
     {
-        $this->event = $event;
+        $this->privatePost = $privatePost;
 
         return $this;
     }
@@ -189,14 +189,34 @@ class Medium
         return $this;
     }
 
-    public function getPrivatePost(): ?PrivatePost
+    public function getEvent(): ?Event
     {
-        return $this->privatePost;
+        return $this->event;
     }
 
-    public function setPrivatePost(?PrivatePost $privatePost): self
+    public function setEvent(?Event $event): self
     {
-        $this->privatePost = $privatePost;
+        $this->event = $event;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of private_post
+     */ 
+    public function getPrivate_post()
+    {
+        return $this->private_post;
+    }
+
+    /**
+     * Set the value of private_post
+     *
+     * @return  self
+     */ 
+    public function setPrivate_post($private_post)
+    {
+        $this->private_post = $private_post;
 
         return $this;
     }

@@ -20,7 +20,7 @@ class EventRepository extends ServiceEntityRepository
     {  
         $query = $this->createQueryBuilder('e')
             //->leftJoin('e.author', 'u')
-            ->leftJoin('e.media', 'm')
+            ->join('e.medium', 'm')
             ->where("e.isPublished = 1")
             ->orderBy('e.date')
             ->setMaxResults($max_results)

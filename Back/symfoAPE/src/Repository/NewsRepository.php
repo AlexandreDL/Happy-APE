@@ -20,7 +20,7 @@ class NewsRepository extends ServiceEntityRepository
     {
         $query = $this->createQueryBuilder('n')
             //->leftJoin('n.author', 'u')
-            ->leftJoin('n.media', 'm')
+            ->leftJoin('n.medium', 'm')
             //->leftJoin('n.tags', 't') !!!!!!!!!!!!!!!!!!!!!!!!! BUG TO FIXE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             ->addSelect('m')
             ->where("n.isPublished = 1")

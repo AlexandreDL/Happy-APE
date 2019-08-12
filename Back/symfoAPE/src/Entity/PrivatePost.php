@@ -60,15 +60,15 @@ class PrivatePost
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Medium", mappedBy="privatePost")
+     * @ORM\OneToOne(targetEntity="App\Entity\Medium", mappedBy="private_post", cascade={"persist", "remove"})
      */
-    private $media;
+    private $medium;
+
 
     public function __construct()
     {
         $this->createdAt = new \DateTime;
         $this->updatedAt = new \DateTime;
-        $this->media = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -124,32 +124,19 @@ class PrivatePost
         return $this;
     }
 
-    /**
-     * @return Collection|Medium[]
-     */
-    public function getMedia(): Collection
+    public function getMedium(): ?Medium
     {
-        return $this->media;
+        return $this->medium;
     }
 
-    public function addMedium(Medium $medium): self
+    public function setMedium(?Medium $medium): self
     {
-        if (!$this->media->contains($medium)) {
-            $this->media[] = $medium;
-            $medium->setPrivatePost($this);
-        }
+        $this->medium = $medium;
 
-        return $this;
-    }
-
-    public function removeMedium(Medium $medium): self
-    {
-        if ($this->media->contains($medium)) {
-            $this->media->removeElement($medium);
-            // set the owning side to null (unless already changed)
-            if ($medium->getPrivatePost() === $this) {
-                $medium->setPrivatePost(null);
-            }
+        // set (or unset) the owning side of the relation if necessary
+        $newPrivate_post = $medium === null ? null : $this;
+        if ($newPrivate_post !== $medium->getPrivatePost()) {
+            $medium->setPrivatePost($newPrivate_post);
         }
 
         return $this;
