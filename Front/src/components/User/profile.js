@@ -11,6 +11,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import PhotoGallery from 'src/components/User/PhotoGallery';
 import dateParser from 'src/utils/dateParser';
+import CardMedia from '@material-ui/core/CardMedia';
+
 
 import './profile.scss';
 
@@ -57,11 +59,6 @@ class Profile extends React.Component {
     setPrivatePosts();
   }
   
-  componentDidMount() {
-    const { setPrivatePosts } = this.props;
-    setPrivatePosts();
-  }
-
   handleChange = (event, newValue) => {
     this.setState({ value: newValue });
   }
@@ -70,7 +67,7 @@ class Profile extends React.Component {
 
     const { loading, privatePost, createdAt } = this.props;
     // console.log(privatePost['hydra:member']);
-    const privatePostLoaded = privatePost['hydra:member'];
+    const privatePostLoaded = privatePost;
     console.log(privatePostLoaded);
    
 
@@ -116,6 +113,9 @@ class Profile extends React.Component {
           </Tabs>
         </AppBar>
         <TabPanel value={this.state.value} index={0}>
+        <Typography variant="h1">Mes informations personnelles</Typography>
+        <Typography  variant="h4">Pour faciliter nos échanges merci de bien vouloir compléter et/ou mettre à jour vos informations</Typography> 
+       
           <ul>
             <li>Mon Nom</li>
             <li>Mon Prénom</li>
@@ -124,14 +124,31 @@ class Profile extends React.Component {
             <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat quam officia sed cumque incidunt enim tempore quod ipsa rerum nam, consequuntur est natus vitae corporis molestiae accusantium, architecto dolorem earum.</li>
           </ul>
         </TabPanel>
-        <TabPanel value={this.state.value} index={1}>          
+        <TabPanel value={this.state.value} index={1}> 
+        <Typography variant="h1">Messages de l'association</Typography>         
           {this.privatePostProfile}                
         </TabPanel>
+
         <TabPanel value={this.state.value} index={2}>
-          <h1>Lorem ipsum dolor sit amet.</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut quis quod laboriosam ipsum velit sapiente vitae nam blanditiis error atque maiores, eligendi id ullam rerum alias quia nulla exercitationem! Impedit vel nobis itaque et dolor est explicabo mollitia quia. Numquam quos quis error quae, accusantium molestias expedita vitae culpa sequi.</p>
+          <Typography variant="h1">Fichiers disponibles</Typography>
+          <div className="profile_pdf">                
+            <a href="https://static.isodev.ovh/file/cotisation.pdf"><img className="profile_pdf_image" src="https://www.obesity.org/wp-content/uploads/2019/02/pdf-png.png" alt="pdf"/></a>
+            <Typography variant="h4">Le document d'inscription à nous rendre début octobre</Typography>   
+          </div>         
+          <Divider /> 
+          <div className="profile_pdf">                
+            <a href="https://static.isodev.ovh/file/commande.pdf"><img className="profile_pdf_image" src="https://www.obesity.org/wp-content/uploads/2019/02/pdf-png.png" alt="pdf"/></a>
+            <Typography variant="h4">le bon de commande pour les pizzas !</Typography>   
+          </div>         
+          <Divider />  
+          <div className="profile_pdf">                
+            <a href="https://static.isodev.ovh/file/compte_rendu.pdf"><img className="profile_pdf_image" src="https://www.obesity.org/wp-content/uploads/2019/02/pdf-png.png" alt="pdf"/></a>
+            <Typography variant="h4">le compte rendu de la réunion de préparation pour la fête de la bière</Typography>   
+          </div>         
+          <Divider />          
         </TabPanel>
         <TabPanel value={this.state.value} index={3}>
+        <Typography variant="h1">Les photos de l'association</Typography>    
           <PhotoGallery />
         </TabPanel>
       </div>

@@ -34,6 +34,7 @@ const generalTheme = createMuiTheme({
       color: '#FF732D',
       fontSize: '1.8rem',
       paddingTop: 20,
+      marginBottom: 20,
       fontWeight: 'bold',
       textAlign: 'left',
       borderBottom: '1px solid #FF732D'
