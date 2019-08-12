@@ -199,6 +199,10 @@ export function getPrivatePosts() {
     payload: {
       request: {
         url: '/api/private_posts',
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('userToken')}`,
+        },
       },
     },
   };
