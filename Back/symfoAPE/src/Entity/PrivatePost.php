@@ -60,7 +60,7 @@ class PrivatePost
     private $updatedAt;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Medium", mappedBy="private_post", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Medium", mappedBy="privatePost", cascade={"persist", "remove"})
      */
     private $medium;
 
@@ -134,9 +134,9 @@ class PrivatePost
         $this->medium = $medium;
 
         // set (or unset) the owning side of the relation if necessary
-        $newPrivate_post = $medium === null ? null : $this;
-        if ($newPrivate_post !== $medium->getPrivatePost()) {
-            $medium->setPrivatePost($newPrivate_post);
+        $newPrivatePost = $medium === null ? null : $this;
+        if ($newPrivatePost !== $medium->getPrivatePost()) {
+            $medium->setPrivatePost($newPrivatePost);
         }
 
         return $this;
