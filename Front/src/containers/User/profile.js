@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 // == Import : local
 import Profile from 'src/components/User/profile';
-import { getPrivatePosts } from 'src/store/reducer';
+import { getPrivatePosts, getUser } from 'src/store/reducer';
 
 /* === State (données) ===
  * - mapStateToProps retroune un objet de props pour le composant de présentation
@@ -14,6 +14,7 @@ import { getPrivatePosts } from 'src/store/reducer';
  */
 const mapStateToProps = (state, ownProps) => ({
   privatePost: state.privatePost,
+  userLoaded: state.userLoaded,
   loading: state.loading,
 });
 
@@ -26,6 +27,7 @@ const mapStateToProps = (state, ownProps) => ({
  */
 const mapDispatchToProps = (dispatch, ownProps) => ({
   setPrivatePosts: () => (dispatch(getPrivatePosts())),
+  setUserLoaded: id => (dispatch(getUser(id))),
 });
 
 // Container
