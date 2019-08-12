@@ -12,18 +12,12 @@ use App\Utils\Slugger;
  * @ApiResource(
  *      itemOperations={
  *          "get", 
- *          "put"={
- *             "access_control"="is_granted('ROLE_REDACT'),"
- *         },
- *           "delete"={
- *             "access_control"="is_granted('ROLE_REDACT'),"
- *         }
+ *          "put"={"access_control"="is_granted('ROLE_REDACT')"},
+ *           "delete"={"access_control"="is_granted('ROLE_REDACT')"}
  *      },
  *      collectionOperations={
  *          "get", 
- *          "post"={
- *             "access_control"="is_granted('ROLE_REDACT'),"
- *         }
+ *          "post"={"access_control"="is_granted('ROLE_REDACT')"}
  *      }
  * )
  * @ORM\Entity(repositoryClass="App\Repository\NewsRepository")

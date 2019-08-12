@@ -11,16 +11,16 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      itemOperations={
  *          "get",
  *          "put"={
- *             "access_control"="is_granted('ROLE_REDACT'),"
+ *             "access_control"="is_granted('ROLE_REDACT')"
  *         },
  *           "delete"={
- *             "access_control"="is_granted('ROLE_REDACT'),"
+ *             "access_control"="is_granted('ROLE_REDACT')"
  *         }
  *      },
  *      collectionOperations={
  *           "get",
  *          "post"={
- *             "access_control"="is_granted('ROLE_REDACT'),"
+ *             "access_control"="is_granted('ROLE_REDACT')"
  *         }
  *      }   
  * )
