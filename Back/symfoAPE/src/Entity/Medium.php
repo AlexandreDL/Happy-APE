@@ -80,17 +80,17 @@ class Medium
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Event", inversedBy="media")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Event", inversedBy="media", onDelete="SET NULL")
      */
     private $event;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\News", inversedBy="media")
+     * @ORM\ManyToOne(targetEntity="App\Entity\News", inversedBy="media", onDelete="SET NULL")
      */
     private $news;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\PrivatePost", inversedBy="media")
+     * @ORM\ManyToOne(targetEntity="App\Entity\PrivatePost", inversedBy="media", onDelete="SET NULL")
      */
     private $privatePost;
 

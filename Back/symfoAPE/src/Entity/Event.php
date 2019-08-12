@@ -83,7 +83,7 @@ class Event
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $author;
 
