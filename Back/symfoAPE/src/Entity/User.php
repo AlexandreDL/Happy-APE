@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ApiResource(
+ * @ApiResource(routePrefix="/profile", 
  *      normalizationContext={"groups"={"read"}},
  *      itemOperations={
  *          "get"={
@@ -156,7 +156,7 @@ class User implements UserInterface
     private $username;
 
     /**
-     * Column(type="json")
+    * @ORM\Column(type="json_array")
      * @Groups({"read"})
      */
     private $roles = ["ROLE_USER"];
