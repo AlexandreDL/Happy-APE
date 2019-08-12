@@ -52,10 +52,12 @@ const generalTheme = createMuiTheme({
       fontFamily: 'Raleway',
       fontSize: '0.9rem',
       fontWeight: 'bold',
+      paddingBottom: '1em',
     },
 
     h4: {
       fontSize: 13,
+      paddingBottom: '1em',
     },
     body1: {
       fontFamily: 'Raleway',
