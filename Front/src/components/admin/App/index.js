@@ -111,7 +111,7 @@ export default class extends Component {
           >
             <Resource name="events" options={{ label: 'Événements' }} list={EventList} edit={EventEdit} create={EventCreate} show={EventShow} icon={EventAvailable} />
             <Resource name="news" options={{ label: 'Actualités' }} list={NewsList} edit={NewsEdit} create={NewsCreate} show={NewsShow} icon={Announcement} />
-            <Resource name="users" options={{ label: 'Utilisateurs' }} list={UserList} edit={UserEdit} show={UserShow} icon={UserIcon} />
+            <Resource name="profile/users" options={{ label: 'Utilisateurs' }} list={UserList} edit={UserEdit} show={UserShow} icon={UserIcon} />
             <Resource name="pages" options={{ label: 'Pages' }} list={PageList} edit={PageEdit} icon={FormatIndentIncrease} />
             <Resource name="contacts" options={{ label: 'Contact' }} list={ContactList} show={ContactShow} icon={LocalPostOffice} />
             <Resource name="private_posts" options={{ label: 'Actu interne' }} list={PrivatePostList} edit={PrivatePostEdit} show={PrivatePostShow} create={PrivatePostCreate} icon={AddToHomeScreen} />

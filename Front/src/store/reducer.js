@@ -14,6 +14,8 @@ const initialState = {
 // == Types
 const GET_LEGAL_MENTIONS = 'GET_LEGAL_MENTIONS';
 const GET_PRIVATE_POSTS = 'GET_PRIVATE_POSTS';
+const GET_USER = 'GET_USER';
+const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
 const GET_PRIVATE_POSTS_SUCCESS = 'GET_PRIVATE_POSTS_SUCCESS';
 const GET_LEGAL_MENTIONS_SUCCESS = 'GET_LEGAL_MENTIONS_SUCCESS';
 const GET_LEGAL_MENTIONS_FAILURE = 'GET_LEGAL_MENTIONS_FAILURE';
@@ -99,6 +101,15 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         privatePost: action.payload.data,
         loading: false,
+      };
+    case GET_USER:
+      return {
+        ...state,
+      };
+    case GET_USER_SUCCESS:
+      return {
+        ...state,
+        userLoaded: action.payload.data,
       };
     case GET_CGVDATA:
       return {
@@ -199,6 +210,21 @@ export function getPrivatePosts() {
     payload: {
       request: {
         url: '/api/private_posts',
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('userToken')}`,
+        },
+      },
+    },
+  };
+}
+
+export function getUser(id) {
+  return {
+    type: GET_USER,
+    payload: {
+      request: {
+        url: `/api/profile/users/${id}`,
         headers: {
           Accept: 'application/json',
           Authorization: `Bearer ${localStorage.getItem('userToken')}`,
