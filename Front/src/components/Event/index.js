@@ -40,7 +40,6 @@ class Event extends React.Component {
         className="whitebox"
         direction="row"
         justify="center"
-        spacing={4}
       >
         <Grid item xs={12} sm={4} xl={4} lg={4}>
           <CardMedia
@@ -51,7 +50,7 @@ class Event extends React.Component {
             title={title}
           />
         </Grid>
-        <Grid item xs={12} sm={6} xl={6} lg={6}>
+        <Grid align="center" item xs={12} sm={6} xl={6} lg={6}>
           <Typography variant="h2">{title}</Typography>
           {button !== true && (
             <Typography variant="body2">{content}</Typography>
@@ -64,7 +63,7 @@ class Event extends React.Component {
           </div>
         </Grid>
         {button === true && (
-          <Grid item xs={12} sm={6} xl={6} lg={6} className="cpcenter">
+          <Grid align="center" item xs={12} sm={6} xl={6} lg={6} >
             <Link to={`/evenement/${slug}`} style={{ textDecoration: 'none' }}>
               <Button variant="contained" color="primary">
               Voir l'événement
