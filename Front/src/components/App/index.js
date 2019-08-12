@@ -24,7 +24,7 @@ import EventDetail from 'src/containers/EventDetail';
 import NewsDetail from 'src/containers/NewsDetail';
 import Login from 'src/containers/User/Login';
 import Signup from 'src/containers/User/Signup';
-import UserProfile from 'src/components/User/profile';
+import UserProfile from 'src/containers/User/profile';
 import AdminApp from 'src/components/admin/App';
 import Error from 'src/components/Error/error404';
 import Logout from 'src/components/User/Logout';

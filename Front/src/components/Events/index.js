@@ -12,7 +12,7 @@ import Event from 'src/components/Event';
 // == Composant
 class Events extends React.Component {
   events = null;
-
+  
   wait = null;
 
   componentDidMount() {
