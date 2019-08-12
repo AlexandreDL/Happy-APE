@@ -42,12 +42,6 @@ strong {
   padding: 15px;
 }
 
-.MuiInput-root {
-  min-width: 400px;
-  max-width: 95%;
-  margin: 50px 0;
-}
-
 h1 {
   font-size: 1.6em;
   font-weight: bold;
@@ -64,4 +58,18 @@ h3 {
   font-size: 1.3em;
   font-weight: bold;
   margin: 10px 0;
+}
+
+form {
+  margin: 0 auto;
+  text-align: center;
+
+  & .MuiInput-root {
+    margin: 50px 0;
+  }
+
+  & .MuiInput-input {
+    min-width: 50vw;
+    max-width: 95%;
+  }
 }
