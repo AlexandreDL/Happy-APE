@@ -5,4 +5,15 @@
   background-color: white;
  }
 
+ .profile_pdf {
+  display: flex;
+  padding-top: 2em;
+  align-items: center;
+
+&_image {
+  width: 50px;
+  padding: 1em;
+}
+}
+
 

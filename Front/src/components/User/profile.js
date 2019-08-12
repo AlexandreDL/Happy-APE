@@ -11,6 +11,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import PhotoGallery from 'src/components/User/PhotoGallery';
 import dateParser from 'src/utils/dateParser';
+import Button from '@material-ui/core/Button';
+
+
 
 import './profile.scss';
 import { TextField } from '@material-ui/core';
@@ -59,19 +62,17 @@ class Profile extends React.Component {
     setUserLoaded(localStorage.getItem('userId'));
   }
   
-  // componentDidMount() {
-  //   const { setPrivatePosts } = this.props;
-  //   setPrivatePosts();
-  // }
-
   handleChange = (event, newValue) => {
     this.setState({ value: newValue });
   }
 
   render() {
 
+
     const { loading, privatePost, userLoaded } = this.props;
     const privatePostLoaded = privatePost;
+    console.log (userLoaded);
+
 
     if (!loading && privatePostLoaded !== undefined) {
       if (privatePostLoaded.length !== 0) {
@@ -121,8 +122,39 @@ class Profile extends React.Component {
                     value={userLoaded.email}
                   />
                 </li>
-                <li>Je suis parent d'élève: {userLoaded.isParent ? 'Oui' : 'Non'}</li>
+                <li>
+                  <TextField
+                    id="user.addressNumber"
+                    label="Mon numéro de rue"
+                    value={userLoaded.addressNumber}
+                  />
+                </li>
+                <li>
+                  <TextField
+                    id="user.addressStreet"
+                    label="Ma rue"
+                    value={userLoaded.addressStreet}
+                  />
+                </li>
+                <li>
+                  <TextField
+                    id="user.addressZipcode"
+                    label="Mon code postal"
+                    value={userLoaded.addressZipcode}
+                  />
+                </li>
+                <li>
+                  <TextField
+                    id="user.addressCity"
+                    label="Mon village"
+                    value={userLoaded.addressCity}
+                  />
+                </li>
+                <li>Je suis parent d'élève: {userLoaded.isParent ? 'Oui' : 'Non'}</li>              
               </ul>
+              <Button variant="contained" color="primary" type="submit">
+                    Envoyer les données
+                </Button>
             </form>
           );
         }
@@ -144,16 +176,39 @@ class Profile extends React.Component {
           </Tabs>
         </AppBar>
         <TabPanel value={this.state.value} index={0}>
-          {this.userBlock}
+
+          <Typography variant="h1">Mes informations personnelles</Typography>
+          <Typography  variant="h3">Pour faciliter nos échanges merci de bien vouloir compléter et/ou mettre à jour vos informations</Typography> 
+            {this.userBlock}
         </TabPanel>
-        <TabPanel value={this.state.value} index={1}>          
+        <TabPanel value={this.state.value} index={1}> 
+          <Typography variant="h1">Messages de l'association</Typography>  
+          <Typography  variant="h3">Ci-dessous les actualités de l'association </Typography>        
           {this.privatePostProfile}                
         </TabPanel>
+
         <TabPanel value={this.state.value} index={2}>
-          <h1>Lorem ipsum dolor sit amet.</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut quis quod laboriosam ipsum velit sapiente vitae nam blanditiis error atque maiores, eligendi id ullam rerum alias quia nulla exercitationem! Impedit vel nobis itaque et dolor est explicabo mollitia quia. Numquam quos quis error quae, accusantium molestias expedita vitae culpa sequi.</p>
+          <Typography variant="h1">Fichiers disponibles</Typography>
+          <Typography  variant="h3">Vous trouverez ci-après l'ensemble des documents de l'association</Typography> 
+          <div className="profile_pdf">                
+            <a href="https://static.isodev.ovh/file/cotisation.pdf"><img className="profile_pdf_image" src="https://www.obesity.org/wp-content/uploads/2019/02/pdf-png.png" alt="pdf"/></a>
+            <Typography variant="h4">Le document d'inscription à nous rendre début octobre</Typography>   
+          </div>         
+          <Divider /> 
+          <div className="profile_pdf">                
+            <a href="https://static.isodev.ovh/file/commande.pdf"><img className="profile_pdf_image" src="https://www.obesity.org/wp-content/uploads/2019/02/pdf-png.png" alt="pdf"/></a>
+            <Typography variant="h4">le bon de commande pour les pizzas !</Typography>   
+          </div>         
+          <Divider />  
+          <div className="profile_pdf">                
+            <a href="https://static.isodev.ovh/file/compte_rendu.pdf"><img className="profile_pdf_image" src="https://www.obesity.org/wp-content/uploads/2019/02/pdf-png.png" alt="pdf"/></a>
+            <Typography variant="h4">le compte rendu de la réunion de préparation pour la fête de la bière</Typography>   
+          </div>         
+          <Divider />          
         </TabPanel>
         <TabPanel value={this.state.value} index={3}>
+          <Typography variant="h1">Les photos de l'association</Typography>    
+          <Typography  variant="h3">Nous tâcherons de mettre en ligne les photos de nos événements et des activités des enfants</Typography> 
           <PhotoGallery />
         </TabPanel>
       </div>
