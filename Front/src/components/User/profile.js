@@ -1,17 +1,17 @@
 import React from 'react';
 
-
+import ReactMarkdown from 'react-markdown';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import PhotoGallery from 'src/components/User/PhotoGallery';
+import dateParser from 'src/utils/dateParser';
 
 import './profile.scss';
 
@@ -68,10 +68,11 @@ class Profile extends React.Component {
 
   render() {
 
-  const { loading, privatePost } = this.props;
-  console.log(privatePost['hydra:member']);
-  const privatePostLoaded = privatePost['hydra:member'];
-  console.log(privatePostLoaded);
+    const { loading, privatePost, createdAt } = this.props;
+    // console.log(privatePost['hydra:member']);
+    const privatePostLoaded = privatePost['hydra:member'];
+    console.log(privatePostLoaded);
+    // const date = dateParser(createdAt);
 
 
     if (!loading && privatePostLoaded !== undefined) {
@@ -80,17 +81,20 @@ class Profile extends React.Component {
         this.privatePostProfile = (
           <div>
             {privatePostLoaded.map(item => (
+              
               <ListItem alignItems="flex-start" key={item.id}>
                 <ListItemText
                   primary={item.title}
                   secondary={(
                     <React.Fragment>
-                      <Typography component="span" variant="body2" color="textPrimary" />
-                      {item.content}
+                      <Typography variant="h4">publié le {dateParser(item.createdAt).dayNumber} {dateParser(item.createdAt).day} {dateParser(item.createdAt).month} {dateParser(item.createdAt).itemYear}</Typography>
+                      <Typography component="span" variant="body2" color="textPrimary" dangerouslySetInnerHTML={{ __html: item.content }} />
                     </React.Fragment>
                         )}
                     />
+                <Divider variant="inset" />
               </ListItem>
+             
             ))}
           </div>
         );
