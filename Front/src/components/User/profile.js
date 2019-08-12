@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown from 'react-markdown/with-html';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
@@ -13,6 +13,7 @@ import PhotoGallery from 'src/components/User/PhotoGallery';
 import dateParser from 'src/utils/dateParser';
 
 import './profile.scss';
+import { TextField } from '@material-ui/core';
 
 function TabPanel(props) {
   const {
@@ -53,14 +54,15 @@ class Profile extends React.Component {
   privatePostProfile = null;
 
   componentWillMount() {
-    const { setPrivatePosts } = this.props;
+    const { setPrivatePosts, setUserLoaded } = this.props;
     setPrivatePosts();
+    setUserLoaded(localStorage.getItem('userId'));
   }
   
-  componentDidMount() {
-    const { setPrivatePosts } = this.props;
-    setPrivatePosts();
-  }
+  // componentDidMount() {
+  //   const { setPrivatePosts } = this.props;
+  //   setPrivatePosts();
+  // }
 
   handleChange = (event, newValue) => {
     this.setState({ value: newValue });
@@ -68,12 +70,8 @@ class Profile extends React.Component {
 
   render() {
 
-    const { loading, privatePost, createdAt } = this.props;
-    // console.log(privatePost['hydra:member']);
-    const privatePostLoaded = privatePost['hydra:member'];
-    console.log(privatePostLoaded);
-   
-
+    const { loading, privatePost, userLoaded } = this.props;
+    const privatePostLoaded = privatePost;
 
     if (!loading && privatePostLoaded !== undefined) {
       if (privatePostLoaded.length !== 0) {
@@ -81,23 +79,53 @@ class Profile extends React.Component {
         this.privatePostProfile = (
           <div>
             {privatePostLoaded.map(item => (
-              
               <ListItem alignItems="flex-start" key={item.id}>
                 <ListItemText
                   primary={item.title}
                   secondary={(
                     <React.Fragment>
                       <Typography variant="h4">publié le {dateParser(item.createdAt).dayNumber} {dateParser(item.createdAt).day} {dateParser(item.createdAt).month} {dateParser(item.createdAt).itemYear}</Typography>
-                      <Typography component="span" variant="body2" color="textPrimary" dangerouslySetInnerHTML={{ __html: item.content }} />
+                      <Typography component="span" variant="body2" color="textPrimary">
+                        <ReactMarkdown source={item.content} escapeHtml={false} />
+                      </Typography>
                     </React.Fragment>
-                        )}
-                    />
+                  )}
+                />
                 <Divider variant="inset" />
               </ListItem>
-             
             ))}
           </div>
         );
+        if (!loading && userLoaded !== undefined) {
+          this.userBlock = (
+            <form noValidate autoComplete="off">
+              <ul>
+                <li>
+                  <TextField
+                    id="user.lastname"
+                    label="Mon Nom"
+                    value={userLoaded.lastname}
+                  />
+                </li>
+                <li>
+                  <TextField
+                    id="user.firstname"
+                    label="Mon Prénom"
+                    value={userLoaded.firstname}
+                  />
+                </li>
+                <li>
+                  <TextField
+                    id="user.email"
+                    label="Mon E-mail"
+                    value={userLoaded.email}
+                  />
+                </li>
+                <li>Je suis parent d'élève: {userLoaded.isParent ? 'Oui' : 'Non'}</li>
+              </ul>
+            </form>
+          );
+        }
       }
       else {
         this.privatePostProfile = <p>Aucune actualité interne</p>;
@@ -116,13 +144,7 @@ class Profile extends React.Component {
           </Tabs>
         </AppBar>
         <TabPanel value={this.state.value} index={0}>
-          <ul>
-            <li>Mon Nom</li>
-            <li>Mon Prénom</li>
-            <li>Mon Email</li>
-            <li>Mon numéro de Téléphone</li>
-            <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat quam officia sed cumque incidunt enim tempore quod ipsa rerum nam, consequuntur est natus vitae corporis molestiae accusantium, architecto dolorem earum.</li>
-          </ul>
+          {this.userBlock}
         </TabPanel>
         <TabPanel value={this.state.value} index={1}>          
           {this.privatePostProfile}                
