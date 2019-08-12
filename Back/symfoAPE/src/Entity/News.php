@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Entity;
-
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -9,10 +7,27 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use JMS\Serializer\Annotation as Serializer;
 use ApiPlatform\Core\Annotation\ApiSubresource;
-
+use App\Utils\Slugger;
 /**
- * @ApiResource()
+ * @ApiResource(
+ *      itemOperations={
+ *          "get", 
+ *          "put"={
+ *             "access_control"="is_granted('ROLE_REDACT'),"
+ *         },
+ *           "delete"={
+ *             "access_control"="is_granted('ROLE_REDACT'),"
+ *         }
+ *      },
+ *      collectionOperations={
+ *          "get", 
+ *          "post"={
+ *             "access_control"="is_granted('ROLE_REDACT'),"
+ *         }
+ *      }
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\NewsRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class News
 {
@@ -27,7 +42,6 @@ class News
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
      * @Assert\Length(min=5, minMessage="Le titre de la news doit compter entre 5 et 200 caractères.", max=200, maxMessage ="Le titre de la news doit compter entre 5 et 200 caractères.")
-     * @Serializer\Expose
      */
     private $title;
 
@@ -35,7 +49,6 @@ class News
      * @ORM\Column(type="text")
      * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
      * @Assert\Length(min=50, minMessage = "Au moins 50 caractères SVP.")
-     * @Serializer\Expose
      */
     private $content;
 
@@ -58,13 +71,11 @@ class News
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Medium", mappedBy="news")
-     * @Serializer\Expose
      */
     private $media;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Serializer\Expose
      */
     private $slug;
 
@@ -75,11 +86,10 @@ class News
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      * @ApiSubresource
      */
     private $author;
-
     public function __construct()
     {
         $this->createdAt = new \DateTime;
@@ -95,7 +105,7 @@ class News
      */
     public function applySlug(){
         $slugger = new Slugger(true);
-        $slug = $slugger->slugify($this->name);
+        $slug = $slugger->slugify($this->title);
         $this->slug = $slug;
     }
 
@@ -127,7 +137,7 @@ class News
 
         return $this;
     }
-
+    
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
@@ -148,7 +158,7 @@ class News
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
-
+        
         return $this;
     }
 
@@ -221,26 +231,20 @@ class News
         return $this;
     }
 
-    /**
-     * Get the value of slug
-     */ 
+
     public function getSlug()
     {
         return $this->slug;
     }
 
-    /**
-     * Set the value of slug
-     *
-     * @return  self
-     */ 
+
     public function setSlug($slug)
     {
         $this->slug = $slug;
 
         return $this;
     }
-
+    
     public function getAuthor(): ?User
     {
         return $this->author;
@@ -252,4 +256,5 @@ class News
 
         return $this;
     }
+
 }

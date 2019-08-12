@@ -2,18 +2,37 @@
 
 namespace App\Entity;
 
+use App\Entity\Role;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-
 /**
- * @ApiResource(routePrefix="/profile", 
+ * @ApiResource(
  *      normalizationContext={"groups"={"read"}},
+ *      itemOperations={
+ *          "get"={
+ *             "access_control"="is_granted('ROLE_ADMIN') or (is_granted('ROLE_USER') and object == user)",
+ *         },
+ *          "put"={
+ *              "access_control"="is_granted('ROLE_ADMIN') or (is_granted('ROLE_USER') and object == user)",
+ *         },
+ *           "delete"={
+ *             "access_control"="is_granted('ROLE_ADMIN') or (is_granted('ROLE_USER') and object == user)",
+ *         }
+ *      },
+ *      collectionOperations={
+ *           "get"={
+ *             "access_control"="is_granted('ROLE_ADMIN'),"
+ *         },
+ *             "post"
+
+ *      }   
  * )
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity("email")
@@ -27,11 +46,6 @@ class User implements UserInterface
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="json")
-     */
-    private $roles = [];
     
     /**
      * @ORM\Column(type="string")
@@ -68,42 +82,50 @@ class User implements UserInterface
         
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read"})
      */
     private $address_city;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read"})
      */
     
     private $address_street;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read"})
      */
     private $address_other;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"read"})
      */
     private $address_number;
 
     /**
      * @ORM\Column(type="string", length=15, nullable=true)
+     * @Groups({"read"})
      */
     private $address_zipcode;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"read"})
      */
     private $newsletter_subscription;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"read"})
      */
     private $isActive;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"read"})
      */
     private $isParent;
 
@@ -120,26 +142,32 @@ class User implements UserInterface
     private $updatedAt;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\Email()
+     * @Groups({"read"})
      */
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\Length(min="2", minMessage="Votre nom d'utilisateur doit faire minimum 2 caractères")
      * @Groups({"read"})
      */
     private $username;
 
+    /**
+     * Column(type="json")
+     * @Groups({"read"})
+     */
+    private $roles = ["ROLE_USER"];
+
     public function __construct()
     {
         $this->createdAt = new \DateTime;
         $this->updatedAt = new \DateTime;
+        $this->isActive = true;
     }
-
-
-
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -157,23 +185,6 @@ class User implements UserInterface
     }
 
     
-    /**
-     * @see UserInterface
-     */
-    public function getRoles(): array
-    {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-        return array_unique($roles);
-    }
-
-    public function setRoles(array $roles): self
-    {
-        $this->roles = $roles;
-        return $this;
-    }
-
     /**
      * @see UserInterface
      */
@@ -372,6 +383,17 @@ class User implements UserInterface
     {
         $this->retypedPassword = $retypedPassword;
 
+        return $this;
+    }
+    
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    public function setRoles(array $roles)
+    {
+        $this->roles = $roles;
         return $this;
     }
 }

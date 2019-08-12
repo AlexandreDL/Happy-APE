@@ -1,11 +1,8 @@
 <?php
-
 namespace App\Repository;
-
 use App\Entity\Event;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
-
 /**
  * @method Event|null find($id, $lockMode = null, $lockVersion = null)
  * @method Event|null findOneBy(array $criteria, array $orderBy = null)
@@ -19,55 +16,20 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
-
-    public function findNext3() {
+    public function findNext($max_results = 1, $as_array = false)
+    {  
+        $query = $this->createQueryBuilder('e')
+            //->leftJoin('e.author', 'u')
+            ->leftJoin('e.media', 'm')
+            ->where("e.isPublished = 1")
+            ->orderBy('e.date')
+            ->setMaxResults($max_results)
+            ;
       
-        $query = $this->createQueryBuilder('e')
-            ->leftJoin('e.author', 'u')
-            ->leftJoin('e.media', 'm')
-            ->where("e.isPublished = 1")
-            ->orderBy('e.date')
-            ->setMaxResults(3)
-            ;
-        return $query->getQuery()->getArrayResult();
+        if(empty($as_array)){
+            return $query->getQuery()->getResult();
+        }else{
+            return $query->getQuery()->getArrayResult();
+        }
     }
-    public function findNext() {
-        $query = $this->createQueryBuilder('e')
-            ->leftJoin('e.author', 'u')
-            ->leftJoin('e.media', 'm')
-            ->where("e.isPublished = 1")
-            ->orderBy('e.date')
-            ->setMaxResults(1)
-            ;
-        return $query->getQuery()->getResult();
-    }
-    
-    // /**
-    //  * @return Event[] Returns an array of Event objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('e.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Event
-    {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

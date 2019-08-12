@@ -14,6 +14,7 @@ const initialState = {
 // == Types
 const GET_LEGAL_MENTIONS = 'GET_LEGAL_MENTIONS';
 const GET_PRIVATE_POSTS = 'GET_PRIVATE_POSTS';
+const GET_PRIVATE_POSTS_SUCCESS = 'GET_PRIVATE_POSTS_SUCCESS';
 const GET_LEGAL_MENTIONS_SUCCESS = 'GET_LEGAL_MENTIONS_SUCCESS';
 const GET_LEGAL_MENTIONS_FAILURE = 'GET_LEGAL_MENTIONS_FAILURE';
 const GET_CGUDATA = 'GET_CGUDATA';
@@ -89,15 +90,19 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
       };
-    case GET_CGVDATA:
+    case GET_PRIVATE_POSTS:
       return {
         ...state,
       };
-    case GET_PRIVATE_POSTS:
+    case GET_PRIVATE_POSTS_SUCCESS:
       return {
         ...state,
         privatePost: action.payload.data,
         loading: false,
+      };
+    case GET_CGVDATA:
+      return {
+        ...state,
       };
     case GET_CGVDATA_SUCCESS:
       return {
@@ -194,6 +199,10 @@ export function getPrivatePosts() {
     payload: {
       request: {
         url: '/api/private_posts',
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('userToken')}`,
+        },
       },
     },
   };

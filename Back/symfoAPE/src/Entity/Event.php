@@ -8,10 +8,25 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use JMS\Serializer\Annotation as Serializer;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *      itemOperations={
+ *          "get", 
+ *          "put"={
+ *             "access_control"="is_granted('ROLE_REDACT'),"
+ *         },
+ *           "delete"={
+ *             "access_control"="is_granted('ROLE_REDACT'),"
+ *         }
+ *      },
+ *      collectionOperations={
+ *          "get", 
+ *          "post"={
+ *             "access_control"="is_granted('ROLE_REDACT'),"
+ *         }
+ *      }
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
  * @ORM\HasLifecycleCallbacks()
  */
@@ -29,7 +44,7 @@ class Event
      * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
      * @Assert\Length(min=5, minMessage="Le nom de l'événement doit compter entre 5 et 200 caractères.", max=200, maxMessage ="Le nom de l'événement doit compter entre 5 et 200 caractères.")
      */
-    private $name;
+    private $title;
 
     /**
      * @ORM\Column(type="datetime")
@@ -92,7 +107,7 @@ class Event
      */
     public function applySlug(){
         $slugger = new Slugger(true);
-        $slug = $slugger->slugify($this->name);
+        $slug = $slugger->slugify($this->title);
         $this->slug = $slug;
     }
 
@@ -101,14 +116,14 @@ class Event
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getTitle(): ?string
     {
-        return $this->name;
+        return $this->title;
     }
 
-    public function setName(?string $name): self
+    public function setTitle(?string $title): self
     {
-        $this->name = $name;
+        $this->title = $title;
 
         return $this;
     }

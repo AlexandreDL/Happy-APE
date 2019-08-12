@@ -2,7 +2,7 @@
 import { connect } from 'react-redux';
 
 // == Import : local
-import LegalMentions from 'src/components/LegalMentions';
+import LegalMentions from 'src/components/legalMentions';
 import { getLegalMentionsData } from 'src/store/reducer';
 
 /* === State (données) ===

@@ -40,9 +40,9 @@ class Event extends React.Component {
         className="whitebox"
         direction="row"
         justify="center"
-        spacing={2}
+        spacing={4}
       >
-        <Grid item xs={12} sm={6} xl={4} lg={4}>
+        <Grid item xs={12} sm={4} xl={4} lg={4}>
           <CardMedia
             component="img"
             alt="event-image"
