@@ -30,7 +30,7 @@ class Event extends React.Component {
       button,
     } = this.props;
 
-    const image = (media !== undefined && media[0] !== undefined) ? media[0].url : 'https://static.isodev.ovh/img/lecture.jpg';
+    const image = (media !== undefined && media !== undefined) ? media.url : 'https://static.isodev.ovh/img/lecture.jpg';
 
     const dateParsed = dateParser(date);
 
