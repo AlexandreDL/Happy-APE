@@ -82,7 +82,12 @@ class Profile extends React.Component {
             {privatePostLoaded.map(item => (
               <ListItem alignItems="flex-start" key={item.id}>
                 <ListItemText
-                  primary={item.title}
+                  primary={(
+                    <React.Fragment>
+                      <Typography variant="h2">{item.title}
+                      </Typography>
+                    </React.Fragment>
+                  )}
                   secondary={(
                     <React.Fragment>
                       <Typography variant="h4">publié le {dateParser(item.createdAt).dayNumber} {dateParser(item.createdAt).day} {dateParser(item.createdAt).month} {dateParser(item.createdAt).itemYear}</Typography>
