@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
 
 
-import './LegalMentions.scss';
+import './legalMentions.scss';
 
 
 class LegalMentions extends React.Component {

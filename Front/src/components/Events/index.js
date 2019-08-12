@@ -12,7 +12,7 @@ import Event from 'src/components/Event';
 // == Composant
 class Events extends React.Component {
   events = null;
-
+  
   wait = null;
 
   componentDidMount() {
@@ -32,7 +32,7 @@ class Events extends React.Component {
         this.events = (
           <Grid container spacing={2} className="whitebox">
             {eventsLoaded.map(item => (
-              <Grid item xs={12} sm={12} xl={6} lg={6} key={item.id}>
+              <Grid item xs={12} sm={6} xl={6} lg={6} key={item.id}>
                 <Event
                   title={item.title}
                   content={item.content_short}

@@ -4,8 +4,27 @@ namespace App\Utils;
 
 class Slugger
 {
-    public static function slugify(string $string): string
+    public static function slugify(string $str): string
     {
-        return preg_replace('/\s+/', '-', mb_strtolower(trim(strip_tags($string)), 'UTF-8'));
+		$separator = '-';
+
+		$q_separator = preg_quote($separator, '#');
+
+		$trans = array(
+			'&.+?;'			=> '',
+			'[^\w\d _-]'		=> '',
+			'\s+'			=> $separator,
+			'('.$q_separator.')+'	=> $separator
+		);
+
+		$str = strip_tags($str);
+		foreach ($trans as $key => $val)
+		{
+			$str = preg_replace('#'.$key.'#i'.(UTF8_ENABLED ? 'u' : ''), $val, $str);
+		}
+
+		$str = strtolower($str);
+
+		return trim(trim($str, $separator));
     }
 }
