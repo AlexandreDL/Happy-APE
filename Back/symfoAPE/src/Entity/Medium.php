@@ -87,7 +87,7 @@ class Medium
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\PrivatePost", inversedBy="medium", cascade={"persist", "remove"})
      */
-    private $private_post;
+    private $privatePost;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Event", inversedBy="medium", cascade={"persist", "remove"})
@@ -165,18 +165,6 @@ class Medium
         return $this;
     }
 
-    public function getPrivatePost(): ?PrivatePost
-    {
-        return $this->privatePost;
-    }
-
-    public function setPrivatePost(?PrivatePost $privatePost): self
-    {
-        $this->privatePost = $privatePost;
-
-        return $this;
-    }
-
     public function getNews(): ?News
     {
         return $this->news;
@@ -202,21 +190,21 @@ class Medium
     }
 
     /**
-     * Get the value of private_post
+     * Get the value of privatePost
      */ 
-    public function getPrivate_post()
+    public function getprivatePost()
     {
-        return $this->private_post;
+        return $this->privatePost;
     }
 
     /**
-     * Set the value of private_post
+     * Set the value of privatePost
      *
      * @return  self
      */ 
-    public function setPrivate_post($private_post)
+    public function setprivatePost($privatePost)
     {
-        $this->private_post = $private_post;
+        $this->privatePost = $privatePost;
 
         return $this;
     }
