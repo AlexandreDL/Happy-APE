@@ -16,22 +16,13 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ApiResource(routePrefix="/profile", 
  *      normalizationContext={"groups"={"read"}},
  *      itemOperations={
- *          "get"={
- *             "access_control"="is_granted('ROLE_ADMIN') or (is_granted('ROLE_USER') and object == user)",
- *         },
- *          "put"={
- *              "access_control"="is_granted('ROLE_ADMIN') or (is_granted('ROLE_USER') and object == user)",
- *         },
- *           "delete"={
- *             "access_control"="is_granted('ROLE_ADMIN') or (is_granted('ROLE_USER') and object == user)",
- *         }
+ *          "get"={"access_control"="is_granted('ROLE_ADMIN') or (is_granted('ROLE_USER') and object == user)"},
+ *          "put"={"access_control"="is_granted('ROLE_ADMIN') or (is_granted('ROLE_USER') and object == user)"},
+ *           "delete"={"access_control"="is_granted('ROLE_ADMIN') or (is_granted('ROLE_USER') and object == user)"}
  *      },
  *      collectionOperations={
- *           "get"={
- *             "access_control"="is_granted('ROLE_ADMIN'),"
- *         },
+ *           "get"={"access_control"="is_granted('ROLE_ADMIN')"},
  *             "post"
-
  *      }   
  * )
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")

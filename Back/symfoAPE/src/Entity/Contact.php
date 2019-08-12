@@ -10,21 +10,21 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiResource(
  *      itemOperations={
  *          "get"={
- *              "access_control"="is_granted('ROLE_REDACT'),"
+ *              "access_control"="is_granted('ROLE_REDACT')"
  *          }, 
  *          "put"={
- *             "access_control"="is_granted('ROLE_REDACT'),"
+ *             "access_control"="is_granted('ROLE_REDACT')"
  *         },
  *           "delete"={
- *             "access_control"="is_granted('ROLE_REDACT'),"
+ *             "access_control"="is_granted('ROLE_REDACT')"
  *         }
  *      },
  *      collectionOperations={
  *           "get"={
- *             "access_control"="is_granted('ROLE_REDACT'),"
+ *             "access_control"="is_granted('ROLE_REDACT')"
  *         }, 
  *          "post"={
- *             "access_control"="is_granted('ROLE_REDACT'),"
+ *             "access_control"="is_granted('ROLE_REDACT')"
  *         }
  *      }
  * )

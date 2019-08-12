@@ -12,24 +12,14 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * @ApiResource(
  *      itemOperations={
- *          "get"={
- *              "access_control"="is_granted('IS_AUTHENTICATED_FULLY')",
- *          },
- *          "put"={
- *             "access_control"="is_granted('ROLE_REDACT'),"
- *         },
- *           "delete"={
- *             "access_control"="is_granted('ROLE_REDACT'),"
- *         }
+ *          "get"={"access_control"="is_granted('IS_AUTHENTICATED_FULLY')"},
+ *          "put"={"access_control"="is_granted('ROLE_REDACT')"},
+ *           "delete"={"access_control"="is_granted('ROLE_REDACT')"}
  *      },
  * 
  *      collectionOperations={
- *          "get"={
- *              "access_control"="is_granted('IS_AUTHENTICATED_FULLY')",
- *          },
- *           "post"={
- *             "access_control"="is_granted('ROLE_REDACT'),"
- *         }
+ *          "get"={"access_control"="is_granted('IS_AUTHENTICATED_FULLY')"},
+ *           "post"={"access_control"="is_granted('ROLE_REDACT')"}
  *      },
  * )
  * @ORM\Entity(repositoryClass="App\Repository\PrivatePostRepository")

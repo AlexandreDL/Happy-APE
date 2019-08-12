@@ -14,10 +14,10 @@ use JMS\Serializer\Annotation as Serializer;
  *             "access_control"="is_granted('IS_AUTHENTICATED_FULLY')",
  *         }, 
  *          "put"={
- *             "access_control"="is_granted('ROLE_REDACT'),"
+ *             "access_control"="is_granted('ROLE_REDACT')"
  *         },
  *           "delete"={
- *             "access_control"="is_granted('ROLE_REDACT'),"
+ *             "access_control"="is_granted('ROLE_REDACT')"
  *         }
  *      },
  *      collectionOperations={
@@ -25,12 +25,11 @@ use JMS\Serializer\Annotation as Serializer;
  *             "access_control"="is_granted('IS_AUTHENTICATED_FULLY')",
  *         }, 
  *          "post"={
- *             "access_control"="is_granted('ROLE_REDACT'),"
+ *             "access_control"="is_granted('ROLE_REDACT')"
  *         }
  *      }
  * )
  * @ORM\Entity(repositoryClass="App\Repository\MediumRepository")
- * @Serializer\ExclusionPolicy("ALL")
  */
 class Medium
 {
@@ -48,19 +47,16 @@ class Medium
      *      minMessage="Le nom de ce fichier doit compter entre 5 et 50 caractères.",   
      *      max=50, 
      *      maxMessage ="Le nom de ce fichier  doit compter entre 5 et 50 caractères.")
-     * @Serializer\Expose
      */
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
+      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\File(
      *     maxSize = "1024k",
      *     mimeTypes = {"application/pdf", "image/png", "image/jpg", "image/jpeg", "image/gif"},
      *     mimeTypesMessage = "Veuillez vous assurer que votre fichier soit en pdf, png, jpeg ou gif."
      * )
-     * @Serializer\Expose
      */
     private $type;
 
@@ -68,7 +64,6 @@ class Medium
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\NotBlank
      * @Assert\Url
-     * @Serializer\Expose
      */
     private $url;
 
