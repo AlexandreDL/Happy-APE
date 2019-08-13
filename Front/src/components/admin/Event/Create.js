@@ -16,7 +16,7 @@ import RichTextInput from 'ra-input-rich-text';
 const EventCreate = props => (
   <Create {...props}>
     <SimpleForm>
-      <ReferenceInput source="author" reference="users">
+      <ReferenceInput source="author" reference="profile/users">
         <SelectInput optionText="lastname" />
       </ReferenceInput>
       <TextInput source="title" />

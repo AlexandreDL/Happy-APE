@@ -5,14 +5,9 @@ import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import dateParser from 'src/utils/dateParser';
 import CardMedia from '@material-ui/core/CardMedia';
-import Card from '@material-ui/core/Card';
-
-
 
 // == Import : local
 import './newsDetails.scss';
-
-
 
 // == Composant
 class NewsDetail extends React.Component {
@@ -35,9 +30,8 @@ class NewsDetail extends React.Component {
 
     if (homepageData !== undefined) {
       this.actualNews = homepageData.news.find(actu => actu.slug === slug);
-      console.log(this.actualNews.medium.url);
       if (this.actualNews !== null) {
-        const NewsImage = this.actualNews.medium.url;
+        const NewsImage = (this.actualNews.medium !== null) ? this.actualNews.medium.url : null;
 
         this.newsLoaded = (
           <React.Fragment>
@@ -51,7 +45,7 @@ class NewsDetail extends React.Component {
               <Grid item xs={12} sm={12} xl={12} lg={12} >            
                 <Typography variant="h2">{this.actualNews.title}</Typography>
                 <Typography variant="h4">publié le {dateParser(this.actualNews.createdAt).day} {dateParser(this.actualNews.createdAt).dayNumber} {dateParser(this.actualNews.createdAt).month} {dateParser(this.actualNews.createdAt).itemYear}</Typography>        
-                <img src={NewsImage} alt="" className="newsImage"/>                        
+                {NewsImage !== null && <img src={NewsImage} alt="" className="newsImage" />}          
                 <Typography variant="body2" dangerouslySetInnerHTML={{ __html: this.actualNews.content }} />                           
               </Grid>
             </Grid>
