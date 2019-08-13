@@ -51,7 +51,6 @@ import { LinearProgress } from '@material-ui/core';
 // import dataProvider from 'src/components/admin/DataProvider';
 
 const entrypoint = apiUrl;
-console.log(apiUrl);
 const bearer = localStorage.getItem('userToken');
 const fetchHeaders = { Authorization: `Bearer ${bearer}` };
 const fetchHydra = (url, options = {}) => baseFetchHydra(url, {
