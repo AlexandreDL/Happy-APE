@@ -29,7 +29,7 @@ const mapStateToProps = (state, ownProps) => ({
  */
 const mapDispatchToProps = (dispatch, ownProps) => ({
   changeContactInputValue: (name, value) => {dispatch(changeContactInput(name, value))},
-  getSendContactForm: contactData => {dispatch(sendContactForm(contactData))},
+  getSendContactForm: (contactData) => {dispatch(sendContactForm(contactData))},
 });
 
 

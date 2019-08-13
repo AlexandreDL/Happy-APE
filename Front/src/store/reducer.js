@@ -31,6 +31,7 @@ const GET_WHOAREWEDATA_FAILURE = 'GET_WHOAREWEDATA_FAILURE';
 const TOGGLE_DRAWER = 'TOGGLE_DRAWER';
 const CONTACT_INPUT_VALUE = 'CONTACT_INPUT_VALUE';
 const SEND_CONTACTFORM = 'SEND_CONTACTFORM';
+const SEND_CONTACTFORM_SUCCESS = 'SEND_CONTACTFORM_SUCCESS';
 
 
 // == Reducer
@@ -168,6 +169,16 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
       };
+    case SEND_CONTACTFORM:
+      return {
+        ...state,
+      };
+
+    case SEND_CONTACTFORM_SUCCESS:
+      return {
+        ...state,
+      };
+
     case 'REGISTER_SUCCESS':
       return {
         ...state,
@@ -283,7 +294,7 @@ export function sendContactForm(contactData) {
     payload: {
       request: {
         url: '/api/contacts',
-        body: contactData,
+        data: contactData,
         method: 'POST',
       },
     },

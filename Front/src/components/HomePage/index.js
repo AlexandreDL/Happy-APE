@@ -27,16 +27,21 @@ class HomePage extends React.Component {
       document.title = homepageData.title;
       if (homepageData.nextEvent !== undefined) {
         this.event = homepageData.nextEvent.map(item => (
-          <Event
-            key={item.id}
-            title={item.title}
-            content={item.content_short}
-            date={item.date}
-            slug={item.slug}
-            media={item.medium}
-            button
-          />
+
+          <div>
+            <div className="homepage-nextevent">PROCHAIN EVENEMENT</div>      
+            <Event
+              key={item.id}
+              title={item.title}
+              content={item.content_short}
+              date={item.date}
+              slug={item.slug}
+              button
+            />
+          </div>
+
         ));
+        
       }
       else {
         this.event = (
@@ -56,7 +61,7 @@ class HomePage extends React.Component {
               alignItems="flex-start"
             >
               {homepageData.news.map(item => (
-                <Grid item xs={12} sm={12} xl={12} lg={12} key={item.id}>
+                <Grid item xs={12} sm={12} xl={12} lg={12} key={item.id} className="whitebox">
                   <Link to={`/actualites/${item.slug}`} style={{ textDecoration: 'none', color: '#000000' }}>
                     <New
                       key={item.id}
@@ -99,9 +104,10 @@ class HomePage extends React.Component {
           <Grid item xs={12} sm={12} xl={12} lg={12}>
             <Slider />
           </Grid>
-          <Grid item xs={12} sm={12} xl={12} lg={12}>
+          <Grid item xs={12} sm={8} xl={8} lg={8} className="whitebox">
             <Typography variant="h2" align="center">Bienvenue !</Typography>
-            <Typography variant="body1">Bienvenue sur le site de l'association de parents d'élèves Happy APE. Nous sommes des parents d'élèves bénévoles qui oeuvront à financer les activités de nos enfants. Vous trouverez l'ensemble de nos action sur ce site ! !</Typography>
+            <Typography variant="body1">"Bienvenue sur le site de l'association de parents d'élèves Happy APE. Nous sommes une équipe de parents d'élèves bénévoles, et nous mettons en place des actions, des événements pour financer les activités de nos enfants. 
+            Vous trouverez l'ensemble de nos actions sur ce site !"</Typography> 
           </Grid>
           <Divider />
           <Grid align="center" item xs={12} sm={6} xl={6} lg={6} className="event">
