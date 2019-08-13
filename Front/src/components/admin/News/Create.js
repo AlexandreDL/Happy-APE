@@ -22,7 +22,6 @@ const NewsCreate = props => (
       </ReferenceInput>
       <TextInput source="title" />
       <RichTextInput source="content" />
-      <DateInput label="Creation date" source="createdAt" />
       <ImageInput source="pictures" label="Related pictures" accept="image/*">
         <ImageField source="src" title="title" />
       </ImageInput>
