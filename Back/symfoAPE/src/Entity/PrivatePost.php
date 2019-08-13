@@ -11,6 +11,7 @@ use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ApiResource(
+ *      attributes={"order"={"createdAt": "DESC"}},
  *      itemOperations={
  *          "get"={"access_control"="is_granted('IS_AUTHENTICATED_FULLY')"},
  *          "put"={"access_control"="is_granted('ROLE_REDACT')"},
