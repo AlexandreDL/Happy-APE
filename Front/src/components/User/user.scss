@@ -1,3 +1,13 @@
 .login-form {
   margin-top: 50px !important;
 }
+
+.signup-form {
+  
+
+  & .MuiFormControl-root {
+    display: inline-block;
+    width: 50%;
+    margin: 0 auto;
+  }
+}
