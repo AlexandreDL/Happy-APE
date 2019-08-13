@@ -39,7 +39,7 @@ class Signup extends React.Component {
     return (
       <Box className="whitebox center">
         <Typography variant="h1">Créer un compte</Typography>
-        <form action="" onSubmit={this.handleSubmit}>
+        <form action="" onSubmit={this.handleSubmit} className="signup-form">
           <Grid container direction="row" justify="center" alignContent="center" alignItems="center" className="login-form" spacing={2}>
             <Grid item xs={12} sm={12} xl={6} lg={6}>
               <FormControl>
