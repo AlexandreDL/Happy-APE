@@ -61,12 +61,12 @@ h3 {
 }
 
 form {
-  margin: 0 auto;
-  text-align: center;
+  // margin: 0 auto;
+  text-align: left;
 
-  & .MuiInput-root {
-    margin: 50px 0;
-  }
+  // & .MuiInput-root {
+  //   margin: 50px 0;
+  // }
 
   & .MuiInput-input {
     width: 100%;

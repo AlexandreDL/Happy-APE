@@ -27,7 +27,6 @@ class HomePage extends React.Component {
       document.title = homepageData.title;
       if (homepageData.nextEvent !== undefined) {
         this.event = homepageData.nextEvent.map(item => (
-
           <div>
             <div className="homepage-nextevent">PROCHAIN EVENEMENT</div>      
             <Event
@@ -35,11 +34,11 @@ class HomePage extends React.Component {
               title={item.title}
               content={item.content_short}
               date={item.date}
+              media={item.medium}
               slug={item.slug}
               button
             />
           </div>
-
         ));
         
       }
@@ -70,7 +69,7 @@ class HomePage extends React.Component {
                       content={item.content_short}
                       createdAt={item.createdAt}
                       author={item.author}
-                      media={item.media}
+                      media={item.medium}
                     />
                   </Link>
                   <Divider />

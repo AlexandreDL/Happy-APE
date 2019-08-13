@@ -178,6 +178,8 @@ class Profile extends React.Component {
             <Tab label="Mes messages" {...a11yProps(1)} />
             <Tab label="Mes fichiers" {...a11yProps(2)} />
             <Tab label="Mes photos" {...a11yProps(3)} />
+            <Tab label="Organisation" {...a11yProps(4)} />
+            <Tab label="Agenda" {...a11yProps(5)} />
           </Tabs>
         </AppBar>
         <TabPanel value={this.state.value} index={0}>
@@ -215,6 +217,14 @@ class Profile extends React.Component {
           <Typography variant="h1">Les photos de l'association</Typography>    
           <Typography  variant="h3">Nous tâcherons de mettre en ligne les photos de nos événements et des activités des enfants</Typography> 
           <PhotoGallery />
+        </TabPanel>
+        <TabPanel value={this.state.value} index={4}> 
+          <Typography variant="h1">Organisation</Typography>  
+          <img className="profile_image" src="https://zapier.cachefly.net/storage/photos/7721e27283c9407abefd7e26e1d62e4e.png" alt="pdf"/>              
+        </TabPanel>
+        <TabPanel value={this.state.value} index={5}> 
+          <Typography variant="h1">Agenda</Typography>  
+          <img className="profile_image" src="https://i.kinja-img.com/gawker-media/image/upload/s--QRR82X5p--/c_fit,f_auto,fl_progressive,q_80,w_636/intmvaiybdkuzjo1dros.png" alt="pdf"/>              
         </TabPanel>
       </div>
     );
