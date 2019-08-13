@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import theme from 'src/components/App/theme';
 import { baseUrl, apiUrl } from 'src/utils/variables';
+import './app.scss';
 
 import { Admin, Resource } from 'react-admin';
 // lien vers nos composants

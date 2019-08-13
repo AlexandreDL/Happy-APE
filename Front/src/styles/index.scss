@@ -68,8 +68,11 @@ form {
   //   margin: 50px 0;
   // }
 
-  // & .MuiInput-input {
-  //   min-width: 50vw;
-  //   max-width: 95%;
-  // }
+  & .MuiInput-input {
+    width: 100%;
+  }
+}
+
+.MuiFormControl-root {
+  display: flex !important;
 }
