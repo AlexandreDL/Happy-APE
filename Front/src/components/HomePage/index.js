@@ -33,7 +33,7 @@ class HomePage extends React.Component {
             content={item.content_short}
             date={item.date}
             slug={item.slug}
-            media={item.media}
+            media={item.medium}
             button
           />
         ));
