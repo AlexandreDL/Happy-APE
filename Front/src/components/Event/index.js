@@ -54,8 +54,8 @@ class Event extends React.Component {
         <Grid align="center" item xs={12} sm={6} xl={6} lg={6}>
           <Typography variant="h2">{title}</Typography>
           {button !== true && (
-            <div className="resaEvent">           
-              <Typography align="left" variant="body2" >{content}</Typography>
+            <div className="resaEvent">
+              <Typography align="left" variant="body2" dangerouslySetInnerHTML={{ __html: content }} />            
               <Button a href="https://static.isodev.ovh/file/commande.pdf" variant="contained" color="primary">
               Je souhaite réserver !
               </Button>              

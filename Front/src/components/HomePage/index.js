@@ -105,7 +105,7 @@ class HomePage extends React.Component {
           <Grid item xs={12} sm={8} xl={8} lg={8} className="whitebox">
             <Typography variant="h2" align="center">Bienvenue !</Typography>
             <Typography variant="body1">"Bienvenue sur le site de l'association de parents d'élèves Happy APE. Nous sommes une équipe de parents d'élèves bénévoles, et nous mettons en place des actions, des événements pour financer les activités de nos enfants. 
-            Vous trouverez l'ensemble de nos actions sur ce site !" </Typography> 
+            Vous trouverez l'ensemble de nos actions sur ce site !"</Typography> 
           </Grid>
           <Divider />
           <Grid align="center" item xs={12} sm={6} xl={6} lg={6} className="event">
