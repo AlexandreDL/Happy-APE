@@ -36,7 +36,7 @@ const EventsList = props => (
 )}
       medium={(
         <Datagrid>
-          <TextField source="name" />
+          <TextField source="title" />
           <RichTextField source="content" />
           <EditButton />
           <ShowButton />

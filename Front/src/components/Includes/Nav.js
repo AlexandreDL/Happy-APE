@@ -93,7 +93,9 @@ const NavBar = ({ drawerOpen, toggleDrawerAction }) => {
             )}
           </PopupState>
         )}
-        <MenuItem component={AdminAppLink} to="/admin/Dashboard">Administration</MenuItem>
+
+        {(isLoggedIn === null) ? ("") : (<MenuItem component={AdminAppLink} to="/admin/Dashboard">Administration</MenuItem>)}
+
       </Typography>
       <Drawer open={drawerOpen} onClose={toggleDrawerButton}>
         <MenuItem onClick={toggleDrawerButton} component={AccueilLink} to="/"><Home />Accueil</MenuItem>
