@@ -16,22 +16,13 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ApiResource(routePrefix="/profile", 
  *      normalizationContext={"groups"={"read"}},
  *      itemOperations={
- *          "get"={
- *             "access_control"="is_granted('IS_AUTHENTICATED_FULLY') and object == user",
- *         },
- *          "put"={
- *             "access_control"="is_granted('IS_AUTHENTICATED_FULLY') and object == user",
- *         },
- *           "delete"={
- *             "access_control"="is_granted('ROLE_ADMIN'),"
- *         }
+ *          "get"={"access_control"="is_granted('ROLE_ADMIN') or (is_granted('ROLE_USER') and object == user)"},
+ *          "put"={"access_control"="is_granted('ROLE_ADMIN') or (is_granted('ROLE_USER') and object == user)"},
+ *           "delete"={"access_control"="is_granted('ROLE_ADMIN') or (is_granted('ROLE_USER') and object == user)"}
  *      },
  *      collectionOperations={
- *           "get"={
- *             "access_control"="is_granted('ROLE_ADMIN'),"
- *         },
+ *           "get"={"access_control"="is_granted('ROLE_ADMIN')"},
  *             "post"
-
  *      }   
  * )
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -142,26 +133,32 @@ class User implements UserInterface
     private $updatedAt;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\Email()
      * @Groups({"read"})
      */
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\Length(min="2", minMessage="Votre nom d'utilisateur doit faire minimum 2 caractères")
      * @Groups({"read"})
      */
     private $username;
 
     /**
-     * Column(type="json")
+    * @ORM\Column(type="json_array")
      * @Groups({"read"})
      */
     private $roles = ["ROLE_USER"];
 
-
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime;
+        $this->updatedAt = new \DateTime;
+        $this->isActive = true;
+    }
+    
     public function getId(): ?int
     {
         return $this->id;

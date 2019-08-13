@@ -12,18 +12,12 @@ use App\Utils\Slugger;
  * @ApiResource(
  *      itemOperations={
  *          "get", 
- *          "put"={
- *             "access_control"="is_granted('ROLE_REDACT'),"
- *         },
- *           "delete"={
- *             "access_control"="is_granted('ROLE_REDACT'),"
- *         }
+ *          "put"={"access_control"="is_granted('ROLE_REDACT')"},
+ *           "delete"={"access_control"="is_granted('ROLE_REDACT')"}
  *      },
  *      collectionOperations={
  *          "get", 
- *          "post"={
- *             "access_control"="is_granted('ROLE_REDACT'),"
- *         }
+ *          "post"={"access_control"="is_granted('ROLE_REDACT')"}
  *      }
  * )
  * @ORM\Entity(repositoryClass="App\Repository\NewsRepository")
@@ -70,11 +64,6 @@ class News
     private $isPublished;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Medium", mappedBy="news")
-     */
-    private $media;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $slug;
@@ -86,17 +75,21 @@ class News
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      * @ApiSubresource
      */
     private $author;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Medium", mappedBy="news", cascade={"persist", "remove"})
+     */
+    private $medium;
     public function __construct()
     {
         $this->createdAt = new \DateTime;
         $this->updatedAt = new \DateTime;
         $this->isPublished = true;
         $this->tags = new ArrayCollection();
-        $this->media = new ArrayCollection();
     }
 
     /**
@@ -174,36 +167,6 @@ class News
         return $this;
     }
 
-    /**
-     * @return Collection|Medium[]
-     */
-    public function getMedia(): Collection
-    {
-        return $this->media;
-    }
-
-    public function addMedium(Medium $medium): self
-    {
-        if (!$this->media->contains($medium)) {
-            $this->media[] = $medium;
-            $medium->setNews($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMedium(Medium $medium): self
-    {
-        if ($this->media->contains($medium)) {
-            $this->media->removeElement($medium);
-            // set the owning side to null (unless already changed)
-            if ($medium->getNews() === $this) {
-                $medium->setNews(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection|Tag[]
@@ -253,6 +216,24 @@ class News
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getMedium(): ?Medium
+    {
+        return $this->medium;
+    }
+
+    public function setMedium(?Medium $medium): self
+    {
+        $this->medium = $medium;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newNews = $medium === null ? null : $this;
+        if ($newNews !== $medium->getNews()) {
+            $medium->setNews($newNews);
+        }
 
         return $this;
     }

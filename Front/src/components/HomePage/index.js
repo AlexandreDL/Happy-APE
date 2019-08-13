@@ -3,11 +3,9 @@ import Event from 'src/components/Event';
 import Slider from 'src/utils/Carousel';
 import New from 'src/components/New';
 import {
-  Container,
   Divider,
   LinearProgress,
   Grid,
-  Box,
   Typography,
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
@@ -30,14 +28,18 @@ class HomePage extends React.Component {
       if (homepageData.nextEvent !== undefined) {
         this.event = homepageData.nextEvent.map(item => (
           <Event
-            item={item}
-            key={homepageData.nextEvent.id}
+            key={item.id}
+            title={item.title}
+            content={item.content_short}
+            date={item.date}
+            slug={item.slug}
+            button
           />
         ));
       }
       else {
         this.event = (
-          <div className="center event">
+          <div className="center event whitebox">
             <p>Aucun évènement à afficher</p>
           </div>
         );
@@ -53,9 +55,17 @@ class HomePage extends React.Component {
               alignItems="flex-start"
             >
               {homepageData.news.map(item => (
-                <Grid item xs={12} sm={12} xl={12} lg={12} key={item.slug}>
+                <Grid item xs={12} sm={12} xl={12} lg={12} key={item.id}>
                   <Link to={`/actualites/${item.slug}`} style={{ textDecoration: 'none', color: '#000000' }}>
-                    <New item={item} key={item.id} />
+                    <New
+                      key={item.id}
+                      id={item.id}
+                      title={item.title}
+                      content={item.content_short}
+                      createdAt={item.createdAt}
+                      author={item.author}
+                      media={item.media}
+                    />
                   </Link>
                   <Divider />
                 </Grid>
@@ -76,7 +86,7 @@ class HomePage extends React.Component {
       document.title = 'Chargement...';
     }
     return (
-      <React.Fragment>     
+      <React.Fragment>
         <Grid
           container
           className="whitebox"
@@ -84,12 +94,12 @@ class HomePage extends React.Component {
           justify="center"
           alignItems="center"
           spacing={2}
-          > 
+        >
           <Grid item xs={12} sm={12} xl={12} lg={12}>
-            <Slider />         
+            <Slider />
           </Grid>
           <Divider />
-          <Grid item xs={12} sm={12} xl={12} lg={6}>   
+          <Grid item xs={12} sm={12} xl={12} lg={6} className="event">
             {!loading ? this.event : (
               <div className="cpcenter">
                 <LinearProgress color="secondary" />
@@ -97,8 +107,8 @@ class HomePage extends React.Component {
             )
             }
           </Grid>
-          <Divider />    
-          <Grid item xs={12} sm={12} xl={12} lg={12}>      
+          <Divider />
+          <Grid item xs={12} sm={12} xl={12} lg={12}>
             <Typography variant="h1">Nos dernières actualités</Typography>
             {!loading ? this.news : (
               <div className="cpcenter">
@@ -114,7 +124,6 @@ class HomePage extends React.Component {
 }
 
 export default HomePage;
-
 
 HomePage.propTypes = {
   setHomepageData: PropTypes.func.isRequired,

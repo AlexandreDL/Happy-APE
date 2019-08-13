@@ -14,10 +14,10 @@ use JMS\Serializer\Annotation as Serializer;
  *             "access_control"="is_granted('IS_AUTHENTICATED_FULLY')",
  *         }, 
  *          "put"={
- *             "access_control"="is_granted('ROLE_REDACT'),"
+ *             "access_control"="is_granted('ROLE_REDACT')"
  *         },
  *           "delete"={
- *             "access_control"="is_granted('ROLE_REDACT'),"
+ *             "access_control"="is_granted('ROLE_REDACT')"
  *         }
  *      },
  *      collectionOperations={
@@ -25,12 +25,11 @@ use JMS\Serializer\Annotation as Serializer;
  *             "access_control"="is_granted('IS_AUTHENTICATED_FULLY')",
  *         }, 
  *          "post"={
- *             "access_control"="is_granted('ROLE_REDACT'),"
+ *             "access_control"="is_granted('ROLE_REDACT')"
  *         }
  *      }
  * )
  * @ORM\Entity(repositoryClass="App\Repository\MediumRepository")
- * @Serializer\ExclusionPolicy("ALL")
  */
 class Medium
 {
@@ -48,19 +47,11 @@ class Medium
      *      minMessage="Le nom de ce fichier doit compter entre 5 et 50 caractères.",   
      *      max=50, 
      *      maxMessage ="Le nom de ce fichier  doit compter entre 5 et 50 caractères.")
-     * @Serializer\Expose
      */
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
-     * @Assert\File(
-     *     maxSize = "1024k",
-     *     mimeTypes = {"application/pdf", "image/png", "image/jpg", "image/jpeg", "image/gif"},
-     *     mimeTypesMessage = "Veuillez vous assurer que votre fichier soit en pdf, png, jpeg ou gif."
-     * )
-     * @Serializer\Expose
+      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $type;
 
@@ -68,7 +59,6 @@ class Medium
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\NotBlank
      * @Assert\Url
-     * @Serializer\Expose
      */
     private $url;
 
@@ -85,19 +75,19 @@ class Medium
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Event", inversedBy="media")
-     */
-    private $event;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\News", inversedBy="media")
+     * @ORM\OneToOne(targetEntity="App\Entity\News", inversedBy="medium", cascade={"persist", "remove"})
      */
     private $news;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\PrivatePost", inversedBy="media")
+     * @ORM\OneToOne(targetEntity="App\Entity\PrivatePost", inversedBy="medium", cascade={"persist", "remove"})
      */
     private $privatePost;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Event", inversedBy="medium", cascade={"persist", "remove"})
+     */
+    private $event;
 
     public function __construct()
     {
@@ -170,18 +160,6 @@ class Medium
         return $this;
     }
 
-    public function getEvent(): ?Event
-    {
-        return $this->event;
-    }
-
-    public function setEvent(?Event $event): self
-    {
-        $this->event = $event;
-
-        return $this;
-    }
-
     public function getNews(): ?News
     {
         return $this->news;
@@ -194,12 +172,32 @@ class Medium
         return $this;
     }
 
-    public function getPrivatePost(): ?PrivatePost
+    public function getEvent(): ?Event
+    {
+        return $this->event;
+    }
+
+    public function setEvent(?Event $event): self
+    {
+        $this->event = $event;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of privatePost
+     */ 
+    public function getprivatePost()
     {
         return $this->privatePost;
     }
 
-    public function setPrivatePost(?PrivatePost $privatePost): self
+    /**
+     * Set the value of privatePost
+     *
+     * @return  self
+     */ 
+    public function setprivatePost($privatePost)
     {
         $this->privatePost = $privatePost;
 

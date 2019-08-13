@@ -1,6 +1,11 @@
 .event {
   min-height: 100px;
+
+  & img {
+    width: auto;
+    max-height: 300px;
   }
+}
 
 .center {
   text-align: center;
