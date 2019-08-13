@@ -1,17 +1,14 @@
 // == Import : npm
 import React from 'react';
 import {
-  CardContent,
   CardMedia,
   Typography,
-  Card,
   Button,
   Grid,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import dateParser from 'src/utils/dateParser';
-import Chip from '@material-ui/core/Chip';
 
 // == Import : local
 
