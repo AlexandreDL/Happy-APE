@@ -37,7 +37,7 @@ class Events extends React.Component {
                   title={item.title}
                   content={item.content_short}
                   date={item.date}
-                  media={item.media}
+                  media={item.medium}
                   slug={item.slug}
                   button
                 />
