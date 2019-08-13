@@ -52,11 +52,6 @@ class Medium
 
     /**
       * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\File(
-     *     maxSize = "1024k",
-     *     mimeTypes = {"application/pdf", "image/png", "image/jpg", "image/jpeg", "image/gif"},
-     *     mimeTypesMessage = "Veuillez vous assurer que votre fichier soit en pdf, png, jpeg ou gif."
-     * )
      */
     private $type;
 
