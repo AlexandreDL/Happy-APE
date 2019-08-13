@@ -4,13 +4,12 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Utils\Slugger;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
+ *      attributes={"order"={"date": "ASC"}},
  *      itemOperations={
  *          "get", 
  *          "put"={"access_control"="is_granted('ROLE_REDACT')"},

@@ -43,7 +43,6 @@ class PrivatePost
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank(message= "Ce champ doit être renseigné.")
-     * @Assert\Length(min=50, minMessage = "Au moins 50 caractères SVP.")
      */
     private $content;
 
