@@ -11,6 +11,7 @@ import {
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import dateParser from 'src/utils/dateParser';
+import Chip from '@material-ui/core/Chip';
 
 // == Import : local
 
@@ -39,13 +40,13 @@ class Event extends React.Component {
         container
         className="whitebox"
         direction="row"
-        justify="center"
+        justify="space-around"
       >
         <Grid item xs={12} sm={4} xl={4} lg={4}>
           <CardMedia
             component="img"
             alt="event-image"
-            justify="center"
+            justify="space-between"
             image={image}
             title={title}
           />
@@ -53,14 +54,19 @@ class Event extends React.Component {
         <Grid align="center" item xs={12} sm={6} xl={6} lg={6}>
           <Typography variant="h2">{title}</Typography>
           {button !== true && (
-            <Typography variant="body2">{content}</Typography>
+            <div className="resaEvent">
+              <Typography align="left" variant="body2" dangerouslySetInnerHTML={{ __html: content }} />            
+              <Button a href="https://static.isodev.ovh/file/commande.pdf" variant="contained" color="primary">
+              Je souhaite réserver !
+              </Button>              
+            </div> 
           )}
           <div className="event-calendar">
             <div className="newContentDay">{dateParsed.day}</div>
             <div className="newContentNumber">{dateParsed.dayNumber}</div>
             <div className="newContentMonth">{dateParsed.month}</div>
             <div className="newContentYear">{dateParsed.itemYear}</div>
-          </div>
+          </div>              
         </Grid>
         {button === true && (
           <Grid align="center" item xs={12} sm={6} xl={6} lg={6} >
@@ -68,6 +74,7 @@ class Event extends React.Component {
               <Button variant="contained" color="primary">
               Voir l'événement
               </Button>
+              
             </Link>
           </Grid>
         )}

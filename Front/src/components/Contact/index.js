@@ -26,7 +26,7 @@ const Contact = ({
   const submitHandler = (event) => {
     event.preventDefault();
     const contactData = {
-      name: contactName,
+      lastname: contactName,
       firstname: contactFirstname,
       email: contactEmail,
       message: contactMessage,
