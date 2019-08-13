@@ -32,15 +32,12 @@ class NewsDetail extends React.Component {
 
   render() {
     const { homepageData, slug, loading } = this.props;
-    
 
     if (homepageData !== undefined) {
       this.actualNews = homepageData.news.find(actu => actu.slug === slug);
-      console.log(this.actualNews.media[0].url);
+      console.log(this.actualNews.medium.url);
       if (this.actualNews !== null) {
-        
-        const NewsImage = this.actualNews.media[0].url;
-
+        const NewsImage = this.actualNews.medium.url;
 
         this.newsLoaded = (
           <React.Fragment>

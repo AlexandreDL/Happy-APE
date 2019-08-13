@@ -27,6 +27,7 @@ class HomePage extends React.Component {
       document.title = homepageData.title;
       if (homepageData.nextEvent !== undefined) {
         this.event = homepageData.nextEvent.map(item => (
+
           <div>
             <div className="homepage-nextevent">PROCHAIN EVENEMENT</div>      
             <Event
@@ -38,6 +39,7 @@ class HomePage extends React.Component {
               button
             />
           </div>
+
         ));
         
       }
