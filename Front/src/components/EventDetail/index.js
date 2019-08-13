@@ -35,7 +35,7 @@ class EventDetail extends React.Component {
             title={this.actualEvent.title}
             content={this.actualEvent.content}
             date={this.actualEvent.date}
-            media={this.actualEvent.media}
+            media={this.actualEvent.medium}
             slug={this.actualEvent.slug}
             button={false}
           />

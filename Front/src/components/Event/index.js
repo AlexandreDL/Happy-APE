@@ -30,7 +30,7 @@ class Event extends React.Component {
       button,
     } = this.props;
 
-    const image = (media !== undefined && media[0] !== undefined) ? media[0].url : 'https://static.isodev.ovh/img/lecture.jpg';
+    const image = (media !== null && media !== undefined) ? media.url : 'https://static.isodev.ovh/img/lecture.jpg';
 
     const dateParsed = dateParser(date);
 
@@ -41,7 +41,7 @@ class Event extends React.Component {
         direction="row"
         justify="center"
       >
-        <Grid item xs={12} sm={4} xl={4} lg={4}>
+        <Grid item xs={12} sm={12} xl={4} lg={4}>
           <CardMedia
             component="img"
             alt="event-image"
@@ -50,7 +50,7 @@ class Event extends React.Component {
             title={title}
           />
         </Grid>
-        <Grid align="center" item xs={12} sm={6} xl={6} lg={6}>
+        <Grid align="center" item xs={12} sm={12} xl={6} lg={6}>
           <Typography variant="h2">{title}</Typography>
           {button !== true && (
             <Typography variant="body2">{content}</Typography>
@@ -63,7 +63,7 @@ class Event extends React.Component {
           </div>
         </Grid>
         {button === true && (
-          <Grid align="center" item xs={12} sm={6} xl={6} lg={6} >
+          <Grid align="center" item xs={12} sm={12} xl={6} lg={6} >
             <Link to={`/evenement/${slug}`} style={{ textDecoration: 'none' }}>
               <Button variant="contained" color="primary">
               Voir l'événement
