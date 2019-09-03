@@ -4,27 +4,20 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Utils\Slugger;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
+ *      attributes={"order"={"date": "ASC"}},
  *      itemOperations={
  *          "get", 
- *          "put"={
- *             "access_control"="is_granted('ROLE_REDACT'),"
- *         },
- *           "delete"={
- *             "access_control"="is_granted('ROLE_REDACT'),"
- *         }
+ *          "put"={"access_control"="is_granted('ROLE_REDACT')"},
+ *           "delete"={"access_control"="is_granted('ROLE_REDACT')"}
  *      },
  *      collectionOperations={
  *          "get", 
- *          "post"={
- *             "access_control"="is_granted('ROLE_REDACT'),"
- *         }
+ *          "post"={"access_control"="is_granted('ROLE_REDACT')"}
  *      }
  * )
  * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
@@ -82,20 +75,20 @@ class Event
      */
     private $slug;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Medium", mappedBy="event")
-     */
-    private $media;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $author;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Medium", mappedBy="event", cascade={"persist", "remove"})
+     */
+    private $medium;
+
     public function __construct()
     {
-        $this->media = new ArrayCollection();
         $this->createdAt = new \DateTime;
         $this->updatedAt = new \DateTime;
         $this->isPublished = true;
@@ -200,37 +193,6 @@ class Event
         return $this;
     }
 
-    /**
-     * @return Collection|Medium[]
-     */
-    public function getMedia(): Collection
-    {
-        return $this->media;
-    }
-
-    public function addMedium(Medium $medium): self
-    {
-        if (!$this->media->contains($medium)) {
-            $this->media[] = $medium;
-            $medium->setEvent($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMedium(Medium $medium): self
-    {
-        if ($this->media->contains($medium)) {
-            $this->media->removeElement($medium);
-            // set the owning side to null (unless already changed)
-            if ($medium->getEvent() === $this) {
-                $medium->setEvent(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getAuthor(): ?User
     {
         return $this->author;
@@ -239,6 +201,24 @@ class Event
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getMedium(): ?Medium
+    {
+        return $this->medium;
+    }
+
+    public function setMedium(?Medium $medium): self
+    {
+        $this->medium = $medium;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newEvent = $medium === null ? null : $this;
+        if ($newEvent !== $medium->getEvent()) {
+            $medium->setEvent($newEvent);
+        }
 
         return $this;
     }

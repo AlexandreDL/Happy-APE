@@ -15,16 +15,16 @@ use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
  *      itemOperations={
  *               "get",
  *               "put"={
- *                  "access_control"="is_granted('ROLE_ADMIN'),"
+ *                  "access_control"="is_granted('ROLE_ADMIN')"
  *              },
  *                "delete"={
- *                  "access_control"="is_granted('ROLE_ADMIN'),"
+ *                  "access_control"="is_granted('ROLE_ADMIN')"
  *              }
  *           },
  *           collectionOperations={
  *                "get",
  *               "post"={
- *                  "access_control"="is_granted('ROLE_ADMIN'),"
+ *                  "access_control"="is_granted('ROLE_ADMIN')"
  *              }
  *           }   
  * )

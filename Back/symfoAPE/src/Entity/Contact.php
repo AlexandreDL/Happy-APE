@@ -10,22 +10,20 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiResource(
  *      itemOperations={
  *          "get"={
- *              "access_control"="is_granted('ROLE_REDACT'),"
+ *              "access_control"="is_granted('ROLE_REDACT')"
  *          }, 
  *          "put"={
- *             "access_control"="is_granted('ROLE_REDACT'),"
+ *             "access_control"="is_granted('ROLE_REDACT')"
  *         },
  *           "delete"={
- *             "access_control"="is_granted('ROLE_REDACT'),"
+ *             "access_control"="is_granted('ROLE_REDACT')"
  *         }
  *      },
  *      collectionOperations={
  *           "get"={
- *             "access_control"="is_granted('ROLE_REDACT'),"
+ *             "access_control"="is_granted('ROLE_REDACT')"
  *         }, 
- *          "post"={
- *             "access_control"="is_granted('ROLE_REDACT'),"
- *         }
+ *          "post",
  *      }
  * )
  * @ORM\Entity(repositoryClass="App\Repository\ContactRepository")
@@ -63,7 +61,6 @@ class Contact
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank()
-     * @Assert\Length(min=50, minMessage="Votre message doit faire plus de 50 caractères.")
      */
     private $message;
 
